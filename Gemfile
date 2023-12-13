@@ -68,3 +68,17 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "paranoia", "~> 2.6"
+
+gem "faker", "~> 3.2"
+
+gem "image_processing", "~> 1.12"
+
+gem "aasm", "~> 5.5"
+
+gem "acts_as_list", "~> 1.1"
+
+gem "kaminari", "~> 1.2"
+
+gem "ransack", "~> 4.1"

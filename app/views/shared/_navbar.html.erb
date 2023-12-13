@@ -1,0 +1,21 @@
+<nav
+  class="flex items-center justify-between px-3 py-2 bg-yellow-100"
+>
+  <div class="flex items-center gap-2">
+    <h1 class="mx-2 text-4xl font-bold"><%= link_to "RestTime",root_path %></h1>
+
+    <section class="flex flex-col gap-1">
+      <ul class="flex gap-3 text-xl">
+        <li><%= link_to 'products', products_path %></li>
+      </ul>
+    </section>
+
+  </div>
+  <div>
+    <ul class="flex gap-3">
+        <li><%= link_to '登出', sessions_path, data: { turbo_method: 'delete' } %></li>
+        <li><%= link_to '註冊', new_users_path %></li>
+        <li><%= link_to '登入', sign_in_users_path %></li>
+    </ul>
+  </div>
+</nav>
