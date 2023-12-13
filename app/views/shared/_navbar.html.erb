@@ -13,6 +13,9 @@
   </div>
   <div>
     <ul class="flex gap-3">
+        <li>
+        <i class="fa-solid fa-cart-shopping fa-lg"></i>
+        </li>
         <li><%= link_to '登出', sessions_path, data: { turbo_method: 'delete' } %></li>
         <li><%= link_to '註冊', new_users_path %></li>
         <li><%= link_to '登入', sign_in_users_path %></li>
