@@ -13,6 +13,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def sign_in
   end
 
