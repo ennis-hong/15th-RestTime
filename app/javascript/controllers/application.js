@@ -1,5 +1,5 @@
 import { Application } from "@hotwired/stimulus"
-import "./scripts";
+// import "./scripts";
 
 
 const application = Application.start()
