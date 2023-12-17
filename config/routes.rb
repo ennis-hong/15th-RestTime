@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
-  resources :products
+  scope '(:lang)', locale: /en|tw/ do
+    resources :products
 
-  root 'products#index'
-  resource :users, except: [:destroy] do
-    collection do
-      get :sign_in
-    end
+    root 'products#index'
+
+    devise_for :users, controllers: { sessions: 'users/sessions' }
   end
-
-  resource :sessions, only: [:create, :destroy]
-
 end
