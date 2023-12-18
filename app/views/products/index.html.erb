@@ -1,2 +1,7 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<p class="fs-5 p-1">商品列表</p>
+<%= link_to  "新增商品", new_product_path, class: 'ink-btn'%>
+<% @products.each do |product|%>
+<ul class="list-group">
+  <li class="list-group-item"><%= link_to product.title, product_path(id: product.id)%></li>
+</ul>
+<%end%>
