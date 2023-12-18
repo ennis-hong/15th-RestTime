@@ -90,5 +90,3 @@ gem 'pg', '~> 1.5'
 gem 'devise', '~> 4.9'
 
 gem 'rubocop', '~> 1.59', require: false
-
-gem 'rails-i18n'
