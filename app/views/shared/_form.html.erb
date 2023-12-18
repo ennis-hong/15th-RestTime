@@ -11,27 +11,33 @@
 <%= form_with model: product,
               data: { turbo: false } do |form| %>
 
+    <div>
+    <%= form.label :title, '服務項目' %>
+    <%= form.text_field :title, class: 'border-2 border-black' %>
+  </div>
+  
   <div>
-    <%= form.label :cover %>
+    <%= form.label :cover, '上傳照片' %>
     <%= form.file_field :cover, class:'input-field' %>
   </div>
   <div>
-    <%= form.label :title %>
-    <%= form.text_field :title, class: 'border-2 border-black' %>
-  </div>
-
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description, class: 'border-2 border-black' %>
-  </div>
-
-  <div>
-    <%= form.label :price %>
+    <%= form.label :price, '售價金額' %>
     <%= form.number_field :price, class: 'border-2 border-black', min: 0 %>
   </div>
 
   <div>
-    <%= form.label :onsale %>
+    <%= form.label :description, '服務敘述' %>
+    <%= form.text_area :description, class: 'border-2 border-black' %>
+  </div>
+
+    <div>
+    <%= form.label :service_hour, '服務時數' %>
+    <%= form.text_area :service_hour, class: 'border-2 border-black' %>
+  </div>
+
+
+  <div>
+    <%= form.label :onsale, '是否上架' %>
     <%= form.check_box :onsale, class: 'border-2 border-black', min: 0 %>
   </div>
 

@@ -1,2 +1,12 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+
+<h1><%= @product.title %></h1>
+  <%= link_to "編輯商品", edit_product_path, class: 'ink-btn' %>
+  <%= link_to '刪除商品', product_path(@product), class: 'ink-btn ink-btn-danger', data: {
+   turbo_method: 'delete',
+   turbo_confirm: '確認刪除？'
+ } %>
+
+
+<h3>售價:<%= @product.price %>元</h3>
+
+<p>描述:<%= simple_format(@product.description) %></p>
