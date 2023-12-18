@@ -10,7 +10,7 @@
 <p>(服務項目:未連)</p>
 <% if user_signed_in?%>
   <%= link_to "店家資訊變更", edit_shop_path(@shop) %>
-  <%= link_to '關閉店家', shops_path, data: {
+  <%= link_to '關閉店家', shops_path(@shop), data: {
                           turbo_method: 'delete',
                           turbo_confirm: '確認關閉店家？'
                         } %>
