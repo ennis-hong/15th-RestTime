@@ -11,6 +11,19 @@
 #
 # Configure Using Gemfile
 # gem "pg"
+# PostgreSQL. Versions 9.3 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On macOS with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+#
+# Configure Using Gemfile
+# gem "pg"
 #
 default: &default
   adapter: postgresql
@@ -21,6 +34,23 @@ default: &default
 
 development:
   <<: *default
+  database: <%= ENV["DEV_DATABASE_NAME"] %>
+  username: <%= ENV["DEV_DATABASE_USERNAME"] %>
+  password: <%= ENV["DEV_DATABASE_PASSWORD"] %>
+  host: localhost
+
+  # The TCP port the server listens on. Defaults to 5432.
+  # If your server runs on a different port number, change accordingly.
+  port: 5432
+
+  # Schema search path. The server defaults to $user,public
+  #schema_search_path: myapp,sharedapp,public
+
+  # Minimum log levels, in increasing order:
+  #   debug5, debug4, debug3, debug2, debug1,
+  #   log, notice, warning, error, fatal, and panic
+  # Defaults to warning.
+  #min_messages: notice
   database: <%= ENV["DEV_DATABASE_NAME"] %>
   username: <%= ENV["DEV_DATABASE_USERNAME"] %>
   password: <%= ENV["DEV_DATABASE_PASSWORD"] %>
