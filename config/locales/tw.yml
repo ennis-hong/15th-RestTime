@@ -31,6 +31,6 @@ tw:
       product:
         create: 新增商品
         update: 更新商品
-      comment:
+        comment: 評論
         create: 新增留言
   
