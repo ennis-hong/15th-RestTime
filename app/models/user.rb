@@ -7,4 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, confirmation: true
+  has_one :shop
+
+  
+  
 end

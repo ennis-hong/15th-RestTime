@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope '(:lang)', locale: /en|tw/ do
     resources :products
+    resources :shops
 
     root 'products#index'
 

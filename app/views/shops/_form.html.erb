@@ -1,0 +1,47 @@
+<<<<<<< HEAD
+<% if shop.errors.any? %>
+  <section>
+    <ul>
+    <% shop.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<section>
+  <div>
+=======
+<div>
+>>>>>>> ea3783d1bc5da50c0edc6336b26b608069710fb7
+    <%= form_with model: shop, data: { turbo: false } do |f| %>
+
+      <div>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
+      <div>
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+      </div>
+      <div>
+        <%= f.label :tel %>
+        <%= f.text_field :tel %>
+      </div>
+      <div>
+        <%= f.label :city %>
+        <%= f.text_field :city %>
+      </div>
+      <div>
+        <%= f.label :district %>
+        <%= f.text_field :district %>
+      </div>
+      <div>
+        <%= f.label :street %>
+        <%= f.text_area :street %>
+      </div>
+
+      <div><%= f.submit %></div>
+    <% end %>
+  </div>
+</section>

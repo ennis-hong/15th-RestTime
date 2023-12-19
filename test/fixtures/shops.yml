@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  tel: MyString
+  description: MyText
+  city: MyString
+  district: MyString
+  street: MyText
+  deleted_at: 2023-12-19 02:04:32
+  user: one
+
+two:
+  title: MyString
+  tel: MyString
+  description: MyText
+  city: MyString
+  district: MyString
+  street: MyText
+  deleted_at: 2023-12-19 02:04:32
+  user: two

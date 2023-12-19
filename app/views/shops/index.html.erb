@@ -1,0 +1,14 @@
+<h1>店家列表</h1>
+<%= link_to "建立店家", new_shop_path %>
+<section>
+  <div>
+    <h2>美甲</h2>
+    <% @shops.each do |shop| %>
+      <h2><%= link_to shop.title, shop_path(shop) %></h2>
+      <h3>服務項目：未連</h3>
+      <p>
+        <%= shop.description %>
+      </p>
+    <% end %>
+  </div>
+</section>
