@@ -12,7 +12,7 @@ class ShopsController < ApplicationController
   end
 
   def create
-    @shop = Shop.new(shop_params)
+    @shop = current_user.build_shop(shop_params)
     if @shop.save
       redirect_to shop_path(@shop), notice: '店家建立成功'
     else
