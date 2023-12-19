@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ShopsController < ApplicationController
   before_action :find_shop, only: %i[show]
   before_action :authenticate_user!, except: %i[index show]
-  before_action :find_owned_shop, only: [:edit, :update, :destroy]
+  before_action :find_owned_shop, only: %i[edit update destroy]
 
   def index
     @shops = Shop.order(id: :desc)
@@ -20,9 +22,8 @@ class ShopsController < ApplicationController
     end
   end
 
-  def edit
-  end
-  
+  def edit; end
+
   def update
     if @shop.update(shop_params)
       redirect_to shop_path, notice: '店家資訊更新成功'
@@ -45,7 +46,7 @@ class ShopsController < ApplicationController
   def find_shop
     @shop = Shop.find(params[:id])
   end
-  
+
   def find_owned_shop
     @shop = current_user.shop
   end
