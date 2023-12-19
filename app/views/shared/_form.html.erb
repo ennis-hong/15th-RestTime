@@ -12,32 +12,32 @@
               data: { turbo: false } do |form| %>
 
     <div>
-    <%= form.label :title, '服務項目' %>
+    <%= form.label :title, t('form.title') %>
     <%= form.text_field :title, class: 'border-2 border-black' %>
   </div>
   
   <div>
-    <%= form.label :cover, '上傳照片' %>
+    <%= form.label :cover, t('form.cover') %>
     <%= form.file_field :cover, class:'input-field' %>
   </div>
   <div>
-    <%= form.label :price, '售價金額' %>
+    <%= form.label :price, t('form.price') %>
     <%= form.number_field :price, class: 'border-2 border-black', min: 0 %>
   </div>
 
   <div>
-    <%= form.label :description, '服務敘述' %>
+    <%= form.label :description, t('form.description') %>
     <%= form.text_area :description, class: 'border-2 border-black' %>
   </div>
 
     <div>
-    <%= form.label :service_hour, '服務時數' %>
+    <%= form.label :service_hour, t('form.service_hour') %>
     <%= form.text_area :service_hour, class: 'border-2 border-black' %>
   </div>
 
 
   <div>
-    <%= form.label :onsale, '是否上架' %>
+    <%= form.label :onsale, t('form.onsale') %>
     <%= form.check_box :onsale, class: 'border-2 border-black', min: 0 %>
   </div>
 

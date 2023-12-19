@@ -1,0 +1,36 @@
+tw:
+  navbar:
+    products: 商品列表
+    about: 關於
+    privacy: 隱私權
+  
+    page:
+    privacy:
+      title: 隱私權政策
+      
+  form:
+    title: 服務項目
+    cover: 上傳照片
+    price: 售價金額
+    description: 服務敘述
+    service_hour: 服務時間
+    onsale: 是否上架
+
+  activerecord:
+    attributes:
+      product:
+            title: 服務項目
+            cover: 上傳照片
+            price: 售價金額
+            description: 服務敘述
+            service_hour: 服務時間
+            onsale: 是否上架
+
+  helpers:
+    submit:
+      product:
+        create: 新增商品
+        update: 更新商品
+      comment:
+        create: 新增留言
+  
