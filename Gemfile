@@ -91,5 +91,3 @@ gem 'pg', '~> 1.5'
 gem 'devise', '~> 4.9'
 
 gem 'rubocop', '~> 1.59', require: false
-
-gem "dotenv-rails", "~> 2.8"
