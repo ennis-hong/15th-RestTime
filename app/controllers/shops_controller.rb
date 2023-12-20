@@ -34,13 +34,13 @@ class ShopsController < ApplicationController
 
   def destroy
     @shop.destroy
-    redirect_to shops_path, alert: '店家資訊以刪除'
+    redirect_to shops_path, alert: '店家資訊已刪除'
   end
 
   private
 
   def shop_params
-    params.require(:shop).permit(:title, :tel, :description, :city, :district, :street)
+    params.require(:shop).permit(:title, :tel, :description, :city, :district, :street, :contact, :contactphone)
   end
 
   def find_shop

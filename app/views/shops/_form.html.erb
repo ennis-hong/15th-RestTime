@@ -14,29 +14,38 @@
 
       <div>
         <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, class: 'border-2 border-black'%>
       </div>
       <div>
         <%= f.label :description %>
-        <%= f.text_area :description %>
+        <%= f.text_area :description, class: 'border-2 border-black'%>
       </div>
       <div>
         <%= f.label :tel %>
-        <%= f.text_field :tel %>
+        <%= f.text_field :tel, class: 'border-2 border-black'%>
       </div>
       <div>
         <%= f.label :city %>
-        <%= f.text_field :city %>
+        <%= select_tag(:county_id, options_for_select(county_options)) %>
       </div>
       <div>
         <%= f.label :district %>
-        <%= f.text_field :district %>
+        <%= f.text_field :district, class: 'border-2 border-black'%>
       </div>
       <div>
         <%= f.label :street %>
-        <%= f.text_area :street %>
+        <%= f.text_area :street, class: 'border-2 border-black'%>
       </div>
-
+      <div>
+        <%= f.label :contact %>
+        <%= f.text_field :contact, class: 'border-2 border-black'%>
+      </div>
+      <div>
+        <%= f.label :contactphone %>
+        <%= f.text_field :contactphone, class: 'border-2 border-black'%>
+      </div>
+      
+      
       <div><%= f.submit %></div>
     <% end %>
   </div>

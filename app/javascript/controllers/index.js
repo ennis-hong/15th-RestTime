@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CitySelectorController from "./city_selector_controller"
+application.register("city-selector", CitySelectorController)
+
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
