@@ -6,7 +6,6 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than: 0 }
 
   acts_as_list
-  default_scope { where.not(title: [nil, '']) }
 
   # 商品圖片
   has_one_attached :cover
