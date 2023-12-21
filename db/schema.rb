@@ -74,9 +74,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_152139) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "city"
     t.string "district"
     t.text "street"
