@@ -26,6 +26,11 @@
   </div>
 
   <div>
+    <%= form.label :service_time, t('form.service_time') %>
+    <%= form.number_field :service_time, class: 'border-2 border-black', min: 0 %>
+  </div>
+
+  <div>
     <%= form.label :description, t('form.description') %>
     <%= form.text_area :description, class: 'border-2 border-black' %>
   </div>

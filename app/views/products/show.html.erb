@@ -8,5 +8,5 @@
 <%= image_tag @product.cover.variant(:thumb) if @product.cover.attached? %>
 
 <h3>售價:<%= @product.price %>元</h3>
-
+<h3>服務時間:<%= @product.service_time %>分鐘</h3>
 <p>描述:<%= simple_format(@product.description) %></p>

@@ -3,7 +3,7 @@ module ProductsHelper
     if product.cover.attached?
       image_tag product.cover.variant(variant)
     else
-      image_tag '/public/images/default.jpeg'
+      image_tag '/images/products/default.jpeg'
     end
   end
 end

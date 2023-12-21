@@ -7,6 +7,8 @@
     <% end %>
     <h2 class="font-bold"><%= link_to product.title, product_path(product) %></h2>
     <span>NT$ <%= product.price %></span>
+    <div>服務時間： <%= product.service_time %>分鐘</div>
+    <div>更新時間：<%= product.updated_at %></div>
     <p class="text-slate-600"><%= product.description %></p>
   </div>
 </li>

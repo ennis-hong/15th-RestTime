@@ -4,9 +4,11 @@ class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
 
   def index
-    @products = Product.order(id: :desc)
-                       .page(params[:page])
-                       .per(8)
+    @q = Product.ransack(params[:q])
+    @products = @q.result
+                  .order(order_by)
+                  .page(params[:page])
+                  .per(8)
   end
 
   def show; end
@@ -42,7 +44,7 @@ class ProductsController < ApplicationController
 
   def search
     data = Product.ransack(title_cont: params[:q])
-    @products = data.result
+    @products = data.result.order(order_by)
   end
 
   private
@@ -54,5 +56,17 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.find(params[:id])
+  end
+
+  def order_by
+    order_options = {
+      'price desc' => 'price desc',
+      'service_time desc' => 'service_time desc',
+      'created_at desc' => 'created_at desc',
+      'updated_at desc' => 'updated_at desc'
+    }
+
+    selected_option = params.dig(:q, :s)
+    order_options[selected_option] || 'price desc'
   end
 end
