@@ -3,14 +3,14 @@
 <p><%= @shop.user.email %></p>
 <span>(店家評價：未連)</span>
 <h1>商店資訊</h1>
-<p>(店家地址：未連)</p>
+<p><%= "#{@shop.city}#{@shop.district}#{@shop.street}" %></p>#{}
 <p>(營業時間：未連)</p>
 <h4>店家電話：<%= @shop.tel %></h4>
 <p>店家簡介：<%= @shop.description %></p>
 <p>(服務項目:未連)</p>
 <% if user_signed_in?%>
   <%= link_to "店家資訊變更", edit_shop_path(@shop) %>
-  <%= link_to '關閉店家', shops_path, data: {
+  <%= link_to '關閉店家', shops_path(@shop), data: {
                           turbo_method: 'delete',
                           turbo_confirm: '確認關閉店家？'
                         } %>
