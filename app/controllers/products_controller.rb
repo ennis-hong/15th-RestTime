@@ -44,7 +44,7 @@ class ProductsController < ApplicationController
 
   def search
     data = Product.ransack(title_cont: params[:q])
-    @products = data.result.order(order_by)
+    @products = data.result
   end
 
   private
