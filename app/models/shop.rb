@@ -13,6 +13,7 @@ class Shop < ApplicationRecord
   has_many :like_shops
   has_many :like_user, through: :like_shops, source: :user
   has_many :products
+  has_many :service_times
 
   before_create :set_default_status
 

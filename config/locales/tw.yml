@@ -1,4 +1,8 @@
 tw:
+  time:
+    formats:
+      h24_short: "%H:%M"
+      h24_normal: "%H:%M:%S"
   navbar:
     products: 商品列表
     about: 關於
@@ -32,5 +36,22 @@ tw:
         create: 新增商品
         update: 更新商品
         comment: 評論
-        create: 新增留言
   
+  service_times:
+    title: 營業時間
+    open_time: 開始時間
+    close_time: 結束時間
+    off_day: 公休日
+    Monday: 星期一
+    Tuesday: 星期二
+    Wednesday: 星期三
+    Thursday: 星期四
+    Friday: 星期五
+    Saturday: 星期六
+    Sunday: 星期日
+    submit: 更新營業時間
+    message:
+      success: 營業時間更新成功
+  
+    
+

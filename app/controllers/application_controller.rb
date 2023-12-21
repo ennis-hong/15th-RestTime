@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  helper_method :current_shop
 
   def not_found
     render file: Rails.public_path.join('404.html'),
@@ -16,5 +17,9 @@ class ApplicationController < ActionController::Base
   def switch_locale(&)
     lang = params[:lang] || I18n.default_locale
     I18n.with_locale(lang, &)
+  end
+
+  def current_shop
+    current_user.shop
   end
 end

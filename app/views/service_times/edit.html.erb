@@ -1,0 +1,11 @@
+<h1 class="text-b"><%= t(:title, scope: [:service_times]) %></h1>
+<section>
+  <%= form_with(scope: :service_times, url: service_times_path, method: :patch) do |f| %>
+    <% @configs.each do |config| %>
+      <%= fields_for "service_times[]", config do |config_field| %>
+        <%= render 'config' , config: , config_field: %>
+      <% end %>
+    <% end %>
+    <%= f.submit t('service_times.submit'), class:'btn btn-sm my-4'%>
+  <% end %>
+</section>
