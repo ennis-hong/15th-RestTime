@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get '/refund_policy', to:'pages#refund_policy'
     get '/payment', to:'pages#payment'
     get '/order', to:'pages#order'
-    get '/refund', to:'pages#refund' 
+    get '/refund', to:'pages#refund'
 
     get '/about', to: 'pages#about'
     get '/choose_us', to: 'pages#choose_us'
@@ -25,6 +25,9 @@ Rails.application.routes.draw do
     get '/payment', to: 'pages#payment'
     get '/order', to: 'pages#order'
     get '/refund', to: 'pages#refund'
+
+    get "/search", to: "products#search"
+
 
     devise_for :users, controllers: { sessions: 'users/sessions' }
   end

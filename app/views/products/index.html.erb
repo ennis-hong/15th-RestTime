@@ -1,7 +1,17 @@
 <p class="fs-5 p-1">商品列表</p>
+
+<div>
+  <form action="/search" data-turbo="false">
+  <input type="search" value="<%= params[:q] %>" name="q" class="">
+  <button class="">搜尋</button>
+  </form>
+</div>
+
 <%= link_to  "新增商品", new_product_path, class: 'ink-btn'%>
-<% @products.each do |product|%>
-<ul class="list-group">
-  <li class="list-group-item"><%= link_to product.title, product_path(id: product.id)%></li>
+<ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+  <%= render @products %>
 </ul>
-<% end %>
+
+<footer>
+  <%= paginate @products %>
+</footer>

@@ -4,7 +4,9 @@ class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
 
   def index
-    @products = Product.all.order(id: :desc)
+    @products = Product.order(id: :desc)
+                       .page(params[:page])
+                       .per(8)
   end
 
   def show; end
@@ -38,13 +40,16 @@ class ProductsController < ApplicationController
     redirect_to root_path, notice: '商品已刪除'
   end
 
-  def search; end
+  def search
+    data = Product.ransack(title_cont: params[:q])
+    @products = data.result
+  end
 
   private
 
   def product_params
     params.require(:product)
-          .permit(:title, :cover, :price, :description, :service_hour, :onsale)
+          .permit(:title, :cover, :price, :description, :service_time, :onsale)
   end
 
   def find_product
