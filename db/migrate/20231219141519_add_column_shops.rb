@@ -1,4 +1,4 @@
-class CreateShops < ActiveRecord::Migration[7.1]
+class AddColumnShops < ActiveRecord::Migration[7.1]
   def change
     add_column :shops, :city, :string
     add_column :shops, :district, :string
