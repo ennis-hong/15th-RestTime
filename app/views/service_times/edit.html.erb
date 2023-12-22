@@ -1,6 +1,6 @@
-<h1 class="text-b"><%= t(:title, scope: [:service_times]) %></h1>
+<h1 class="text-xl"><%= t('service_times.title') %></h1>
 <section>
-  <%= form_with(scope: :service_times, url: service_times_path, method: :patch) do |f| %>
+  <%= form_with(scope: :service_times, url: service_times_path, method: :patch, data:{ turbo: false }) do |f| %>
     <% @configs.each do |config| %>
       <%= fields_for "service_times[]", config do |config_field| %>
         <%= render 'config' , config: , config_field: %>

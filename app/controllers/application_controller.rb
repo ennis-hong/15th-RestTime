@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  helper_method :current_shop
+  helper_method :current_user_shop
 
   def not_found
     render file: Rails.public_path.join('404.html'),
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     I18n.with_locale(lang, &)
   end
 
-  def current_shop
+  def current_user_shop
     current_user.shop
   end
 end

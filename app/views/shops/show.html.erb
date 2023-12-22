@@ -14,7 +14,7 @@
   <section class="mt-4">
     <h2 class="text-lg font-semibold">商店資訊</h2>
     <p>地址：<%= "#{@shop.city}#{@shop.district}#{@shop.street}" %></p>
-    <span class="text-gray-500">(營業時間：未連)</span>
+    <span class="text-gray-500">(營業時間：<%= link_to t('service_times.Edit Service Times'), edit_service_times_path, class:'btn btn-xs' %>)</span>
     <p>聯繫方式：<span class="font-semibold"><%= @shop.tel %></span></p>
     <p>店家簡介：<%= @shop.description %></p>
     <span class="text-gray-500">(服務項目:未連)</span>

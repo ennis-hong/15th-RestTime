@@ -11,6 +11,7 @@ tw:
     page:
     privacy:
       title: 隱私權政策
+    shop info: 商店資訊
       
   form:
     title: 服務項目
@@ -36,11 +37,16 @@ tw:
         create: 新增商品
         update: 更新商品
         comment: 評論
+
+  
   
   service_times:
+    Edit Service Times: 修改營業時間
     title: 營業時間
     open_time: 開始時間
     close_time: 結束時間
+    lunch_start: 午休開始時間
+    lunch_end: 午休結束時間
     off_day: 公休日
     Monday: 星期一
     Tuesday: 星期二
@@ -52,6 +58,6 @@ tw:
     submit: 更新營業時間
     message:
       success: 營業時間更新成功
-  
-    
+      Close time can't be blank if open time is set: 設定開始時間必須填寫結束時間
+      Open time can't be blank if close time is set: 設定結束時間必須填寫開始時間
 

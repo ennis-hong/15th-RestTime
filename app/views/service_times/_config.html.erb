@@ -1,4 +1,13 @@
 <div>
+  <% if config.errors.any? %>
+  <section class="p-4 my-4 text-white bg-rose-600">
+    <ul>
+    <% config.errors.full_messages.each do |message| %>
+      <li><%= t message, scope: %i[service_times message] %></li>
+    <% end %>
+    </ul>
+  </section>
+  <% end %>
   <%= config_field.hidden_field :id %>
   <div class="flex items-center ">
     <div>
@@ -13,23 +22,11 @@
     </div>
   </div>
   <section class="grid gap-x-4 content-center">
-    <div class="flex items-center">
-      <%= config_field.label :open_time, t('service_times.open_time'), class: 'label' %>
-      <%= config_field.text_field :open_time,
-                            data: {
-                              controller: 'timepicker',
-                              time: config.open_time&.then { |t| l(t, format: :h24_short) }, 
-                            },
-                            class: 'input input-bordered input-sm max-w-xs' %>
-    </div>
-    <div class="flex items-center">
-      <%= config_field.label t('service_times.close_time'), class: 'label' %>
-      <%= config_field.text_field :close_time,
-                            data: {
-                              controller: 'timepicker',
-                              time: config.close_time&.then { |t| l(t, format: :h24_short) }
-                            },
-                            class: 'input input-bordered input-sm max-w-xs' %>
-    </div>
+    <div class="flex">
+      <%= render 'config_time', column: :open_time, value: config.open_time, config_field: %>
+      <%= render 'config_time', column: :close_time, value: config.close_time, config_field: %>
+      <%= render 'config_time', column: :lunch_start, value: config.lunch_start, config_field: %>
+      <%= render 'config_time', column: :lunch_end, value: config.lunch_end, config_field: %>  
+    </div>    
   </section>
 </div>

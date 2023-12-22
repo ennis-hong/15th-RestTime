@@ -1,0 +1,9 @@
+<div class="flex items-center">
+  <%= config_field.label column, t("service_times.#{column}"), class: 'label' %>
+  <%= config_field.text_field column,
+                        data: {
+                          controller: 'timepicker',
+                          time: value&.then { |t| l(t, format: :h24_short) }, 
+                        },
+                        class: 'input input-bordered input-sm max-w-xs' %>
+</div>
