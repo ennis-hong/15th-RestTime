@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product)
-          .permit(:title, :cover, :price, :description, :service_time, :onsale)
+          .permit(:title, :cover, :price, :description, :service_min, :onsale)
   end
 
   def find_product
@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
   def order_by
     order_options = {
       'price desc' => 'price desc',
-      'service_time desc' => 'service_time desc',
+      'service_min desc' => 'service_min desc',
       'created_at desc' => 'created_at desc',
       'updated_at desc' => 'updated_at desc'
     }

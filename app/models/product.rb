@@ -2,7 +2,7 @@
 
 class Product < ApplicationRecord
   validates :title, presence: true
-  validates :service_time, presence: true
+  validates :service_min, presence: true
   validates :price, numericality: { greater_than: 0 }
 
   acts_as_list

@@ -13,7 +13,7 @@ tw:
     cover: 上傳照片
     price: 售價金額
     description: 服務敘述
-    service_time: 服務時間
+    service_min: 服務時間
     onsale: 是否上架
 
   activerecord:
@@ -23,7 +23,7 @@ tw:
             cover: 上傳照片
             price: 售價金額
             description: 服務敘述
-            service_time: 服務時間
+            service_min: 服務時間
             onsale: 是否上架
 
   helpers:
