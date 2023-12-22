@@ -6,7 +6,7 @@ class ShopsController < ApplicationController
   before_action :find_owned_shop, only: %i[edit update destroy]
 
   def index
-    # @shop = current_user.shop
+    @shop = current_user.shop
     @shops = Shop.order(id: :desc).page(params[:page]).per(8)
   end
 
