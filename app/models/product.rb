@@ -5,6 +5,9 @@ class Product < ApplicationRecord
   validates :service_min, presence: true
   validates :price, numericality: { greater_than: 0 }
 
+  belongs_to :shop
+
+
   acts_as_list
 
   # 商品圖片
