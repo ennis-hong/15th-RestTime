@@ -1,8 +1,9 @@
 puts "建立資料中..."
 5.times do
   email = Faker::Internet.email
-  user = User.find_or_create_by(email:) do |u|
-  u.password = '123456'
+  user = User.find_or_create_by(email: email) do |u|
+    u.password = '123456'
+  end
 
   puts "使用者：#{user.email}"
 
@@ -14,7 +15,10 @@ puts "建立資料中..."
       tel: "(0#{rand(1..9)})#{Faker::Number.number(digits: 4)}-#{Faker::Number.number(digits: 4)}",
       city: '台北市',
       district: '中正區',
-      street: "衡陽路#{rand(1..500)}巷#{rand(1..50)}號"
+      street: "衡陽路#{rand(1..500)}巷#{rand(1..50)}號",
+      contact: '草先生',
+      contactphone: '0123456789',
+      status: 'open'
     )
 
     if shop.save
@@ -26,5 +30,4 @@ puts "建立資料中..."
   else
     puts '該使用者已擁有店家'
   end
-
 end

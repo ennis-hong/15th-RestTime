@@ -1,20 +1,36 @@
-<span><img src="https://fakeimg.pl/300x200/200"></span>
-<h2>店名：<%= @shop.title %></h2>
-<p><%= @shop.user.email %></p>
-<span>(店家評價：未連)</span>
-<h1>商店資訊</h1>
-<p><%= "#{@shop.city}#{@shop.district}#{@shop.street}" %></p>#{}
-<p>(營業時間：未連)</p>
-<h4>店家電話：<%= @shop.tel %></h4>
-<p>店家簡介：<%= @shop.description %></p>
-<p>(服務項目:未連)</p>
-<% if user_signed_in?%>
-  <%= link_to "店家資訊變更", edit_shop_path(@shop) %>
-  <%= link_to '關閉店家', shops_path(@shop), data: {
-                          turbo_method: 'delete',
-                          turbo_confirm: '確認關閉店家？'
-                        } %>
-<% end %>
+<section class="container mx-auto p-4">
+  <% if @shop.cover.attached? %>
+    <%= image_tag @shop.cover, class: "w-full h-auto" %>
+  <% else %>
+    <img src="https://fakeimg.pl/1000x300/200" class="w-full h-auto">
+  <% end %>
+
+  <article class="mt-4">
+    <h1 class="text-xl font-bold">店名：<%= @shop.title %></h1>
+    <p>店主：<%= @shop.user.email %></p>
+    <span class="text-gray-500">(店家評價：未連)</span>
+  </article>
+
+  <section class="mt-4">
+    <h2 class="text-lg font-semibold">商店資訊</h2>
+    <p>地址：<%= "#{@shop.city}#{@shop.district}#{@shop.street}" %></p>
+    <span class="text-gray-500">(營業時間：未連)</span>
+    <p>聯繫方式：<span class="font-semibold"><%= @shop.tel %></span></p>
+    <p>店家簡介：<%= @shop.description %></p>
+    <span class="text-gray-500">(服務項目:未連)</span>
+  </section>
+  
+  <% if user_signed_in? %>
+    <%= render 'like_shops', shop: @shop %>
+    <% if current_user == @shop.user %>
+    <div class="mt-4">
+      <%= link_to "店家資訊變更", edit_shop_path(@shop), class: "btn btn-primary mr-2" %>
+      <%= render 'form_select_shop_status' %>
+    </div>
+    <% end %>
+  <% end %>
+</section>
+
 
 
 

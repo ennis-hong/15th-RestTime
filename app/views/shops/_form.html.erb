@@ -7,7 +7,6 @@
     </ul>
   </section>
 <% end %>
-
 <section>
   <div>
     <%= form_with model: shop, data: { turbo: false } do |f| %>
@@ -26,7 +25,7 @@
       </div>
       <div>
         <%= f.label :city %>
-        <%= select_tag(:county_id, options_for_select(county_options)) %>
+        <%= f.select(:city, options_for_select(county_options)) %>
       </div>
       <div>
         <%= f.label :district %>
@@ -44,7 +43,10 @@
         <%= f.label :contactphone %>
         <%= f.text_field :contactphone, class: 'border-2 border-black'%>
       </div>
-      
+      <div>
+        <%= f.label :cover, class: 'label' %>
+        <%= f.file_field :cover, class: 'file-input file-input-bordered' %>
+      </div>
       
       <div><%= f.submit %></div>
     <% end %>

@@ -6,7 +6,8 @@ class ShopsController < ApplicationController
   before_action :find_owned_shop, only: %i[edit update destroy]
 
   def index
-    @shops = Shop.order(id: :desc)
+    @shop = current_user.shop
+    @shops = Shop.order(id: :desc).page(params[:page]).per(8)
   end
 
   def new
@@ -40,7 +41,7 @@ class ShopsController < ApplicationController
   private
 
   def shop_params
-    params.require(:shop).permit(:title, :tel, :description, :city, :district, :street, :contact, :contactphone)
+    params.require(:shop).permit(:title, :tel, :description, :city, :district, :street, :contact, :contactphone, :cover, :status)
   end
 
   def find_shop

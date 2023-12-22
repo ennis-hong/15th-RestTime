@@ -1,21 +1,10 @@
 <h1>店家列表</h1>
 <%= link_to "建立店家", new_shop_path, class: 'border-2 border-black'%>
+<%= link_to "我的店家", shop_path(@shop), class: 'border-2 border-black' %>
+<%= render 'form_select_shop_status', shop: @shop %>
 <ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-  <li class="p-2 border rounded shadow border-slate-300">
-    <div>
-    <% @shops.each do |shop| %>
-    <figure>
-      <img src="https://fakeimg.pl/300x200/200">
-    </figure>
-    <h2>
-      店名：<%= link_to shop.title, shop_path(shop) , class: 'border-2 border-black'%>
-    </h2>
-    <h3>服務項目：未連</h3>
-    <p>
-      地址：<%= shop.description %>
-    </p>
-    <button>立即預定</button>
-    <% end %>
-  </div>
-  </li>
+  <%= render @shops %>
 </ul>
+<div class="flex justify-center my-4">
+  <%= paginate @shops %>
+</div>
