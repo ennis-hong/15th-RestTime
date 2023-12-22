@@ -5,9 +5,18 @@ class ShopsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_owned_shop, only: %i[edit update destroy]
 
+  #修改前
+  # def index
+  #   @shop = current_user.shop
+  #   @shops = Shop.order(id: :desc).page(params[:page]).per(8)
+  # end
+
+  #搜尋修改後
   def index
     @shop = current_user.shop
-    @shops = Shop.order(id: :desc).page(params[:page]).per(8)
+      @q = Shop.ransack(params[:q])
+      @shops = @q.result(distinct: true).order(order_by).page(params[:page]).per(8)
+
   end
 
   def new
@@ -51,4 +60,16 @@ class ShopsController < ApplicationController
   def find_owned_shop
     @shop = current_user.shop
   end
+
+  #搜尋新增
+  def order_by
+    order_options = {
+      'city desc' => 'city desc',
+      'updated_at desc' => 'updated_at desc'
+    }
+
+    selected_option = params.dig(:q, :s)
+    order_options[selected_option] || 'city desc'
+  end
+
 end

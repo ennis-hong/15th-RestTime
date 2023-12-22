@@ -33,4 +33,14 @@ class Shop < ApplicationRecord
   def set_default_status
     self.status ||= 'open'
   end
+
+  #商店排序用，允許被搜尋到的東西
+  def self.ransackable_attributes(auth_object = nil)
+    ["city", "description", "district", "status", "street", "title", "updated_at", "open"]
+  end
+  #這行刪掉會壞掉，所以保留
+  def self.ransackable_associations(auth_object = nil)
+    ["products"]
+  end
+
 end
