@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 class Shop < ApplicationRecord
-  enum status: { closed: 'closed', open: 'open', busy: 'busy', ShutDown: 'ShutDown' }
+  enum status: { closed: 'closed', open: 'open', busy: 'busy', shut_down: 'ShutDown' }
 
   belongs_to :user
 
@@ -28,10 +26,12 @@ class Shop < ApplicationRecord
   validates :contactphone, presence: true, length: { maximum: 50 },
                            format: { with: /\A[\d\+\-\(\)]+\z/, message: '格式不正確' }
 
-  private
-
   def set_default_status
-    self.status ||= 'open'
+    self.status ||= 'closed'
+  end
+
+  def owned_by?(user)
+    self.user == user
   end
 
   #商店排序用，允許被搜尋到的東西

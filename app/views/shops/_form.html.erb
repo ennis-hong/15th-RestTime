@@ -12,39 +12,39 @@
     <%= form_with model: shop, data: { turbo: false } do |f| %>
 
       <div>
-        <%= f.label :title %>
+        <%= f.label :title, t('form.shop.title') %>
         <%= f.text_field :title, class: 'border-2 border-black'%>
       </div>
       <div>
-        <%= f.label :description %>
+        <%= f.label :description, t('form.shop.description') %>
         <%= f.text_area :description, class: 'border-2 border-black'%>
       </div>
       <div>
-        <%= f.label :tel %>
+        <%= f.label :tel, t('form.shop.tel') %>
         <%= f.text_field :tel, class: 'border-2 border-black'%>
       </div>
       <div>
-        <%= f.label :city %>
+        <%= f.label :city, t('form.shop.city') %>
         <%= f.select(:city, options_for_select(county_options)) %>
       </div>
       <div>
-        <%= f.label :district %>
+        <%= f.label :district, t('form.shop.district') %>
         <%= f.text_field :district, class: 'border-2 border-black'%>
       </div>
       <div>
-        <%= f.label :street %>
+        <%= f.label :street, t('form.shop.street') %>
         <%= f.text_area :street, class: 'border-2 border-black'%>
       </div>
       <div>
-        <%= f.label :contact %>
+        <%= f.label :contact, t('form.shop.contact') %>
         <%= f.text_field :contact, class: 'border-2 border-black'%>
       </div>
       <div>
-        <%= f.label :contactphone %>
+        <%= f.label :contactphone, t('form.shop.contactphone') %>
         <%= f.text_field :contactphone, class: 'border-2 border-black'%>
       </div>
       <div>
-        <%= f.label :cover, class: 'label' %>
+        <%= f.label :cover, t('form.shop.cover'), class: 'label' %>
         <%= f.file_field :cover, class: 'file-input file-input-bordered' %>
       </div>
       

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ShopsHelper
   def shop_cover(shop, variant = :thumb)
     if shop.cover.attached?
@@ -7,5 +5,9 @@ module ShopsHelper
     else
       image_tag 'shops/default.png', class: 'w-full h-full object-cover'
     end
+  end
+
+  def address(shop)
+    "#{shop.city}#{shop.district}#{shop.street}"
   end
 end

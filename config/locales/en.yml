@@ -3,3 +3,14 @@ en:
     formats:
       h24_short: "%H:%M"
       h24_normal: "%H:%M:%S"
+  form:
+    shop:
+      title: "Shop Name"
+      tel: "Shop Phone"
+      description: "Shop Description"
+      city: "City"
+      district: "District"
+      street: "Street Address"
+      contact: "Contact Person"
+      contactphone: "Contact Phone"
+      cover: "Shop Cover"

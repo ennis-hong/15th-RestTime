@@ -2,7 +2,7 @@
   <div class="flex-1">
     <h1 class="mx-2 text-4xl font-bold"><%= link_to "RestTime",root_path %></h1>
         <%= link_to t('navbar.products'), products_path %>
-        <%= link_to "店家", shops_path, class: 'ml-2.5' %>
+        <%= link_to t('navbar.shops'), shops_path, class: 'ml-2.5' %>
   </div>
   <div class="flex-none">
     <ul class="flex gap-3 menu menu-horizontal px-1">
@@ -13,7 +13,6 @@
               <%= current_user.email %>
             </summary>
             <ul class="p-2 bg-base-100 rounded-t-none">
-              <li><%= link_to t('navbar.shop info'), shop_path(current_user_shop)%></li>
               <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" } %></li>
               <li><%= link_to('修改密碼', edit_registration_path(:user)) %></li>
             </ul>

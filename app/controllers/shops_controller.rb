@@ -1,13 +1,12 @@
-# frozen_string_literal: true
-
 class ShopsController < ApplicationController
   before_action :find_shop, only: %i[show]
+  before_action :check_shop_presence, only: %i[new create]
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_owned_shop, only: %i[edit update destroy]
 
   # 搜尋修改後
   def index
-    @shop = current_user.shop
+    @shop = current_user&.shop
     @q = Shop.ransack(params[:q])
     @shops = @q.result(distinct: true).order(order_by).page(params[:page]).per(8)
   end
@@ -65,4 +64,9 @@ class ShopsController < ApplicationController
     selected_option = params.dig(:q, :s)
     order_options[selected_option] || 'city desc'
   end
+
+  def check_shop_presence
+    current_user.shop.nil?
+  end
+  
 end

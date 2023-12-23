@@ -7,6 +7,7 @@ tw:
     products: 商品列表
     about: 關於
     privacy: 隱私權
+    shops: 店家列表
   
     page:
     privacy:
@@ -20,6 +21,17 @@ tw:
     description: 服務敘述
     service_min: 服務時間
     onsale: 是否上架
+    shop:
+      title: 店家名稱
+      tel: 店家電話
+      description: 店家簡介
+      city: 城市
+      district: 區域
+      street: 地址
+      contact: 聯繫人
+      contactphone: 聯絡電話
+      cover: 店家封面
+      status: 目前店家狀態
 
   activerecord:
     attributes:
@@ -37,6 +49,10 @@ tw:
         create: 新增商品
         update: 更新商品
         comment: 評論
+        create: 新增留言
+      shop:
+        create: 建立店家
+        update: 更新店家
 
   
   
@@ -69,3 +85,8 @@ tw:
         sort_by_city: "依照城市排序"
         sort_by_updated_at: "更新時間排序"
   
+  shop_status:
+    closed: "休息中"
+    open: "開放中"
+    busy: "忙碌中"
+    shut_down: "已停業"

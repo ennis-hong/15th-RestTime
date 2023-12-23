@@ -7,13 +7,13 @@
     </div>
     <div class="flex-grow p-2">
       <h2>
-        店名：<%= link_to shop.title, shop_path(shop), class: 'text-blue-600 hover:text-blue-800' %>
+        <%= t('form.shop.title') %><%= link_to shop.title, shop_path(shop), class: 'text-blue-600 hover:text-blue-800' %>
       </h2>
-      <p>地址：</p><%= "#{shop.city}#{shop.district}#{shop.street}" %>
+      <p>地址：</p><%= address(shop) %>
       <h3>服務項目：(未連結)</h3>
-      <p>描述：<%= shop.description %></p>
+      <p><%= t('form.shop.description') %><%= shop.description %></p>
         <%= link_to '立即預定(未連結)', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-rounded' %>
-      <p class="font-semibold">營業狀態：<%= shop.status %></p>
+      <p class="font-semibold"><%= t('form.shop.status') %>：<%= t("shop_status.#{shop.status}") %></p>
       <% if user_signed_in? && %>
         <%= render 'like_shops', shop: %>
       <% end %>
