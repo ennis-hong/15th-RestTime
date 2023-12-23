@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
   before_action :find_shop, only: %i[show]
   before_action :check_shop_presence, only: %i[new create]
+  before_action :check_ownership, only: %i[edit update]
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_owned_shop, only: %i[edit update destroy]
 
@@ -12,7 +13,11 @@ class ShopsController < ApplicationController
   end
 
   def new
-    @shop = Shop.new
+    if current_user.shop.present?
+      redirect_to new_product_path, alert: '你已經擁有一家店，趕緊刊登服務商品吧！'
+    else
+      @shop = Shop.new
+    end
   end
 
   def create
@@ -35,8 +40,6 @@ class ShopsController < ApplicationController
   end
 
   def destroy
-    @shop.destroy
-    redirect_to shops_path, alert: '店家資訊已刪除'
   end
 
   private
@@ -67,6 +70,12 @@ class ShopsController < ApplicationController
 
   def check_shop_presence
     current_user.shop.nil?
+  end
+
+  def check_ownership
+    if current_user == @shop
+      redirect_to root_path, alert: "你走錯地方了"
+    end
   end
   
 end
