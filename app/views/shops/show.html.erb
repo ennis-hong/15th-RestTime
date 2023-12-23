@@ -25,11 +25,10 @@
   height="450"
   frameborder="0" style="border:0"
   referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA2i-y489WjMmPuE3uZ1MXTnp5LtbaHQOE&q=<%= ERB::Util.url_encode(address(@shop))%>"
+  src="https://www.google.com/maps/embed/v1/place?key=<%=ENV['GOOGLE_API_KEY']%>&q=<%= ERB::Util.url_encode(address(@shop))%>"
   allowfullscreen>
   </iframe>
 
-  
   <% if user_signed_in? %>
     <%= render 'like_shops', shop: @shop %>
     <% if @shop.owned_by?(current_user) %>
