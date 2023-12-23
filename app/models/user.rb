@@ -5,6 +5,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  enum role: %i[general vendor]
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, confirmation: true
   has_one :shop

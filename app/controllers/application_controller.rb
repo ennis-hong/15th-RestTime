@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordNotSaved, with: :not_saved
   helper_method :current_user_shop
+  layout :set_layout # 設置判斷登入的使用者layout頁面
 
   def not_found
     render file: Rails.public_path.join('404.html'),
@@ -26,5 +27,13 @@ class ApplicationController < ActionController::Base
 
   def current_user_shop
     current_user.shop
+  end
+
+  def set_layout
+    if current_user&.vendor?
+      'vendor'
+    else
+      'application'
+    end
   end
 end
