@@ -61,8 +61,6 @@ tw:
       Close time can't be blank if open time is set: 設定開始時間必須填寫結束時間
       Open time can't be blank if close time is set: 設定結束時間必須填寫開始時間
 
-        create: 新增留言
-
   views:
     shop:
       index:
