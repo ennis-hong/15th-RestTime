@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  constraints ->(request) { request.env["restime"]&.user&.vendor? } do
+    mount Avo::Engine, at: Avo.configuration.root_path
+  end
+
   scope '(:lang)', locale: /en|tw/ do
     root 'products#index'
 
@@ -10,6 +14,7 @@ Rails.application.routes.draw do
 
     resources :shops
     resource :service_times, only: %i[edit update]
+
 
     namespace :api do
       namespace :v1 do

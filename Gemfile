@@ -93,3 +93,6 @@ gem 'devise', '~> 4.9'
 gem 'rubocop', '~> 1.59', require: false
 
 gem 'pundit', '~> 2.3'
+gem 'sprockets', '~> 4.0'
+
+gem 'avo', '>= 3.2.1'
