@@ -31,6 +31,9 @@ class ShopsController < ApplicationController
 
   def edit; end
 
+  def show
+  end
+
   def update
     if @shop.update(shop_params)
       redirect_to shop_path, notice: '店家資訊更新成功'

@@ -32,6 +32,7 @@ tw:
       contactphone: 聯絡電話
       cover: 店家封面
       status: 目前店家狀態
+      
 
   activerecord:
     attributes:
@@ -53,6 +54,7 @@ tw:
       shop:
         create: 建立店家
         update: 更新店家
+        update_status: 更新營業狀態
 
   
   
@@ -84,6 +86,28 @@ tw:
         create_shop: "建立店家"
         sort_by_city: "依照城市排序"
         sort_by_updated_at: "更新時間排序"
+      show:
+        address: 地址
+        comment: 店家評價
+        title: 店家名稱
+        tel: 店家電話
+        description: 店家簡介
+        city: 城市
+        district: 區域
+        street: 地址
+        contact: 聯繫人
+        contactphone: 聯絡電話
+        cover: 店家封面
+        status: 目前店家狀態
+        comment: 評論
+        ownder: 店主
+        information: 店家資訊
+        information_edit: 店家資訊變更
+        
+
+
+
+
   
   shop_status:
     closed: "休息中"

@@ -6,18 +6,19 @@
   <% end %>
 
   <article class="mt-4">
-    <h1 class="text-xl font-bold"><%= t('form.shop.ttitle') %>：<%= @shop.title %></h1>
-    <p>店主：<%= @shop.user.email %></p>
-    <span class="text-gray-500">(店家評價：未連)</span>
+    <h1 class="text-xl font-bold"><%= t('views.shop.show.title') %>：<%= @shop.title %></h1>
+    <p><%= t('views.shop.show.ownder') %>：<%= @shop.user.email %></p>
+    <span class="text-gray-500">(<%= t('views.shop.show.comment') %>：未連)</span>
   </article>
 
   <section class="mt-4">
-    <h2 class="text-lg font-semibold">商店資訊</h2>
-    <p>地址：<%= address(@shop) %></p>
-    <span class="text-gray-500">(營業時間：未連)</span>
-    <p><%= t('form.shop.tel') %>：<span class="font-semibold"><%= @shop.tel %></span></p>
-    <p><%= t('form.shop.description') %>：<%= @shop.description %></p>
-    <span class="text-gray-500">(服務項目:未連)</span>
+    <h2 class="text-lg font-semibold"><%= t('views.shop.show.information')%></h2>
+    <p><%= t('views.shop.show.address')%>：<%= address(@shop) %></p>
+    <span class="text-gray-500">(<%= t('service_times.title')%>：未連)</span>
+    <span class="text-gray-500"><%= link_to t('service_times.Edit Service Times'), edit_service_times_path, class:'btn btn-xs' %></span>
+    <p><%= t('views.shop.show.tel') %>：<span class="font-semibold"><%= @shop.tel %></span></p>
+    <p><%= t('views.shop.show.description') %>：<%= @shop.description %></p>
+    <span class="text-gray-500">(服務項目:<%= t('form.title')%>未連)</span>
   </section>
 
   <iframe
@@ -33,7 +34,7 @@
     <%= render 'like_shops', shop: @shop %>
     <% if @shop.owned_by?(current_user) %>
     <div class="mt-4">
-      <%= link_to "店家資訊變更", edit_shop_path(@shop), class: "btn btn-primary mr-2" %>
+      <%= link_to t('views.shop.show.information_edit'), edit_shop_path(@shop), class: "btn btn-primary mr-2" %>
       <%= render 'form_select_shop_status' %>
     </div>
     <% end %>
