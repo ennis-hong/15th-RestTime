@@ -10,18 +10,12 @@ class Avo::Resources::Product < Avo::BaseResource
     field :description, as: :textarea
     field :price, as: :number
     field :onsale, as: :boolean
-    # field :deleted_at, as: :date_time
-    # field :position, as: :number
+    field :deleted_at, as: :date_time
+    field :position, as: :number
     field :publish_date, as: :date_time
     field :service_min, as: :number
     field :shop_id, as: :number
     field :cover, as: :file
     field :shop, as: :belongs_to
   end
-
-  # grid do
-  #   title :title, as: :text
-  #   price :price, as: :number
-  #   cover :cover, as: :file, link_to_resource: true
-  # end
 end

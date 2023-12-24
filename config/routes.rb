@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
   # Constraints for Avo Engine
-  authenticate :user, -> user { user.vendor? } do
+  authenticate :user, -> user { user.admin? } do
     mount Avo::Engine => '/avo'
   end
 
-  # constraints ->(request) { request.env["restime"]&.user&.vendor? } do
-  #   mount Avo::Engine, at: Avo.configuration.root_path
-  # end
 
   # Global scope with locale parameter
   scope '(:lang)', locale: /en|tw/ do

@@ -56,8 +56,6 @@ tw:
         update: 更新店家
         update_status: 更新營業狀態
 
-  
-  
   service_times:
     Edit Service Times: 修改營業時間
     title: 營業時間
@@ -109,10 +107,6 @@ tw:
           updated: 店家資訊更新成功
           wrong_way: 你走錯地方了
         
-
-
-
-
   
   shop_status:
     closed: "休息中"
