@@ -103,6 +103,11 @@ tw:
         ownder: 店主
         information: 店家資訊
         information_edit: 店家資訊變更
+      message:
+          already_own_store: 你已經擁有一家店，趕緊刊登服務商品吧！
+          list_your_services_products: 店家建立成功,趕緊刊登服務商品吧！
+          updated: 店家資訊更新成功
+          wrong_way: 你走錯地方了
         
 
 

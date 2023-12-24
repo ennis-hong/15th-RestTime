@@ -14,7 +14,8 @@ class ShopsController < ApplicationController
 
   def new
     if current_user.shop.present?
-      redirect_to new_product_path, alert: '你已經擁有一家店，趕緊刊登服務商品吧！'
+      redirect_to new_product_path,
+      alert: t(:already_own_store, scope: %i[views shop message])
     else
       @shop = Shop.new
     end
@@ -23,7 +24,8 @@ class ShopsController < ApplicationController
   def create
     @shop = current_user.build_shop(shop_params)
     if @shop.save
-      redirect_to shop_path(@shop), notice: '店家建立成功'
+      redirect_to shop_path(@shop), 
+      notice: t(:list_your_services_products, scope: %i[views shop message])
     else
       render :new
     end
@@ -36,7 +38,7 @@ class ShopsController < ApplicationController
 
   def update
     if @shop.update(shop_params)
-      redirect_to shop_path, notice: '店家資訊更新成功'
+      redirect_to shop_path, notice: t(:updated, scope: %i[views shop message])
     else
       render :edit
     end
@@ -77,7 +79,7 @@ class ShopsController < ApplicationController
 
   def check_ownership
     if current_user == @shop
-      redirect_to root_path, alert: "你走錯地方了"
+      redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
     end
   end
   
