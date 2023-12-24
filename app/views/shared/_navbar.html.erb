@@ -23,15 +23,6 @@
         <li><%= link_to '登入', new_user_session_path %></li>
       <% end %>
 
-      <%#是否轉為店家後台判斷%>
-      <% if current_user %>
-        <%= current_user.role %>
-          <%= link_to "logout", destroy_user_session_path, method: :delete, data: { turbo_method: :delete} %>
-      <% else %>
-          <%= link_to "log_in", new_user_session_path %>
-      <% end %>
-
-
       <div>
         <form action="<%= search_path %>" data-turbo="false">
           <input type="search" name="q" class="text-black input input-bordered">
