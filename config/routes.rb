@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   scope '(:lang)', locale: /en|tw/ do
     root 'products#index'
 
-    resources :products
+    resources :products do
+      collection do
+        get :my
+      end
+    end
+
     resources :shops
     resource :service_times, only: %i[edit update]
 

@@ -34,13 +34,13 @@ class Shop < ApplicationRecord
     self.user == user
   end
 
-  #商店排序用，允許被搜尋到的東西
-  def self.ransackable_attributes(auth_object = nil)
-    ["city", "description", "district", "status", "street", "title", "updated_at", "open"]
-  end
-  #這行刪掉會壞掉，所以保留
-  def self.ransackable_associations(auth_object = nil)
-    ["products"]
+  # 商店排序用，允許被搜尋到的東西
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[city description district status street title updated_at open]
   end
 
+  # 這行刪掉會壞掉，所以保留
+  def self.ransackable_associations(_auth_object = nil)
+    ['products']
+  end
 end

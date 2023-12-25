@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum role: %i[general vendor]
+  enum role: %i[general vendor admin]
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, confirmation: true
   has_one :shop
@@ -14,5 +14,9 @@ class User < ApplicationRecord
 
   def liked?(shop)
     liked_shop_ids.include?(shop.id)
+  end
+
+  def own?(product)
+    shop&.products&.unscope(where: :onsale)&.include?(product)
   end
 end

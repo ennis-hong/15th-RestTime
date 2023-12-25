@@ -13,19 +13,15 @@ class ShopsController < ApplicationController
   end
 
   def new
-    if current_user.shop.present?
-      redirect_to new_product_path,
-      alert: t(:already_own_store, scope: %i[views shop message])
-    else
-      @shop = Shop.new
-    end
+    authorize Shop, :new?
+    @shop = Shop.new
   end
 
   def create
+    authorize Shop, :create?
     @shop = current_user.build_shop(shop_params)
     if @shop.save
-      redirect_to shop_path(@shop), 
-      notice: t(:list_your_services_products, scope: %i[views shop message])
+      redirect_to shop_path(@shop), notice: t(:list_your_services_products, scope: %i[views shop message])
     else
       render :new
     end
@@ -33,8 +29,7 @@ class ShopsController < ApplicationController
 
   def edit; end
 
-  def show
-  end
+  def show; end
 
   def update
     if @shop.update(shop_params)
@@ -44,8 +39,7 @@ class ShopsController < ApplicationController
     end
   end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 
@@ -78,9 +72,8 @@ class ShopsController < ApplicationController
   end
 
   def check_ownership
-    if current_user == @shop
-      redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
-    end
+    return unless current_user == @shop
+
+    redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
   end
-  
 end
