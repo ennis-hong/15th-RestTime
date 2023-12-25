@@ -5,16 +5,16 @@ Rails.application.routes.draw do
     mount Avo::Engine => '/avo'
   end
 
-  resources :vendor
-
 
   # Global scope with locale parameter
   scope '(:lang)', locale: /en|tw/ do
     root 'products#index'
+    resources :vendor
 
     resources :products do
       collection do
         get :my
+        delete :my
       end
     end
 

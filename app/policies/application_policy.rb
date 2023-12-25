@@ -36,6 +36,10 @@ class ApplicationPolicy
     false
   end
 
+  def show_vendor_link?
+    user && user.role == 'vendor'
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user

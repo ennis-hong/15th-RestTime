@@ -14,3 +14,8 @@ en:
       contact: "Contact Person"
       contactphone: "Contact Phone"
       cover: "Shop Cover"
+
+
+en:
+  vendor:
+    myproduct: 'My Product'

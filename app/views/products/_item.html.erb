@@ -1,7 +1,7 @@
 <%= tag.li data: { id: product.id },
            class: class_names('p-2 bg-white border rounded shadow border-slate-300', grayscale: !product.onsale, 'grayscale-0': product.onsale) do %>
   <div>
-    <%= link_to edit_product_path(product) do %>
+    <%= link_to product_path(product) do %>
       <figure>
         <%= product_cover(product) %>
       </figure>

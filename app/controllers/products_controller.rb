@@ -58,9 +58,8 @@ class ProductsController < ApplicationController
 
   def destroy
     authorize @product
-
     @product.destroy
-    redirect_to root_path, alert: '商品已刪除'
+    redirect_to my_products_path, notice: '商品已刪除'
   end
 
   def search

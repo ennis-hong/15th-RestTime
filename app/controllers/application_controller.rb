@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
   helper_method :current_user_shop
   layout :set_layout # 設置判斷登入的使用者layout頁面
+  helper_method :show_vendor_link?
+
+  def show_vendor_link
+    authorize :application, :show_vendor_stuff?
+  end
 
   def not_found
     render file: Rails.public_path.join('404.html'),

@@ -1,13 +1,13 @@
 
 <% if policy(@product).update? %>
-  <%= link_to "編輯商品", edit_product_path, class: 'ink-btn' %>
-  <%= link_to '刪除商品', product_path(@product), class: 'ink-btn ink-btn-danger', data: {
+  <%= link_to t('product.edit'), edit_product_path, class: 'btn' %>
+  <%= link_to t('product.delete'), my_products_path, class: 'btn', method: :delete, data: {
    turbo_method: 'delete',
-   turbo_confirm: '確認刪除？'
+   turbo_confirm: t('product.confirm_delete')
  } %>
 <% end %>
 <%= image_tag @product.cover.variant(:thumb) if @product.cover.attached? %>
 
-<h3>售價:<%= @product.price %>元</h3>
-<h3>服務時間:<%= @product.service_min %>分鐘</h3>
-<p>描述:<%= simple_format(@product.description) %></p>
+<h3><%=t('form.price')%>:<%= @product.price %><%=t('product.doller')%></h3>
+<h3><%=t('form.service_min')%>:<%= @product.service_min %><%=t('product.min')%></h3>
+<p><%=t('form.description')%>:<%= simple_format(@product.description) %></p>
