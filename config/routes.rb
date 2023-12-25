@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  get 'vendor/index'
   # Constraints for Avo Engine
   authenticate :user, -> user { user.admin? } do
     mount Avo::Engine => '/avo'
   end
+
+  resources :vendor
 
 
   # Global scope with locale parameter
