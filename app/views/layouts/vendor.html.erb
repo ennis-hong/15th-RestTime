@@ -17,6 +17,7 @@
     <%= render "shared/flash" if flash.any? %>
     <main class="container p-4 mx-auto">
         <h1>使用者後台</h1>
+    <%= link_to "backstage", vendor_index_path, class: 'btn' %>
       <%= yield %>
     </main>
     <%= render "shared/footer" %>
