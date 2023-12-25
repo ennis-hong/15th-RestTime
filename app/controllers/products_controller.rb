@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
     authorize Product
     @q = Product.ransack(params[:q])
     @products = @q.result
+                  .where(onsale: true)
                   .order(order_by)
                   .page(params[:page])
                   .per(8)
