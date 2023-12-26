@@ -7,16 +7,5 @@
 }
 
 .flash-notice {
-  @apply px-4 py-2 text-white bg-primary;
-}
-.text-input{
-  @apply input input-bordered-primary w-full max-w-xs
-}
-
-.text-area{
-  @apply textarea textarea-primary
-}
-
-.file-input{
-  @apply file-input-primary w-full max-w-xs
+  @apply px-4 py-2 text-white bg-accent;
 }

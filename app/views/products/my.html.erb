@@ -3,7 +3,7 @@
 <%= link_to t('vendor.create'), new_product_path, class: 'btn btn-primary mb-4' %>
 
 <ul data-controller="drag"
-    class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 m-5 gap-5">
   <%= render partial: 'item', collection: @products, as: :product %>
 </ul>
 

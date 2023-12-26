@@ -1,5 +1,7 @@
+<div class="card w-85 gap-2 glass">
+
 <%= tag.li data: { id: product.id },
-           class: class_names('p-2 bg-white border rounded shadow border-slate-300', grayscale: !product.onsale, 'grayscale-0': product.onsale) do %>
+           class: class_names('p-2', grayscale: !product.onsale, 'grayscale-0': product.onsale) do %>
   <div class="card-body">
     <%= link_to edit_product_path(product) do %>
       <figure>
@@ -22,4 +24,4 @@
      </div>
   </div>
 <% end %>
-
+</div>
