@@ -8,46 +8,49 @@
   </div>
 <% end %>
 
-<form backdrop-opacity-5	>
+<form>
   <div class="form-control">
-    <div class="space-y-12">
-      <div class="border-b border-gray-900/10 pb-12">
+    <div class="space-y-12 mx-10">
+      <div class="border
+      
+      
+       border-gray-900/10 pb-12">
         <%= form_with model: product, data: { turbo: false } do |form| %>
           <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
             <div class="sm:col-span-4">
-              <%= form.label :title, t('form.title'), class: "block text-sm font-medium leading-6 text-gray-900" %>
+              <%= form.label :title, t('form.title'), class: "form-label" %>
               <%= form.text_field :title, class: 'input input-bordered w-full max-w-xs' %>
             </div>
 
             <div class="col-span-full">
-              <%= form.label :cover, t('form.cover') %>
+              <%= form.label :cover, t('form.cover'), class: "form-label" %>
               <%= form.file_field :cover, class: 'file-input file-input-bordered w-full max-w-xs' %>
             </div>
 
             <div class="col-span-full">
-              <%= form.label :price, t('form.price') %>
+              <%= form.label :price, t('form.price'), class: "block text-sm font-medium leading-6 text-gray-900" %>
               <%= form.number_field :price, class: 'input input-bordered w-full max-w-xs', min: 0 %>
             </div>
 
             <div class="col-span-full">
-              <%= form.label :service_min, t('form.service_min') %>
+              <%= form.label :service_min, t('form.service_min'), class: "block text-sm font-medium leading-6 text-gray-900" %>
               <%= form.number_field :service_min, class: 'input input-bordered w-full max-w-xs', min: 0 %>
             </div>
 
             <div class="col-span-full">
-              <%= form.label :description, t('form.description') %>
+              <%= form.label :description, t('form.description'), class: "block text-sm font-medium leading-6 text-gray-900" %>
               <%= form.text_area :description, class: 'textarea textarea-bordered' %>
             </div>
 
             <div>
               <label class="cursor-pointer label">
-                <span class="label-text"><%= form.label :onsale, t('form.onsale') %>
-                <%= form.check_box :onsale, class: 'toggle toggle-primary', min: 0 %></span>
+                <span class="label-text"><%= form.label :onsale, t('form.onsale'), class: "block text-sm font-medium leading-6 text-gray-900" %></span>
+                <%= form.check_box :onsale, class: 'toggle toggle-primary' %>
               </label>
             </div>
 
-            <div class="mt-6 flex items-center justify-end gap-x-6">
+            <div class="col-span-full">
               <%= form.submit t('form.create'), class: 'btn btn-accent' %>
             </div>
 
