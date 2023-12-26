@@ -49,10 +49,6 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def user_can_manage_product_in_shop?
-    user.admin? && product.shop_id == user_assigned_shop_id
-  end
-
-  def user_assigned_shop_id
-    user.assigned_shop_id
+    user.admin? && product.shop_id
   end
 end

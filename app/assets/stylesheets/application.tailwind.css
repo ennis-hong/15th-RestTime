@@ -7,7 +7,7 @@
 }
 
 .flash-notice {
-  @apply px-4 py-2 text-black bg-indigo-400;
+  @apply px-4 py-2 text-white bg-primary;
 }
 .text-input{
   @apply input input-bordered-primary w-full max-w-xs
