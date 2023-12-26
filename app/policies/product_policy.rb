@@ -35,7 +35,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def destroy?
-    vendor_with_shop? || (user.admin? && user_can_manage_product_in_shop?)
+    vendor_with_shop? || user.admin?
   end
 
   def search?

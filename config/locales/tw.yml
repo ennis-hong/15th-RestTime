@@ -55,7 +55,6 @@ tw:
         create: 新增商品
         update: 更新商品
         comment: 評論
-        create: 新增留言
       shop:
         create: 建立店家
         update: 更新店家
@@ -144,6 +143,7 @@ tw:
     confirm_delete: '確認刪除?'
     create: 新增商品
     search: 搜尋結果
+    check: 查看商品
     update_time: 更新時間
     doller: 元
     min: 分鐘

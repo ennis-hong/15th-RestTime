@@ -1,49 +1,53 @@
 <% if product.errors.any? %>
-  <section class="p-4 bg-rose-600 text-white p-4">
+  <div class="bg-red-500 text-white p-4 mb-4">
     <ul>
     <% product.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
     </ul>
-  </section>
+  </div>
 <% end %>
+
+<div class="form-control">
 
 <%= form_with model: product,
               data: { turbo: false } do |form| %>
 
     <div>
     <%= form.label :title, t('form.title') %>
-    <%= form.text_field :title, class: 'border-2 border-black' %>
+    <%= form.text_field :title, class:'text-input' %>
   </div>
   
   <div>
     <%= form.label :cover, t('form.cover') %>
-    <%= form.file_field :cover, class:'input-field' %>
+    <%= form.file_field :cover, class:'file-input' %>
   </div>
   <div>
     <%= form.label :price, t('form.price') %>
-    <%= form.number_field :price, class: 'border-2 border-black', min: 0 %>
+    <%= form.number_field :price, class:'text-input', min: 0 %>
   </div>
 
   <div>
     <%= form.label :service_min, t('form.service_min') %>
-    <%= form.number_field :service_min, class: 'border-2 border-black', min: 0 %>
+    <%= form.number_field :service_min, class:'text-input', min: 0 %>
   </div>
 
   <div>
     <%= form.label :description, t('form.description') %>
-    <%= form.text_area :description, class: 'border-2 border-black' %>
+    <%= form.text_area :description, class: 'textarea' %>
   </div>
 
 
   <div>
-    <%= form.label :onsale, t('form.onsale') %>
-    <%= form.check_box :onsale, class: 'border-2 border-black', min: 0 %>
+    <label class="cursor-pointer label">
+    <span class="label-text"><%= form.label :onsale, t('form.onsale') %>
+    <%= form.check_box :onsale, class: 'toggle toggle-primary', min: 0 %></span>
+    </label>
   </div>
 
 
   <div>
-    <%= form.submit t('form.create'), class: 'bg-rose-700 text-white px-3 py-2' %>
+    <%= form.submit t('form.create'), class: 'btn btn-accent' %>
   </div>
-
+</div>
 <% end %>

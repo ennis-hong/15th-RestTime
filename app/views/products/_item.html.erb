@@ -1,12 +1,25 @@
 <%= tag.li data: { id: product.id },
            class: class_names('p-2 bg-white border rounded shadow border-slate-300', grayscale: !product.onsale, 'grayscale-0': product.onsale) do %>
-  <div>
-    <%= link_to product_path(product) do %>
+  <div class="card-body">
+    <%= link_to edit_product_path(product) do %>
       <figure>
         <%= product_cover(product) %>
       </figure>
     <% end %>
-    <h2 class="font-bold"><%= link_to product.title, product_path(product) %></h2>
+    <div class="card-tittle">
+      <%= link_to product.title, edit_product_path(product) %>
+    </div>
     <span>NT$ <%= product.price %></span>
+    <%= link_to product_path(product) do %>
+    <div class="card-actions justify-end">
+      <button class="btn"><%= t('product.check') %></button>
+    <% end %> 
+
+<%# link_to t('product.delete'), my_products_path, class: 'btn btn-primary', method: :delete, data: {
+   turbo_method: 'delete',
+   turbo_confirm: t('product.confirm_delete')
+ } %>
+     </div>
   </div>
 <% end %>
+
