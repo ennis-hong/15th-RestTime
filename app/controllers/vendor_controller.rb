@@ -10,13 +10,13 @@ class VendorController < ApplicationController
   end
 
   def new
+    authorize Shop, :new?
     @shop = Shop.new
-    authorize @shop, :new?
   end
 
   def create
+    authorize Shop, :create?
     @shop = current_user.build_shop(shop_params)
-    authorize @shop, :create?
     if @shop.save
       redirect_to shop_path(@shop), notice: t(:list_your_services_products, scope: %i[views shop message])
     else
