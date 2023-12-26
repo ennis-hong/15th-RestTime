@@ -1,3 +1,7 @@
+<% if policy(:application).show_vendor_link? %>
+<%= link_to t('vendor.myproduct'), my_products_path, class: 'btn btn-primary mb-4' %>
+<% end %>
+
 <%# 我的商品頁面 %>
 <h1><%= t('views.shop.index.title') %></h1>
 <% if user_signed_in? %>
