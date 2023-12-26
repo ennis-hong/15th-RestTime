@@ -133,6 +133,7 @@ tw:
   
   vendor:
     myproduct: '我的商品'
+    myshop: '我的店家'
     create: '新增'
     edit: '修改'
     delete: '刪除'
@@ -147,4 +148,5 @@ tw:
     doller: 元
     min: 分鐘
     order_by_price: 價格排序
+
 

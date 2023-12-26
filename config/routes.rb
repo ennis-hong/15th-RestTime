@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # Global scope with locale parameter
   scope '(:lang)', locale: /en|tw/ do
     root 'products#index'
+
     resources :vendor
 
     # Devise routes
