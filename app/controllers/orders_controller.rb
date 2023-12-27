@@ -1,0 +1,42 @@
+# frozen_string_literal: true
+
+class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :order_params, only: :create
+  before_action :find_order, only: :show
+
+  def my
+    @orders = current_user.orders
+  end
+
+  def show; end
+
+  def create
+    order = current_user.orders.new(order_params)
+    order.booking_info!(current_booking)
+    order.product_info!(booking_product)
+
+    if order.save
+      current_booking.destroy
+      order.confirm!
+      redirect_to root_path, notice: t('message.Appointment Successful')
+    else
+      redirect_to checkout_booking_path
+    end
+  end
+
+  private
+
+  def order_params
+    params.require(:order)
+          .permit(:booked_name, :booked_email).merge(product: booking_product, shop: booking_shop)
+  end
+
+  def process_error
+    redirect_to checkout_booking_path, alert: t('message.The system is busy, please try again later')
+  end
+
+  def find_order
+    @order = Order.find(params[:id])
+  end
+end

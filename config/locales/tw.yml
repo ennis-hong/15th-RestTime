@@ -1,8 +1,4 @@
 tw:
-  time:
-    formats:
-      h24_short: "%H:%M"
-      h24_normal: "%H:%M:%S"
   navbar:
     products: 商品列表
     about: 關於
@@ -17,6 +13,9 @@ tw:
     privacy:
       title: 隱私權政策
     shop info: 商店資訊
+  
+  Home: 首頁
+  My Bookings: 我的預約 
       
   form:
     title: 服務項目
@@ -26,6 +25,7 @@ tw:
     service_min: 服務時間
     onsale: 是否上架
     create: 新增
+    Next: 下一步
     shop:
       title: 店家名稱
       tel: 店家電話
@@ -48,7 +48,7 @@ tw:
             description: 服務敘述
             service_min: 服務時間
             onsale: 是否上架
-
+    
   helpers:
     submit:
       product:
@@ -105,6 +105,9 @@ tw:
         ownder: 店主
         information: 店家資訊
         information_edit: 店家資訊變更
+        Map: 地圖
+        Select Product: 選擇商品
+        format: "%{open_time} ~ %{close_time}"
       message:
           already_own_store: 你已經擁有一家店，趕緊刊登服務商品吧！
           list_your_services_products: 店家建立成功,趕緊刊登服務商品吧！
@@ -118,6 +121,20 @@ tw:
     
 
 
+  order:
+    min: 分鐘
+    currency: NTD
+    Booking: 開始預約
+    Booking Date: 日期
+    Booking Start Time: 開始時間
+    Booking End Time: 結束時間
+    Contact Info: 聯絡資訊
+    Booking Info: 預約資訊
+    Name: 姓名
+    Confirm: 確認預約
+  message:
+    The system is busy, please try again later: 系統忙碌中，請稍候再試
+    Appointment Successful: 預約成功
   
   shop_status:
     closed: "休息中"
