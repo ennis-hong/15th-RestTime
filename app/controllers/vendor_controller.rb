@@ -1,6 +1,6 @@
 class VendorController < ApplicationController
   before_action :find_shop, only: %i[show]
-  before_action :check_shop_presence, only: %i[new create]
+  before_action :check_shop_presence
   before_action :check_ownership, only: %i[edit update]
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_owned_shop, only: %i[edit update destroy]
@@ -68,7 +68,27 @@ class VendorController < ApplicationController
   end
 
   def check_shop_presence
-    current_user.shop.nil?
+    if current_user.role == 'vendor'
+      current_user.shop || create_default_shop
+    else
+      false
+    end
+  end
+
+  def create_default_shop(_attributes = {})
+    Shop.new(
+      title: 'Default Title',
+      description: 'Default Description',
+      district: 'Default District',
+      city: 'Default City',
+      street: 'Default Street',
+      contact: 'Default Contact',
+      tel: '000000000',
+      contactphone: '000000000'
+    ).tap do |shop|
+      current_user.shop = shop
+      shop.save
+    end
   end
 
   def check_ownership
