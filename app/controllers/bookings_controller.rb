@@ -16,6 +16,10 @@ class BookingsController < ApplicationController
 
   private
 
+  def booking_params
+    params.permit(:service_date, :product_id)
+  end
+
   def find_product
     @product = Product.find(params[:product_id])
   end
