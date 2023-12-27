@@ -96,3 +96,10 @@ gem 'pundit', '~> 2.3'
 gem 'sprockets', '~> 4.0'
 
 gem 'avo', '>= 3.2.1'
+gem 'omniauth-google-oauth2'
+
+gem 'oauth2'
+
+gem 'omniauth'
+
+gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'

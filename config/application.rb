@@ -17,6 +17,9 @@ module RestTime
     config.autoload_lib(ignore: %w(assets tasks))
     config.i18n.default_locale = "tw"
 
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+
 
     # Configuration for the application, engines, and railties goes here.
     #

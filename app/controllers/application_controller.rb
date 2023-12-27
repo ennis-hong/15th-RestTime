@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     authorize :application, :show_vendor_stuff?
   end
 
+  protect_from_forgery with: :exception
   def not_found
     render file: Rails.public_path.join('404.html'),
            status: 404,
@@ -65,4 +66,5 @@ class ApplicationController < ActionController::Base
   def not_authorized
     redirect_to root_path, alert: '權限不足'
   end
+
 end
