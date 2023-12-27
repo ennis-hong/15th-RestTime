@@ -33,6 +33,16 @@ class Order < ApplicationRecord
     end
   end
 
+  def booking_info!(current_booking)
+    self.service_date = current_booking.service_date
+    self.booking_date = Time.current
+  end
+
+  def product_info!(product)
+    self.price = product.price
+    self.service_min = product.service_min
+  end
+
   private
 
   def generate_serial

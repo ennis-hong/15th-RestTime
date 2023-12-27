@@ -33,6 +33,10 @@ class OrdersController < ApplicationController
           .permit(:booked_name, :booked_email).merge(product: booking_product, shop: booking_shop)
   end
 
+  def process_error
+    redirect_to checkout_booking_path, alert: t('message.The system is busy, please try again later')
+  end
+
   def find_order
     @order = Order.find(params[:id])
   end
