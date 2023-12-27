@@ -1,3 +1,12 @@
+<% if @order.errors.any? %>
+  <section>
+    <ul>
+    <% @order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </section>
+<% end %>
 <div class="grid grid-cols-2 gap-4 mt-8">
   <div>
     <div class="card w-full bg-white-100 shadow-xl">
