@@ -21,6 +21,8 @@ class User < ApplicationRecord
 
   def own?(product)
     shop&.products&.unscope(where: :onsale)&.include?(product)
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.find_by(email: data['email'])

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     root 'products#index'
     resources :vendor
 
+    # Devise routes
+    devise_for :users, skip: :omniauth_callbacks, controllers: { sessions: 'users/sessions' }
     resources :products do
       collection do
         get :my
@@ -33,6 +35,8 @@ Rails.application.routes.draw do
       end
     end
 
+
+
     # Static pages
     %w(about choose_us join_us contact_us terms privacy refund_policy payment order refund).each do |page|
       get "/#{page}", to: "pages##{page}"
@@ -41,7 +45,7 @@ Rails.application.routes.draw do
     # Search route
     get "/search", to: "products#search"
 
-    # Devise routes
-    devise_for :users, controllers: { sessions: 'users/sessions' }
+
+
   end
 end
