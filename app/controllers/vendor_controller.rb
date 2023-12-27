@@ -1,12 +1,9 @@
 class VendorController < ApplicationController
-  before_action :find_shop, only: %i[show]
-  before_action :check_shop_presence
-  before_action :check_ownership, only: %i[edit update]
-  before_action :authenticate_user!, except: %i[index show]
-  before_action :find_owned_shop, only: %i[edit update destroy]
+  before_action :find_owned_shop, only: %i[edit show destroy]
 
   # 搜尋修改後
   def index
+    authorize Shop, :index?
     @shop = current_user&.shop
     @q = Shop.ransack(params[:q])
     @shops = @q.result(distinct: true).order(order_by).page(params[:page]).per(8)
@@ -27,11 +24,16 @@ class VendorController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize Shop, :edit?
+  end
 
-  def show; end
+  def show
+    authorize Shop, :show?
+  end
 
   def update
+    authorize Shop, :update?
     if @shop.update(shop_params)
       redirect_to shop_path, notice: t(:updated, scope: %i[views shop message])
     else
@@ -39,17 +41,15 @@ class VendorController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    authorize Shop, :destroy?
+  end
 
   private
 
   def shop_params
     params.require(:shop).permit(:title, :tel, :description, :city, :district, :street, :contact, :contactphone,
                                  :cover, :status)
-  end
-
-  def find_shop
-    @shop = Shop.find(params[:id])
   end
 
   def find_owned_shop
@@ -65,30 +65,6 @@ class VendorController < ApplicationController
 
     selected_option = params.dig(:q, :s)
     order_options[selected_option] || 'city desc'
-  end
-
-  def check_shop_presence
-    if current_user.role == 'vendor'
-      current_user.shop || create_default_shop
-    else
-      false
-    end
-  end
-
-  def create_default_shop(_attributes = {})
-    Shop.new(
-      title: 'Default Title',
-      description: 'Default Description',
-      district: 'Default District',
-      city: 'Default City',
-      street: 'Default Street',
-      contact: 'Default Contact',
-      tel: '000000000',
-      contactphone: '000000000'
-    ).tap do |shop|
-      current_user.shop = shop
-      shop.save
-    end
   end
 
   def check_ownership
