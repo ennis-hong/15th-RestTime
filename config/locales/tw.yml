@@ -112,6 +112,13 @@ tw:
           updated: 店家資訊更新成功
           wrong_way: 你走錯地方了
         
+
+  errors:
+    messages:
+      not_saved: Email錯誤
+    
+
+
   
   shop_status:
     closed: "休息中"
