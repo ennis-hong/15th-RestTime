@@ -1,5 +1,5 @@
 class VendorController < ApplicationController
-  before_action :find_owned_shop, only: %i[edit show destroy]
+  before_action :find_owned_shop, only: %i[edit show update destroy]
 
   # 搜尋修改後
   def index
@@ -10,13 +10,13 @@ class VendorController < ApplicationController
   end
 
   def new
-    authorize Shop, :new?
     @shop = Shop.new
+    authorize @shop, :new?
   end
 
   def create
-    authorize Shop, :create?
     @shop = current_user.build_shop(shop_params)
+    authorize @shop, :create?
     if @shop.save
       redirect_to shop_path(@shop), notice: t(:list_your_services_products, scope: %i[views shop message])
     else
@@ -25,15 +25,15 @@ class VendorController < ApplicationController
   end
 
   def edit
-    authorize Shop, :edit?
+    authorize @shop, :edit?
   end
 
   def show
-    authorize Shop, :show?
+    authorize @shop, :show?
   end
 
   def update
-    authorize Shop, :update?
+    authorize @shop, :update?
     if @shop.update(shop_params)
       redirect_to shop_path, notice: t(:updated, scope: %i[views shop message])
     else
@@ -42,7 +42,7 @@ class VendorController < ApplicationController
   end
 
   def destroy
-    authorize Shop, :destroy?
+    authorize @shop, :destroy?
   end
 
   private
