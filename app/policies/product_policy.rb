@@ -15,40 +15,30 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def my?
-    (user.vendor? && user.shop.present?) || user.admin?
+    user.shop.present? || create_default_shop || user.admin?
   end
 
   def new?
-    vendor_with_shop? || user.admin?
+    my?
   end
 
   def create?
-    vendor_with_shop? || user.admin?
+    my?
   end
 
   def edit?
-    vendor_with_shop? || (user.admin? && user_can_manage_product_in_shop?)
+    user&.own?(product) || user&.admin?
   end
 
   def update?
-    vendor_with_shop? || (user.present? && user.admin? && user_can_manage_product_in_shop?)
+    edit?
   end
 
   def destroy?
-    vendor_with_shop? || user.admin?
+    edit?
   end
 
   def search?
     true
-  end
-
-  private
-
-  def vendor_with_shop?
-    user.present? && user.vendor? && user.shop.present?
-  end
-
-  def user_can_manage_product_in_shop?
-    user.admin? && product.shop_id
   end
 end

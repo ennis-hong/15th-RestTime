@@ -1,16 +1,11 @@
-<% if policy(:application).show_vendor_link? %>
-<%= link_to t('vendor.myproduct'), my_products_path, class: 'btn btn-primary mb-4' %>
+<h1><%= t('views.shop.index.title') %></h1>
+
+<%= link_to  "我的商品", my_products_path, class: 'btn btn-outline btn-primary'%>
+<% if policy(:application).show_create_shop_link? %>
+  <%= link_to t('views.shop.index.create_shop'), new_shop_path, class: 'btn btn-outline btn-secondary'%>
 <% end %>
 
-<%# 我的商品頁面 %>
-<h1><%= t('views.shop.index.title') %></h1>
-<% if user_signed_in? %>
-  <% if current_user&.shop.nil? %>
-    <%= link_to t('views.shop.index.create_shop'), new_shop_path, class: 'border-2 border-black'%>
-  <% else %>
-    <%= render 'form_select_shop_status', shop: @shop %>
-  <% end %>
-<% end %>
+
 
 <ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
 <%= search_form_for @q do |f| %>
