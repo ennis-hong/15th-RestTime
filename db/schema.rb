@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_184317) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "appointments", force: :cascade do |t|
+    t.time "open_time"
+    t.time "close_time"
+    t.time "lunch_start"
+    t.time "lunch_end"
+    t.boolean "off_day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
