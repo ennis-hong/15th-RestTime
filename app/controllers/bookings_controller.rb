@@ -4,19 +4,14 @@ class BookingsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_product, only: [:create]
 
-  def show; end
-
   def checkout
     @order = Order.new
   end
 
   def create
-    current_booking
+    current_booking&.destroy
+    current_user.create_booking(product: @product, service_date: params[:service_date])
     redirect_to checkout_booking_path
-  end
-
-  def destroy
-    current_booking.destroy
   end
 
   private
