@@ -3,7 +3,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
-  before_action :find_owned_product, only: %i[edit update destroy]
+  before_action :find_owned_product, only: %i[edit update destroy show]
 
   def index
     authorize Product
@@ -15,7 +15,9 @@ class ProductsController < ApplicationController
                   .per(8)
   end
 
-  def show; end
+  def show
+    authorize :product
+  end
 
   def my
     authorize :product

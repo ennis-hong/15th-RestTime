@@ -1,7 +1,7 @@
 <h1><%= t('views.shop.index.title') %></h1>
 
-<%= link_to  "我的商品", my_products_path, class: 'btn btn-outline btn-primary'%>
-<% if policy(:application).show_create_shop_link? %>
+<%= link_to  t('vendor.myproduct'), my_products_path, class: 'btn btn-outline btn-primary'%>
+<% if policy(:shop).new? %>
   <%= link_to t('views.shop.index.create_shop'), new_shop_path, class: 'btn btn-outline btn-secondary'%>
 <% end %>
 

@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-
   def not_found
     render file: Rails.public_path.join('404.html'),
            status: 404,
@@ -57,9 +56,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_booking
-    if user_signed_in?
-      @__booking__ ||= current_user.booking
-    end
+    return unless user_signed_in?
+
+    @__booking__ ||= current_user.booking
   end
 
   def booking_shop
@@ -69,5 +68,4 @@ class ApplicationController < ActionController::Base
   def booking_product
     current_booking.product
   end
-
 end

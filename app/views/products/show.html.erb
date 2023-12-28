@@ -1,6 +1,5 @@
 
- <% if policy(:application).show_product_edit_destroy_link? %>
-  <%= link_to t('product.edit'), edit_product_path, class: 'btn' %>
+<% if policy(@product).update? %>
   <%= link_to t('product.delete'), product_path(@product), class: 'btn', method: :delete, data: {
    turbo_method: 'delete',
    turbo_confirm: t('product.confirm_delete')
