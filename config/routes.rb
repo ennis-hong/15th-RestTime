@@ -22,7 +22,9 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :shops
+    resources :shops do
+      resources :comments
+    end
     resource :service_times, only: %i[edit update]
 
     # API namespace

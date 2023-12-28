@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :like_shops
   has_many :liked_shops, through: :like_shops, source: :shop
   has_many :orders
+  has_many :comments
 
   def liked?(shop)
     liked_shop_ids.include?(shop.id)

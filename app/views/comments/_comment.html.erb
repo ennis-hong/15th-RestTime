@@ -1,0 +1,9 @@
+<div class="comment-<%= comment.id %> container"
+    style="border: 1px solid ; padding: 1em; margin: 1em;">
+  <div class="label">
+  <span class="label-text"><%= comment.user.email %></span>
+  <span class="label-text-alt">Posted <%= time_ago_in_words(comment.created_at) %></span>
+</div>
+  <hr />
+  <%= comment.body %>
+</div>

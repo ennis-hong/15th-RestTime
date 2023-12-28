@@ -67,3 +67,13 @@
     <%= render 'booking', { shop: @shop, service_times: @shop.service_times } %>
   </div>
 </section>
+    <% end %>
+  <% end %>
+</section>
+
+<div class="container">
+  <%= render 'comments/form', shop: @shop %>
+  <% @comments.each do |comment| %>
+    <%= render 'comments/comment', shop: @shop, comment: comment %>
+  <% end %>
+</div>

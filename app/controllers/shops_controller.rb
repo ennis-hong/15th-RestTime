@@ -31,7 +31,10 @@ class ShopsController < ApplicationController
 
   def edit; end
 
-  def show; end
+  def show
+    @shop = Shop.find(params[:id])
+    @comments = @shop.comments.order(created_at: :desc)
+  end
 
   def update
     if @shop.update(shop_params)

@@ -1,0 +1,6 @@
+<%= form_with(model: [shop, shop.comments.build]) do |f| %>
+  <div class="form-control">
+    <%= f.text_area :body, class: "textarea textarea-bordered h-24" %>
+    <%= f.submit "Reply", class: "btn mt-1" %>
+  </div>
+<% end %>
