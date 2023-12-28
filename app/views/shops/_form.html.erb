@@ -1,54 +1,51 @@
-<% if shop.errors.any? %>
-  <section>
-    <ul>
-    <% shop.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </section>
-<% end %>
-<section>
-  <div>
-    <%= form_with model: shop, data: { turbo: false } do |f| %>
+<%= display_errors(shop) %>
 
-      <div>
-        <%= f.label :title, t('form.shop.title') %>
-        <%= f.text_field :title, class: 'border-2 border-black'%>
+<div class="form-control">
+  <%= form_with model: shop, data: { turbo: false } do |form| %>
+    <div class="space-y-12 mx-4">
+      <div class="border-b border-gray-900/10 pb-12">
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <%= form.label :title, t('form.shop.title'), class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.text_field :title, class: 'input input-bordered w-full max-w-xs' %>
+          </div>
+          <div class="col-span-full">
+            <%= form.label :tel, t('form.shop.tel'), class: 'block text-sm font-medium text-gray-700'  %>
+            <%= form.text_field :tel, class: 'input input-bordered w-full max-w-xs' %>
+          </div>
+          <div class="sm:col-span-2">
+            <%= form.label :description, t('form.shop.description'), class: 'block text-sm font-medium text-gray-700'  %>
+            <%= form.text_area :description, class: , class: 'textarea textarea-bordered' %>
+          </div>
+          <div class="col-span-full">
+            <%= form.label :city, t('form.shop.city'), class: 'block text-sm font-medium text-gray-700'  %>
+            <%= form.select :city, options_for_select(county_options), {}, class: 'input input-bordered w-full max-w-xs' %>
+          </div>
+          <div class="col-span-full">
+            <%= form.label :district, t('form.shop.district'), class: 'block text-sm font-medium text-gray-700'  %>
+            <%= form.text_field :district, class: 'input input-bordered w-full max-w-xs' %>
+          </div>
+          <div class="sm:col-span-2">
+            <%= form.label :street, t('form.shop.street'), class: 'block text-sm font-medium text-gray-700'  %>
+            <%= form.text_area :street, class: 'textarea textarea-bordered' %>
+          </div>
+          <div class="col-span-full">
+            <%= form.label :contact, t('form.shop.contact'), class: 'block text-sm font-medium text-gray-700'  %>
+            <%= form.text_field :contact, class: 'input input-bordered w-full max-w-xs' %>
+          </div>
+          <div class="col-span-full">
+            <%= form.label :contactphone, t('form.shop.contactphone') %>
+            <%= form.text_field :contactphone, class: 'input input-bordered w-full max-w-xs' %>
+          </div>
+          <div class="sm:col-span-2">
+            <%= form.label :cover, t('form.shop.cover'), class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.file_field :cover, class: 'file-input file-input-bordered' %>
+          </div>
+          <div class="col-span-full">
+            <%= form.submit class: 'btn btn-accent' %>
+          </div>
+        </div>
       </div>
-      <div>
-        <%= f.label :description, t('form.shop.description') %>
-        <%= f.text_area :description, class: 'border-2 border-black'%>
-      </div>
-      <div>
-        <%= f.label :tel, t('form.shop.tel') %>
-        <%= f.text_field :tel, class: 'border-2 border-black'%>
-      </div>
-      <div>
-        <%= f.label :city, t('form.shop.city') %>
-        <%= f.select(:city, options_for_select(county_options)) %>
-      </div>
-      <div>
-        <%= f.label :district, t('form.shop.district') %>
-        <%= f.text_field :district, class: 'border-2 border-black'%>
-      </div>
-      <div>
-        <%= f.label :street, t('form.shop.street') %>
-        <%= f.text_area :street, class: 'border-2 border-black'%>
-      </div>
-      <div>
-        <%= f.label :contact, t('form.shop.contact') %>
-        <%= f.text_field :contact, class: 'border-2 border-black'%>
-      </div>
-      <div>
-        <%= f.label :contactphone, t('form.shop.contactphone') %>
-        <%= f.text_field :contactphone, class: 'border-2 border-black'%>
-      </div>
-      <div>
-        <%= f.label :cover, t('form.shop.cover'), class: 'label' %>
-        <%= f.file_field :cover, class: 'file-input file-input-bordered' %>
-      </div>
-      
-      <div><%= f.submit %></div>
     <% end %>
   </div>
-</section>
+</div>

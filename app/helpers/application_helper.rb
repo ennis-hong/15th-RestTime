@@ -38,4 +38,14 @@ module ApplicationHelper
   def format_datetime(date_time)
     date_time&.strftime('%Y/%m/%d %H:%M')
   end
+  def display_errors(index)
+    return unless index.errors.any?
+
+    content_tag(:div, class: "bg-red-500 text-white p-4 mb-4") do
+      content_tag(:ul) do
+        index.errors.full_messages.map { |message| content_tag(:li, message) }.join.html_safe
+      end
+    end
+  end
+
 end

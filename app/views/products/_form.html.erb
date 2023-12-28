@@ -1,59 +1,47 @@
-<% if product.errors.any? %>
-  <div class="bg-red-500 text-white p-4 mb-4">
-    <ul>
-    <% product.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= display_errors(product) %>
 
 <div class="form-control">
+  <%= form_with model: product, data: { turbo: false } do |form| %>
+    <div class="space-y-12 mx-4">
+      <div class="border-b border-gray-900/10 pb-12">
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-4">
+            <%= form.label :title, t('form.title'), class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.text_field :title, class: 'input input-bordered w-full max-w-xs' %>
+          </div>
 
-<%= form_with model: product,
-              data: { turbo: false } do |form| %>
-  <div class="space-y-12 mx-4">
-    <div class="border-b border-gray-900/10 pb-12">
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="col-span-full">
+            <%= form.label :cover, t('form.cover'), class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.file_field :cover, class: 'file-input file-input-bordered w-full max-w-xs' %>
+          </div>
 
-    <div class="sm:col-span-4">
-    <%= form.label :title, t('form.title'), class:'block text-sm font-medium leading-6 text-gray-900' %>
-    <%= form.text_field :title, class:'input input-bordered w-full max-w-xs' %>
-  </div>
-  
-  <div class="col-span-full">
-    <%= form.label :cover, t('form.cover') %>
-    <%= form.file_field :cover, class:'file-input file-input-bordered w-full max-w-xs' %>
-  </div>
-  <div class="col-span-full">
-    <%= form.label :price, t('form.price') %>
-    <%= form.number_field :price, class:'input input-bordered w-full max-w-xs', min: 0 %>
-  </div>
+          <div class="col-span-full">
+            <%= form.label :price, t('form.price'), class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.number_field :price, class: 'input input-bordered w-full max-w-xs', min: 0 %>
+          </div>
 
-  <div class="col-span-full">
-    <%= form.label :service_min, t('form.service_min') %>
-    <%= form.number_field :service_min, class:'input input-bordered w-full max-w-xs', min: 0 %>
-  </div>
+          <div class="col-span-full">
+            <%= form.label :service_min, t('form.service_min'), class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.number_field :service_min, class: 'input input-bordered w-full max-w-xs', min: 0 %>
+          </div>
 
-  <div class="col-span-full"> 
-    <%= form.label :description, t('form.description') %>
-    <%= form.text_area :description, class: 'textarea textarea-bordered' %>
-  </div>
+          <div class="col-span-full"> 
+            <%= form.label :description, t('form.description'), class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.text_area :description, class: 'textarea textarea-bordered' %>
+          </div>
 
+          <div class="col-span-full">
+            <label class="cursor-pointer label">
+              <span class="label-text"><%= form.label :onsale, t('form.onsale'), class: 'block text-sm font-medium text-gray-700' %>
+              <%= form.check_box :onsale, class: 'toggle toggle-primary', min: 0 %></span>
+            </label>
+          </div>
 
-  <div class="col-span-full">
-    <label class="cursor-pointer label">
-    <span class="label-text"><%= form.label :onsale, t('form.onsale') %>
-    <%= form.check_box :onsale, class: 'toggle toggle-primary', min: 0 %></span>
-    </label>
-  </div>
-
-
-  <div class="col-span-full">
-    <%= form.submit t('form.create'), class: 'btn btn-accent' %>
+          <div class="col-span-full">
+            <%= form.submit t('form.create'), class: 'btn btn-accent' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
-</div>
-</div>
-</div>
-<% end %>

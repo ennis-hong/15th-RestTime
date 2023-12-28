@@ -148,11 +148,17 @@ tw:
     general: '會員'
   
   vendor:
-    myproduct: '我的商品'
-    myshop: '我的店家'
+    my_product: '我的商品'
+    my_shop: '我的店家'
+    my_backstage: '我的後台'
     create_product: '新增商品'
+    update_product: '編輯商品'
     edit: '修改'
     delete: '刪除'
+    system_notification: '系統通知'
+    appointment: '預約管理'
+    redeem_order: '核銷訂單'
+    message: '客戶訊息'
 
   product:
     edit: 編輯商品
