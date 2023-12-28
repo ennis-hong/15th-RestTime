@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
-  helper_method :format_time_without_sec, :format_date, :format_datetime
   helper_method :current_user_shop, :current_booking, :booking_shop, :booking_product
 
   def not_found
@@ -73,15 +72,4 @@ class ApplicationController < ActionController::Base
     current_booking.product
   end
 
-  def format_time_without_sec(date_time)
-    date_time&.strftime('%H:%M')
-  end
-
-  def format_date(date_time)
-    date_time&.strftime('%Y/%m/%d')
-  end
-
-  def format_datetime(date_time)
-    date_time&.strftime('%Y/%m/%d %H:%M')
-  end
 end
