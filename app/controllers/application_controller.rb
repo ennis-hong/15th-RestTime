@@ -69,15 +69,4 @@ class ApplicationController < ActionController::Base
     current_booking.product
   end
 
-  def format_time_without_sec(date_time)
-    date_time&.strftime('%H:%M')
-  end
-
-  def format_date(date_time)
-    date_time&.strftime('%Y/%m/%d')
-  end
-
-  def format_datetime(date_time)
-    date_time&.strftime('%Y/%m/%d %H:%M')
-  end
 end
