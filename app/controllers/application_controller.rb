@@ -38,23 +38,6 @@ class ApplicationController < ActionController::Base
     I18n.with_locale(lang, &)
   end
 
-  def authenticate_user!
-    return if user_signed_in?
-
-    respond_to do |format|
-      format.html do
-        redirect_to sign_in_users_path, alert: '請先登入帳號'
-      end
-
-      format.json do
-        render json: {
-          message: '請先登入帳號',
-          url: sign_in_users_path
-        }, status: 401
-      end
-    end
-  end
-
   def current_user_shop
     current_user.shop
     Shop.where(user_id: current_user.id)
