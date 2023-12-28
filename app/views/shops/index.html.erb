@@ -1,25 +1,29 @@
-<h1><%= t('views.shop.index.title') %></h1>
-<% if user_signed_in? %>
-  <% if current_user&.shop.nil? %>
-    <%= link_to t('views.shop.index.create_shop'), new_shop_path, class: 'border-2 border-black'%>
-  <% else %>
-    <%= render 'form_select_shop_status', shop: @shop %>
+<p><%= t('views.shop.index.title') %><p>
+
+
+  <% if user_signed_in? %>
+    <% if current_user&.shop.nil? %>
+      <%= link_to t('views.shop.index.create_shop'), new_shop_path, class: 'border-2 border-black'%>
+    <% else %>
+      <%= render 'form_select_shop_status', shop: @shop %>
+    <% end %>
   <% end %>
-<% end %>
+
+<div class="grid grid-cols-1 gap-3">
+  <%= search_form_for @q do |f| %>
+    <div class="btn">
+      <%= f.sort_link :city, t('views.shop.index.sort_by_city'), default_order: 'desc' %>
+    </div>
+
+    <div class="btn">
+      <%= f.sort_link :updated_at, t('views.shop.index.sort_by_updated_at'), default_order: 'desc' %>
+    </div>
+  <% end %>
+</div>
 
 <ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-<%= search_form_for @q do |f| %>
-<div class="btn">
-      <%= f.sort_link :city, t('views.shop.index.sort_by_city'), default_order: 'desc' %>
-</div>
-
-<div class="btn">
-      <%= f.sort_link :updated_at, t('views.shop.index.sort_by_updated_at'), default_order: 'desc' %>
-</div>
-<% end %>
-</div>
   <%= render @shops %>
 </ul>
-<div class="flex justify-center my-4">
+<footer>
   <%= paginate @shops %>
-</div>
+</footer>

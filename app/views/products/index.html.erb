@@ -1,19 +1,19 @@
 <p class="fs-5 p-1">商品列表</p>
 
 <div class="grid grid-cols-1 gap-3">
-<%= search_form_for @q do |f| %>
-<div class="btn">
-  <%= f.sort_link :price, '價格排序', default_order: 'desc' %>
-</div>
+    <%= search_form_for @q do |f| %>
+      <div class="btn">
+        <%= f.sort_link :price, '價格排序', default_order: 'desc' %>
+      </div>
 
-<div class="btn">
-  <%= f.sort_link :service_min, '服務時間排序', default_order: 'desc' %>
-</div>
+      <div class="btn">
+        <%= f.sort_link :service_min, '服務時間排序', default_order: 'desc' %>
+      </div>
 
-<div class="btn">
-  <%= f.sort_link :updated_at, '更新時間排序', default_order: 'desc' %>
-</div>
-<% end %>
+      <div class="btn">
+        <%= f.sort_link :updated_at, '更新時間排序', default_order: 'desc' %>
+      </div>
+    <% end %> 
 </div>
 
 <ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
