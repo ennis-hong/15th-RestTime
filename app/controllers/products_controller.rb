@@ -2,7 +2,6 @@
 
 class ProductsController < ApplicationController
   before_action :find_product, only: %i[show edit update destroy]
-  before_action :authenticate_user!, except: %i[index show]
   before_action :find_owned_product, only: %i[edit update destroy show]
 
   def index
