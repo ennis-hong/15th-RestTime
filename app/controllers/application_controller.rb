@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+  around_action :switch_locale
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordNotSaved, with: :not_saved
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
@@ -9,7 +10,6 @@ class ApplicationController < ActionController::Base
   layout :set_layout # 設置判斷登入的使用者layout頁面
   helper_method :show_vendor_link?
   helper_method :current_user_shop, :current_booking, :booking_shop, :booking_product
-  helper_method :format_time_without_sec, :format_date, :format_datetime
 
   def show_vendor_link
     authorize :application, :show_vendor_stuff?
@@ -58,9 +58,7 @@ class ApplicationController < ActionController::Base
 
   def current_booking
     if user_signed_in?
-      @__booking__ ||= current_user.booking || current_user.create_booking
-    else
-      Booking.new
+      @__booking__ ||= current_user.booking
     end
   end
 
@@ -72,15 +70,4 @@ class ApplicationController < ActionController::Base
     current_booking.product
   end
 
-  def format_time_without_sec(date_time)
-    date_time&.strftime('%H:%M')
-  end
-
-  def format_date(date_time)
-    date_time&.strftime('%Y/%m/%d')
-  end
-
-  def format_datetime(date_time)
-    date_time&.strftime('%Y/%m/%d %H:%M')
-  end
 end

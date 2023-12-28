@@ -33,7 +33,7 @@
             </iframe>
           </div>
         </div>
-        <div class="collapse  line-container">
+        <div class="collapse collapse-arrow line-container">
           <input type="checkbox" /> 
           <div class="collapse-title flex justify-between">
             <div class="font-medium">
@@ -64,6 +64,6 @@
         </div>
       </div>
     </div>
-    <%= render 'booking', { shop: @shop, service_times: @service_times } %>
+    <%= render 'booking', { shop: @shop, service_times: @shop.service_times } %>
   </div>
 </section>

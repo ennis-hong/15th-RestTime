@@ -2,7 +2,7 @@
   <div class="card-body gap-4">
     <div class="card-title"><%= t('order.Contact Info') %></div>
     <% if order.errors.any? %>
-      <section class="p-4 my-4 text-white bg-rose-600">
+      <section class="p-4 my-4 text-white bg-rose-600 rounded">
         <ul>
         <% order.errors.full_messages.each do |message| %>
           <li><%= message %></li>

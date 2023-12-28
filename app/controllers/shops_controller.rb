@@ -31,16 +31,7 @@ class ShopsController < ApplicationController
 
   def edit; end
 
-  def show
-    @service_times = @shop.service_times.map do |service_time|
-      {
-        day_of_week: service_time.day_of_week,
-        off_day: service_time.off_day,
-        open_time: format_time_without_sec(service_time.open_time),
-        close_time: format_time_without_sec(service_time.close_time)
-      }
-    end
-  end
+  def show; end
 
   def update
     if @shop.update(shop_params)

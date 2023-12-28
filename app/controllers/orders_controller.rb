@@ -12,16 +12,17 @@ class OrdersController < ApplicationController
   def show; end
 
   def create
-    order = current_user.orders.new(order_params)
-    order.booking_info!(current_booking)
-    order.product_info!(booking_product)
+    @order = current_user.orders.new(order_params)
+    @order.service_date = current_booking.service_date
+    @order.price = booking_product.price
+    @order.service_min = booking_product.service_min
 
-    if order.save
+    if @order.save
       current_booking.destroy
-      order.confirm!
+      @order.confirm!
       redirect_to root_path, notice: t('message.Appointment Successful')
     else
-      redirect_to checkout_booking_path
+      render 'bookings/checkout'
     end
   end
 
@@ -30,10 +31,6 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order)
           .permit(:booked_name, :booked_email).merge(product: booking_product, shop: booking_shop)
-  end
-
-  def process_error
-    redirect_to checkout_booking_path, alert: t('message.The system is busy, please try again later')
   end
 
   def find_order
