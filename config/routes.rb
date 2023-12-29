@@ -49,6 +49,10 @@ Rails.application.routes.draw do
       collection do
         get :my
       end
+      member do
+        get :confirm_status
+        patch :update_status
+      end
     end
 
     # Static pages

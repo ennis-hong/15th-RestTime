@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
-  include AASM
+  # include AASM
   acts_as_paranoid
 
   validates :booked_email, presence: true
@@ -12,26 +12,26 @@ class Order < ApplicationRecord
 
   before_create :generate_serial
 
-  aasm column: 'status', no_direct_assignment: true do
-    state :pending, initial: true
-    state :confirmed, :paid, :refunded, :cancelled, :completed
+  # aasm column: 'status', no_direct_assignment: true do
+  #   state :pending, initial: true
+  #   state :confirmed, :paid, :refunded, :cancelled, :completed
 
-    event :confirm do
-      transitions from: :pending, to: :confirmed
-    end
+  #   event :confirm do
+  #     transitions from: :pending, to: :confirmed
+  #   end
 
-    event :pay do
-      transitions from: :pending, to: :paid
-    end
+  #   event :pay do
+  #     transitions from: :pending, to: :paid
+  #   end
 
-    event :complete do
-      transitions from: %i[pending paid], to: :completed
-    end
+  #   event :complete do
+  #     # transitions from: %i[pending paid], to: :completed
+  #   end
 
-    event :cancel do
-      transitions from: %i[pending paid], to: :cancelled
-    end
-  end
+  #   event :cancel do
+  #     transitions from: %i[pending paid], to: :cancelled
+  #   end
+  # end
 
   private
 

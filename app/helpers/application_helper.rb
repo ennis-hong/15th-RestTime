@@ -49,4 +49,8 @@ module ApplicationHelper
     end
   end
 
+  def address(shop)
+    "#{shop.city}#{shop.district}#{shop.street}"
+  end
+  
 end

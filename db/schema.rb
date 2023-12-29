@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_28_150547) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_28_161124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,16 +52,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_28_150547) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "appointments", force: :cascade do |t|
-    t.time "open_time"
-    t.time "close_time"
-    t.time "lunch_start"
-    t.time "lunch_end"
-    t.boolean "off_day"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "bookings", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
@@ -97,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_28_150547) do
     t.integer "quantitiy", default: 1
     t.integer "service_min"
     t.string "booked_name"
-    t.string "booked_email"
+    t.string "booked_email", null: false
     t.bigint "user_id", null: false
     t.bigint "shop_id", null: false
     t.bigint "product_id", null: false
@@ -140,7 +130,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_28_150547) do
   end
 
   create_table "service_times", force: :cascade do |t|
-    t.string "day_of_week"
+    t.string "day_of_week", null: false
     t.time "open_time"
     t.time "close_time"
     t.time "lunch_start"

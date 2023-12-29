@@ -1,9 +1,37 @@
 <div class="text-sm breadcrumbs">
   <ul>
-    <li><%= link_to t('Home'), root_path %></li> 
+    <li><%= link_to t('Home'), root_path %></li>
     <li><%= link_to t('My Bookings'), my_orders_path %></li>
   </ul>
 </div>
+
+<div class="flex flex-row justify-between">
+  <div tabindex="0" class="collapse bg-primary text-primary-content focus:bg-secondary focus:text-secondary-content flex-1">
+    <div class="collapse-title">
+      <div><%= t('order.QRcode') %></div>
+    </div>
+    <div class="collapse-content"> 
+      <canvas data-controller="qrcode" data-text="<%= @url_string %>"></canvas>
+    </div>
+  </div>
+
+  <div tabindex="0" class="collapse bg-primary text-primary-content focus:bg-secondary focus:text-secondary-content flex-1 ml-4">
+    <div class="collapse-title">
+      <div><%= t('order.Google Map') %></div>
+    </div>
+    <div class="collapse-content"> 
+      <iframe
+        width="710"
+        height="300"
+        frameborder="0" style="border:0"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_API_KEY'] %>&q=<%= ERB::Util.url_encode(address(@shop)) %>"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
 <div class="grid grid-cols-2 gap-4 mt-8">
   <div>
     <div class="card w-full bg-white-100 shadow-xl">

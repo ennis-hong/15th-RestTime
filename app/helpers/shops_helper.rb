@@ -9,10 +9,6 @@ module ShopsHelper
     end
   end
 
-  def address(shop)
-    "#{shop.city}#{shop.district}#{shop.street}"
-  end
-
   def shop_product_options(shop)
     shop.products.map do |product|
       ["#{product.title} | #{product.service_min} min | #{t('order.currency')} #{product.price.to_i}", product.id]

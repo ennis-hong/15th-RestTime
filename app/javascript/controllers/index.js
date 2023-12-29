@@ -2,19 +2,22 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application";
+import { application } from "./application"
 
-import FlashController from "./flash_controller";
-application.register("flash", FlashController);
+import DatepickerController from "./datepicker_controller"
+application.register("datepicker", DatepickerController)
 
-import HelloController from "./hello_controller";
-application.register("hello", HelloController);
+import FlashController from "./flash_controller"
+application.register("flash", FlashController)
 
-import LikeController from "./like_controller";
-application.register("like", LikeController);
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
 
-import TimepickerController from "./timepicker_controller";
-application.register("timepicker", TimepickerController);
+import LikeController from "./like_controller"
+application.register("like", LikeController)
 
-import DatepickerController from "./datepicker_controller";
-application.register("datepicker", DatepickerController);
+import QrcodeController from "./qrcode_controller"
+application.register("qrcode", QrcodeController)
+
+import TimepickerController from "./timepicker_controller"
+application.register("timepicker", TimepickerController)
