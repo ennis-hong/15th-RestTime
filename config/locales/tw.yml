@@ -208,3 +208,17 @@ tw:
    featured_stores: 精選店家
    special_offer: 限時優惠
 
+  
+  member:
+    Email: "電子信箱"
+    Password: "密碼"
+    Remember: "記住我"
+    Log in: "登入"
+    Sign up: "註冊"
+    Forgot your Password?: "忘記密碼"
+    sign_in_with_google_oauth2: "請用 GOOGLE 帳號密碼登入"
+    Password Min Length: "密碼最少 %{min_length} 位數"
+    Password Confirmation: "確認密碼"
+
+    
+
