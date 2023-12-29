@@ -12,8 +12,10 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, confirmation: true
   has_one :shop
+  has_one :booking
   has_many :like_shops
   has_many :liked_shops, through: :like_shops, source: :shop
+  has_many :orders
 
   def liked?(shop)
     liked_shop_ids.include?(shop.id)

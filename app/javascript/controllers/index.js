@@ -15,3 +15,6 @@ application.register("like", LikeController);
 
 import TimepickerController from "./timepicker_controller";
 application.register("timepicker", TimepickerController);
+
+import DatepickerController from "./datepicker_controller";
+application.register("datepicker", DatepickerController);

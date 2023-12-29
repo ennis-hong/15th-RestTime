@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShopsController < ApplicationController
   before_action :find_shop, only: %i[show]
   before_action :check_shop_presence, only: %i[new create]

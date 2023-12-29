@@ -36,10 +36,20 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :booking, only: %i[show create destroy] do
+      collection do
+        get :checkout
+      end
+    end
 
+    resources :orders, only: %i[show create] do
+      collection do
+        get :my
+      end
+    end
 
     # Static pages
-    %w(about choose_us join_us contact_us terms privacy refund_policy payment order refund).each do |page|
+    %w(about choose_us join_us contact_us terms privacy refund_policy payment order_question refund).each do |page|
       get "/#{page}", to: "pages##{page}"
     end
 

@@ -24,9 +24,8 @@ class ServiceTimesController < ApplicationController
       render :edit
     else
       redirect_to shop_path(current_user_shop),
-                notice: t(:success, scope: %i[service_times message])
+                  notice: t(:success, scope: %i[service_times message])
     end
-
   end
 
   def service_params

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Shop < ApplicationRecord
   enum status: { closed: 'closed', open: 'open', busy: 'busy', shut_down: 'ShutDown' }
 
@@ -12,6 +14,7 @@ class Shop < ApplicationRecord
   has_many :like_user, through: :like_shops, source: :user
   has_many :products
   has_many :service_times
+  has_many :orders
 
   before_create :set_default_status
 
