@@ -172,6 +172,10 @@ tw:
       about_x_hours: 大約 %{count} 小時前
       less_than_x_minutes: 少於 %{count} 分鐘
 
+  comment:
+    comment has been created: 留言成功
+    comment has not been created: 留言失敗
+    reply: 回覆
 
   
 

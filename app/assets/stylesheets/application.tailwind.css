@@ -12,3 +12,29 @@
 .flash-notice {
   @apply px-4 py-2 text-white bg-accent;
 }
+
+/* 留言區的圖片設定嘴大寬高限制 */
+figure.attachment img {
+  max-width: 500px;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+}
+/* 留言區的圖片檔名設定不顯示 */
+.attachment__name, .attachment__size {
+  display: none;
+}
+
+.comment-container {
+  width: 80%; /* 或者您希望的宽度 */
+  height: auto; /* 或者您希望的高度 */
+  padding: 50px; /* 设置边界为30px */
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.trix-content{
+  padding: 10px;
+  min-height: 100px;
+}

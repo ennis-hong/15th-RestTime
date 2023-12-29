@@ -1,27 +1,21 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_shop
+  before_action :find_shop
 
   def create
     @comment = @shop.comments.create(comment_params)
     @comment.user = current_user
 
     if @comment.save
-      redirect_to shop_path(@shop), notice: 'Comment has been created'
+      redirect_to shop_path(@shop), notice: t('comment.comment has been created')
     else
-      redirect_to shop_path(@shop), alert: 'Comment has not been created'
+      redirect_to shop_path(@shop), alert: t('comment.comment has not been created')
     end
-  end
-
-  def destroy
-    @comment = @shop.comments.find(params[:id])
-    @comment.destroy
-    redirect_to shop_path(@shop)
   end
 
   private
 
-  def set_shop
+  def find_shop
     @shop = Shop.find(params[:shop_id])
   end
 
