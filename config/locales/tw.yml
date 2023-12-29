@@ -111,10 +111,10 @@ tw:
         Select Product: 選擇商品
         format: "%{open_time} ~ %{close_time}"
       message:
-          already_own_store: 你已經擁有一家店，趕緊刊登服務商品吧！
-          list_your_services_products: 店家建立成功,趕緊刊登服務商品吧！
-          updated: 店家資訊更新成功
-          wrong_way: 你走錯地方了
+        already_own_store: 你已經擁有一家店，趕緊刊登服務商品吧！
+        list_your_services_products: 店家建立成功,趕緊刊登服務商品吧！
+        updated: 店家資訊更新成功
+        wrong_way: 你走錯地方了
         
 
   errors:
@@ -208,10 +208,10 @@ tw:
 
   
   homepage:
-   "Creating a relaxed and beautiful lifestyle": "專屬您的放鬆時光。美甲、美髮、按摩，打造輕鬆美好生活."
-   star: 立即開始
-   featured_stores: 精選店家
-   special_offer: 限時優惠
+    "Creating a relaxed and beautiful lifestyle": "專屬您的放鬆時光。美甲、美髮、按摩，打造輕鬆美好生活."
+    star: 立即開始
+    featured_stores: 精選店家
+    special_offer: 限時優惠
 
   
   member:
