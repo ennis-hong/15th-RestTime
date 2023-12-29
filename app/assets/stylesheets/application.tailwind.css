@@ -25,10 +25,11 @@ figure.attachment img {
   display: none;
 }
 
+/* 留言區的長寬 */
 .comment-container {
-  width: 80%; /* 或者您希望的宽度 */
-  height: auto; /* 或者您希望的高度 */
-  padding: 50px; /* 设置边界为30px */
+  width: 80%; 
+  height: auto; 
+  padding: 50px;
   justify-content: center;
   align-items: center;
   margin: auto;
