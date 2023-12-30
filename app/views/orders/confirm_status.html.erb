@@ -2,12 +2,12 @@
 <div>
     <h2><%= t('order.Order Info') %></h2>
     <p><strong><%= t('order.serial') %>:</strong> <%= @order.serial %></p>
-    <p><strong><%= t('order.Created_date') %>:</strong> <%= @order.created_at %></p>
+    <p><strong><%= t('order.Created_date') %>:</strong> <%= format_date(@order.created_at) %></p>
     <p><strong><%= t('order.Status') %>:</strong> <%= @status %></p>
-    <p><strong><%= t('order.Booking Date') %>:</strong> <%= @order.booking_date %></p>
+    <p><strong><%= t('order.Booking Date') %>:</strong> <%= format_datetime(@order.service_date) %></p>
 
     <h3><%= t('order.Booking Info') %></h3>
-    <p><strong><%= t('order.price') %>:</strong> <%= @order.price %></p>
+    <p><strong><%= t('order.price') %>:</strong> <%= format_price(@order.price) %></p>
     <p><strong><%= t('order.Service Time') %>:</strong> <%= @order.service_min %></p>
 
     <h3><%= t('order.Contact Info') %></h3>
@@ -16,7 +16,9 @@
 
     <%# 表單讓店家確認操作 %>
     <div>
-        <%= form_with(url: update_status_order_path(@order, status: @status), method: :patch, data: { turbo_confirm: t('message.Please confirm again') }) do %>
+        <%= form_with(url: update_status_order_path(@order, status: @status, staff: @staff), method: :patch, data: { turbo_confirm: t('message.Please confirm again') }) do |f| %>
+            <%= f.label :staff, t('order.staff') %>
+            <%= f.text_field :staff %>
             <%= submit_tag t('order.Redeem Order'), class: 'btn btn-primary' %>
         <% end %>
     </div>

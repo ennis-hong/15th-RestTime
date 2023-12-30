@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       current_booking.destroy
+      @order.pay!#測試用，金流完成再拉回下面！！
       # @order.confirm!
       redirect_to root_path, notice: t('message.Appointment Successful')
     else
@@ -30,14 +31,18 @@ class OrdersController < ApplicationController
 
   
   def confirm_status
-    @status = params[:status]  
+    authorize @order, :access_page?
+    @status = params[:status]
+    @staff = params[:staff]
   end
 
   def update_status
-    if @order.update(status: params[:status])
-      redirect_to @order, notice: '訂單狀態已更新。'
+    @order.completed?
+    if @order.update(status: params[:status], staff: params[:staff])
+      redirect_to @order, notice: t(:Order_has_been_redeemed, scope: %i[message])
+      # redirect_to vendor_order_path 之後設定前往管理頁面
     else
-      redirect_to @order, alert: '無法更新訂單狀態。'
+      redirect_to @order, alert: t(:Order_can_not_redeem, scope: %i[message])
     end
   end
 
@@ -45,7 +50,7 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order)
-          .permit(:booked_name, :booked_email).merge(product: booking_product, shop: booking_shop)
+          .permit(:booked_name, :booked_email, :staff).merge(product: booking_product, shop: booking_shop)
   end
 
   def find_order
