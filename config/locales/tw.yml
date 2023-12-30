@@ -154,7 +154,6 @@ tw:
     Abnormal Payment Result: 付款結果異常
     Order Confirmed and Proceeding to Payment: 訂單成立，正在前往付款頁面
 
-  
   shop_status:
     closed: "休息中"
     open: "開放中"
