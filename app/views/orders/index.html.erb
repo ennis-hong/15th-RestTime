@@ -1,0 +1,88 @@
+<div class="overflow-x-auto">
+  <table class="table" style="padding: 10px;">  <!-- 添加了 10px 的 padding -->
+    <!-- head -->
+    <thead>
+      <tr>
+        <th><%= t('order.Customer Info') %></th>
+        <th>
+          <%= t('order.Customer Info')%>/
+          <%= t('order.Created_date') %>
+        </th>
+        <th><%= t('order.Booking Item') %></th>
+        <th><%= t('order.Booking Date') %></th>
+        <th>
+          <%= t('order.Booking Time Slot')%>
+          <%= t('order.Start') %>
+        </th>
+        <th>
+          <%= t('order.Booking Time Slot')%>
+          <%= t('order.End') %>
+        </th>
+        <th><%= t('order.Service Duration') %></th>
+        <th>
+          <button class="btn btn-ghost btn-xs">
+            <%= t('order.Status') %>
+          </button>
+        </th>
+        <th><%= t('order.Updated Status Time') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row 1 -->
+      <% @orders.each do |order| %>
+      <tr>
+        <td>
+          <div class="flex items-center gap-3">
+            <div class="avatar">
+              <div class="mask mask-squircle w-12 h-12">
+                <img src="https://thumbor.4gamers.com.tw/ZSCwC149bamiXhQ9wNvhKxcNqVc=/adaptive-fit-in/1200x1200/filters:no_upscale():extract_cover():format(jpeg):quality(85)/https%3A%2F%2Fugc-media.4gamers.com.tw%2Fpuku-prod-zh%2Fanonymous-story%2F213b30f4-8f8a-4636-8b11-f1a6ac3c783e.jpg" alt="user's img" />
+              </div>
+            </div>
+            <div>
+              <div class="font-bold">
+                <%= order.booked_name %>
+              </div>
+              <div class="text-sm opacity-50">
+                <%= order.booked_email %>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <%= link_to order.serial, order_path(order) %>
+          <br/>
+          <span class="badge badge-ghost badge-xs">
+            <%= format_date(order.created_at) %>
+          </span>
+        </td>
+        <td>
+          <%= order.product.title %>
+        </td>
+        <td>
+          <%= format_date(order.service_date) %>
+        </td>
+        <td>
+          <%= format_datetime(order.service_date) %>
+        </td>
+        <td>
+          <%= format_end_time(order.service_date, order.product.service_min) %>
+        </td>
+        <td>
+          <%= order.product.service_min %><%= t('order.min') %>
+        </td>
+        <td>
+          <button class="btn btn-ghost btn-xs">
+            <%= I18n.t("aasm.order_state.#{order.status}") %>
+          </button>
+        </td>
+        <td>
+          <%= format_datetime(order.updated_at) %>
+        </td>
+      </tr>
+    </tbody>
+    <% end %>
+    <!-- foot -->
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

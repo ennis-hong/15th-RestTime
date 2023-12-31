@@ -68,5 +68,4 @@ class ApplicationController < ActionController::Base
   def booking_product
     current_booking.product
   end
-
 end

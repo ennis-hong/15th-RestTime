@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: %i[payment_result]
   before_action :order_params, only: :create
@@ -27,6 +28,10 @@ class OrdersController < ApplicationController
   def show
     @shop = @order.shop
     @url_string = confirm_status_order_url(@order, status: 'completed', host: request.host_with_port)
+  end
+
+  def index
+    @orders = Order.includes(:user).order(id: :desc)
   end
 
   def confirm_status

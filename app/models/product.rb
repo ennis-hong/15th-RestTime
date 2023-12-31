@@ -7,7 +7,6 @@ class Product < ApplicationRecord
 
   belongs_to :shop
 
-
   acts_as_list
 
   # 商品圖片

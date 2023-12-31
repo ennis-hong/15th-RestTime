@@ -126,15 +126,20 @@ tw:
     currency: NTD
     Booking: 開始預約
     Booking Date: 預約日期
+    Booking Time Slot: 預約時段
     Booking Start Time: 開始時間
     Booking End Time: 結束時間
     Contact Info: 聯絡資訊
     Booking Info: 預約資訊
+    Booking Item: 預約項目
     Order Info: 訂單資訊
+    Customer Info: 客戶資訊
+    Service Duration: 服務時間
     Name: 姓名
     Email: 信箱
     Confirm: 確認預約
     Status: 訂單狀態
+    Updated Status Time: 狀態更新時間 
     serial: 訂單編號
     Created_date: 訂單建立日期
     price: 消費金額
@@ -142,7 +147,10 @@ tw:
     QRcode: 顯示QR CODE
     Google Map: 顯示店家位置
     Redeem Order: 核銷訂單
+    Redeem Date: 核銷日期
     staff: 核銷人員
+    Start: (開始)
+    End: (結束)
   message:
     The system is busy, please try again later: 系統忙碌中，請稍候再試
     Appointment Successful: 預約成功
@@ -226,3 +234,15 @@ tw:
 
     
 
+  aasm:
+    order_state:
+      pending: "待處理"
+      confirmed: "已確認"
+      paid: "已付款"
+      refunded: "已退款"
+      cancelled: "已取消"
+      completed: "已核銷"
+      confirm: "確認"
+      pay: "付款"
+      complete: "完成"
+      cancel: "取消"

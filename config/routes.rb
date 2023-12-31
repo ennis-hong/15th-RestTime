@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders, only: %i[show create] do
+    resources :orders, only: %i[show create index] do
       collection do
         get :my_bookings
         post :payment_result

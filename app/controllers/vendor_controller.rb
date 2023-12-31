@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VendorController < ApplicationController
   before_action :find_owned_shop, only: %i[edit show update destroy]
 

@@ -57,6 +57,13 @@ module ApplicationHelper
     price.to_i.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, '\\1,')
   end
 
+  # 吐血的預估結束時間
+  def format_end_time(service_date, service_min)
+    start_time = service_date.is_a?(String) ? DateTime.parse(service_date) : service_date
+    end_time = start_time + service_min.minutes
+    format_datetime(end_time)
+  end
+
   def address(shop)
     "#{shop.city}#{shop.district}#{shop.street}"
   end
