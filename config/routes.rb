@@ -22,7 +22,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :shops
+    resources :shops do
+      resources :comments, shallow: true, only: [:create, :destroy]
+    end
+
     resource :service_times, only: %i[edit update]
 
     # API namespace

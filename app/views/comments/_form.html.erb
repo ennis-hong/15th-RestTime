@@ -1,0 +1,6 @@
+<%= form_with(model: [shop, shop.comments.build]) do |f| %>
+  <div class="form-control">
+    <%= f.rich_text_area :body %>
+    <%= f.submit t('comment.reply'), class: "btn mt-1" %>
+  </div>
+<% end %>

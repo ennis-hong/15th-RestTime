@@ -1,7 +1,9 @@
 @import "flatpickr/dist/flatpickr.css";
+@import 'trix.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 .flash-alert {
   @apply px-4 py-2 text-white bg-rose-700;
@@ -9,4 +11,31 @@
 
 .flash-notice {
   @apply px-4 py-2 text-white bg-accent;
+}
+
+/* 留言區的圖片設定嘴大寬高限制 */
+figure.attachment img {
+  max-width: 500px;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+}
+/* 留言區的圖片檔名設定不顯示 */
+.attachment__name, .attachment__size {
+  display: none;
+}
+
+/* 留言區的長寬 */
+.comment-container {
+  width: 80%; 
+  height: auto; 
+  padding: 50px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.trix-content{
+  padding: 10px;
+  min-height: 100px;
 }
