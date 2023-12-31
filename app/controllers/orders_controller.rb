@@ -31,7 +31,11 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.includes(:user).order(id: :desc)
+    if current_user&.shop.present?
+      urrent_user.shop.orders.includes(:user).order(id: :desc)
+    else
+      redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
+    end
   end
 
   def confirm_status
