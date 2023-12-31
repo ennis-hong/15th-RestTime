@@ -1,0 +1,79 @@
+<%# 版頭圖片 %>
+<div class="content mt-20 mb-10">
+    <div class="hero min-h-screen" style="background-image: url('<%= asset_url('pages/banner.jpg') %>');">
+            <div class="hero-overlay bg-opacity-60"></div>
+            <div class="hero-content text-center text-neutral-content">
+                <div class="max-w-md">
+                <h2 class="m-5 text-5xl font-bold">ResTime</h2>
+                <p class="pb-5">
+                <%= t('homepage.Creating a relaxed and beautiful lifestyle.') %>
+                </p>
+                <div class="flex items-center justify-center">
+                        <form action="<%= search_path %>" data-turbo="false">
+                        <input type="search" name="q" class="input input-bordered">
+                        <button class="btn btn-primary"><%= t('homepage.star') %></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<section class="mb-10">
+<h3 class="text-2xl p-5"><%= t('homepage.featured_stores') %><h3>
+<div class="carousel carousel-center p-4 space-x-4 bg-ghost shadow-xl rounded-box">
+    <div class="carousel-item">
+    <%= link_to root_path do %>
+    <img src="<%= asset_url('pages/shops/1.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+    <% end %>
+    </div> 
+  <div class="carousel-item">
+    <%= link_to root_path do %>
+    <img src="<%= asset_url('pages/shops/2.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+    <% end %>
+  </div> 
+  <div class="carousel-item">
+    <%= link_to root_path do %>
+    <img src="<%= asset_url('pages/shops/3.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+    <% end %>
+  </div> 
+  <div class="carousel-item">
+    <%= link_to root_path do %>
+    <img src="<%= asset_url('pages/shops/4.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+    <% end %>
+  </div> 
+  <div class="carousel-item">
+    <%= link_to root_path do %>
+    <img src="<%= asset_url('pages/shops/5.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+    <% end %>
+  </div> 
+  <div class="carousel-item">
+    <%= link_to root_path do %>
+    <img src="<%= asset_url('pages/shops/6.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+    <% end %>
+  </div> 
+  <div class="carousel-item">
+    <%= link_to root_path do %>
+    <img src="<%= asset_url('pages/shops/7.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+    <% end %>
+  </div>
+</div>
+</section>
+
+<section class="mb-32">
+    <h3 class="text-2xl p-5"><%= t('homepage.special_offer') %></h3>
+    <div class="carousel carousel-center space-x-4 bg-ghost rounded-box">
+        <% (1..10).each do |index| %>
+            <div class="carousel-item">
+                <%= link_to root_path do %>
+                    <img src="<%= asset_url('pages/shops/8.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+                            <span class="card-title">Lorem</span>
+                            <div class="card-actions justify-end">
+                                <div class="badge badge-outline">TWD$888起</div> 
+                                <div class="badge badge-primary text-white">Hot!</div>
+                            </div>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+</section>

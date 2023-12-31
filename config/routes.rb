@@ -59,6 +59,9 @@ Rails.application.routes.draw do
     # Search route
     get "/search", to: "products#search"
 
+    # Home page
+    get "/index", to: "pages#index"
+
 
 
   end

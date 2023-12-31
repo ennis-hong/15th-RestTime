@@ -8,6 +8,7 @@ tw:
     edit_password: 修改密碼
     mybackstage: 我的後台
     vendor: 商家
+    homepage: 首頁
   
     page:
     privacy:
@@ -185,4 +186,10 @@ tw:
 
   
 
+  
+  homepage:
+   "Creating a relaxed and beautiful lifestyle": "專屬您的放鬆時光。美甲、美髮、按摩，打造輕鬆美好生活."
+   star: 立即開始
+   featured_stores: 精選店家
+   special_offer: 限時優惠
 
