@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :orders, only: %i[show create] do
       collection do
         get :my
+        post :payment_result
       end
       member do
         get :confirm_status

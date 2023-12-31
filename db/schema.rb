@@ -96,6 +96,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_112819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "staff"
+    t.datetime "payment_date"
+    t.string "payment_type"
+    t.string "payment_type_charge_fee"
+    t.string "rtn_code"
+    t.string "rtn_msg"
     t.index ["cancelled_at"], name: "index_orders_on_cancelled_at"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["serial"], name: "index_orders_on_serial"

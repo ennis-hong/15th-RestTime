@@ -22,6 +22,7 @@ class Order < ApplicationRecord
 
     event :pay do
       transitions from: :pending, to: :paid
+      transitions from: :confirmed, to: :paid
     end
 
     event :complete do
@@ -33,13 +34,17 @@ class Order < ApplicationRecord
     end
   end
 
+  def shop
+    product&.shop
+  end
+
   private
 
   def generate_serial
     self.serial = serial_generator
   end
 
-  def serial_generator(digits = 6)
+  def serial_generator(digits = 10)
     today = Time.current.strftime('%Y%m%d')
     code = SecureRandom.alphanumeric.upcase[0..digits - 1]
 

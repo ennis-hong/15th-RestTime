@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[payment_result]
   before_action :order_params, only: :create
   before_action :find_order, only: %i[show confirm_status update_status]
+
+  skip_before_action :verify_authenticity_token, only: :payment_result
 
   def my
     @orders = current_user.orders
@@ -15,9 +17,11 @@ class OrdersController < ApplicationController
     @order.service_min = booking_product.service_min
 
     if @order.save
-      current_booking.destroy
       @order.confirm!
-      redirect_to root_path, notice: t('message.Appointment Successful')
+      uuid = SecureRandom.hex(10)
+      if @order.update(uuid: uuid)
+        @paymentHtml = ecpay_pay(@order)
+      end
     else
       render 'bookings/checkout'
     end
@@ -44,6 +48,22 @@ class OrdersController < ApplicationController
     end
   end
 
+  def payment_result
+    result_params = payment_result_params
+
+    @order = Order.find_by(uuid: result_params[:MerchantTradeNo])
+    if result_params[:RtnCode] === "1"
+      @order.pay!
+      user = @order.user
+      if user
+        sign_in(user)
+      end
+      redirect_to order_path(@order), notice: t("Payment Successful", scope: %i[order message])
+    end
+
+    redirect_to order_path(@order), notice: t("Payment Failed", scope: %i[order message])
+  end
+
   private
 
   def order_params
@@ -51,7 +71,38 @@ class OrdersController < ApplicationController
           .permit(:booked_name, :booked_email, :staff).merge(product: booking_product, shop: booking_shop)
   end
 
+  def payment_result_params
+    params.permit(:MerchantTradeNo, :PaymentDate, :PaymentType,:PaymentTypeChargeFee, :RtnCode, :RtnMsg,:TradeAmt)
+  end
+
   def find_order
     @order = Order.find(params[:id])
+  end
+
+  def ecpay_pay(order)
+    xml_file = File.open("./config/payment_conf.xml")
+    config_xml = Nokogiri::XML(xml_file)
+    ecpay_mode = config_xml.xpath("//Conf//OperatingMode").first
+    ecpay_mode.content = ENV["ECPAY_MODE"]
+
+    APIHelper.class_variable_set(:@@conf_xml, config_xml)
+    ecpay_client = ECpayPayment::ECpayPaymentClient.new
+
+    credit_params = generate_credit_param(order)
+    ecpay_client.aio_check_out_credit_onetime(params: credit_params, invoice: {})
+  end
+
+  def generate_credit_param(order)
+    credit_param = {
+      'MerchantTradeNo' => order.uuid,  #請帶20碼uid, ex: f0a0d7e9fae1bb72bc93
+      'MerchantTradeDate' => Time.current.strftime("%Y/%m/%d %H:%M:%S"), # ex: 2017/02/13 15:45:30
+      'TotalAmount' => order.price.to_i,
+      'TradeDesc' => "#{order.shop.title}:#{order.serial}",
+      'ItemName' => order.product.title,
+      'ReturnURL' => ENV["DOMAIN_NAME"],
+      'PaymentType' => 'aio',
+      'ChoosePayment' => 'Credit',
+      'OrderResultURL' => "#{ENV["DOMAIN_NAME"]}/orders/payment_result",
+    }
   end
 end
