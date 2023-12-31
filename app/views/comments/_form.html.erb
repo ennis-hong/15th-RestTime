@@ -1,3 +1,39 @@
+<div class="flex gap-x-3 mb-4"
+  data-controller="star-bar"
+  data-star-bar-hover-class="fill-yellow-500 stroke-yellow-500">
+  <% 5.times do |n| %>
+    <%= button_to shop_path(@shop),
+      method: :patch,
+      params: { comment: { rating: n + 1 } } do %>
+      <%= inline_svg_tag("star.svg",
+        class: "w-8 h-8 #{star_rating_class(@comment, n)}",
+        data: {
+          star_bar_target: "star",
+          star_bar_star_index_param: n,
+          action: "pointerenter->star-bar#enter
+            pointerleave->star-bar#leave"
+        }) %>
+    <% end %>
+  <% end %>
+
+  <% if @toast %>
+  <div class="flex items-center gap-x-1 px-4 py-2
+    bg-black/75 rounded text-white text-sm
+    relative top-[-2px]
+    toast">
+    <% if @toast == :success %>
+      <%= inline_svg_tag("check.svg",
+        class: "h-4 w-4 text-green-500 relative top-px") %>
+      <span>Rating Added!</span>
+    <% else %>
+      <%= inline_svg_tag("warning.svg",
+        class: "h-4 w-4 text-red-500 relative top-px") %>
+      <span>Rating could not be added</span>
+    <% end %>
+  </div>
+<% end %>
+</div>
+
 <%= form_with(model: [shop, shop.comments.build]) do |f| %>
   <div class="form-control">
     <%= f.rich_text_area :body %>

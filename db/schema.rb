@@ -60,11 +60,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_112819) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_bookings_on_product_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "shop_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "content"
+    t.datetime "deleted_at"
+    t.integer "rating", default: 0, null: false
     t.index ["shop_id"], name: "index_comments_on_shop_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -126,12 +131,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_112819) do
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer "value"
+    t.integer "score", default: 0
     t.bigint "user_id", null: false
-    t.bigint "product_id", null: false
+    t.bigint "shop_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_ratings_on_product_id"
+    t.index ["shop_id"], name: "index_ratings_on_shop_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
@@ -195,7 +200,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_112819) do
   add_foreign_key "orders", "shops"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "shops"
-  add_foreign_key "ratings", "products"
+  add_foreign_key "ratings", "shops"
   add_foreign_key "ratings", "users"
   add_foreign_key "service_times", "shops"
   add_foreign_key "shops", "users"

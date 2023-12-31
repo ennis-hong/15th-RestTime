@@ -105,3 +105,4 @@ gem 'omniauth'
 gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
 
 gem 'ecpay_payment', '~> 1.1'
+gem 'inline_svg'
