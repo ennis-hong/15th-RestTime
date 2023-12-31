@@ -121,8 +121,6 @@ tw:
     messages:
       not_saved: Email錯誤
     
-
-
   order:
     min: 分鐘
     currency: NTD
