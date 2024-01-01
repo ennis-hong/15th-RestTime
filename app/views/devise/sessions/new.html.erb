@@ -1,14 +1,17 @@
-
+<h1>登入<H1>
 <%= form_for(@user, url: user_session_path(@user), data: { turbo: false }) do |f| %>
-  <div class="field">
-    <%= f.label :email, t('member.Email') %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password, t('member.Password') %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <div class="form-control">
+  <%= f.label :email, t('member.Email'), class: "label-text text-lg" %>
+  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-52 text-sm px-2 py-3" %>
+</div>
+
+
+<div class="form-control">
+  <%= f.label :password, t('member.Password'), class: "label-text text-lg" %>
+  <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered w-52 text-sm px-2 py-3" %>
+</div>
+  
 
   <% if devise_mapping.rememberable? %>
     <div class="field">
@@ -17,13 +20,17 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit t('member.Log in') %>
-  </div>
+<div class="actions">
+  <%= f.submit t('member.Log in'), class: "input input-bordered w-52 text-sm px-2 py-3" %>
+</div>
 <% end %>
 
+
+
 <%= render "devise/shared/links" do %>
-  <%= link_to t('member.Signup'), new_registration_path(resource_name) %><br />
-  <%= link_to t('member.Forgot your Password'), new_password_path(resource_name) %><br />
-  <%= link_to t('member.sign_in_with_google_oauth2'), user_google_oauth2_omniauth_authorize_path %>
+  <div class="form-control">
+    <%= link_to t('member.Signup'), new_registration_path(resource_name), class: "input input-bordered w-full text-sm px-2 py-3 my-1" %><br />
+    <%= link_to t('member.Forgot your Password'), new_password_path(resource_name), class: "input input-bordered w-full text-sm px-2 py-3 my-1" %><br />
+    <%= link_to t('member.sign_in_with_google_oauth2'), user_google_oauth2_omniauth_authorize_path, class: "input input-bordered w-full text-sm px-2 py-3 my-1" %>
+  </div>
 <% end %>
