@@ -1,7 +1,7 @@
 <section class="container mx-auto p-4">
   <div class="h-[300px] relative">
     <article class="mt-4 z-10 absolute top-64 left-10 text-white">
-      <h1 class="text-xl font-bold"><%= @shop.title %></h1>      
+      <h1 class="text-xl font-bold"><%= @shop.title %></h1>
     </article>
     <div class="absolute h-[300px] overflow-hidden place-items-center">
       <% if @shop.cover.attached? %>
@@ -14,8 +14,16 @@
 
   <div class="grid grid-cols-2 gap-4 mt-8">
     <div class="card w-full bg-white-100 shadow-xl">
-      <div class="card-body">
+      <div class="card-body">    
         <h2 class="card-title"><%= t('views.shop.show.information')%></h2>
+        <div class="collapse-title text-xl font-medium">
+          <%= t('comment.rating') %>
+          <div class="flex rating rating-md gap-x-2">
+            <% @shop.average_rating.times do %>
+            <input type="radio" name="rating-7" class="mask mask-star-2 bg-yellow-400" disabled/>
+            <% end %> 
+          </div>
+        </div> 
         <div class="collapse  line-container">
           <input type="checkbox" /> 
           <div class="collapse-title flex justify-between">

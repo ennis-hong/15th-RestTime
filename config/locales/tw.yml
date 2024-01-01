@@ -195,12 +195,14 @@ tw:
     distance_in_words:
       x_minutes: "%{count} 分鐘前"
       about_x_hours: 大約 %{count} 小時前
-      less_than_x_minutes: 少於 %{count} 分鐘
+      less_than_x_minutes: 大約 %{count} 分鐘前
+      x_days: 大約 %{count} 天前
 
   comment:
     comment has been created: 留言成功
-    comment has not been created: 留言失敗
+    comment has not been created: 留言失敗，您只能評價一次
     reply: 回覆
+    rating: 評價
 
   
 

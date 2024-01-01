@@ -38,6 +38,11 @@ class Shop < ApplicationRecord
     self.user == user
   end
 
+  def average_rating
+    total_ratings = comments.any? ? comments.average(:rating) : 0
+    total_ratings.round
+  end
+
   # 商店排序用，允許被搜尋到的東西
   def self.ransackable_attributes(_auth_object = nil)
     %w[city description district status street title updated_at open]

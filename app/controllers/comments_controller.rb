@@ -2,6 +2,10 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_shop
 
+  def new
+    @comment = Comment.new
+  end
+
   def create
     @comment = @shop.comments.create(comment_params)
     @comment.user = current_user
@@ -9,7 +13,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to shop_path(@shop), notice: t('comment.comment has been created')
     else
-      render 'new'
+      redirect_to shop_path(@shop), notice: t('comment.comment has not been created')
     end
   end
 
