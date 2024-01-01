@@ -17,9 +17,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-
-  helper_method :current_user_shop, :current_booking, :booking_shop, :booking_product
-
   def not_found
     render file: Rails.public_path.join('404.html'),
            status: 404,

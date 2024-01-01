@@ -12,8 +12,7 @@ class Order < ApplicationRecord
 
   before_create :generate_serial
 
-  aasm column: 'status', no_direct_assignment: false do
-  # aasm column: 'status', no_direct_assignment: true do (金流完成再拉回！！)
+  aasm column: 'status', no_direct_assignment: true do
     state :pending, initial: true
     state :confirmed, :paid, :refunded, :cancelled, :completed
 

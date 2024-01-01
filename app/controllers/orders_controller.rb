@@ -16,8 +16,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       current_booking.destroy
-      @order.pay!#測試用，金流完成再拉回下面！！
-      # @order.confirm!
+      @order.confirm!
       redirect_to root_path, notice: t('message.Appointment Successful')
     else
       render 'bookings/checkout'
@@ -29,7 +28,6 @@ class OrdersController < ApplicationController
     @url_string = confirm_status_order_url(@order, status: 'completed', host: request.host_with_port)
   end
 
-  
   def confirm_status
     authorize @order, :access_page?
     @status = params[:status]
