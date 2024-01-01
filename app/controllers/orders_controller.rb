@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
 
   def index
     if current_user&.shop.present?
-      urrent_user.shop.orders.includes(:user).order(id: :desc)
+      @orders = current_user.shop.orders.includes(:user).order(id: :desc)
     else
       redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
     end
@@ -47,8 +47,7 @@ class OrdersController < ApplicationController
   def update_status
     @order.completed?
     if @order.update(status: params[:status], staff: params[:staff])
-      redirect_to @order, notice: t(:Order_has_been_redeemed, scope: %i[message])
-      # redirect_to vendor_order_path 之後設定前往管理頁面
+      redirect_to orders_path, notice: t(:Order_has_been_redeemed, scope: %i[message])
     else
       redirect_to @order, alert: t(:Order_can_not_redeem, scope: %i[message])
     end
