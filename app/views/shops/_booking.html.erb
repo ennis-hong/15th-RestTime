@@ -1,4 +1,4 @@
-<div class="card w-full bg-white-100 shadow-xl">
+<div class="card w-full bg-white-100 shadow-xl" data-controller="products">
   <div class="card-body gap-4">
     <div class="card-title"><%= t('order.booking') %></div>
     <%= form_with url: booking_path, data: { turbo: false } do |f| %>
@@ -6,7 +6,9 @@
       <%= f.select :product_id, 
                   shop_product_options(shop),
                   { include_blank: t("views.shop.show.Select Product") }, 
-                  class: "select select-lg select-bordered w-full" %>
+                  { data:{
+                    action: "mousedown->products#toggleModal"
+                  },class: "select select-lg select-bordered w-full"} %>
       <%= f.text_field :service_date,
                       data: {
                         controller: 'datepicker',
@@ -15,5 +17,21 @@
                       class: 'input input-bordered w-full mt-4' %>
       <%= f.submit t("form.Next"), class: 'mt-4 w-full bg-gray-400 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
     <% end %>
+  </div>
+  <div>
+    <input type="checkbox" id="products_modal" data-products-target="product_modal" class="modal-toggle" />
+    <div class="modal" role="dialog">
+      <div class="modal-box w-6/12">
+        <h3 class="font-bold text-lg"><%= t('order.Choose Product') %></h3>
+        <%= render partial:'radio_product',collection: shop.products, as: :product, locals: { index: 1 }%>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" data-action="products#toggleModal">✕</button>
+            <button class="btn" data-action="products#toggleModal"><%= t('Cancel') %></button>
+          </form>
+          <button class="btn" data-controller="products" data-action="products#selectProductOption"><%= t('OK') %></button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

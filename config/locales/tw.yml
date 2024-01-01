@@ -15,8 +15,9 @@ tw:
     shop info: 商店資訊
   
   home: 首頁
-  my bookings: 我的預約 
-      
+  my bookings: 我的預約
+  Cancel: 取消
+  OK: 確認    
   form:
     title: 服務項目
     cover: 上傳照片
@@ -148,6 +149,7 @@ tw:
     staff: 核銷人員
     start: (開始)
     end: (結束)
+    Choose Product: 選擇項目
   message:
     The system is busy, please try again later: 系統忙碌中，請稍候再試
     Appointment Successful: 預約成功
