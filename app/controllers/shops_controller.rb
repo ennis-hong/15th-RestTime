@@ -34,14 +34,6 @@ class ShopsController < ApplicationController
   def show
     @shop = Shop.find(params[:id])
     @comments = @shop.comments.order(created_at: :desc)
-    @service_times = @shop.service_times.map do |service_time|
-      {
-        day_of_week: service_time.day_of_week,
-        off_day: service_time.off_day,
-        open_time: format_time_without_sec(service_time.open_time),
-        close_time: format_time_without_sec(service_time.close_time)
-      }
-    end
   end
 
   def update
