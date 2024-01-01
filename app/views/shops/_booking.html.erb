@@ -23,13 +23,16 @@
     <div class="modal" role="dialog">
       <div class="modal-box w-6/12">
         <h3 class="font-bold text-lg"><%= t('order.Choose Product') %></h3>
-        <%= render partial:'radio_product',collection: shop.products, as: :product, locals: { index: 1 }%>
+        <%= render partial:'radio_product',
+            collection: shop.products, as: :product, locals: { index: 1 }%>
         <div class="modal-action">
           <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" data-action="products#toggleModal">✕</button>
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" 
+                    data-action="products#toggleModal">✕</button>
             <button class="btn" data-action="products#toggleModal"><%= t('Cancel') %></button>
           </form>
-          <button class="btn" data-controller="products" data-action="products#selectProductOption"><%= t('OK') %></button>
+          <button class="btn" data-controller="products" 
+                  data-action="products#selectProductOption"><%= t('OK') %></button>
         </div>
       </div>
     </div>
