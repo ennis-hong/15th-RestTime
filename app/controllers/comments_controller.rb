@@ -17,17 +17,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def update
-    @comment = Comment.find(params[:id])
-    @toast = if @comment.update(rating: params[:comment][:rating])
-               :success
-             else
-               :warning
-
-             end
-    render 'show'
-  end
-
   private
 
   def find_shop
