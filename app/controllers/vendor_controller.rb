@@ -78,10 +78,10 @@ class VendorController < ApplicationController
   end
 
   def create_default_shop
-    return unless vendor? && shop.nil?
+    return if current_user.shop && current_user.role = 'vendor'
 
-    build_shop(
-      title: email,
+    default_shop_data = {
+      title: current_user.email,
       description: 'Default Description',
       district: 'Default District',
       city: 'Default City',
@@ -89,6 +89,14 @@ class VendorController < ApplicationController
       contact: 'Default Contact',
       tel: '000000000',
       contactphone: '000000000'
-    ).save
+    }
+
+    shop = current_user.build_shop(default_shop_data)
+
+    if shop.save
+      redirect_to vendor_index_path, notice: t(:updated, scope: %i[views shop message])
+    else
+      redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
+    end
   end
 end
