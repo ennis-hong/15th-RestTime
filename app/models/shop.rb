@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Shop < ApplicationRecord
-  enum status: { closed: 'closed', open: 'open', busy: 'busy', shut down: 'ShutDown' }
+  enum status: { closed: 'closed', open: 'open', busy: 'busy', shutdown: 'ShutDown' }
 
   belongs_to :user
 

@@ -1,17 +1,17 @@
 <p><%= t('views.shop.index.title') %></p>
 
   <% if policy(:shop).new? %>
-    <%= link_to t('views.shop.index.create_shop'), new_shop_path, class: 'btn btn-outline btn-secondary'%>
+    <%= link_to t('views.shop.index.create shop'), new_shop_path, class: 'btn btn-outline btn-secondary'%>
   <% end %>
 
 <div class="grid grid-cols-1 gap-3">
     <%= search_form_for @q do |f| %>
       <div class="btn">
-        <%= f.sort_link :city, t('views.shop.index.sort_by_city'), default_order: 'desc' %>
+        <%= f.sort_link :city, t('views.shop.index.sort by city'), default_order: 'desc' %>
       </div>
 
       <div class="btn">
-        <%= f.sort_link :updated_at, t('views.shop.index.sort_by_updated_at'), default_order: 'desc' %>
+        <%= f.sort_link :updated_at, t('views.shop.index.sort by updated at'), default_order: 'desc' %>
       </div>
     <% end %>
 </div>

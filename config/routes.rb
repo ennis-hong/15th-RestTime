@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :orders, only: [ :index ]
+      resources :orders, only: %i[index show]
     end
 
     # Static pages

@@ -34,7 +34,7 @@
     <%= render 'like_shops', shop: @shop %>
     <% if @shop.owned_by?(current_user) %>
     <div class="mt-4">
-      <%= link_to t('views.shop.show.information_edit'), edit_shop_path(@shop), class: "btn btn-primary mr-2" %>
+      <%= link_to t('views.shop.show.information edit'), edit_shop_path(@shop), class: "btn btn-primary mr-2" %>
       <%= render 'form_select_shop_status' %>
     </div>
     <% end %>

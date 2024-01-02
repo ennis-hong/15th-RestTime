@@ -5,8 +5,8 @@ tw:
     privacy: 隱私權
     shops: 店家列表
     logout: 登出
-    edit_password: 修改密碼
-    mybackstage: 我的後台
+    edit password: 修改密碼
+    my backstage: 我的後台
     vendor: 商家
     homepage: 首頁
   
@@ -87,9 +87,9 @@ tw:
     shop:
       index:
         title: "店家列表"
-        create_shop: "建立店家"
-        sort_by_city: "依照城市排序"
-        sort_by_updated_at: "更新時間排序"
+        create shop: "建立店家"
+        sort by city: "依照城市排序"
+        sort by updated at: "更新時間排序"
       show:
         address: 地址
         comment: 店家評價
@@ -106,13 +106,13 @@ tw:
         comment: 評論
         ownder: 店主
         information: 店家資訊
-        information_edit: 店家資訊變更
-        Map: 地圖
+        information edit: 店家資訊變更
+        map: 地圖
         Select Product: 選擇商品
         format: "%{open_time} ~ %{close_time}"
       message:
-        already_own_store: 你已經擁有一家店，趕緊刊登服務商品吧！
-        list_your_services_products: 店家建立成功,趕緊刊登服務商品吧！
+        already own store: 你已經擁有一家店，趕緊刊登服務商品吧！
+        list your services products: 店家建立成功,趕緊刊登服務商品吧！
         updated: 店家資訊更新成功
         wrong_way: 你走錯地方了
         
@@ -166,7 +166,7 @@ tw:
     closed: "休息中"
     open: "開放中"
     busy: "忙碌中"
-    shut down: "已停業"
+    shutdown: "已停業"
 
   user_roles:
     admin: '管理員'
@@ -174,16 +174,16 @@ tw:
     general: '會員'
   
   vendor:
-    my product: '我的商品'
-    my shop: '我的店家'
-    my backstage: '我的後台'
-    create product: '新增商品'
-    update product: '編輯商品'
-    edit: '修改'
-    delete: '刪除'
-    system notification: '系統通知'
-    appointment: '預約管理'
-    message: '客戶訊息'
+    my product: 我的商品
+    my shop: 我的店家
+    my backstage: 我的後台
+    create product: 新增商品
+    update product: 編輯商品
+    edit: 修改
+    delete: 刪除
+    system notification: 系統通知
+    appointment: 預約管理
+    message: 客戶訊息
 
   product:
     edit: 編輯商品
@@ -235,13 +235,13 @@ tw:
 
   aasm:
     order state:
-      pending: "待處理"
-      confirmed: "已確認"
-      paid: "已付款"
-      refunded: "已退款"
-      cancelled: "已取消"
-      completed: "已核銷"
-      confirm: "確認"
-      pay: "付款"
-      complete: "完成"
-      cancel: "取消"
+      pending: 待處理
+      confirmed: 已確認
+      paid: 已付款
+      refunded: 已退款
+      cancelled: 已取消
+      completed: 已核銷
+      confirm: 確認
+      pay: 付款
+      complete: 完成
+      cancel: 取消

@@ -1,6 +1,5 @@
 <div class="overflow-x-auto">
-  <table class="table" style="padding: 10px;">  <!-- 添加了 10px 的 padding -->
-    <!-- head -->
+  <table class="table" style="padding: 10px;">
     <thead>
       <tr>
         <th><%= t('order.Customer Info') %></th>
@@ -24,7 +23,6 @@
       </tr>
     </thead>
     <tbody>
-      <!-- row 1 -->
       <% @orders.each do |order| %>
       <tr>
         <td>
@@ -45,10 +43,13 @@
           </div>
         </td>
         <td>
-          <%= link_to order.serial, order_path(order) %>
+          <%= link_to order.serial, admin_order_path(order) %>
           <br/>
           <span class="badge badge-ghost badge-xs">
             <%= format_date(order.created_at) %>
+          </span>
+          <span class="badge badge-ghost badge-xs">
+            <%= link_to t('order.Order Info'), admin_order_path(order) %>
           </span>
         </td>
         <td>
@@ -75,7 +76,6 @@
       </tr>
     </tbody>
     <% end %>
-    <!-- foot -->
     <tfoot>
     </tfoot>
   </table>

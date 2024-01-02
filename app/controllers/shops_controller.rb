@@ -23,7 +23,7 @@ class ShopsController < ApplicationController
     authorize Shop, :create?
     @shop = current_user.build_shop(shop_params)
     if @shop.save
-      redirect_to shop_path(@shop), notice: t(:list_your_services_products, scope: %i[views shop message])
+      redirect_to shop_path(@shop), notice: t('list your services products', scope: %i[views shop message])
     else
       render :new
     end
@@ -81,4 +81,5 @@ class ShopsController < ApplicationController
 
     redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
   end
+  
 end

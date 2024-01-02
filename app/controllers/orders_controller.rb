@@ -30,14 +30,6 @@ class OrdersController < ApplicationController
     @url_string = confirm_status_order_url(@order, status: 'completed', host: request.host_with_port)
   end
 
-  def index
-    if current_user&.shop.present?
-      @orders = current_user.shop.orders.includes(:user).order(id: :desc)
-    else
-      redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
-    end
-  end
-
   def confirm_status
     authorize @order, :access_page?
     @status = params[:status]
