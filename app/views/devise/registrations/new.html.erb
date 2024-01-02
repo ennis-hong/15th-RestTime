@@ -1,4 +1,4 @@
-<h1>註冊葉  </h1>
+<div class="w-52">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -44,9 +44,12 @@
     </ul>
 
   
+<div class="actions">
+    <%= f.submit t('member.Sign up'), class: "btn btn-outline btn-success w-52" %>
+  </div>
 <% end %>
-
-
+  <%= render "devise/shared/links" %>
+</div>
 
 
 

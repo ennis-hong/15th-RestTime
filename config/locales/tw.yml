@@ -269,6 +269,7 @@ tw:
     vendor: 商家
     general: 一般使用者
     welcome: 註冊成功，請修改商店資訊
+    Send me reset password instructions: "重設密碼"
 
   aasm:
     order state:
