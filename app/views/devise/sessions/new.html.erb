@@ -19,11 +19,21 @@
 
     <div class="actions">
       <%= f.submit t('member.log in'), class: "input input-bordered w-52 text-sm px-2 py-3" %>
+<div class="form-control">
+  <%= f.label :password, t('member.password'), class: "label-text text-lg" %>
+  <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered w-52 text-sm px-2 py-3" %>
+</div>
+  
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me, t('member.remember') %>
     </div>
   <% end %>
 
 <div class="actions">
-  <%= f.submit t('member.Log in'), class: "input input-bordered w-52 text-sm px-2 py-3" %>
+  <%= f.submit t('member.log in'), class: "input input-bordered w-52 text-sm px-2 py-3" %>
 </div>
 <% end %>
 
