@@ -80,7 +80,7 @@ class VendorController < ApplicationController
   def create_default_shop
     return unless current_user.vendor? && current_user.shop.nil?
 
-    default_shop_data = {
+    shop = Shop.new(
       title: current_user.email,
       description: 'Default Description',
       district: 'Default District',
@@ -89,9 +89,9 @@ class VendorController < ApplicationController
       contact: 'Default Contact',
       tel: '000000000',
       contactphone: '000000000'
-    }
+    )
 
-    shop = current_user.build_shop(default_shop_data)
+    current_user.shop = shop
     shop.save
   end
 end
