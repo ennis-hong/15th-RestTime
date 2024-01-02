@@ -78,7 +78,7 @@ class VendorController < ApplicationController
   end
 
   def create_default_shop
-    return if current_user.shop && current_user.role = 'vendor'
+    return if current_user.shop && current_user.role == 'vendor'
 
     default_shop_data = {
       title: current_user.email,
