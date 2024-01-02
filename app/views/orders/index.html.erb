@@ -12,11 +12,7 @@
         <th><%= t('order.Booking Date') %></th>
         <th>
           <%= t('order.Booking Time Slot')%>
-          <%= t('order.Start') %>
-        </th>
-        <th>
-          <%= t('order.Booking Time Slot')%>
-          <%= t('order.End') %>
+          <%= t('order.Start') %>~<%= t('order.End') %>
         </th>
         <th><%= t('order.Service Duration') %></th>
         <th>
@@ -62,10 +58,8 @@
           <%= format_date(order.service_date) %>
         </td>
         <td>
-          <%= format_datetime(order.service_date) %>
-        </td>
-        <td>
-          <%= format_end_time(order.service_date, order.product.service_min) %>
+          <%= format_datetime(order.service_date) %>~
+          <%= booking_end_time(order) %>
         </td>
         <td>
           <%= order.product.service_min %><%= t('order.min') %>
