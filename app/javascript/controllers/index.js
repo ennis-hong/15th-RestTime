@@ -10,9 +10,6 @@ application.register("datepicker", DatepickerController)
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import LikeController from "./like_controller"
 application.register("like", LikeController)
 
