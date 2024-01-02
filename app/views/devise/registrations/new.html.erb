@@ -1,6 +1,6 @@
-<div class="w-52">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<h1>註冊葉  </h1>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="form-control">
       <%= f.label :email, t('member.email'), class: "label-text text-lg" %>
@@ -22,23 +22,22 @@
   <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-52 text-sm px-2 py-3 " %>
 </div>
 
-  <div class="field">
-    <%= f.label :role, t('member.role') %><br />
-    <%= f.select :role, options_for_select([[t('member.general'), 'general'], [t('member.vendor'), 'vendor']]) %>
-  </div>
-  
     <ul class="p-2 shadow bg-base-100 rounded-box w-52">
 
-      <li><%= f.submit t('member.sign up'), class: "btn btn-outline btn-success w-full" %></li>
+      <li><%= f.submit t('member.Sign up'), class: "btn btn-outline btn-success w-full" %></li>
 
-      <li><%= link_to t('member.log in'), new_session_path(resource_name), class: "btn btn-outline btn-success" %></li>
+      <li><%= link_to t('member.Log in'), new_session_path(resource_name), class: "btn btn-outline btn-success" %></li>
 
     
       <li><%= link_to t('member.sign_in_with_google_oauth2'), omniauth_authorize_path(resource_name, :google_oauth2), class: "btn btn-outline btn-success" %></li>
     </ul>
 
   
-
 <% end %>
 
-</div>
+
+
+
+
+
+
