@@ -4,12 +4,12 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
 <div class="form-control">
-  <%= f.label :email, t('member.Email'), class: "label-text text-lg" %>
+  <%= f.label :email, t('member.email'), class: "label-text text-lg" %>
   <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-52 text-sm px-2 py-3" %>
 </div>
 
 <div class="actions">
-  <%= f.submit t('member.Send me reset password instructions'), class: "input input-bordered w-52 text-sm px-2 py-3" %>
+  <%= f.submit t('member.send me reset password instructions'), class: "input input-bordered w-52 text-sm px-2 py-3" %>
 </div>
 <% end %>
 
