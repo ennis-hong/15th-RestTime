@@ -15,8 +15,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def my?
-    user.shop.present? || create_default_shop || user.admin?
-    # 只有vendor&admin能進入後台，預設vendor沒有店家就new一個default_shop，方法寫在application_policy
+    user.vendor? || user.admin?
   end
 
   def new?

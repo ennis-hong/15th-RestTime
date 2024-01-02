@@ -7,7 +7,7 @@ class ShopPolicy < ApplicationPolicy
   end
 
   def index?
-    user.shop.present? || create_default_shop || user.admin?
+    user.vendor? || user.admin?
   end
 
   def new?
