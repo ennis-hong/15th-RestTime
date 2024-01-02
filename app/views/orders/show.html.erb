@@ -1,14 +1,14 @@
 <div class="text-sm breadcrumbs">
   <ul>
-    <li><%= link_to t('Home'), root_path %></li> 
-    <li><%= link_to t('My Bookings'), my_bookings_orders_path %></li>
+    <li><%= link_to t('Home'), root_path %></li>
+    <li><%= link_to t('my bookings'), my_orders_path %></li>
   </ul>
 </div>
 
 <div class="flex flex-row justify-between">
   <div tabindex="0" class="collapse bg-primary text-primary-content focus:bg-secondary focus:text-secondary-content flex-1">
     <div class="collapse-title">
-      <div><%= t('order.QRcode') %></div>
+      <div><%= t('order.qrcode') %></div>
     </div>
     <div class="collapse-content"> 
       <canvas data-controller="qrcode" data-text="<%= @url_string %>"></canvas>
@@ -17,7 +17,7 @@
 
   <div tabindex="0" class="collapse bg-primary text-primary-content focus:bg-secondary focus:text-secondary-content flex-1 ml-4">
     <div class="collapse-title">
-      <div><%= t('order.Google map') %></div>
+      <div><%= t('order.google map') %></div>
     </div>
     <div class="collapse-content"> 
       <iframe
@@ -36,7 +36,7 @@
   <div>
     <div class="card w-full bg-white-100 shadow-xl">
       <div class="card-body gap-4">
-        <div class="card-title"><%= t('order.Booking Info') %></div>
+        <div class="card-title"><%= t('order.booking info') %></div>
         <div class="flex justify-between">
           <span><%= @order.product.title %><%= @order.service_min %><%= t('order.min') %></span>
           <span><%= t('order.currency') %> <%= @order.price.to_i %></span>
@@ -44,9 +44,9 @@
         <table class="table text-center">
           <thead>
             <tr class="border-2 border-gray-500">
-              <th><%= t('order.Booking Date') %></th>
-              <th><%= t('order.Booking Start Time') %></th>
-              <th><%= t('order.Booking End Time') %></th>
+              <th><%= t('order.booking date') %></th>
+              <th><%= t('order.booking start time') %></th>
+              <th><%= t('order.booking end time') %></th>
             </tr>
           </thead>
           <tbody>
@@ -65,9 +65,9 @@
     </div>
     <div class="card w-full bg-white-100 shadow-xl">
       <div class="card-body gap-4">
-        <div class="card-title"><%= t('order.Contact Info') %></div>
+        <div class="card-title"><%= t('order.contact info') %></div>
         <div class="flex">
-          <%= tag.label t('order.Name'), class: 'label' %>
+          <%= tag.label t('order.name'), class: 'label' %>
           <%= tag.label @order.booked_name, class: 'label' %>
         </div>
         <div class="flex">

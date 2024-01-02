@@ -27,22 +27,7 @@ class OrdersController < ApplicationController
 
   def show
     @shop = @order.shop
-    @url_string = confirm_status_order_url(@order, status: 'completed', host: request.host_with_port)
-  end
-
-  def confirm_status
-    authorize @order, :access_page?
-    @status = params[:status]
-    @staff = params[:staff]
-  end
-
-  def update_status
-    @order.completed?
-    if @order.update(status: params[:status], staff: params[:staff])
-      redirect_to orders_path, notice: t(:Order_has_been_redeemed, scope: %i[message])
-    else
-      redirect_to @order, alert: t('Order can not redeem', scope: %i[message])
-    end
+    @url_string = confirm_redeem_admin_order_url(@order, status: 'completed', host: request.host_with_port)
   end
 
   def payment_result

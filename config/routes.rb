@@ -45,19 +45,20 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders, only: %i[show create index] do
+    resources :orders, only: %i[show] do
       collection do
         get :my_bookings
         post :payment_result
       end
-      member do
-        get :confirm_status
-        patch :update_status
-      end
     end
 
     namespace :admin do
-      resources :orders, only: %i[index show]
+      resources :orders, only: %i[index show create] do
+        member do
+          get :confirm_redeem
+          patch :redeem
+        end
+      end
     end
 
     # Static pages

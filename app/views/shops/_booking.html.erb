@@ -1,6 +1,6 @@
 <div class="card w-full bg-white-100 shadow-xl">
   <div class="card-body gap-4">
-    <div class="card-title"><%= t('order.Booking') %></div>
+    <div class="card-title"><%= t('order.booking') %></div>
     <%= form_with url: booking_path, data: { turbo: false } do |f| %>
       <%= f.hidden_field :shop_id, value: shop.id %>
       <%= f.select :product_id, 

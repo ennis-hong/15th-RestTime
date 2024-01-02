@@ -9,15 +9,13 @@ tw:
     my backstage: 我的後台
     vendor: 商家
     homepage: 首頁
-  
-
     page:
     privacy:
       title: 隱私權政策
     shop info: 商店資訊
   
   Home: 首頁
-  My Bookings: 我的預約 
+  my bookings: 我的預約 
       
   form:
     title: 服務項目
@@ -40,7 +38,6 @@ tw:
       cover: 店家封面
       status: 目前店家狀態
       
-
   activerecord:
     attributes:
       product:
@@ -114,9 +111,8 @@ tw:
         already own store: 你已經擁有一家店，趕緊刊登服務商品吧！
         list your services products: 店家建立成功,趕緊刊登服務商品吧！
         updated: 店家資訊更新成功
-        wrong_way: 你走錯地方了
+        wrong way: 你走錯地方了
         
-
   errors:
     messages:
       not_saved: Email錯誤
@@ -124,33 +120,33 @@ tw:
   order:
     min: 分鐘
     currency: NTD
-    Booking: 開始預約
-    Booking Date: 預約日期
-    Booking Time Slot: 預約時段
-    Booking Start Time: 開始時間
-    Booking End Time: 結束時間
-    Contact Info: 聯絡資訊
-    Booking Info: 預約資訊
-    Booking Item: 預約項目
-    Order Info: 訂單資訊
-    Customer Info: 客戶資訊
-    Service Duration: 服務時間
-    Name: 姓名
-    Email: 信箱
-    Confirm: 確認預約
-    Status: 訂單狀態
-    Updated Status Time: 狀態更新時間 
+    booking: 開始預約
+    booking date: 預約日期
+    booking time slot: 預約時段
+    booking start time: 開始時間
+    booking end time: 結束時間
+    contact info: 聯絡資訊
+    booking info: 預約資訊
+    booking item: 預約項目
+    order info: 訂單資訊
+    customer info: 客戶資訊
+    service duration: 服務時間
+    name: 姓名
+    email: 信箱
+    confirm: 確認預約
+    status: 訂單狀態
+    updated status time: 狀態更新時間 
     serial: 訂單編號
-    Created_date: 訂單建立日期
+    created_date: 訂單建立日期
     price: 消費金額
-    Service Time: 消費時數
-    QRcode: 顯示QR CODE
-    Google Map: 顯示店家位置
-    Redeem Order: 核銷訂單
-    Redeem Date: 核銷日期
+    service Time: 消費時數
+    qrcode: 顯示QR CODE
+    google map: 顯示店家位置
+    redeem order: 核銷訂單
+    redeem Date: 核銷日期
     staff: 核銷人員
-    Start: (開始)
-    End: (結束)
+    start: (開始)
+    end: (結束)
   message:
     The system is busy, please try again later: 系統忙碌中，請稍候再試
     Appointment Successful: 預約成功
@@ -210,9 +206,6 @@ tw:
     reply: 回覆
     rating: 評價
 
-  
-
-  
   homepage:
     "Creating a relaxed and beautiful lifestyle": "專屬您的放鬆時光。美甲、美髮、按摩，打造輕鬆美好生活."
     star: 立即開始

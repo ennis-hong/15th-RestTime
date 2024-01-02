@@ -1,6 +1,6 @@
 <div class="card w-full bg-white-100 shadow-xl">
   <div class="card-body gap-4">
-    <div class="card-title"><%= t('order.Contact Info') %></div>
+    <div class="card-title"><%= t('order.contact info') %></div>
     <% if order.errors.any? %>
       <section class="p-4 my-4 text-white bg-rose-600 rounded">
         <ul>
@@ -10,16 +10,17 @@
         </ul>
       </section>
     <% end %>
-    <%= form_with model: order, data: { turbo:false }, class: 'flex flex-col gap-2' do |form| %>
+    <%= form_with model: [:admin, order],  data: { turbo:false }, class: 'flex flex-col gap-2' do |form| %>
       <div>
-        <%= form.label :booked_name, t('order.Name') , class: 'label' %>
+        <%= form.label :booked_name, t('order.name') , class: 'label' %>
         <%= form.text_field :booked_name, class: 'input w-full input-bordered' %>
       </div>
       <div>
-        <%= form.label :booked_email, 'Email', class: 'label' %>
+        <%= form.label :booked_email, t('order.email'), class: 'label' %>
         <%= form.text_field :booked_email, value: current_user.email, class: 'input w-full input-bordered' %>
       </div>
-      <%= form.submit t('order.Confirm'), class: 'btn btn-primary' %>
+      <%= form.submit t('order.confirm'), class: 'btn btn-primary' %>
+      </div>
     <% end %>
   </div>
 </div>
