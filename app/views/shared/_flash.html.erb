@@ -2,7 +2,7 @@
   <% if flash[type] %>
     <div data-controller="flash" class="flash-<%= type %> flex items-center justify-between">
       <%= flash[type] %>
-      <button data-action="flash#close" class="px-2 py-1 bg-white rounded">X</button>
+      <button data-action="flash#close" class="px-2 py-1 bg-white text-black rounded">x</button>
     </div>
   <% end %>
 <% end %>
