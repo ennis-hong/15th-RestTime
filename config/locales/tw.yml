@@ -166,7 +166,7 @@ tw:
     closed: "休息中"
     open: "開放中"
     busy: "忙碌中"
-    shut_down: "已停業"
+    shut down: "已停業"
 
   user_roles:
     admin: '管理員'
@@ -174,16 +174,15 @@ tw:
     general: '會員'
   
   vendor:
-    my_product: '我的商品'
-    my_shop: '我的店家'
-    my_backstage: '我的後台'
-    create_product: '新增商品'
-    update_product: '編輯商品'
+    my product: '我的商品'
+    my shop: '我的店家'
+    my backstage: '我的後台'
+    create product: '新增商品'
+    update product: '編輯商品'
     edit: '修改'
     delete: '刪除'
-    system_notification: '系統通知'
+    system notification: '系統通知'
     appointment: '預約管理'
-    redeem_order: '核銷訂單'
     message: '客戶訊息'
 
   product:
@@ -235,7 +234,7 @@ tw:
     
 
   aasm:
-    order_state:
+    order state:
       pending: "待處理"
       confirmed: "已確認"
       paid: "已付款"

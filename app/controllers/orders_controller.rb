@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
     if @order.update(status: params[:status], staff: params[:staff])
       redirect_to orders_path, notice: t(:Order_has_been_redeemed, scope: %i[message])
     else
-      redirect_to @order, alert: t(:Order_can_not_redeem, scope: %i[message])
+      redirect_to @order, alert: t('Order can not redeem', scope: %i[message])
     end
   end
 
