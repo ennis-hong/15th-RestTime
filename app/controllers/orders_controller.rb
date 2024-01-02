@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: :payment_result
 
-  def my
+  def my_bookings
     @orders = current_user.orders
   end
 
@@ -52,8 +52,8 @@ class OrdersController < ApplicationController
     @order.payment_date = result_params[:PaymentDate]
     @order.payment_type = result_params[:PaymentType]
     @order.payment_type_charge_fee = result_params[:PaymentTypeChargeFee]
-    @order.rtn_code = result_params[:RtnCode]
-    @order.rtn_msg = result_params[:RtnMsg]
+    @order.return_code = result_params[:RtnCode]
+    @order.return_msg = result_params[:RtnMsg]
     redirect_to order_path(@order), alert: t('Abnormal Payment Result', scope: %i[order message]) unless @order.save
 
     if result_params[:RtnCode] === '1'

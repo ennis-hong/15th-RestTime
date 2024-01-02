@@ -32,8 +32,7 @@
               <% if policy(:shop).index? %>
                 <li><%= link_to t('navbar.mybackstage'), vendor_index_path, class: 'text-red-500' %></li>
               <% end %>
-              
-              <li><%= link_to t('My Bookings'), my_orders_path %></li>
+              <li><%= link_to t('My Bookings'), my_bookings_orders_path %></li>
             </ul>
           </details>
         </li>
