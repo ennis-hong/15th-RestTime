@@ -1,14 +1,3 @@
-<p><%= t('views.shop.index.title') %><p>
-
-
-  <% if user_signed_in? %>
-    <% if current_user&.shop.nil? %>
-      <%= link_to t('views.shop.index.create shop'), new_shop_path, class: 'border-2 border-black'%>
-    <% else %>
-      <%= render 'form_select_shop_status', shop: @shop %>
-    <% end %>
-  <% end %>
-
 <div class="grid grid-cols-1 gap-3">
   <%= search_form_for @q do |f| %>
     <div class="btn">

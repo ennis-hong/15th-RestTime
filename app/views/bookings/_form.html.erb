@@ -10,7 +10,7 @@
         </ul>
       </section>
     <% end %>
-    <%= form_with model: [:admin, order],  data: { turbo:false }, class: 'flex flex-col gap-2' do |form| %>
+    <%= form_with model: order, data: { turbo:false }, class: 'flex flex-col gap-2' do |form| %>
       <div>
         <%= form.label :booked_name, t('order.name') , class: 'label' %>
         <%= form.text_field :booked_name, class: 'input w-full input-bordered' %>

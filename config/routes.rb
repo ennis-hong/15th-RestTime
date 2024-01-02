@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders, only: %i[show] do
+    resources :orders, only: %i[show create] do
       collection do
         get :my_bookings
         post :payment_result
@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :orders, only: %i[index show create] do
+      resources :orders, only: %i[index show] do
         member do
           get :confirm_redeem
           patch :redeem
