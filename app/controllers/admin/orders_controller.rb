@@ -39,7 +39,7 @@ class Admin::OrdersController < ApplicationController
   def redeem
     @order.completed?
     if @order.update(status: params[:status], staff: params[:staff])
-      redirect_to admin_orders_path, notice: t('order_has_been_redeemed', scope: %i[message])
+      redirect_to admin_orders_path, notice: t('order has been redeemed', scope: %i[message])
     else
       redirect_to @order, alert: t('order can not redeem', scope: %i[message])
     end
