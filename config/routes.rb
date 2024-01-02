@@ -66,9 +66,5 @@ Rails.application.routes.draw do
     # Home page
     get "/index", to: "pages#index"
 
-
-
-    # Devise routes
-    devise_for :users, controllers: { sessions: 'users/sessions' }
   end
 end
