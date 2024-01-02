@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   scope '(:lang)', locale: /en|tw/ do
     root 'products#index'
 
-    resources :vendor
-
     # Devise routes
     devise_for :users, skip: :omniauth_callbacks, controllers: { sessions: 'users/sessions' }
     resources :products do
@@ -52,15 +50,20 @@ Rails.application.routes.draw do
       end
     end
 
-    namespace :admin do
-      resources :orders, only: %i[index show] do
+    resources :vendor
+
+    namespace :vendor do
+      resources :orders,only: %i[show] do
+        collection do
+          get :my
+        end
         member do
           get :confirm_redeem
           patch :redeem
         end
       end
     end
-
+    
     # Static pages
     %w(about choose_us join_us contact_us terms privacy refund_policy payment order_question refund).each do |page|
       get "/#{page}", to: "pages##{page}"

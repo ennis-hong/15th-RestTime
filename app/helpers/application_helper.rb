@@ -44,10 +44,11 @@ module ApplicationHelper
 
     content_tag(:div, class: 'bg-red-500 text-white p-4 mb-4') do
       content_tag(:ul) do
-        any_model.errors.full_messages.map { |message| content_tag(:li, message) }.join.html_safe
+        safe_join(any_model.errors.full_messages.map { |message| content_tag(:li, message) })
       end
     end
   end
+  
 
   def format_price(price)
     price.to_i.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, '\\1,')

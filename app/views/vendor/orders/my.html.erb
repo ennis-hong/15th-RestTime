@@ -43,13 +43,13 @@
           </div>
         </td>
         <td>
-          <%= link_to order.serial, admin_order_path(order) %>
+          <%= link_to order.serial, vendor_order_path(order) %>
           <br/>
           <span class="badge badge-ghost badge-xs">
             <%= format_date(order.created_at) %>
           </span>
           <span class="badge badge-ghost badge-xs">
-            <%= link_to t('order.order info'), admin_order_path(order) %>
+            <%= link_to t('order.order info'), vendor_order_path(order) %>
           </span>
         </td>
         <td>

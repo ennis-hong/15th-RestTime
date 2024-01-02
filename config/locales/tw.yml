@@ -14,7 +14,7 @@ tw:
       title: 隱私權政策
     shop info: 商店資訊
   
-  Home: 首頁
+  home: 首頁
   my bookings: 我的預約 
       
   form:
@@ -37,6 +37,7 @@ tw:
       contactphone: 聯絡電話
       cover: 店家封面
       status: 目前店家狀態
+      update: 修改店家資訊
       
   activerecord:
     attributes:
@@ -172,6 +173,7 @@ tw:
   vendor:
     my product: 我的商品
     my shop: 我的店家
+    my order: 我的訂單
     my backstage: 我的後台
     create product: 新增商品
     update product: 編輯商品
