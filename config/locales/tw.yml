@@ -15,9 +15,9 @@ tw:
     shop info: 商店資訊
   
   home: 首頁
-  my bookings: 我的預約
-  Cancel: 取消
-  OK: 確認    
+  my bookings: 我的預約 
+  cancel: 取消
+  ok: 確認    
   form:
     title: 服務項目
     cover: 上傳照片
