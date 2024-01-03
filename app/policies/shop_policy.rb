@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShopPolicy < ApplicationPolicy
   attr_reader :user, :shop
 

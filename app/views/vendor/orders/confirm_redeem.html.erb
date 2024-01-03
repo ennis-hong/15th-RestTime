@@ -16,7 +16,7 @@
 
     <%# 表單讓店家確認操作 %>
     <div>
-        <%= form_with(url: redeem_vendor_order_path(@order, status: @status, staff: @staff), method: :patch, data: { turbo_confirm: t('message.please confirm again') }) do |f| %>
+        <%= form_with(url: redeem_vendor_order_path(@order, status: params[:status], staff: params[:staff]), method: :patch, data: { turbo_confirm: t('message.please confirm again') }) do |f| %>
             <%= f.label :staff, t('order.staff') %>
             <%= f.text_field :staff %>
             <%= submit_tag t('order.redeem order'), class: 'btn btn-primary' %>

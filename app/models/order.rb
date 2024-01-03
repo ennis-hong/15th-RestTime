@@ -12,7 +12,7 @@ class Order < ApplicationRecord
 
   before_create :generate_serial
 
-  aasm column: 'status', no_direct_assignment: true do
+  aasm column: 'status', no_direct_assignment: false do
     state :pending, initial: true
     state :confirmed, :paid, :refunded, :cancelled, :completed
 
@@ -54,5 +54,4 @@ class Order < ApplicationRecord
   def human_state
     I18n.t("aasm.order state.#{aasm_state}")
   end
-  
 end

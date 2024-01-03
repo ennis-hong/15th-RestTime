@@ -15,7 +15,7 @@ class Shop < ApplicationRecord
   has_many :products
   has_many :service_times
   has_many :orders
-  has_many :comments
+  has_many :comments, -> { order(created_at: :desc) }
 
   before_create :set_default_status
 

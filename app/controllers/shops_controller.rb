@@ -81,5 +81,4 @@ class ShopsController < ApplicationController
 
     redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
   end
-  
 end

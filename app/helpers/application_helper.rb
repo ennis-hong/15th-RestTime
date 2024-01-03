@@ -48,7 +48,6 @@ module ApplicationHelper
       end
     end
   end
-  
 
   def format_price(price)
     price.to_i.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, '\\1,')
@@ -57,5 +56,4 @@ module ApplicationHelper
   def address(shop)
     "#{shop.city}#{shop.district}#{shop.street}"
   end
-  
 end
