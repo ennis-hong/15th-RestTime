@@ -2,7 +2,7 @@
 
 class Shop < ApplicationRecord
   enum status: { closed: 'closed', open: 'open', busy: 'busy', shutdown: 'ShutDown' }
-
+  paginates_per 8
   belongs_to :user
 
   has_one_attached :cover
