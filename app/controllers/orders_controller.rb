@@ -3,7 +3,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: %i[payment_result]
   before_action :order_params, only: :create
-  before_action :find_order, only: %i[show]
+  before_action :find_order, only: %i[show cancel edit update]
 
   skip_before_action :verify_authenticity_token, only: :payment_result
 
@@ -28,6 +28,30 @@ class OrdersController < ApplicationController
   def show
     @shop = @order.shop
     @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
+  end
+
+  def edit
+  end
+
+  def update
+    if @order.update(service_date: params[:order][:service_date])
+      redirect_to order_path(@order), notice: t('booking time adjusted', scope: %i[message])
+    else
+      render :edit
+    end
+  end
+
+  def cancel
+    if @order.cancelled?
+      redirect_to @order, alert: t('can not cancel', scope: %i[message])
+    else
+      if @order.cancel!
+        @order.update(cancelled_at: Time.now)
+        redirect_to @order, notice: t('you has been cancelled', scope: %i[message])
+      else
+        redirect_to @order, alert: t('cancellation error', scope: %i[message])
+      end
+    end
   end
 
   def payment_result

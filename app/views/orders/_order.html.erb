@@ -5,4 +5,9 @@
   <h2 class="font-bold"><%= order.product.title %></h2>
   <span>NT$ <%= order.price.to_i %></span>
   <% end %>
+  <span><%= t("aasm.order state.#{order.status}") %></span>
+  <%= link_to t('order.appointment change'), edit_order_path(order) %>
+  <% if order.status != 'cancelled' && order.status != 'completed' %>
+    <%= link_to t('order.cancel order'), cancel_order_path(order), data: { turbo_method:'patch', turbo_confirm: t('message.are you sure cancel the order') } %>
+  <% end %>
 </div>

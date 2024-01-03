@@ -1,0 +1,72 @@
+<div class="text-sm breadcrumbs">
+  <ul>
+    <li><%= link_to t('home'), root_path %></li>
+    <li><%= link_to t('my bookings'), my_bookings_orders_path %></li>
+  </ul>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+  <div class="card w-full bg-white-100 shadow-xl">
+    <div class="card-body gap-4">
+      <div class="card-title"><%= t('order.booking info') %></div>
+      <div class="flex justify-between">
+        <span><%= @order.product.title %><%= @order.service_min %><%= t('order.min') %></span>
+        <span><%= t('order.currency') %> <%= @order.price.to_i %></span>
+      </div>
+      <table class="table text-center">
+        <thead>
+          <tr class="border-2 border-gray-500">
+            <th><%= t('order.booking date') %></th>
+            <th><%= t('order.booking start time') %></th>
+            <th><%= t('order.booking end time') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= format_date(@order.service_date) %></td>
+            <td><%= format_time_without_sec(@order.service_date) %></td>
+            <td><%= booking_end_time(@order) %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="flex justify-between border-2 border-gray-500 p-4">
+        <span><%= t('order.total') %>:</span>
+        <span><%= t('order.currency') %> <%= @order.price.to_i %></span>
+      </div>
+      <div class="card-title"><%= t('order.reschedule the booking time') %></div>
+      <%= form_with model: @order, data: { turbo: false } do |f| %>
+        <%= f.text_field :service_date,
+                        data: {
+                          controller: 'datepicker',
+                          serviceTimes: filter_service_times(@order.product.shop.service_times)
+                        },
+                        class: 'input input-bordered w-full mt-4' %>
+        <%= f.submit I18n.t('order.chang booking time'), class: 'mt-4 w-full bg-red-400 hover:bg-red-250 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+      <% end %>
+      
+      <%= link_to t('form.back'), request.referrer, class: 'w-full bg-gray-400 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center' %>
+    </div>
+  </div>
+
+  <div class="card w-full bg-white-100 shadow-xl">
+    <div class="card-body gap-4">
+      <div class="card-title"><%= t('views.shop.show.information') %></div>
+      <div class="flex">
+        <%= t('views.shop.show.tel') %>:
+        <%= @order.shop.tel %>
+      </div>
+      <div class="flex">
+        <%= t('views.shop.show.street') %>:
+        <%= address(@order.shop) %>
+      </div>
+      <iframe
+          width="100%"
+          height="300"
+          frameborder="0" style="border:0"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_API_KEY'] %>&q=<%= ERB::Util.url_encode(address(@order.product.shop)) %>"
+          allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
