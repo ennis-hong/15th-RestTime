@@ -34,10 +34,14 @@ class OrdersController < ApplicationController
   end
 
   def update
-    if @order.update(service_date: params[:order][:service_date])
-      redirect_to order_path(@order), notice: t('booking time adjusted', scope: %i[message])
-    else
-      render :edit
+    new_service_date = params[:order][:service_date]
+    
+    if @order.service_date != new_service_date
+      if @order.update(service_date: new_service_date)
+        redirect_to order_path(@order), notice: t('booking time adjusted', scope: %i[message])
+      else
+        render :edit
+      end
     end
   end
 
@@ -69,9 +73,9 @@ class OrdersController < ApplicationController
       @order.pay!
       user = @order.user
       sign_in(user) if user
-      redirect_to order_path(@order), notice: t('Payment Successful', scope: %i[order message])
+      redirect_to order_path(@order), notice: t('payment successful', scope: %i[order message])
     else
-      redirect_to order_path(@order), notice: t('Payment Failed', scope: %i[order message])
+      redirect_to order_path(@order), notice: t('payment failed', scope: %i[order message])
     end
   end
 

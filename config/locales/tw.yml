@@ -143,6 +143,7 @@ tw:
     service duration: 服務時間
     name: 姓名
     email: 信箱
+    total: 總計
     confirm: 確認預約
     status: 訂單狀態
     updated status time: 狀態更新時間 
@@ -172,8 +173,8 @@ tw:
     cancellation error: 取消訂單時出現錯誤
     booking time adjusted: 預約時間已經調整
     are you sure cancel the order: 確定要取消訂單？
-    Payment Successful: 付款成功
-    Payment Failed: 付款失敗
+    payment successful: 付款成功
+    payment failed: 付款失敗
     Abnormal Payment Result: 付款結果異常
     Order Confirmed and Proceeding to Payment: 訂單成立，正在前往付款頁面
     
