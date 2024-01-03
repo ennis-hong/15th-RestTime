@@ -92,6 +92,9 @@ class VendorController < ApplicationController
     )
 
     current_user.shop = shop
-    shop.save
+
+    return unless shop.save
+
+    flash[:notice] = "歡迎#{current_user.email}初次登入，請您修改以下預設商店資訊"
   end
 end
