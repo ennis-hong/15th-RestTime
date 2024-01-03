@@ -10,17 +10,14 @@
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css", "data-turbo-track": "reload" %>
     
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= render "shared/navbar" %>
-    <div class="mt-16">
+    <%= render "vendor/navbar" %>
     <%= render "shared/flash" if flash.any? %>
     </div>
 
   </head>
 
   <body>
-        
-    <main class="mt-24 p-5">
-      <%= render "vendor/sidebar" %>
+    <main class="p-5">
       <div class="flex-1 m-3">
       <%= yield %>
       </div>

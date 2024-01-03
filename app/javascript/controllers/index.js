@@ -19,5 +19,8 @@ application.register("qrcode", QrcodeController);
 import ProductsController from "./products_controller";
 application.register("products", ProductsController);
 
-import TimepickerController from "./timepicker_controller";
-application.register("timepicker", TimepickerController);
+import SidebarController from "./sidebar_controller"
+application.register("sidebar", SidebarController)
+
+import TimepickerController from "./timepicker_controller"
+application.register("timepicker", TimepickerController)
