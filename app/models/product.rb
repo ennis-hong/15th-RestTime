@@ -9,6 +9,9 @@ class Product < ApplicationRecord
 
   acts_as_list
 
+  paginates_per 8
+  scope :onsale, -> { where(onsale: true) }
+
   # 商品圖片
   has_one_attached :cover
 
