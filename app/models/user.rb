@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :liked_shops, through: :like_shops, source: :shop
   has_many :orders
   has_many :comments
+  after_create :create_default_shop
 
   def liked?(shop)
     liked_shop_ids.include?(shop.id)
@@ -34,5 +35,23 @@ class User < ApplicationRecord
                          password: Devise.friendly_token[0, 20])
 
     user
+  end
+
+  def create_default_shop
+    return unless vendor? && shop.nil?
+
+    shop = Shop.new(
+      title: email,
+      description: 'Default Description',
+      district: 'Default District',
+      city: 'Default City',
+      street: 'Default Street',
+      contact: 'Default Contact',
+      tel: '000000000',
+      contactphone: '000000000'
+    )
+
+    self.shop = shop
+    shop.save
   end
 end
