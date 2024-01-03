@@ -111,7 +111,7 @@ tw:
         format: "%{open_time} ~ %{close_time}"
       message:
         already own store: 你已經擁有一家店，趕緊刊登服務商品吧！
-        list your services products: 店家建立成功,趕緊刊登服務商品吧！
+        create_shop_success: 店家建立成功,趕緊刊登服務商品吧！
         updated: 店家資訊更新成功
         wrong way: 你走錯地方了
         
