@@ -6,7 +6,7 @@ tw:
     shops: 店家列表
     logout: 登出
     edit password: 修改密碼
-    my backstage: 我的後台
+    my_backstage: 我的後台
     vendor: 商家
     homepage: 首頁
     homepage_front: 前台首頁
@@ -22,7 +22,7 @@ tw:
 
   
   home: 首頁
-  my bookings: 我的預約 
+  my_bookings: 我的預約 
   cancel: 取消
   ok: 確認    
   form:
@@ -70,7 +70,7 @@ tw:
         update_status: 更新營業狀態
 
   service_times:
-    Edit Service Times: 修改營業時間
+    edit_service_times: 修改營業時間
     title: 營業時間
     open_time: 開始時間
     close_time: 結束時間
@@ -94,9 +94,9 @@ tw:
     shop:
       index:
         title: "店家列表"
-        create shop: "建立店家"
-        sort by city: "依照城市排序"
-        sort by updated at: "更新時間排序"
+        create_shop: "建立店家"
+        sort_by_city: "依照城市排序"
+        sort_by_updated_at: "更新時間排序"
       show:
         address: 地址
         comment: 店家評價
@@ -113,15 +113,16 @@ tw:
         comment: 評論
         ownder: 店主
         information: 店家資訊
-        information edit: 店家資訊變更
+        information_edit: 店家資訊變更
         map: 地圖
-        Select Product: 選擇商品
+        select_product: 選擇商品
         format: "%{open_time} ~ %{close_time}"
       message:
         already own store: 你已經擁有一家店，趕緊刊登服務商品吧！
         create_shop_success: 店家建立成功,趕緊刊登服務商品吧！
+        list_your_services_products: 店家建立成功,趕緊刊登服務商品吧！
         updated: 店家資訊更新成功
-        wrong way: 你走錯地方了
+        wrong_way: 你走錯地方了
         
   errors:
     messages:
@@ -131,72 +132,71 @@ tw:
     min: 分鐘
     currency: NTD
     booking: 開始預約
-    booking date: 預約日期
-    booking time slot: 預約時段
-    booking start time: 開始時間
-    booking end time: 結束時間
-    contact info: 聯絡資訊
-    booking info: 預約資訊
-    booking item: 預約項目
-    order info: 訂單資訊
-    customer info: 客戶資訊
-    service duration: 服務時間
+    booking_date: 預約日期
+    booking_time_slot: 預約時段
+    booking_start_time: 開始時間
+    booking_end_time: 結束時間
+    contact_info: 聯絡資訊
+    booking_info: 預約資訊
+    booking_item: 預約項目
+    order_info: 訂單資訊
+    customer_info: 客戶資訊
+    service_duration: 服務時間
     name: 姓名
     email: 信箱
     total: 總計
     confirm: 確認預約
     status: 訂單狀態
-    updated status time: 狀態更新時間 
+    updated_status_time: 狀態更新時間 
     serial: 訂單編號
-    created date: 訂單建立日期
+    created_date: 訂單建立日期
     price: 消費金額
-    service Time: 消費時數
+    service_time: 消費時數
     qrcode: 顯示QR CODE
-    google map: 顯示店家位置
-    redeem order: 核銷訂單
-    redeem Date: 核銷日期
+    google_map: 顯示店家位置
+    redeem_order: 核銷訂單
     staff: 核銷人員
-    start end: (開始時間~結束時間)
-    Choose Product: 選擇項目
-    appointment change: 變更預約
-    chang booking time: 更改預約時間
-    reschedule the booking time: 重新選擇預約時段
-    cancel order: 取消訂單
+    start_end: (開始時間~結束時間)
+    choose_product: 選擇項目
+    appointment_change: 變更預約
+    chang_booking_time: 更改預約時間
+    reschedule_the_booking_time: 重新選擇預約時段
+    cancel_order: 取消訂單
     pay: 付款
   message:
     the system is busy, please try again later: 系統忙碌中，請稍候再試
-    appointment Successful: 預約成功
-    please confirm again: 訂單即將核銷，請再次確認！
-    order has been redeemed: 訂單已核銷
-    order can not redeem: 核銷失敗，請再確認訂單
-    can not cancel: 訂單已經取消過了
-    you has been cancelled: 訂單已經取消
-    cancellation error: 取消訂單時出現錯誤
-    booking time adjusted: 預約時間已經調整
-    are you sure cancel the order: 確定要取消訂單？
-    payment successful: 付款成功
-    payment failed: 付款失敗
-    Abnormal Payment Result: 付款結果異常
-    Order Confirmed and Proceeding to Payment: 訂單成立，正在前往付款頁面
+    appointment_successful: 預約成功
+    please_confirm_again: 訂單即將核銷，請再次確認！
+    order_has_been_redeemed: 訂單已核銷
+    order_can_not_redeem: 核銷失敗，請再確認訂單
+    can_not_cancel: 訂單已經取消過了
+    you_has_been_cancelled: 訂單已經取消
+    cancellation_error: 取消訂單時出現錯誤
+    booking_time_adjusted: 預約時間已經調整
+    are_you_sure_cancel _order: 確定要取消訂單？
+    payment_successful: 付款成功
+    payment_failed: 付款失敗
+    abnormal_payment_result: 付款結果異常
+    order_confirmed_and_proceeding_to_payment: 訂單成立，正在前往付款頁面
     
 
 
   shop_status:
-    closed: "休息中"
-    open: "開放中"
-    busy: "忙碌中"
-    shutdown: "已停業"
+    closed: 休息中
+    open: 開放中
+    busy: 忙碌中
+    shutdown: 已停業
 
   user_roles:
-    admin: '管理員'
-    vendor: '商家'
-    general: '會員'
+    admin: 管理員
+    vendor: 商家
+    general: 會員
   
   vendor:
     my product: 我的商品
     my shop: 我的店家
     my order: 我的訂單
-    my backstage: 我的後台
+    my_backstage: 我的後台
     create product: 新增商品
     update product: 編輯商品
     edit: 修改

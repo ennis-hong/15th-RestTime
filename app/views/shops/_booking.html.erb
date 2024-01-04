@@ -5,7 +5,7 @@
       <%= f.hidden_field :shop_id, value: shop.id %>
       <%= f.select :product_id, 
                   shop_product_options(shop),
-                  { include_blank: t("views.shop.show.Select Product") }, 
+                  { include_blank: t("views.shop.show.select_product") }, 
                   { data:{
                     action: "mousedown->products#toggleModal"
                   },class: "select select-lg select-bordered w-full"} %>
@@ -22,7 +22,7 @@
     <input type="checkbox" id="products_modal" data-products-target="product_modal" class="modal-toggle" />
     <div class="modal" role="dialog">
       <div class="modal-box w-6/12">
-        <h3 class="font-bold text-lg"><%= t('order.choose product') %></h3>
+        <h3 class="font-bold text-lg"><%= t('order.choose_product') %></h3>
         <%= render partial:'radio_product',
             collection: shop.products, as: :product, locals: { index: 1 }%>
         <div class="modal-action">

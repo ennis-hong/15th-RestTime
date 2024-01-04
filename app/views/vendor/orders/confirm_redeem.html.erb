@@ -1,25 +1,25 @@
 <%# 顯示訂單資訊供店家比對確認 %>
 <div>
-    <h2><%= t('order.order info') %></h2>
+    <h2><%= t('order.order_info') %></h2>
     <p><strong><%= t('order.serial') %>:</strong> <%= @order.serial %></p>
     <p><strong><%= t('order.created_date') %>:</strong> <%= format_date(@order.created_at) %></p>
     <p><strong><%= t('order.status') %>:</strong> <%= @status %></p>
-    <p><strong><%= t('order.booking date') %>:</strong> <%= format_datetime(@order.service_date) %></p>
+    <p><strong><%= t('order.booking_date') %>:</strong> <%= format_datetime(@order.service_date) %></p>
 
-    <h3><%= t('order.booking info') %></h3>
+    <h3><%= t('order.booking_info') %></h3>
     <p><strong><%= t('order.price') %>:</strong> <%= format_price(@order.price) %></p>
-    <p><strong><%= t('order.service time') %>:</strong> <%= @order.service_min %></p>
+    <p><strong><%= t('order.service_time') %>:</strong> <%= @order.service_min %></p>
 
-    <h3><%= t('order.contact info') %></h3>
+    <h3><%= t('order.contact_info') %></h3>
     <p><strong><%= t('order.name') %>:</strong> <%= @order.booked_name %></p>
     <p><strong><%= t('order.email') %>:</strong> <%= @order.booked_email %></p>
 
     <%# 表單讓店家確認操作 %>
     <div>
-        <%= form_with(url: redeem_vendor_order_path(@order, status: params[:status], staff: params[:staff]), method: :patch, data: { turbo_confirm: t('message.please confirm again') }) do |f| %>
+        <%= form_with(url: redeem_vendor_order_path(@order, status: params[:status], staff: params[:staff]), method: :patch, data: { turbo_confirm: t('message.please_confirm_again') }) do |f| %>
             <%= f.label :staff, t('order.staff') %>
             <%= f.text_field :staff %>
-            <%= submit_tag t('order.redeem order'), class: 'btn btn-primary' %>
+            <%= submit_tag t('order.redeem_order'), class: 'btn btn-primary' %>
         <% end %>
     </div>
 </div>

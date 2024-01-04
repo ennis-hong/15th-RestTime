@@ -24,7 +24,7 @@ class ShopsController < ApplicationController
     authorize @shop
 
     if @shop.save
-      redirect_to shop_path(@shop), notice: t('list your services products', scope: %i[views shop message])
+      redirect_to shop_path(@shop), notice: t('list_your_services_products', scope: %i[views shop message])
     else
       render :new
     end

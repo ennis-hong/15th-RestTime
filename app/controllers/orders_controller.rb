@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
     return unless @order.service_date != new_service_date
 
     if @order.update(service_date: new_service_date)
-      redirect_to order_path(@order), notice: t('booking time adjusted', scope: %i[message])
+      redirect_to order_path(@order), notice: t('booking_time_adjusted', scope: %i[message])
     else
       render :edit
     end
@@ -46,12 +46,12 @@ class OrdersController < ApplicationController
 
   def cancel
     if @order.cancelled?
-      redirect_to @order, alert: t('can not cancel', scope: %i[message])
+      redirect_to @order, alert: t('can_not_cancel', scope: %i[message])
     elsif @order.cancel!
       @order.update(cancelled_at: Time.now)
-      redirect_to @order, notice: t('you has been cancelled', scope: %i[message])
+      redirect_to @order, notice: t('you_has_been_cancelled', scope: %i[message])
     else
-      redirect_to @order, alert: t('cancellation error', scope: %i[message])
+      redirect_to @order, alert: t('cancellation_error', scope: %i[message])
     end
   end
 
@@ -64,15 +64,15 @@ class OrdersController < ApplicationController
     @order.payment_type_charge_fee = result_params[:PaymentTypeChargeFee]
     @order.return_code = result_params[:RtnCode]
     @order.return_msg = result_params[:RtnMsg]
-    redirect_to order_path(@order), alert: t('Abnormal Payment Result', scope: %i[order message]) unless @order.save
+    redirect_to order_path(@order), alert: t('abnormal_payment_result', scope: %i[order message]) unless @order.save
 
     if result_params[:RtnCode] === '1'
       @order.pay!
       user = @order.user
       sign_in(user) if user
-      redirect_to order_path(@order), notice: t('payment successful', scope: %i[order message])
+      redirect_to order_path(@order), notice: t('payment_successful', scope: %i[order message])
     else
-      redirect_to order_path(@order), notice: t('payment failed', scope: %i[order message])
+      redirect_to order_path(@order), notice: t('payment_failed', scope: %i[order message])
     end
   end
 

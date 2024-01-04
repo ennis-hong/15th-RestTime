@@ -1,14 +1,14 @@
 <div class="text-sm breadcrumbs">
   <ul>
     <li><%= link_to t('home'), root_path %></li>
-    <li><%= link_to t('my bookings'), my_bookings_orders_path %></li>
+    <li><%= link_to t('my_bookings'), my_bookings_orders_path %></li>
   </ul>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
   <div class="card w-full bg-white-100 shadow-xl">
     <div class="card-body gap-4">
-      <div class="card-title"><%= t('order.booking info') %></div>
+      <div class="card-title"><%= t('order.booking_info') %></div>
       <div class="flex justify-between">
         <span><%= @order.product.title %><%= @order.service_min %><%= t('order.min') %></span>
         <span><%= t('order.currency') %> <%= @order.price.to_i %></span>
@@ -16,9 +16,9 @@
       <table class="table text-center">
         <thead>
           <tr class="border-2 border-gray-500">
-            <th><%= t('order.booking date') %></th>
-            <th><%= t('order.booking start time') %></th>
-            <th><%= t('order.booking end time') %></th>
+            <th><%= t('order.booking_date') %></th>
+            <th><%= t('order.booking_start_time') %></th>
+            <th><%= t('order.booking_end_time') %></th>
           </tr>
         </thead>
         <tbody>
@@ -33,7 +33,7 @@
         <span><%= t('order.total') %></span>
         <span><%= t('order.currency') %> <%= @order.price.to_i %></span>
       </div>
-      <div class="card-title"><%= t('order.reschedule the booking time') %></div>
+      <div class="card-title"><%= t('order.reschedule_the_booking_time') %></div>
       <%= form_with model: @order, data: { turbo: false } do |f| %>
         <%= f.text_field :service_date,
                         data: {
@@ -41,7 +41,7 @@
                           serviceTimes: filter_service_times(@order.product.shop.service_times)
                         },
                         class: 'input input-bordered w-full mt-4' %>
-        <%= f.submit I18n.t('order.chang booking time'), class: 'mt-4 w-full bg-red-400 hover:bg-red-250 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+        <%= f.submit I18n.t('order.chang_booking_time'), class: 'mt-4 w-full bg-red-400 hover:bg-red-250 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
       <% end %>
       
       <%= link_to t('form.back'), request.referrer, class: 'w-full bg-gray-400 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center' %>

@@ -1,7 +1,7 @@
 <div class="mt-8 p-3">
   <div class="card bg-white shadow-xl">
     <div class="card-body p-4">
-      <h3 class="card-title text-lg font-bold mb-2"><%= t('order.booking info') %></h3>
+      <h3 class="card-title text-lg font-bold mb-2"><%= t('order.booking_info') %></h3>
       <div class="flex justify-between mb-4">
         <span><%= @order.product.title %> <%= @order.service_min %> <%= t('order.min') %></span>
         <span><%= t('order.currency') %> <%= @order.price.to_i %></span>
@@ -9,9 +9,9 @@
       <table class="table-auto text-center w-full mb-4">
         <thead>
           <tr class="bg-gray-200">
-            <th class="px-4 py-2"><%= t('order.booking date') %></th>
-            <th class="px-4 py-2"><%= t('order.booking start time') %></th>
-            <th class="px-4 py-2"><%= t('order.booking end time') %></th>
+            <th class="px-4 py-2"><%= t('order.booking_date') %></th>
+            <th class="px-4 py-2"><%= t('order.booking_start_time') %></th>
+            <th class="px-4 py-2"><%= t('order.booking_end_time') %></th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
   </div>
   <div class="card bg-white shadow-xl mt-4">
     <div class="card-body p-4">
-      <h3 class="card-title text-lg font-bold mb-2"><%= t('order.contact info') %></h3>
+      <h3 class="card-title text-lg font-bold mb-2"><%= t('order.contact_info') %></h3>
       <div class="flex items-center mb-2">
         <span class="label w-1/4"><%= t('order.name') %>:</span>
         <span class="label w-3/4"><%= @order.booked_name %></span>

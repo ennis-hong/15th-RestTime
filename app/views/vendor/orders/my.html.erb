@@ -2,24 +2,24 @@
   <table class="table" style="padding: 10px;">
     <thead>
       <tr>
-        <th><%= t('order.customer info') %></th>
+        <th><%= t('order.customer_info') %></th>
         <th>
-          <%= t('order.customer info')%>/
+          <%= t('order.customer_info')%>/
           <%= t('order.created_date') %>
         </th>
-        <th><%= t('order.booking item') %></th>
-        <th><%= t('order.booking date') %></th>
+        <th><%= t('order.booking_item') %></th>
+        <th><%= t('order.booking_date') %></th>
         <th>
-          <%= t('order.booking time slot')%>
-          <%= t('order.start end') %>
+          <%= t('order.booking_time_slot')%>
+          <%= t('order.start_end') %>
         </th>
-        <th><%= t('order.service duration') %></th>
+        <th><%= t('order.service_duration') %></th>
         <th>
           <button class="btn btn-ghost btn-xs">
             <%= t('order.status') %>
           </button>
         </th>
-        <th><%= t('order.updated status time') %></th>
+        <th><%= t('order.updated_status_time') %></th>
       </tr>
     </thead>
     <tbody>
@@ -44,7 +44,7 @@
             <%= format_date(order.created_at) %>
           </span>
           <span class="badge badge-ghost badge-xs">
-            <%= link_to t('order.order info'), vendor_order_path(order) %>
+            <%= link_to t('order.order_info'), vendor_order_path(order) %>
           </span>
         </td>
         <td>

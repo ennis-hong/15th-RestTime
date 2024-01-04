@@ -15,7 +15,7 @@
     </div>
     <div class="flex-1 p-2">
       <span class="font-semibold text-gray-700">
-        <%= t('order.booking time slot') %>:
+        <%= t('order.booking_time_slot') %>:
         <%= format_datetime(order.service_date) %>
       </span>
     </div>
@@ -34,12 +34,12 @@
         <%= link_to order.serial, order_path(order) %>
       </span>
       <span class="p-2 text-sm">
-        (<%= t('order.created date') %>:
+        (<%= t('order.created_date') %>:
         <%= format_date(order.created_at)%>)
       </span>
     </div>
     <div class="p-2">
-      <%= t('order.booking date') %>:
+      <%= t('order.booking_date') %>:
       <%= format_datetime(order.service_date) %>
     </div>
     <div class="p-2">
@@ -47,18 +47,18 @@
       <%= order.price.to_i %>
     </div>
     <div class="p-2 text-right">
-      <%= link_to t('order.order info'), order_path(order),
+      <%= link_to t('order.order_info'), order_path(order),
       class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
 
       <% unless order.completed? || order.cancelled? %>
-        <%= link_to t('order.appointment change'), edit_order_path(order),
+        <%= link_to t('order.appointment_change'), edit_order_path(order),
         class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded ml-2" %>
       <% end %>
 
       <% if order.may_cancel? %>
-        <%= link_to t('order.cancel order'), cancel_order_path(order), 
+        <%= link_to t('order.cancel_order'), cancel_order_path(order), 
             class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-2",
-            data: { turbo_method: 'patch', turbo_confirm: t('message.are you sure cancel the order') } %>
+            data: { turbo_method: 'patch', turbo_confirm: t('message.are_you_sure_cancel_order') } %>
       <% end %>
 
       <% if order.may_pay? %>

@@ -9,7 +9,7 @@ module Vendor
       if current_user&.shop.present?
         @orders = current_user.shop.orders.includes(:user).order(id: :desc)
       else
-        redirect_to root_path, alert: t('wrong way', scope: %i[views shop message])
+        redirect_to root_path, alert: t('wrong_way', scope: %i[views shop message])
       end
     end
 
@@ -25,9 +25,9 @@ module Vendor
       if @order.may_complete?
         @order.complete!
         @order.update(staff: params[:staff])
-        redirect_to my_vendor_orders_path, notice: t('order has been redeemed', scope: %i[message])
+        redirect_to my_vendor_orders_path, notice: t('order_has_been_redeemed', scope: %i[message])
       else
-        redirect_to @order, alert: t('order can not redeem', scope: %i[message])
+        redirect_to @order, alert: t('order_can_not_redeem', scope: %i[message])
       end
     end
 
