@@ -18,6 +18,7 @@ class Shop < ApplicationRecord
   has_many :comments, -> { order(created_at: :desc) }
 
   before_create :set_default_status
+  after_create :create_service_times
 
   validates :title, presence: true
   validates :description, presence: true
@@ -41,6 +42,13 @@ class Shop < ApplicationRecord
   def average_rating
     total_ratings = comments.any? ? comments.average(:rating) : 0
     total_ratings.round
+  end
+
+  def create_service_times
+    days = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
+    days.each do |day|
+      ServiceTime.create(day_of_week: day, off_day: true, shop: self)
+    end
   end
 
   # 商店排序用，允許被搜尋到的東西

@@ -5,7 +5,10 @@
         <%= link_to t('vendor.system_notification'), '#' %>
       </li>
       <li>
-        <%= link_to  t('vendor.my_shop'), vendor_index_path%>
+        <%= link_to  t('vendor.my shop'), vendor_index_path%>
+        <ul>
+          <li><%= link_to t('vendor.service times'), edit_service_times_path %></li>
+        </ul>
       </li>
       <li>
         <%= link_to  t('vendor.my_product'), my_products_path%>

@@ -4,7 +4,7 @@ class ServiceTimesController < ApplicationController
   before_action :authenticate_user!
 
   def edit
-    ServiceTime.default_data(current_user_shop) if current_user_shop.service_times.empty?
+
     @configs = current_user_shop.service_times
   end
 

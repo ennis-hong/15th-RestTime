@@ -40,7 +40,6 @@ class ApplicationController < ActionController::Base
 
   def current_user_shop
     current_user.shop
-    Shop.where(user_id: current_user.id)
   end
 
   def set_layout
