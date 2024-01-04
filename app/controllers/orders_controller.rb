@@ -41,6 +41,8 @@ class OrdersController < ApplicationController
 
     if @order.update(service_date: new_service_date)
       redirect_to order_path(@order), notice: t('booking_time_adjusted', scope: %i[message])
+      OrderMailer.change_order_email_to_general(@order).deliver_later
+      OrderMailer.change_order_email_to_vendor(@order).deliver_later
     else
       render :edit
     end
@@ -52,6 +54,8 @@ class OrdersController < ApplicationController
     elsif @order.cancel!
       @order.update(cancelled_at: Time.now)
       redirect_to @order, notice: t('you_has_been_cancelled', scope: %i[message])
+      OrderMailer.cancel_order_email_to_general(@order).deliver_later
+      OrderMailer.cancel_order_email_to_vendor(@order).deliver_later
     else
       redirect_to @order, alert: t('cancellation_error', scope: %i[message])
     end
@@ -73,6 +77,8 @@ class OrdersController < ApplicationController
       user = @order.user
       sign_in(user) if user
       redirect_to order_path(@order), notice: t('message.payment_successful')
+      OrderMailer.new_order_email_to_general(@order).deliver_later
+      OrderMailer.new_order_email_to_vendor(@order).deliver_later
     else
       redirect_to order_path(@order), notice: t('message.payment_failed')
     end

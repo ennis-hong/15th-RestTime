@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>訂單通知</title>
+    <link href="path_to_your_tailwind_css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-lg">
+            <div class="md:flex">
+                <div class="w-full p-4">
+                    <div class="relative">
+                        <h2 class="text-xl font-bold text-gray-800">【訂單通知】新訂單成立 - 訂單編號 <%= @order.serial %></h2>
+                        <p class="text-gray-600 mt-2">尊敬的 <%= @order.shop.title %>，</p>
+                        <p class="text-gray-600 mt-2">您好！我們很高興通知您，您的店鋪 <%= @shop_name %> 剛剛收到了一筆新訂單。以下是訂單的詳細信息：</p>
+                        <ul class="list-disc list-inside mt-2">
+                            <li>訂單編號：<%= @order.serial %></li>
+                            <li>訂購日期：<%= @time_now %></li>
+                            <li>顧客姓名：<%= @order.booked_name %></li>
+                            <li>聯絡方式：<%= @order.booked_email %></li>
+                            <li>預約內容：<%= @product_description %></li>
+                            <li>總計金額：<%= @order.price %></li>
+                            <li>付款方式：信用卡</li>
+                        </ul>
+                        <p class="text-gray-600 mt-2">請您盡快確認訂單並準備排程，以確保顧客能夠順利消費。若有任何問題或需要進一步協助，請隨時聯絡我們。</p>
+                        <p class="text-gray-600 mt-2">謝謝您的合作，祝生意興隆！</p>
+                        <p class="text-gray-600 mt-2">
+                            此致<br>
+                            ResTime<br>
+                            <%= @vendor_email %><br>
+                            <%= @time_now %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

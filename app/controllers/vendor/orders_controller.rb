@@ -26,6 +26,8 @@ module Vendor
         @order.complete!
         @order.update(staff: params[:staff])
         redirect_to my_vendor_orders_path, notice: t('order_has_been_redeemed', scope: %i[message])
+        OrderMailer.redeem_order_email_to_general(@order).deliver_later
+        OrderMailer.redeem_order_email_to_vendor(@order).deliver_later
       else
         redirect_to @order, alert: t('order_can_not_redeem', scope: %i[message])
       end

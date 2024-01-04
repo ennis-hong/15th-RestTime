@@ -179,7 +179,7 @@ tw:
     you_has_been_cancelled: 訂單已經取消
     cancellation_error: 取消訂單時出現錯誤
     booking_time_adjusted: 預約時間已經調整
-    are_you_sure_cancel _order: 確定要取消訂單？
+    are_you_sure_cancel_order: 確定要取消訂單？
     payment_successful: 付款成功
     payment_failed: 付款失敗
     abnormal_payment_result: 付款結果異常
@@ -281,3 +281,13 @@ tw:
       pay: 付款
       complete: 完成
       cancel: 取消
+
+  mailer:
+    appointment_successful: "Hello,Here is ResTime，%{booked_name}先生/女士，您已經預約完成，%{shop_title}將在%{formatted_date}為您服務。"
+    booking_time_adjusted: "Hello,Here is ResTime，%{booked_name}先生/女士，您的預約時間已經更改%{service_date}，稍後確認您的訂單內容。"
+    order_has_been_redeemed: "Hello,Here is ResTime，%{booked_name}先生/女士，您的預約已經核銷，%{shop_title}期待您下次預約。"
+    you_has_been_cancelled: "Hello,Here is ResTime，%{booked_name}先生/女士，您的預約已經取消，麻煩再確認您的訂單內容。"
+    have_new_order: "Hello,Here is ResTime，您有新訂單，預計在%{service_date}成立，麻煩再確認您的訂單內容。"
+    change_booking_time: "Hello,Here is ResTime，%{booked_name}先生/女士的預約時間已經更改%{service_date}，請儘快確認您的訂單。"
+    order_redeemed: "Hello,Here is ResTime，訂單編號<%{serial}>已經核銷，麻煩再確認您的訂單內容。"
+    order_cancelled: "Hello,Here is ResTime，訂單編號<%{serial}>已經取消，麻煩再確認您的訂單內容。"

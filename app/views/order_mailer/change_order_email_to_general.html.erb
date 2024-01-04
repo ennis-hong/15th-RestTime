@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>預約時間變更確認</title>
+    <link href="path_to_your_tailwind_css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-lg">
+            <div class="md:flex">
+                <div class="w-full p-4">
+                    <div class="relative">
+                        <h2 class="text-xl font-bold text-gray-800">【預約時間變更確認】您在 <%= @shop_title %> 的預約時間已更新</h2>
+                        <p class="text-gray-600 mt-2">親愛的 <%= @order.booked_name %>，</p>
+                        <p class="text-gray-600 mt-2">感謝您選擇 <%= @shop_title %>。我們寫信是為了確認您的預約時間已經成功變更。請查看以下新的預約詳情：</p>
+                        <ul class="list-disc list-inside mt-2">
+                            <li>新預約時間：<%= @service_date %></li>
+                            <li>預約編號：<%= @order.serial %></li>
+                            <li>預約項目：<%= @product_description %></li>
+                            <li>預約地點：<%= @shop_address %></li>
+                            <li>店家聯絡方式：<%= @order.shop.tel %></li>
+                        </ul>
+                        <p class="text-gray-600 mt-2">我們已經為您重新安排了相應的服務，並期待在新的預約時間見到您。如果您有任何疑問或需要進一步的協助，請隨時與我們聯繫。</p>
+                        <p class="text-gray-600 mt-2">再次感謝您的理解與配合，我們期待為您提供優質的服務體驗。</p>
+                        <p class="text-gray-600 mt-2">祝您有美好的一天！</p>
+                        <p class="text-gray-600 mt-2">
+                            此致<br>
+                            ResTime<br>
+                            <%= @vendor_email %><br>
+                            <%= @time_now %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

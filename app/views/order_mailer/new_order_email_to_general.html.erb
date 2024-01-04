@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>訂單確認</title>
+    <link href="path_to_your_tailwind_css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-lg">
+            <div class="md:flex">
+                <div class="w-full p-4">
+                    <div class="relative">
+                        <h2 class="text-xl font-bold text-gray-800">【訂單確認】您的訂單 <%= @order.serial %> 已成功建立</h2>
+                        <p class="text-gray-600 mt-2">親愛的 <%= @order.booked_name %>，</p>
+                        <p class="text-gray-600 mt-2">感謝您在 <%= @shop_title %> 消費！我們已經收到您的訂單，並且正在為您通知店家。以下是您訂單的詳細資訊：</p>
+                        <ul class="list-disc list-inside mt-2">
+                            <li>訂單編號：<%= @order.serial %></li>
+                            <li>訂購日期：<%= @time_now %></li>
+                            <li>聯絡方式：<%= @order.shop.tel %></li>
+                            <li>地址：<%= @shop_address %></li>
+                            <li>預約內容：<%= @product_description %></li>
+                            <li>總計金額：<%= @order.price %></li>
+                            <li>付款方式：信用卡</li>
+                        </ul>
+                        <p class="text-gray-600 mt-2">如果您對訂單有任何疑問，或需要進一步的協助，請隨時聯繫我們。您也可以隨時訪問我們的網站查看訂單的最新狀態。</p>
+                        <p class="text-gray-600 mt-2">再次感謝您的購買，我們期待您再次光臨 <%= @shop_title %>。</p>
+                        <p class="text-gray-600 mt-2">祝您有美好的一天！</p>
+                        <p class="text-gray-600 mt-2">
+                            此致<br>
+                            ResTime<br>
+                            <%= @vendor_email %><br>
+                            <%= @time_now %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

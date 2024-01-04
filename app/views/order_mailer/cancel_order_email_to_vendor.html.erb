@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>預約取消通知</title>
+    <link href="path_to_your_tailwind_css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-lg">
+            <div class="md:flex">
+                <div class="w-full p-4">
+                    <div class="relative">
+                        <h2 class="text-xl font-bold text-gray-800">【預約取消通知】顧客 <%= @order.booked_name %> 取消了預約 - 預約編號 <%= @order.serial %></h2>
+                        <p class="text-gray-600 mt-2">尊敬的 <%= @order.shop.title %>，</p>
+                        <p class="text-gray-600 mt-2">您好！我們遺憾地通知您，您的顧客 <%= @order.booked_name %> 已取消了原定於 <%= @service_date %> 的預約。以下是取消預約的詳細資訊：</p>
+                        <ul class="list-disc list-inside mt-2">
+                            <li>預約編號：<%= @order.serial %></li>
+                            <li>顧客姓名：<%= @order.booked_name %></li>
+                            <li>原預約時間：<%= @service_date %></li>
+                            <li>服務項目：<%= @product_description %></li>
+                        </ul>
+                        <p class="text-gray-600 mt-2">我們已經通知了顧客關於取消的確認，並對其進行了相關的指導和解釋。請您更新您的預約記錄，並根據需要進行調整。</p>
+                        <p class="text-gray-600 mt-2">若此預約取消給您帶來任何不便，我們深表歉意。如您有任何疑問或需要進一步協助，請隨時與我們聯繫。</p>
+                        <p class="text-gray-600 mt-2">感謝您的理解與配合，期待未來繼續為您提供服務。</p>
+                        <p class="text-gray-600 mt-2">
+                            此致<br>
+                            ResTime<br>
+                            <%= @vendor_email %><br>
+                            <%= @time_now %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

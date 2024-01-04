@@ -18,7 +18,6 @@ class Order < ApplicationRecord
 
     event :pay do
       transitions from: :pending, to: :paid
-      transitions from: :confirmed, to: :paid
     end
 
     event :complete do
