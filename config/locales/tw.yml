@@ -263,8 +263,7 @@ tw:
 
   aasm:
     order state:
-      pending: 待處理
-      confirmed: 已確認
+      pending: 未付款
       paid: 已付款
       refunded: 已退款
       cancelled: 已取消

@@ -18,7 +18,6 @@ class OrdersController < ApplicationController
     @order.service_min = booking_product.service_min
 
     if @order.save
-      # @order.confirm!在討論
       @paymentHtml = ecpay_pay(@order)
     else
       render 'bookings/checkout'
@@ -70,9 +69,9 @@ class OrdersController < ApplicationController
       @order.pay!
       user = @order.user
       sign_in(user) if user
-      redirect_to order_path(@order), notice: t('payment_successful', scope: %i[order message])
+      redirect_to order_path(@order), notice: t('message.payment_successful')
     else
-      redirect_to order_path(@order), notice: t('payment_failed', scope: %i[order message])
+      redirect_to order_path(@order), notice: t('message.payment_failed')
     end
   end
 

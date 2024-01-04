@@ -14,11 +14,7 @@ class Order < ApplicationRecord
 
   aasm column: 'status', no_direct_assignment: true do
     state :pending, initial: true
-    state :confirmed, :paid, :refunded, :cancelled, :completed
-
-    event :confirm do
-      transitions from: :pending, to: :confirmed
-    end
+    state :paid, :refunded, :cancelled, :completed
 
     event :pay do
       transitions from: :pending, to: :paid
