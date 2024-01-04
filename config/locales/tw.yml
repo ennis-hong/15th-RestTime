@@ -270,7 +270,9 @@ tw:
     general: 一般使用者
     welcome: 註冊成功，請修改商店資訊
     Send me reset password instructions: "重設密碼"
-
+    update: 更新
+    back: 回首頁
+    change my password: 變更密碼
   aasm:
     order state:
       pending: 未付款
@@ -282,6 +284,7 @@ tw:
       pay: 付款
       complete: 完成
       cancel: 取消
+<<<<<<< HEAD
 
   mailer:
     appointment_successful: "Hello,Here is ResTime，%{booked_name}先生/女士，您已經預約完成，%{shop_title}將在%{formatted_date}為您服務。"
@@ -292,3 +295,6 @@ tw:
     change_booking_time: "Hello,Here is ResTime，%{booked_name}先生/女士的預約時間已經更改%{service_date}，請儘快確認您的訂單。"
     order_redeemed: "Hello,Here is ResTime，訂單編號<%{serial}>已經核銷，麻煩再確認您的訂單內容。"
     order_cancelled: "Hello,Here is ResTime，訂單編號<%{serial}>已經取消，麻煩再確認您的訂單內容。"
+=======
+ 
+>>>>>>> 359b516 (fix:修改登入GODGLE畫面)
