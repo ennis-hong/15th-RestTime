@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
   layout :set_layout # 設置判斷登入的使用者layout頁面
   helper_method :show_vendor_link?
   helper_method :current_user_shop, :current_booking, :booking_shop, :booking_product
-  before_action :configure_permitted_parameters, if: :devise_controller? # devise增加額外白名單
-  protect_from_forgery with: :exception # devise跳轉頁面更改
 
   def show_vendor_link
     authorize :application, :show_vendor_stuff?
@@ -69,20 +67,5 @@ class ApplicationController < ActionController::Base
 
   def booking_product
     current_booking.product
-  end
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
-  end
-
-  def after_sign_in_path_for(resource)
-    if resource.vendor?
-      flash[:notice] = t('member.welcome')
-      vendor_index_path
-    elsif resource.general?
-      root_path
-    end
   end
 end

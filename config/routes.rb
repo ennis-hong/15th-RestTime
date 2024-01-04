@@ -5,14 +5,17 @@ Rails.application.routes.draw do
     mount Avo::Engine => '/avo'
   end
 
+  # Devise routes
+  devise_for :users, skip: :omniauth_callbacks, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
   devise_for :users, only: :omniauth_callbacks, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   # Global scope with locale parameter
   scope '(:lang)', locale: /en|tw/ do
     root 'products#index'
 
-    # Devise routes
-    devise_for :users, skip: :omniauth_callbacks, controllers: { sessions: 'users/sessions' }
     resources :products do
       collection do
         get :my
@@ -63,7 +66,7 @@ Rails.application.routes.draw do
         end
       end
     end
-    
+
     # Static pages
     %w(about choose_us join_us contact_us terms privacy refund_policy payment order_question refund).each do |page|
       get "/#{page}", to: "pages##{page}"
