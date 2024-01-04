@@ -193,15 +193,15 @@ tw:
     general: 會員
   
   vendor:
-    my product: 我的商品
-    my shop: 我的店家
-    my order: 我的訂單
+    my_product: 我的商品
+    my_shop: 我的店家
+    my_order: 我的訂單
     my_backstage: 我的後台
-    create product: 新增商品
-    update product: 編輯商品
+    create_product: 新增商品
+    update_product: 編輯商品
     edit: 修改
     delete: 刪除
-    system notification: 系統通知
+    system_notification: 系統通知
     appointment: 預約管理
     message: 客戶訊息
 
