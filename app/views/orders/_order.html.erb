@@ -1,13 +1,55 @@
-<div class="p-2 bg-white border rounded shadow border-slate-300">
-  <%= link_to order_path(order) do %>
-  <span class="font-bold"><%= format_datetime(order.service_date) %></span>
-  <h1><%= order.shop.title %></h1>
-  <h2 class="font-bold"><%= order.product.title %></h2>
-  <span>NT$ <%= order.price.to_i %></span>
-  <% end %>
-  <span><%= t("aasm.order state.#{order.status}") %></span>
-  <%= link_to t('order.appointment change'), edit_order_path(order) %>
-  <% if order.status != 'cancelled' && order.status != 'completed' %>
-    <%= link_to t('order.cancel order'), cancel_order_path(order), data: { turbo_method:'patch', turbo_confirm: t('message.are you sure cancel the order') } %>
-  <% end %>
+<div class="collapse collapse-arrow bg-gray-300 hover:bg-gray-200 my-4 rounded-lg">
+  <input type="radio" name="my-accordion-1" id="accordion-1" checked="checked" class="peer"/>
+
+  <div class="collapse-title flex justify-between items-center text-sm">
+    <div class="flex-1 p-2">
+      <span class="font-semibold text-gray-700">
+        <%= order.shop.title %>
+      </span>
+    </div>
+    <div class="flex-1 p-2">
+      <span class="font-semibold text-gray-700">
+        <%= "#{t('form.title')}:#{order.product.title}" %>
+      </span>
+    </div>
+    <div class="flex-1 p-2">
+      <span class="font-semibold text-gray-700">
+        預約日期時間：<%= format_datetime(order.service_date) %>
+      </span>
+    </div>
+    <div class="p-2 ml-auto">
+      <span class="font-semibold text-gray-700">訂單狀態：</span><%= t("aasm.order state.#{order.status}") %>
+    </div>
+  </div>
+  <hr>
+  <div class="collapse-content text-sm bg-gray-300">
+    <br>
+    <div class="p-2">
+      <span class="font-semibold text-gray-700">訂單編號：</span>
+      <%= link_to order.serial, order_path(order) %>
+      <span class="p-2 text-sm">( 建立日期：<%= format_date(order.created_at) %> )</span>
+    </div>
+    <div class="p-2">預約日期時間：<%= format_datetime(order.service_date) %></div>
+    <div class="p-2">消費金額：NT$ <%= order.price.to_i %></div>
+    <div class="p-2 text-right">
+      <%= link_to '訂單詳細', order_path(order),
+      class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
+
+      <% unless order.completed? || order.cancelled? %>
+        <%= link_to t('order.appointment change'), edit_order_path(order),
+        class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded ml-2" %>
+      <% end %>
+
+      <% if order.may_cancel? %>
+        <%= link_to t('order.cancel order'), cancel_order_path(order), 
+            class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-2",
+            data: { turbo_method: 'patch', turbo_confirm: t('message.are you sure cancel the order') } %>
+      <% end %>
+
+      <% if order.may_pay? %>
+        <%= link_to '付款', '#', 
+            class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-2" %>
+      <% end %>
+    </div>
+  </div>
 </div>
