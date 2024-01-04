@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # Global scope with locale parameter
   scope '(:lang)', locale: /en|tw/ do
-    root 'products#index'
+    root 'pages#index'
 
     resources :products do
       collection do
