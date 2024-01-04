@@ -77,7 +77,6 @@ class ProductsController < ApplicationController
   end
 
   def order_by
-    key, direction = (params.dig(:q, :s) || 'price desc').split
-    "#{key} #{%w[desc asc].include?(direction) ? direction : 'desc'}"
+    params.dig(:q, :s) || 'price asc'
   end
 end

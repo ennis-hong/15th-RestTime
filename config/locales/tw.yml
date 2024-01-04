@@ -202,6 +202,9 @@ tw:
     create_success: 新增成功
     update_success: 更新成功
     delete_success: 刪除成功
+    price_order: 價格排序
+    service_order: 服務時間排序
+    update_order: 更新排序
 
 
   datetime:
