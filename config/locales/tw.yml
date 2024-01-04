@@ -199,6 +199,10 @@ tw:
     doller: 元
     min: 分鐘
     order_by_price: 價格排序
+    create_success: 新增成功
+    update_success: 更新成功
+    delete_success: 刪除成功
+
 
   datetime:
     distance_in_words:
