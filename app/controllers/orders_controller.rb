@@ -30,31 +30,28 @@ class OrdersController < ApplicationController
     @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     new_service_date = params[:order][:service_date]
-    
-    if @order.service_date != new_service_date
-      if @order.update(service_date: new_service_date)
-        redirect_to order_path(@order), notice: t('booking time adjusted', scope: %i[message])
-      else
-        render :edit
-      end
+
+    return unless @order.service_date != new_service_date
+
+    if @order.update(service_date: new_service_date)
+      redirect_to order_path(@order), notice: t('booking time adjusted', scope: %i[message])
+    else
+      render :edit
     end
   end
 
   def cancel
     if @order.cancelled?
       redirect_to @order, alert: t('can not cancel', scope: %i[message])
+    elsif @order.cancel!
+      @order.update(cancelled_at: Time.now)
+      redirect_to @order, notice: t('you has been cancelled', scope: %i[message])
     else
-      if @order.cancel!
-        @order.update(cancelled_at: Time.now)
-        redirect_to @order, notice: t('you has been cancelled', scope: %i[message])
-      else
-        redirect_to @order, alert: t('cancellation error', scope: %i[message])
-      end
+      redirect_to @order, alert: t('cancellation error', scope: %i[message])
     end
   end
 

@@ -77,7 +77,7 @@ class ShopsController < ApplicationController
   end
 
   def own_shop?
-    return unless current_user == @shop
+    return false unless current_user == @shop
 
     redirect_to root_path, alert: t(:wrong_way, scope: %i[views shop message])
   end
