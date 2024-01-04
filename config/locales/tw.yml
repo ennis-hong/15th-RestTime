@@ -148,7 +148,7 @@ tw:
     status: 訂單狀態
     updated status time: 狀態更新時間 
     serial: 訂單編號
-    created_date: 訂單建立日期
+    created date: 訂單建立日期
     price: 消費金額
     service Time: 消費時數
     qrcode: 顯示QR CODE
@@ -162,6 +162,7 @@ tw:
     chang booking time: 更改預約時間
     reschedule the booking time: 重新選擇預約時段
     cancel order: 取消訂單
+    pay: 付款
   message:
     the system is busy, please try again later: 系統忙碌中，請稍候再試
     appointment Successful: 預約成功

@@ -9,30 +9,45 @@
     </div>
     <div class="flex-1 p-2">
       <span class="font-semibold text-gray-700">
-        <%= "#{t('form.title')}:#{order.product.title}" %>
+        <%= t('form.title') %>:
+        <%= order.product.title %>
       </span>
     </div>
     <div class="flex-1 p-2">
       <span class="font-semibold text-gray-700">
-        預約日期時間：<%= format_datetime(order.service_date) %>
+        <%= t('order.booking time slot') %>:
+        <%= format_datetime(order.service_date) %>
       </span>
     </div>
     <div class="p-2 ml-auto">
-      <span class="font-semibold text-gray-700">訂單狀態：</span><%= t("aasm.order state.#{order.status}") %>
+      <span class="font-semibold text-gray-700">
+        <%= t("aasm.order state.#{order.status}") %>
+      </span>
     </div>
   </div>
   <hr>
   <div class="collapse-content text-sm bg-gray-300">
     <br>
     <div class="p-2">
-      <span class="font-semibold text-gray-700">訂單編號：</span>
-      <%= link_to order.serial, order_path(order) %>
-      <span class="p-2 text-sm">( 建立日期：<%= format_date(order.created_at) %> )</span>
+      <span class="font-semibold text-gray-700">
+        <%= t('order.serial') %>
+        <%= link_to order.serial, order_path(order) %>
+      </span>
+      <span class="p-2 text-sm">
+        (<%= t('order.created date') %>:
+        <%= format_date(order.created_at)%>)
+      </span>
     </div>
-    <div class="p-2">預約日期時間：<%= format_datetime(order.service_date) %></div>
-    <div class="p-2">消費金額：NT$ <%= order.price.to_i %></div>
+    <div class="p-2">
+      <%= t('order.booking date') %>:
+      <%= format_datetime(order.service_date) %>
+    </div>
+    <div class="p-2">
+      <%= t('order.price') %>: NT$
+      <%= order.price.to_i %>
+    </div>
     <div class="p-2 text-right">
-      <%= link_to '訂單詳細', order_path(order),
+      <%= link_to t('order.order info'), order_path(order),
       class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
 
       <% unless order.completed? || order.cancelled? %>
@@ -47,7 +62,7 @@
       <% end %>
 
       <% if order.may_pay? %>
-        <%= link_to '付款', '#', 
+        <%= link_to t('order.pay'), '#', 
             class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-2" %>
       <% end %>
     </div>
