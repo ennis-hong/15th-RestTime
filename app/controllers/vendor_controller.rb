@@ -8,8 +8,6 @@ class VendorController < ApplicationController
   def index
     authorize :shop
     @shop = current_user&.shop
-    @q = Shop.ransack(params[:q])
-    @shops = @q.result(distinct: true).order(order_by).page(params[:page])
   end
 
   def new
@@ -59,11 +57,6 @@ class VendorController < ApplicationController
 
   def find_owned_shop
     @shop = current_user.shop
-  end
-
-  # 搜尋新增
-  def order_by
-    params.dig(:q, :s) || 'city desc'
   end
 
   def check_ownership
