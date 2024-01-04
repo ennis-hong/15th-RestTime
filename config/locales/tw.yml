@@ -191,7 +191,7 @@ tw:
     delete_success: 產品刪除成功
     edit: 編輯商品
     delete: 刪除商品
-    confirm_delete: '確認刪除?'
+    confirm_delete: 確認刪除?
     create: 新增商品
     search: 搜尋結果
     check: 查看商品
@@ -209,7 +209,7 @@ tw:
 
   datetime:
     distance_in_words:
-      x_minutes: "%{count} 分鐘前"
+      x_minutes: 大約 %{count} 分鐘前
       about_x_hours: 大約 %{count} 小時前
       less_than_x_minutes: 大約 %{count} 分鐘前
       x_days: 大約 %{count} 天前
@@ -221,7 +221,7 @@ tw:
     rating: 評價
 
   homepage:
-    "Creating a relaxed and beautiful lifestyle": "專屬您的放鬆時光。美甲、美髮、按摩，打造輕鬆美好生活."
+    slogan: 專屬您的放鬆時光。美甲、美髮、按摩，打造輕鬆美好生活
     star: 立即開始
     featured_stores: 精選店家
     special_offer: 限時優惠
