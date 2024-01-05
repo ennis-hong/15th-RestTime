@@ -1,0 +1,23 @@
+<div>
+  <%= display_errors(service_time) %>
+  <div class="flex items-center ">
+    <div>
+      <%= service_time_field.label :day_of_week, 
+              t(service_time.day_of_week, scope: [:service_times]), 
+              class: 'label content-center' %>
+      <%= service_time_field.hidden_field :day_of_week %>
+    </div>
+    <div class="flex items-center ml-4">
+      <%= service_time_field.label t 'service_times.off_day', class: 'label' %>
+      <%= service_time_field.check_box :off_day, class: 'toggle toggle-error' %>
+    </div>
+  </div>
+  <section class="grid gap-x-4 content-center">
+    <div class="flex">
+      <%= render 'input_time', column: :open_time, value: service_time.open_time, service_time_field: %>
+      <%= render 'input_time', column: :close_time, value: service_time.close_time, service_time_field: %>
+      <%= render 'input_time', column: :lunch_start, value: service_time.lunch_start, service_time_field: %>
+      <%= render 'input_time', column: :lunch_end, value: service_time.lunch_end, service_time_field: %>  
+    </div>    
+  </section>
+</div>

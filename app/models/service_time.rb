@@ -20,12 +20,12 @@ class ServiceTime < ApplicationRecord
     return if off_day
 
     if open_time.present? && close_time.blank?
-      errors.add(:close_time, "can't be blank if open time is set")
+      errors.add(:base, :close_time_blank)
       return
     end
 
     return unless close_time.present? && open_time.blank?
 
-    errors.add(:close_time, "can't be blank if close time is set")
+    errors.add(:base, :open_time_blank)
   end
 end

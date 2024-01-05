@@ -4,33 +4,33 @@ class ServiceTimesController < ApplicationController
   before_action :authenticate_user!
 
   def edit
-
-    @configs = current_user_shop.service_times
+    authorize :shop, :edit?
+    @service_times = current_user_shop.service_times
   end
 
   def update
-    service_time_params = service_params.index_by { |param| param[:id].to_i }
-    @configs = ServiceTime.where(shop_id: current_user_shop.id, id: service_time_params.keys)
+    authorize :shop, :update?
+    service_time_params = service_params.index_by { |param| param[:day_of_week] }
+    @service_times = current_user_shop.service_times
 
-    failed_updates = 0
     ServiceTime.transaction do
-      @configs.each do |config|
-        failed_updates += 1 unless config.update(service_time_params[config.id])
+      update_result = @service_times.map do |service_time|
+        update_params = service_time_params.fetch(service_time.day_of_week)
+        service_time.update(update_params) if update_params.present?
       end
-      raise ActiveRecord::Rollback if failed_updates.positive?
-    end
 
-    if failed_updates.positive?
-      render :edit
-    else
-      redirect_to shop_path(current_user_shop),
+      raise ActiveRecord::Rollback unless update_result.all?
+
+      redirect_to vendor_index_path,
                   notice: t(:success, scope: %i[service_times message])
+    rescue ActiveRecord::Rollback
+      render :edit
     end
   end
 
   def service_params
     params.require(:service_times).values.map do |param|
-      param.permit(:id, :day_of_week, :open_time, :close_time,
+      param.permit(:day_of_week, :open_time, :close_time,
                    :lunch_start, :lunch_end, :off_day)
     end
   end
