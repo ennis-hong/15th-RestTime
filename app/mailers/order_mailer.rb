@@ -31,25 +31,25 @@ class OrderMailer < ApplicationMailer
   def new_order_email_to_vendor(order)
     initialize_order(order)
     mail_message = t('mailer.have_new_order', service_date: @service_date)
-    mail(to: ENV.fetch('MAIL_USERNAME', nil), subject: mail_message)
+    mail(to: @vendor_email, subject: mail_message)
   end
 
   def change_order_email_to_vendor(order)
     initialize_order(order)
     mail_message = t('mailer.change_booking_time', booked_name: @booked_name, service_date: @service_date)
-    mail(to: ENV.fetch('MAIL_USERNAME', nil), subject: mail_message)
+    mail(to: @vendor_email, subject: mail_message)
   end
 
   def redeem_order_email_to_vendor(order)
     initialize_order(order)
     mail_message = t('mailer.order_redeemed', serial: @order.serial)
-    mail(to: ENV.fetch('MAIL_USERNAME', nil), subject: mail_message)
+    mail(to: @vendor_email, subject: mail_message)
   end
 
   def cancel_order_email_to_vendor(order)
     initialize_order(order)
     mail_message = t('mailer.order_cancelled', serial: @order.serial)
-    mail(to: ENV.fetch('MAIL_USERNAME', nil), subject: mail_message)
+    mail(to: @vendor_email, subject: mail_message)
   end
 
   private
@@ -64,6 +64,8 @@ class OrderMailer < ApplicationMailer
     @time_now = Time.now.strftime('%Y-%m-%d %H:%M')
     @booked_email = @order.booked_email
     @booked_name = @order.booked_name
-    @vendor_email = ENV.fetch('MAIL_USERNAME', nil)
+    @vendor_email = @order.shop.user.email
+    # @vendor_email = ENV['MAIL_USERNAME'] #測試用打開，不然會寄到假資料信箱
   end
+
 end
