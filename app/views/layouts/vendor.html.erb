@@ -10,7 +10,10 @@
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css", "data-turbo-track": "reload" %>
     
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <div class="mb-24">
     <%= render "vendor/navbar" %>
+    </div>
+    </div>
     <%= render "shared/flash" if flash.any? %>
     </div>
 
