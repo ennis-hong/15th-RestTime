@@ -4,7 +4,6 @@ module Avo
   module Resources
     class User < Avo::BaseResource
       self.includes = []
-
       def fields
         field :id, as: :id
         field :email, as: :text
