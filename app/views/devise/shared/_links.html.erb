@@ -20,6 +20,7 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to t("member.sign_in_with_#{provider}"), omniauth_authorize_path(resource_name, provider),{ data: { turbo: false }, class: "btn btn-outline btn-success w-full"} %><br />
+    <%= button_to t("member.sign_in_with_#{provider}"), omniauth_authorize_path(resource_name, provider), { data: { turbo: false }, class: "btn btn-outline btn-success w-full" } %><br />
   <% end %>
 <% end %>
+
