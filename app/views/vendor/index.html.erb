@@ -1,5 +1,6 @@
-<p><%= t('views.shop.index.title') %></p>
+<div class="grid grid-cols-2 gap-4 mt-8">
+      <%= render 'vendor/form', shop: @shop %>
+</div>
 
-<ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-  <%= render 'shops/form', shop: @shop %>
-</ul>
+
+    

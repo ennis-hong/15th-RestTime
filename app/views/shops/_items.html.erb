@@ -1,0 +1,50 @@
+<section class="container mx-auto p-4">
+  <div class="h-[300px] relative">
+    <article class="mt-4 z-10 absolute top-64 left-10 text-white">
+      <h1 class="text-xl font-bold"><%= @shop.title %></h1>
+    </article>
+    <div class="absolute h-[300px] overflow-hidden place-items-center">
+      <% if @shop.cover.attached? %>
+        <%= image_tag @shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+      <% else %>
+        <img src="https://fakeimg.pl/1000x300/200" class="w-full">
+      <% end %>
+    </div>
+  </div>
+
+    <div class="card w-full bg-white-100 shadow-xl">
+      <div class="card-body">    
+        <h2 class="card-title"><%= t('views.shop.show.information')%></h2>
+        <div class="collapse  line-container">
+          <input type="checkbox" /> 
+          <div class="collapse-title flex justify-between">
+            <div class="font-medium"><%= address(@shop) %></div>
+            <div><%= t('views.shop.show.map') %></div>
+          </div>
+          <div class="collapse-content"> 
+            <iframe
+            width="450"
+            height="450"
+            frameborder="0" style="border:0"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed/v1/place?key=<%=ENV['GOOGLE_API_KEY']%>&q=<%= ERB::Util.url_encode(address(@shop))%>"
+            allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        <div class="collapse collapse-arrow line-container">
+          <input type="checkbox" /> 
+        </div>
+        <div>
+        <div tabindex="0" class="collapse collapse-open"> 
+          <div class="collapse-title text-xl font-medium">
+            <%= t('views.shop.show.description') %>
+          </div>
+          <div class="collapse-content"> 
+            <p><%= @shop.description %></p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+</section>

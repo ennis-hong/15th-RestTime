@@ -1,7 +1,7 @@
 <%= form_with model: @shop, local: true, html: { class: 'max-w-md p-4' } do |f| %>
-  <div class="flex mb-4">
-    <%= f.label :status, t('form.shop.status'), class: 'block text-sm font-medium text-gray-700 p-3' %>
-    <%= f.select :status, Shop.statuses.keys.map { |status| [t("shop_status.#{status}"), status] }, class: 'input input-bordered w-full max-w-xs' %>
-    <%= f.submit t('helpers.submit.shop.update_status') %>
+  <div class="flex mb-4 space-x-3">
+    <%= f.label :status, t('form.shop.status'), class: 'block p-3 font-medium text-gray-700' %>
+    <%= f.select :status, Shop.statuses.keys.map { |status| [t("shop_status.#{status}"), status] }, {}, { class: 'select select-bordered' } %>
+    <%= f.submit t('helpers.submit.shop.update_status'), class: 'btn btn-accent' %>
   </div>
 <% end %>

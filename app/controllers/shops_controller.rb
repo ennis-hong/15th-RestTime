@@ -40,7 +40,7 @@ class ShopsController < ApplicationController
 
   def update
     if @shop.update(shop_params)
-      redirect_to shop_path, notice: t(:updated, scope: %i[views shop message])
+      redirect_to vendor_index_path, notice: t(:updated, scope: %i[views shop message])
     else
       render :edit
     end
