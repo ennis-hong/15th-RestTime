@@ -93,10 +93,12 @@ tw:
   views:
     shop:
       index:
-        title: "店家列表"
-        create_shop: "建立店家"
-        sort_by_city: "依照城市排序"
-        sort_by_updated_at: "更新時間排序"
+        title: 商店資訊
+        contact: 聯繫方式
+        status: 狀態
+        create shop: "建立店家"
+        sort by city: "依照城市排序"
+        sort by updated at: "更新時間排序"
       show:
         address: 地址
         comment: 店家評價
