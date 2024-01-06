@@ -8,13 +8,13 @@
                   { include_blank: t("views.shop.show.select_product") }, 
                   { data:{
                     action: "mousedown->products#toggleModal"
-                  },class: "select select-lg select-bordered w-full"} %>
+                  },class: "select select-lg select-bordered w-full", required: true } %>
       <%= f.text_field :service_date,
-                      data: {
+                      { data: {
                         controller: 'datepicker',
                         serviceTimes: filter_service_times(service_times)
                       },
-                      class: 'input input-bordered w-full mt-4' %>
+                      class: 'input input-bordered w-full mt-4', required: true } %>
       <%= f.submit t("form.Next"), class: 'mt-4 w-full bg-gray-400 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
     <% end %>
   </div>

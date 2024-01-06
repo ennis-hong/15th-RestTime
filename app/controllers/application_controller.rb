@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   def current_booking
     return unless user_signed_in?
 
-    @current_booking ||= current_user.booking
+    @current_booking ||= current_user.booking || current_user.create_booking
   end
 
   def booking_shop

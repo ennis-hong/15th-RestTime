@@ -1,131 +1,160 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: %i[payment_result]
-  before_action :order_params, only: :create
-  before_action :find_order, only: %i[show cancel edit update]
+    before_action :authenticate_user!, except: %i[payment_result]
+    before_action :order_params, only: :create
+    before_action :find_order, only: %i[show cancel edit update]
 
-  skip_before_action :verify_authenticity_token, only: :payment_result
+    skip_before_action :verify_authenticity_token, only: :payment_result
 
-  def my_bookings
-    @orders = current_user.orders
-  end
-
-  def create
-    @order = current_user.orders.new(order_params)
-    @order.service_date = current_booking.service_date
-    @order.price = booking_product.price
-    @order.service_min = booking_product.service_min
-
-    if @order.save
-      @paymentHtml = ecpay_pay(@order)
-    else
-      render 'bookings/checkout'
+    def index
+      @orders = current_user.orders
     end
-  end
 
-  def show
-    @shop = @order.shop
-    @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
-  end
-
-  def edit
-    @shop = @order.shop
-    @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
-  end
-
-  def update
-    new_service_date = params[:order][:service_date]
-
-    return unless @order.service_date != new_service_date
-
-    if @order.update(service_date: new_service_date)
-      redirect_to order_path(@order), notice: t('booking_time_adjusted', scope: %i[message])
-      OrderMailer.change_order_email_to_general(@order).deliver_later
-      OrderMailer.change_order_email_to_vendor(@order).deliver_later
-    else
-      render :edit
+    def new
+      @order = Order.new
     end
-  end
 
-  def cancel
-    if @order.cancelled?
-      redirect_to @order, alert: t('can_not_cancel', scope: %i[message])
-    elsif @order.cancel!
-      @order.update(cancelled_at: Time.now)
-      redirect_to @order, notice: t('you_has_been_cancelled', scope: %i[message])
-      OrderMailer.cancel_order_email_to_general(@order).deliver_later
-      OrderMailer.cancel_order_email_to_vendor(@order).deliver_later
-    else
-      redirect_to @order, alert: t('cancellation_error', scope: %i[message])
+    def create
+      @order = current_user.orders.new(order_params)
+      @order.service_date = current_booking.service_date
+      @order.price = booking_product.price
+      @order.service_min = booking_product.service_min
+
+      if @order.save
+        add_mac_value(payment_params(@order))
+      else
+        render :new
+      end
     end
-  end
 
-  def payment_result
-    result_params = payment_result_params
-
-    @order = Order.find_by(serial: result_params[:MerchantTradeNo])
-    @order.payment_date = result_params[:PaymentDate]
-    @order.payment_type = result_params[:PaymentType]
-    @order.payment_type_charge_fee = result_params[:PaymentTypeChargeFee]
-    @order.return_code = result_params[:RtnCode]
-    @order.return_msg = result_params[:RtnMsg]
-    redirect_to order_path(@order), alert: t('abnormal_payment_result', scope: %i[order message]) unless @order.save
-
-    if result_params[:RtnCode] === '1'
-      @order.pay!
-      user = @order.user
-      sign_in(user) if user
-      redirect_to order_path(@order), notice: t('message.payment_successful')
-      OrderMailer.new_order_email_to_general(@order).deliver_later
-      OrderMailer.new_order_email_to_vendor(@order).deliver_later
-    else
-      redirect_to order_path(@order), notice: t('message.payment_failed')
+    def show
+      @shop = @order.shop
+      @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
     end
-  end
 
-  private
+    def confirm_status
+      authorize @order, :access_page?
+      @status = params[:status]
+      @staff = params[:staff]
+    end
 
-  def order_params
-    params.require(:order)
-          .permit(:booked_name, :booked_email, :staff)
-          .merge(product: booking_product, shop: booking_shop)
-  end
+    def update
+      new_service_date = params[:order][:service_date]
 
-  def payment_result_params
-    params.permit(:MerchantTradeNo, :PaymentDate,
-                  :PaymentType, :PaymentTypeChargeFee,
-                  :RtnCode, :RtnMsg, :TradeAmt)
-  end
+      return unless @order.service_date != new_service_date
 
-  def find_order
-    @order = Order.find(params[:id])
-  end
+      if @order.update(service_date: new_service_date)
+        redirect_to order_path(@order), notice: t('booking_time_adjusted', scope: %i[message])
+        OrderMailer.change_order_email_to_general(@order).deliver_later
+        OrderMailer.change_order_email_to_vendor(@order).deliver_later
+      else
+        render :edit
+      end
+    end
 
-  def ecpay_pay(order)
-    xml_file = File.open('./config/payment_conf.xml')
-    config_xml = Nokogiri::XML(xml_file)
-    ecpay_mode = config_xml.xpath('//Conf//OperatingMode').first
-    ecpay_mode.content = ENV.fetch('ECPAY_MODE', nil)
+    def cancel
+      if @order.cancelled?
+        redirect_to @order, alert: t('can_not_cancel', scope: %i[message])
+      elsif @order.cancel!
+        @order.update(cancelled_at: Time.now)
+        redirect_to @order, notice: t('you_has_been_cancelled', scope: %i[message])
+        OrderMailer.cancel_order_email_to_general(@order).deliver_later
+        OrderMailer.cancel_order_email_to_vendor(@order).deliver_later
+      else
+        redirect_to @order, alert: t('cancellation_error', scope: %i[message])
+      end
+    end
 
-    APIHelper.class_variable_set(:@@conf_xml, config_xml)
-    ecpay_client = ECpayPayment::ECpayPaymentClient.new
+    def payment_result
+      result_params = payment_result_params
+      @order = Order.find_by(serial: result_params[:MerchantTradeNo].slice(0, 16))
+      payment_hash = {
+        trade_no: result_params[:TradeNo],
+        payment_date: result_params[:PaymentDate],
+        payment_type:result_params[:PaymentType],
+        payment_type_charge_fee: result_params[:PaymentTypeChargeFee],
+        return_code: result_params[:RtnCode],
+        return_msg: result_params[:RtnMsg]
+      }
+      redirect_to order_path(@order), alert: t(:abnormal_payment_result, scope: %i[order message]) unless @order.update(payment_hash)
 
-    credit_params = generate_credit_param(order)
-    ecpay_client.aio_check_out_credit_onetime(params: credit_params, invoice: {})
-  end
+      if result_params[:RtnCode] == '1'
+        @order.pay!
+        user = @order.user
+        sign_in(user) if user
+        redirect_to order_path(@order), notice: t(:payment_successful, scope: %i[order message])
+      else
+        redirect_to order_path(@order), notice: t(:payment_failed, scope: %i[order message])
+      end
+    end
 
-  def generate_credit_param(order)
-    {
-      'MerchantTradeNo' => order.serial, # 請帶20碼uid, ex: f0a0d7e9fae1bb72bc93
-      'MerchantTradeDate' => Time.current.strftime('%Y/%m/%d %H:%M:%S'), # ex: 2017/02/13 15:45:30
-      'TotalAmount' => order.price.to_i,
-      'TradeDesc' => "#{order.shop.title}:#{order.serial}",
-      'ItemName' => order.product.title,
-      'ReturnURL' => ENV.fetch('DOMAIN_NAME', nil),
-      'PaymentType' => 'aio',
-      'ChoosePayment' => 'Credit',
-      'OrderResultURL' => "#{ENV.fetch('DOMAIN_NAME', nil)}/orders/payment_result"
-    }
-  end
+    private
+
+    def payment_params(order)
+      @hash = {
+        MerchantID: ENV.fetch('ECPAY_MERCHANT_ID', nil),
+        MerchantTradeNo: order.serial.concat(Time.current.strftime('%H%M')),
+        MerchantTradeDate: Time.current.strftime('%Y/%m/%d %H:%M:%S'),
+        PaymentType: 'aio',
+        TotalAmount: order.price.to_i,
+        TradeDesc: "#{order.shop.title}:#{order.serial}",
+        ItemName: order.product.title,
+        ReturnURL: ENV.fetch('DOMAIN_NAME', nil),
+        OrderResultURL: "#{ENV.fetch('DOMAIN_NAME', nil)}/orders/payment_result",
+        ChoosePayment: 'Credit',
+        EncryptType: '1'
+      }
+    end
+
+    def add_mac_value(params)
+      params[:CheckMacValue] = compute_check_mac_value(params)
+    end
+
+    # 計算檢查碼
+    def compute_check_mac_value(params)
+      query_string = to_query_string(params)
+      query_string.prepend("HashKey=#{ENV.fetch('ECPAY_HASH_KEY', nil)}&")
+      query_string.concat("&HashIV=#{ENV.fetch('ECPAY_HASH_IV', nil)}")
+      raw = urlencode_dot_net(query_string)
+      @sha_code = Digest::SHA256.hexdigest(raw).upcase
+    end
+
+    def urlencode_dot_net(raw_data)
+      encoded_data = CGI.escape(raw_data).downcase
+      encoded_data.gsub!('%2d', '-')
+      encoded_data.gsub!('%5f', '_')
+      encoded_data.gsub!('%2e', '.')
+      encoded_data.gsub!('%21', '!')
+      encoded_data.gsub!('%2a', '*')
+      encoded_data.gsub!('%28', '(')
+      encoded_data.gsub!('%29', ')')
+      encoded_data.gsub!('%20', '+')
+      encoded_data
+    end
+
+    def to_query_string(params)
+      params = params.sort_by do |key, _val|
+        key.downcase
+      end
+
+      params = params.map do |key, val|
+        "#{key}=#{val}"
+      end
+      params.join('&')
+    end
+
+    def order_params
+      params.require(:order)
+            .permit(:booked_name, :booked_email, :staff).merge(product: booking_product, shop: booking_shop)
+    end
+
+    def payment_result_params
+      params.permit(:MerchantTradeNo, :TradeNo, :PaymentDate, :PaymentType, :PaymentTypeChargeFee, :RtnCode, :RtnMsg, :TradeAmt)
+    end
+
+    def find_order
+      @order = Order.find(params[:id])
+    end
+
 end

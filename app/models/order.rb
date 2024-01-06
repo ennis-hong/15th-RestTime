@@ -39,7 +39,7 @@ class Order < ApplicationRecord
     self.serial = serial_generator
   end
 
-  def serial_generator(digits = 10)
+  def serial_generator(digits = 6)
     today = Time.current.strftime('%Y%m%d')
     code = SecureRandom.alphanumeric.upcase[0..digits - 1]
 

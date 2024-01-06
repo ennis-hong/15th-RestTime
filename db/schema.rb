@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_30_112819) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_06_175513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,14 +55,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_112819) do
 
   create_table "orders", force: :cascade do |t|
     t.string "status", default: "pending"
-    t.datetime "booking_date"
     t.datetime "service_date"
     t.string "serial"
     t.decimal "price"
     t.integer "quantitiy", default: 1
     t.integer "service_min"
     t.string "booked_name"
-    t.string "booked_email", null: false
+    t.string "booked_email"
     t.bigint "user_id", null: false
     t.bigint "shop_id", null: false
     t.bigint "product_id", null: false
@@ -70,12 +69,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_112819) do
     t.datetime "cancelled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "staff"
     t.datetime "payment_date"
     t.string "payment_type"
     t.string "payment_type_charge_fee"
     t.string "return_code"
     t.string "return_msg"
+    t.string "staff"
+    t.string "trade_no"
     t.index ["cancelled_at"], name: "index_orders_on_cancelled_at"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["serial"], name: "index_orders_on_serial"
@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_112819) do
   end
 
   create_table "service_times", force: :cascade do |t|
-    t.string "day_of_week", null: false
+    t.string "day_of_week"
     t.time "open_time"
     t.time "close_time"
     t.time "lunch_start"
