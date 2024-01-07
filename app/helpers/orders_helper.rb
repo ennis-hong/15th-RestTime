@@ -5,4 +5,8 @@ module OrdersHelper
     end_time = booking.service_date + booking.product.service_min.minutes
     format_time_without_sec(end_time)
   end
+
+  def render_steps(order)
+    render "#{order.status}"
+  end
 end

@@ -9,10 +9,10 @@ export default class extends Controller {
         this.element,
         text,
         {
-          width: 300,
+          width: 200,
           margin: 1,
           color: {
-            light: "#FEF9C3",
+            light: "#ffff",
           },
         },
         (err) => {

@@ -136,15 +136,16 @@ tw:
     currency: NTD
     booking: 開始預約
     booking_date: 預約日期
-    booking_time_slot: 預約時段
-    booking_start_time: 開始時間
-    booking_end_time: 結束時間
-    contact_info: 聯絡資訊
-    booking_info: 預約資訊
+    booking time slot: 預約時段
+    booking start time: 開始時間
+    booking end time: 結束時間
+    contact info: 聯絡資訊
+    booking info: 預約資訊
     booking_item: 預約項目
     order_info: 訂單資訊
-    customer_info: 客戶資訊
-    service_duration: 服務時間
+    customer info: 客戶資訊
+    service duration: 服務時間
+    established: 訂單成立
     name: 姓名
     email: 信箱
     total: 總計
@@ -161,18 +162,27 @@ tw:
     redeem_order: 核銷訂單
     staff: 核銷人員
     start_end: (開始時間~結束時間)
+
     time_start_end: 開始時間－結束時間
     choose_product: 選擇項目
     appointment_change: 變更預約
     chang_booking_time: 更改預約時間
+    appointment_change: 更改預約時間
     reschedule_the_booking_time: 重新選擇預約時段
     cancel_order: 取消訂單
     pay: 付款
     payment_method: 付款方式
     service_time: 消費時數
     service_time_min: "消費時數: %{service_min} 分鐘"
+    please_pay: 請先付款
+    restime_now: 開始享樂
+    completed: 完成訂單
+    cancelled: 取消訂單
+    refund: 待退款
+    redeeming: 進行核銷
+    faqs: 常見問題
   message:
-    the system is busy, please try again later: 系統忙碌中，請稍候再試
+    The system is busy, please try again later: 系統忙碌中，請稍候再試
     appointment_successful: 預約成功
     please_confirm_again: 訂單即將核銷，請再次確認！
     order_has_been_redeemed: 訂單已核銷
@@ -297,3 +307,8 @@ tw:
     change_booking_time: "Hello,Here is ResTime，%{booked_name}先生/女士的預約時間已經更改%{service_date}，請儘快確認您的訂單。"
     order_redeemed: "Hello,Here is ResTime，訂單編號<%{serial}>已經核銷，麻煩再確認您的訂單內容。"
     order_cancelled: "Hello,Here is ResTime，訂單編號<%{serial}>已經取消，麻煩再確認您的訂單內容。"
+  faqs:
+    order:
+      title:
+        redemption: 預約使用核銷說明
+        redemption_notice: 核銷注意

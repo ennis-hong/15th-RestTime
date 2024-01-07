@@ -1,0 +1,12 @@
+<li data-content="1" class="step step-neutral">
+  <%= t('order.established') %><br>
+</li>
+<li data-content="2" class="step step-neutral">
+  <%= t("aasm.order state.#{@order.status}") %>
+</li>
+<li data-content="3" class="step step-neutral">
+  <%= t('message.order_has_been_redeemed') %>
+</li>
+<li data-content="★" class="step step-neutral text-orange-700">
+  <%= t('order.completed') %>
+</li>
