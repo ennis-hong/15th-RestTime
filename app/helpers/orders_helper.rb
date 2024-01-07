@@ -7,6 +7,6 @@ module OrdersHelper
   end
 
   def render_steps(order)
-    render "#{order.status}"
+    render order.status.to_s
   end
 end
