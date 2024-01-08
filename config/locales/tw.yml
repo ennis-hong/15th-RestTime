@@ -275,14 +275,14 @@ tw:
     email: 電子信箱
     password: 密碼
     remember: 記住我
-    log in: 登入
-    sign up: 註冊
-    forgot your password?: 忘記密碼
+    log_in: 登入
+    sign_up: 註冊
+    forgot_your_password?: 忘記密碼
     sign_in_with_google_oauth2: 請用 GOOGLE 帳號密碼登入
-    password min length: 密碼最少 %{min_length} 位數
-    password confirmation: 確認密碼
-    send me reset password instructions: 發送密碼
-    current password: 請輸入之前密碼
+    password_min_length: 密碼最少 %{min_length} 位數
+    password_confirmation: 確認密碼
+    send_me_reset_password_instructions: 發送密碼
+    current_password: 請輸入之前密碼
     update: 更新
     back: 回首頁
     change my password: 變更密碼
