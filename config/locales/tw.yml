@@ -273,6 +273,7 @@ tw:
     update: 更新
     back: 回首頁
     change my password: 變更密碼
+    errors_check_again: 再次確認
   aasm:
     order state:
       pending: 未付款
