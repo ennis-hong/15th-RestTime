@@ -77,13 +77,13 @@ tw:
     lunch_start: 午休開始時間
     lunch_end: 午休結束時間
     off_day: 公休日
-    Monday: 星期一
-    Tuesday: 星期二
-    Wednesday: 星期三
-    Thursday: 星期四
-    Friday: 星期五
-    Saturday: 星期六
-    Sunday: 星期日
+    monday: 星期一
+    tuesday: 星期二
+    wednesday: 星期三
+    thursday: 星期四
+    friday: 星期五
+    saturday: 星期六
+    sunday: 星期日
     submit: 更新營業時間
     message:
       success: 營業時間更新成功
@@ -157,6 +157,7 @@ tw:
     redeem_order: 核銷訂單
     staff: 核銷人員
     start_end: (開始時間~結束時間)
+    time_start_end: 開始時間－結束時間
     choose_product: 選擇項目
     appointment_change: 變更預約
     chang_booking_time: 更改預約時間
@@ -178,6 +179,8 @@ tw:
     payment_failed: 付款失敗
     abnormal_payment_result: 付款結果異常
     order_confirmed_and_proceeding_to_payment: 訂單成立，正在前往付款頁面
+    enter_the_change_time: 請輸入變更時間
+    original_time: 原先預約時間
     
 
 

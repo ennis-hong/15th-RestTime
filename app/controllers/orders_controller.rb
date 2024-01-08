@@ -29,7 +29,11 @@ class OrdersController < ApplicationController
     @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
   end
 
-  def edit; end
+  def edit
+    @shop = @order.shop
+    @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
+
+  end
 
   def update
     new_service_date = params[:order][:service_date]
