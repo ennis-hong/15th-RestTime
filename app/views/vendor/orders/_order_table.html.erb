@@ -1,0 +1,126 @@
+<thead class="bg-gray-300">
+  <tr>
+    <th class="px-2 py-2 text-center text-orange-800 font-black">
+      <%= t('order.order_info') %>
+    </th>
+    <th class="px-2 py-2 text-center text-orange-800 font-black">
+      <%= t('order.detailed') %>
+    </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold">
+      <%= t('order.serial') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold">
+      <%= @order.serial %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold">
+      <%= t('order.created_date') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold">
+      <%= format_date(@order.created_at) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold">
+      <%= t('order.updated_status_time') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold">
+      <%= format_date(@order.updated_at) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold">
+      <%= t('order.order_price') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold">
+      <%= t('order.currency') %><%= format_price(@order.price) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold">
+      <%= t('order.payment_method') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold">
+      <%= t("payment_type.#{@order.payment_type}") %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
+      <%= t('order.status') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
+      <%= t("aasm.order state.#{@order.status}") %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-orange-800 font-black bg-gray-300">
+      <%= t('order.booking_info') %>
+    </td>
+    <td class="px-2 py-2 text-center text-orange-800 font-black bg-gray-300">
+      <%= t('order.detailed') %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
+      <%= t('order.booking_item') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
+      <%= truncate(@order.product.title, length: 13) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
+      <%= t('order.booking_start_time') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
+      <%= format_datetime(@order.service_date) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
+      <%= t('order.booking_end_time') %>
+    </td>
+    <td class="px-12 py-2  text-center text-gray-500 font-semibold ">
+      <%= "#{format_date(@order.service_date)} #{booking_end_time(@order)}" %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
+      <%= t('order.service_time') %>
+    </td>
+    <td class="px-12 py-2  text-center text-gray-500 font-semibold ">
+      <%= @order.service_min %><%= t('order.min') %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-orange-800 font-black bg-gray-300">
+      <%= t('order.customer_info') %>
+    </td>
+    <td class="px-2 py-2 text-center text-orange-800 font-black bg-gray-300">
+      <%= t('order.detailed') %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
+      <%= t('order.name') %>
+    </td>
+    <td class="px-12 py-2  text-center text-gray-500 font-semibold ">
+      <%= @order.booked_name %>
+    </td>
+  </tr>
+</tbody>
+<tfoot>
+  <tr>
+    <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
+      <%= t('order.booking_end_time') %>
+    </td>
+    <td class="px-12 py-2  text-center text-gray-500 font-semibold ">
+      <%= @order.booked_email %>
+    </td>
+  </tr>
+</tfoot>

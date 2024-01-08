@@ -1,44 +1,9 @@
 <div class="mt-8 p-3">
   <div class="card bg-white shadow-xl">
-    <div class="card-body p-4">
-      <h3 class="card-title text-lg font-bold mb-2"><%= t('order.booking_info') %></h3>
-      <div class="flex justify-between mb-4">
-        <span><%= @order.product.title %> <%= @order.service_min %> <%= t('order.min') %></span>
-        <span><%= t('order.currency') %> <%= @order.price.to_i %></span>
-      </div>
-      <table class="table-auto text-center w-full mb-4">
-        <thead>
-          <tr class="bg-gray-200">
-            <th class="px-4 py-2"><%= t('order.booking_date') %></th>
-            <th class="px-4 py-2"><%= t('order.booking_start_time') %></th>
-            <th class="px-4 py-2"><%= t('order.booking_end_time') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border px-4 py-2"><%= format_date(@order.service_date) %></td>
-            <td class="border px-4 py-2"><%= format_time_without_sec(@order.service_date) %></td>
-            <td class="border px-4 py-2"><%= booking_end_time(@order) %></td>
-          </tr>
-        </tbody>
+    <div class="card-body p-4 mt-4">
+      <table class="table-auto text-center w-full mb-4 bg-slate-100 ">
+        <%= render 'order_table' %>
       </table>
-      <div class="flex justify-between border-t-2 border-gray-200 pt-4">
-        <span>總計：</span>
-        <span><%= t('order.currency') %> <%= @order.price.to_i %></span>
-      </div>
-    </div>
-  </div>
-  <div class="card bg-white shadow-xl mt-4">
-    <div class="card-body p-4">
-      <h3 class="card-title text-lg font-bold mb-2"><%= t('order.contact_info') %></h3>
-      <div class="flex items-center mb-2">
-        <span class="label w-1/4"><%= t('order.name') %>:</span>
-        <span class="label w-3/4"><%= @order.booked_name %></span>
-      </div>
-      <div class="flex items-center">
-        <span class="label w-1/4"><%= t('order.email') %>:</span>
-        <span class="label w-3/4"><%= @order.booked_email %></span>
-      </div>
     </div>
   </div>
 </div>

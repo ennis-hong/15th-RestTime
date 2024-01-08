@@ -1,0 +1,54 @@
+<thead class="bg-gray-300">
+  <tr>
+    <th class="px-2 py-2 text-center text-gray-600 rounded-tl-lg">
+      <%= t('order.serial') %>
+    </th>
+    <th class="px-2 py-2 text-center text-gray-500">
+      <%= @order.serial %>
+    </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold">
+      <%= t('order.order_price') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold">
+      <%= t('order.currency') %><%= format_price(@order.price) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
+      <%= t('order.status') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
+      <%= t("aasm.order state.#{@order.status}") %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
+      <%= t('order.booking_item') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
+      <%= truncate(@order.product.title, length: 13) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
+      <%= t('order.booking_start_time') %>
+    </td>
+    <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
+      <%= format_datetime(@order.service_date) %>
+    </td>
+  </tr>
+</tbody>
+<tfoot class="bg-gray-300 shadow">
+  <tr>
+    <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
+      <%= t('order.booking_end_time') %>
+    </td>
+    <td class="px-12 py-2  text-center text-gray-500 font-semibold ">
+      <%= "#{format_date(@order.service_date)} #{booking_end_time(@order)}" %>
+    </td>
+  </tr>
+</tfoot>

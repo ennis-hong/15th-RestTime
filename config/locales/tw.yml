@@ -129,6 +129,7 @@ tw:
       not_saved: Email錯誤
     
   order:
+    detailed: 詳細
     min: 分鐘
     currency: NTD
     booking: 開始預約
@@ -151,6 +152,7 @@ tw:
     serial: 訂單編號
     created_date: 訂單建立日期
     price: 消費金額
+    order_price: 訂單金額
     service_time: 消費時數
     qrcode: 顯示QR CODE
     google_map: 顯示店家位置
@@ -164,6 +166,9 @@ tw:
     reschedule_the_booking_time: 重新選擇預約時段
     cancel_order: 取消訂單
     pay: 付款
+    payment_method: 付款方式
+    service_time: 消費時數
+    service_time_min: "消費時數: %{service_min} 分鐘"
   message:
     the system is busy, please try again later: 系統忙碌中，請稍候再試
     appointment_successful: 預約成功
@@ -181,7 +186,8 @@ tw:
     order_confirmed_and_proceeding_to_payment: 訂單成立，正在前往付款頁面
     enter_the_change_time: 請輸入變更時間
     original_time: 原先預約時間
-    
+  payment_type:
+    Credit_CreditCard: 信用卡  
 
 
   shop_status:

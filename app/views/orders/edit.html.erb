@@ -22,7 +22,7 @@
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
     <div class="card md:col-span-2 bg-white-100 shadow-xl">
       <ul class="card-body mx-10">
-        <li class="text-lg font-medium mb-3">
+        <li class="text-lg font-medium mb-3 mb-6">
           <div class="aspect-w-16 aspect-h-9 w-full max-w-full">
             <iframe class="w-full h-full border-0 rounded-lg" frameborder="0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_API_KEY'] %>&q=<%= ERB::Util.url_encode(address(@shop)) %>" allowfullscreen>
             </iframe>
@@ -91,35 +91,8 @@
     <div class="card md:col-span-2 bg-white-100 shadow-xl">
       <div class="card-body">
         <div class="overflow-x-auto mb-10 ml-12 mr-12">
-          <h3 class="mb-3 mt-3 text-lg font-bold"><%= t('message.original_time') %></h3>
-          <hr class="mt-1">
           <table class="min-w-full table-auto border-collapse bg-slate-100 shadow-lg text-lg text-gray-800 rounded-lg overflow-hidden">
-            <thead class="bg-gray-300">
-              <tr>
-                <th class="px-4 py-2 border-b-2 text-left text-gray-600 rounded-tl-lg">
-                  <%= t('order.booking_item') %>
-                </th>
-                <th class="px-4 py-2 border-b-2 text-left text-gray-600">
-                  <%= t('order.booking_date') %>
-                </th>
-                <th class="px-4 py-2 border-b-2 text-left text-gray-600 rounded-tr-lg">
-                  <%= t('order.time_start_end') %>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="px-4 py-2 border-b rounded-bl-lg">
-                  <%= truncate(@order.product.title, length: 13) %>
-                </td>
-                <td class="px-4 py-2 border-b">
-                  <%= format_date(@order.service_date) %>
-                </td>
-                <td class="px-4 py-2 border-b rounded-br-lg">
-                  <%= "#{format_time_without_sec(@order.service_date)}－#{booking_end_time(@order)}" %>
-                </td>
-              </tr>
-            </tbody>
+            <%= render 'order_table' %>
           </table>
         </div>
         <div class="mr-12 ml-12">
@@ -127,9 +100,9 @@
             <%= form_with model: @order, data: { turbo: false } do |f| %>
               <%= f.label :service_date, t('message.enter_the_change_time'), class: 'text-lg font-bold' %>
               <hr class="mt-1">
-              <%= f.text_field :service_date, data: { controller: 'datepicker', serviceTimes: filter_service_times(@order.product.shop.service_times)}, class: 'input input-bordered w-full mt-4' %>
+              <%= f.text_field :service_date, data: { controller: 'datepicker', serviceTimes: filter_service_times(@order.product.shop.service_times)}, class: 'input input-bordered w-full mt-4 text-center' %>
               <%= f.submit t('order.chang_booking_time'),
-              class: 'mt-4 w-full bg-orange-400 hover:bg-orage-250 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+              class: 'mt-4 w-full bg-orange-400 hover:bg-orage-300 text-black font-semibold py-2 px-4 rounded focus:shadow-outline' %>
               <%= link_to t('form.back'), request.referrer, class: 'block w-full bg-gray-400 hover:bg-gray-250 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center mt-4' %>
             <% end %>
           </div>

@@ -32,7 +32,6 @@ class OrdersController < ApplicationController
   def edit
     @shop = @order.shop
     @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
-
   end
 
   def update
