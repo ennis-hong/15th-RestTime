@@ -1,22 +1,24 @@
-<div class="navbar", style="position: fixed; top: 0; z-index: 1000;">
+<div class="navbar bg-accent", style="position: fixed; top: 0; z-index: 1000;">
   <div class="navbar-start h-5">
     <div class="dropdown" data-controller="sidebar">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle" data-action="click->sidebar#toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div tabindex="0" role="button" class="btn btn-ghost  btn-circle" data-action="click->sidebar#toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
         </svg>
       </div>
       <div data-sidebar-target="menu" class="hidden">
-        <ul tabindex="0" data-sidebar-target="menu" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <ul tabindex="0" data-sidebar-target="menu" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow text-stone-600 bg-base-100 rounded-box w-52">
           <%= render "vendor/sidebar" %>
         </ul>
       </div>
     </div>
-    <h1 class="btn btn-ghost text-xl text-orange-900"><%= link_to "RestTime", root_path %></h1>
+    <h1 class="btn btn-ghost text-2xl  text-white"><%= link_to "RestTime", root_path %></h1>
     <div class="badge badge-secondary text-white text-s"><%=t('navbar.vendor_backstage')%></div>
+    <span class="btn btn-ghost text-white"><%= link_to t('navbar.homepage_front'), index_path %></span>
+
   </div>
   <%# 中間文字 %>
-  <div class="flex-none navbar-end">
+  <div class="flex-none navbar-end text-white">
     <ul class="flex menu menu-horizontal px-1">
       <li>
         <details>
@@ -25,7 +27,7 @@
             <li><%= current_user.email %></li>
           </summary>
           <%# 下拉選單 %>
-          <ul class="w-32">
+          <ul class="w-32 text-stone-600 ">
             <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" } %></li>
             <li><%= link_to(t('navbar.edit_password'), edit_registration_path(:user)) %></li>
             <% if policy(:shop).index? %>

@@ -9,6 +9,7 @@ tw:
     my backstage: 我的後台
     vendor: 商家
     homepage: 首頁
+    homepage_front: 前台首頁
     page:
     privacy:
       title: 隱私權政策
