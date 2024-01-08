@@ -12,14 +12,16 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
+  <body class="flex flex-col h-screen">
     <%= render "shared/navbar" %>
-    <div class="mt-16">
+    <div class="mt-8">
     <%= render "shared/flash" if flash.any? %>
     </div>
-    <main class="container p-8 mt-24 mx-auto">
+    <main class="container p-8 mt-12 mx-auto flex-1">
       <%= yield %>
     </main>
-    <%= render "shared/footer" %>
+    <footer>
+      <%= render "shared/footer" %>
+    </footer>
   </body>
 </html>
