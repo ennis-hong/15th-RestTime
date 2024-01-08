@@ -41,6 +41,7 @@
       <%= t('order.currency') %><%= format_price(@order.price) %>
     </td>
   </tr>
+  <% if @order.paid? %>
   <tr>
     <td class="px-2 py-2 text-center text-gray-600 font-semibold">
       <%= t('order.payment_method') %>
@@ -49,6 +50,7 @@
       <%= t("payment_type.#{@order.payment_type}") %>
     </td>
   </tr>
+  <% end %>
   <tr>
     <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
       <%= t('order.status') %>
