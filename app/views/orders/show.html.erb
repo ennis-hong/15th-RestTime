@@ -125,14 +125,14 @@
         </div>
         <div class="mr-12 ml-12">
           <% unless @order.completed? || @order.cancelled? %>
-            <div class="border border-base-200 rounded-md p-4 mb-4 font-bold text-lg font-medium text-center ">
-              <%= link_to t('order.appointment_change'), '#', class: "block w-full" %>
+            <div class="mt-4 w-full bg-red-400 hover:bg-red-250 text-black font-semibold font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline font-medium text-center">
+              <%= link_to t('order.appointment_change'), '#' %>
               <%#= link_to t('order.appointment_change'), edit_order_path(@order), class: "block w-full" feat-issue-28才有此路徑%>
             </div>
           <% end %>
           <% if @order.may_cancel? %>
-          <div class="border border-base-200 rounded-md p-4 mb-4 font-bold text-lg font-medium text-center">
-            <%= link_to t('order.cancelled'), '#', class: "block w-full"  %>
+          <div class="mt-4 mb-4 w-full bg-red-400 hover:bg-red-250 text-black font-semibold font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline font-medium text-center">
+            <%= link_to t('order.cancelled'), '#'  %>
             <%#= link_to t('order.cancel_order'), cancel_order_path(@order), class: "block w-full"  feat-issue-28才有此路徑%>
           </div>
           <% end %>
