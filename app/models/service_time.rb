@@ -4,7 +4,7 @@ class ServiceTime < ApplicationRecord
   belongs_to :shop
   before_validation :validate_open_and_close_times, on: :update
 
-  default_scope { order(id: :asc) }
+  default_scope { order(id: :desc) }
 
   # 預設寫入週一至週日共七筆設定資料
   def self.default_data(shop)

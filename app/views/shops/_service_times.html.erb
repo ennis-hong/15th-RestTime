@@ -1,4 +1,18 @@
-<li>
-    <%= t(service_time.day_of_week, scope: %i[service_times]) %>
-    <%= display_service_time(service_time) %> 
-</li>
+<div class="join join-vertical">
+  <div class="collapse collapse-arrow join-item border border-base-300 bg-gray-100 hover:bg-gray-200 focus:bg-gray-300">
+    <input type="radio" name="my-accordion-4" checked="checked" /> 
+    <div class="collapse-title text-lg text-gray-600 font-medium flex items-center text-center">
+      <span class="mr-2"><%= t(service_time.day_of_week, scope: %i[service_times]) %></span>
+      <% if service_time.off_day? %>
+        <span class="badge badge-neutral bg-gray-600"><%= t('service_times.off_day') %></span>
+      <% else %>
+        <span class="badge badge-accent text-white"><%= t('service_times.opening') %></span>
+      <% end %>
+    </div>
+    <% unless service_time.off_day? %>
+    <div class="collapse-content text-center">
+      <%= display_service_time(service_time) %>
+    </div>
+    <% end %>
+  </div>
+</div>

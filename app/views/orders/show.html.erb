@@ -23,69 +23,34 @@
     <div class="card md:col-span-2 bg-white-100 shadow-xl">
       <ul class="card-body mx-10">
         <li class="text-lg font-medium mb-3">
-          <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-6">
+          <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
             <iframe class="w-full h-full border-0 rounded-lg" frameborder="0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_API_KEY'] %>&q=<%= ERB::Util.url_encode(address(@shop)) %>" allowfullscreen>
             </iframe>
           </div>
         </li>
-        <div class="grid grid-cols-4 gap-2 p-2">
-          <div class="col-span-2">
+        <div class="p-2">
+          <div class="mb-8">
             <ul>
               <li class="mb-4">
-                <h2 class="text-2xl font-bold mb-3 text-gray-700">
-                  <%= t('views.shop.show.information') %>
+                <h2 class="text-2xl text-gray-700 font-bold">
+                  <%= @order.shop.title %>
                 </h2>
+                <p class="flex items-center">
+                  <span class="text-gray-500 mr-1"><%= @order.shop.city %><%= @order.shop.district %></span>
+                  <span class="text-xs badge badge-accent badge-outline">TEL:<%= @order.shop.tel %></span>
+                </p>
               </li>
-              <li class="text-lg order_text">
-                <%= @order.shop.title %>
-              </li>
-              <li class="text-m order_text">
-                <%= @order.shop.description %>
-              </li>
-              <li class="text-lg order_text">
-                <%= @order.shop.tel %>
-              </li>
-              <li class="text-lg order_text">
-                <%= address(@order.shop) %>
+              <li class="text-m order_text tracking-wide">
+                <div class="text-gray-500">
+                  <%= @order.shop.description %>
+                </div>
               </li>
             </ul>
           </div>
-          <div class="col-span-2 mx-auto">
-            <ul>
-              <li class="mb-4">
-                <h2 class="text-2xl font-bold mb-3 text-gray-700">
-                  <%= t('service_times.title') %>
-                </h2>
-              </li>
-              <li class="text-m order_text">
-                <%= t('service_times.monday') %> ： 
-                <%= t('service_times.off_day') %>
-              </li>
-              <li class="text-m order_text">
-                <%= t('service_times.tuesday') %> 
-                ： 11:00 － 23:00
-              </li>
-              <li class="text-m order_text">
-                <%= t('service_times.wednesday') %> ： 
-                <%= t('service_times.off_day') %>
-              </li>
-              <li class="text-m order_text">
-                <%= t('service_times.thursday') %> 
-                ： 11:00 － 23:00
-              </li>
-              <li class="text-m order_text">
-                <%= t('service_times.friday') %> 
-                ： 11:00 － 23:00
-              </li>
-              <li class="text-m order_text">
-                <%= t('service_times.saturday') %> 
-                ： 11:00 － 23:00
-              </li>
-              <li class="text-m order_text">
-                <%= t('service_times.sunday') %> 
-                ： 11:00 － 23:00
-              </li>
-            </ul>
+          <div class="mx-auto">
+            <div class="text-sm ">
+              <%= render partial: 'shops/service_times', collection: @shop.service_times, as: :service_time%>
+            </div>
           </div>
         </div>
       </ul>
