@@ -1,14 +1,12 @@
-<thead class="bg-gray-300">
-  <tr>
-    <th class="px-2 py-2 text-center text-orange-800 font-black">
+<thead>
+  <tr >
+    <th class="px-2 py-4 text-center text-orange-800  bg-orange-300 font-black">
       <%= t('order.order_info') %>
     </th>
-    <th class="px-2 py-2 text-center text-orange-800 font-black">
+    <th class="px-2 py-4 text-center text-orange-800  bg-orange-300 font-black">
       <%= t('order.detailed') %>
     </th>
   </tr>
-</thead>
-<tbody>
   <tr>
     <td class="px-2 py-2 text-center text-gray-600 font-semibold">
       <%= t('order.serial') %>
@@ -55,17 +53,19 @@
     <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
       <%= t('order.status') %>
     </td>
-    <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
+    <td class="px-2 py-2 mb-4 text-center text-gray-500 font-semibold ">
       <%= t("aasm.order state.#{@order.status}") %>
     </td>
   </tr>
+</thead>
+<tbody>
   <tr>
-    <td class="px-2 py-2 text-center text-orange-800 font-black bg-gray-300">
+    <th class="px-2 py-4 text-center text-orange-800  bg-orange-300 font-black ">
       <%= t('order.booking_info') %>
-    </td>
-    <td class="px-2 py-2 text-center text-orange-800 font-black bg-gray-300">
+    </th>
+    <th class="px-2 py-4 text-center text-orange-800  bg-orange-300 font-black">
       <%= t('order.detailed') %>
-    </td>
+    </th>
   </tr>
   <tr>
     <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
@@ -99,13 +99,15 @@
       <%= @order.service_min %><%= t('order.min') %>
     </td>
   </tr>
+</tbody>
+<tfoot>
   <tr>
-    <td class="px-2 py-2 text-center text-orange-800 font-black bg-gray-300">
+    <th class="px-2 py-4 text-center text-orange-800  bg-orange-300 font-black">
       <%= t('order.customer_info') %>
-    </td>
-    <td class="px-2 py-2 text-center text-orange-800 font-black bg-gray-300">
+    </th>
+    <th class="px-2 py-4 text-center text-orange-800  bg-orange-300 font-black">
       <%= t('order.detailed') %>
-    </td>
+    </th>
   </tr>
   <tr>
     <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
@@ -115,11 +117,9 @@
       <%= @order.booked_name %>
     </td>
   </tr>
-</tbody>
-<tfoot>
   <tr>
     <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
-      <%= t('order.booking_end_time') %>
+      <%= t('order.email') %>
     </td>
     <td class="px-12 py-2  text-center text-gray-500 font-semibold ">
       <%= @order.booked_email %>
