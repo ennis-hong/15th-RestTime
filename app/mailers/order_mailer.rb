@@ -65,7 +65,6 @@ class OrderMailer < ApplicationMailer
     @booked_email = @order.booked_email
     @booked_name = @order.booked_name
     @vendor_email = @order.shop.user.email
-    # @vendor_email = ENV['MAIL_USERNAME'] #測試用打開，不然會寄到假資料信箱
   end
 
 end
