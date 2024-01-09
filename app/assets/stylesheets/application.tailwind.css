@@ -1,9 +1,8 @@
 @import "flatpickr/dist/flatpickr.css";
-@import 'trix.css';
+@import "trix.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 .flash-alert {
   @apply px-4 py-2 text-white bg-rose-700;
@@ -21,21 +20,30 @@ figure.attachment img {
   height: auto;
 }
 /* 留言區的圖片檔名設定不顯示 */
-.attachment__name, .attachment__size {
+.attachment__name,
+.attachment__size {
   display: none;
 }
 
 /* 留言區的長寬 */
 .comment-container {
-  width: 80%; 
-  height: auto; 
+  width: 80%;
+  height: auto;
   padding: 50px;
   justify-content: center;
   align-items: center;
   margin: auto;
 }
 
-.trix-content{
+.trix-content {
   padding: 10px;
   min-height: 100px;
+}
+
+.order_table_th {
+  @apply px-2 py-4 mb-2 text-stone-100 text-xl text-center  bg-accent font-black;
+}
+
+.order_table_td {
+  @apply px-5 py-2 text-lg text-center text-gray-500 font-semibold;
 }
