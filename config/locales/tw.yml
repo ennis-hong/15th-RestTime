@@ -256,24 +256,24 @@ tw:
     special_offer: 限時優惠
 
   member:
-    Email: "電子信箱"
-    Password: "密碼"
-    Remember: "記住我"
-    Log in: "登入"
-    Sign up: "註冊"
-    Forgot your Password?: "忘記密碼"
-    sign_in_with_google_oauth2: "請用 GOOGLE 帳號密碼登入"
-    Password Min Length: "密碼最少 %{min_length} 位數"
-    Password Confirmation: "確認密碼"
+    email: 電子信箱
+    password: 密碼
+    remember: 記住我
+    log in: 登入
+    sign up: 註冊
+    forgot your password?: 忘記密碼
+    sign_in_with_google_oauth2: 請用 GOOGLE 帳號密碼登入
+    password min length: 密碼最少 %{min_length} 位數
+    password confirmation: 確認密碼
+    send me reset password instructions: 重送密碼
+    current password: 請輸入之前密碼
+    update: 更新
+    back: 回首頁
+    change my password: 變更密碼
     role: 註冊角色
     vendor: 商家
     general: 一般使用者
     welcome: 註冊成功，請修改商店資訊
-    Send me reset password instructions: "重設密碼"
-    update: 更新
-    back: 回首頁
-    change my password: 變更密碼
-    errors_check_again: 再次確認
   aasm:
     order state:
       pending: 未付款
@@ -285,7 +285,6 @@ tw:
       pay: 付款
       complete: 完成
       cancel: 取消
-<<<<<<< HEAD
 
   mailer:
     appointment_successful: "Hello,Here is ResTime，%{booked_name}先生/女士，您已經預約完成，%{shop_title}將在%{formatted_date}為您服務。"
@@ -296,6 +295,3 @@ tw:
     change_booking_time: "Hello,Here is ResTime，%{booked_name}先生/女士的預約時間已經更改%{service_date}，請儘快確認您的訂單。"
     order_redeemed: "Hello,Here is ResTime，訂單編號<%{serial}>已經核銷，麻煩再確認您的訂單內容。"
     order_cancelled: "Hello,Here is ResTime，訂單編號<%{serial}>已經取消，麻煩再確認您的訂單內容。"
-=======
- 
->>>>>>> 359b516 (fix:修改登入GODGLE畫面)
