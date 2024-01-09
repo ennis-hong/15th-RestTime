@@ -4,8 +4,7 @@ class OrderMailer < ApplicationMailer
   # send mail to General
   def new_order_email_to_general(order)
     initialize_order(order)
-    mail_message = t('mailer.appointment_successful', booked_name: @booked_name, shop_title: @shop_title,
-                                                      formatted_date: @formatted_date)
+    mail_message = t('mailer.appointment_successful', booked_name: @booked_name, shop_title: @shop_title, formatted_date: @formatted_date)
     mail(to: @booked_email, subject: mail_message)
   end
 
