@@ -99,22 +99,6 @@ class OrdersController < ApplicationController
 
   private
 
-  def sample_params(order)
-    @hash = {
-      MerchantID: ENV.fetch('ECPAY_MERCHANT_ID', nil),
-      MerchantTradeNo: order.serial.concat(Time.current.strftime('%H%M')),
-      MerchantTradeDate: Time.current.strftime('%Y/%m/%d %H:%M:%S'),
-      PaymentType: 'aio',
-      TotalAmount: order.price.to_i,
-      TradeDesc: "#{order.shop.title}:#{order.serial}",
-      ItemName: order.product.title,
-      ReturnURL: ENV.fetch('DOMAIN_NAME', nil),
-      OrderResultURL: "#{ENV.fetch('DOMAIN_NAME', nil)}/orders/payment_result",
-      ChoosePayment: 'Credit',
-      EncryptType: '1'
-    }
-  end
-
   def payment_params(order)
     @hash = {
       MerchantID: ENV.fetch('ECPAY_MERCHANT_ID', nil),
