@@ -136,11 +136,11 @@ tw:
     currency: NTD
     booking: 開始預約
     booking_date: 預約日期
-    booking time slot: 預約時段
+    booking_time_slot: 預約時段
     booking_start_time: 開始時間
     booking_end_time: 結束時間
-    contact info: 聯絡資訊
-    booking info: 預約資訊
+    contact_info: 聯絡資訊
+    booking_info: 預約資訊
     booking_item: 預約項目
     order_info: 訂單資訊
     customer_info: 客戶資訊

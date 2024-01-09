@@ -1,8 +1,8 @@
 <div class="text-sm breadcrumbs">
   <ul>
     <li><%= link_to t('home'), root_path %></li>
-    <li><%= link_to t('my bookings'), my_bookings_orders_path %></li>
-    <li><%= link_to t('order.order_info'), '#' %></li>
+    <li><%= link_to t('my_bookings'), my_bookings_orders_path %></li>
+    <li><%= t('order.order_info') %></li>
   </ul>
 </div>
 
@@ -28,22 +28,24 @@
             </iframe>
           </div>
         </li>
-        <div class="grid grid-cols-4 gap-2">
+        <div class="grid grid-cols-4 gap-2 p-2">
           <div class="col-span-2">
             <ul>
               <li class="mb-4">
-                <h2 class="text-2xl font-bold mb-3"><%= t('views.shop.show.information') %></h2>
+                <h2 class="text-2xl font-bold mb-3 text-gray-700">
+                  <%= t('views.shop.show.information') %>
+                </h2>
               </li>
-              <li class="text-lg font-medium mb-2">
+              <li class="text-lg order_text">
                 <%= @order.shop.title %>
               </li>
-              <li class="text-m font-medium mb-2">
+              <li class="text-m order_text">
                 <%= @order.shop.description %>
               </li>
-              <li class="text-lg font-medium mb-2">
+              <li class="text-lg order_text">
                 <%= @order.shop.tel %>
               </li>
-              <li class="text-lg font-medium mb-2">
+              <li class="text-lg order_text">
                 <%= address(@order.shop) %>
               </li>
             </ul>
@@ -51,35 +53,35 @@
           <div class="col-span-2 mx-auto">
             <ul>
               <li class="mb-4">
-                <h2 class="text-2xl font-bold mb-3">
+                <h2 class="text-2xl font-bold mb-3 text-gray-700">
                   <%= t('service_times.title') %>
                 </h2>
               </li>
-              <li class="text-m font-medium mb-2">
+              <li class="text-m order_text">
                 <%= t('service_times.monday') %> ： 
                 <%= t('service_times.off_day') %>
               </li>
-              <li class="text-m font-medium mb-2">
+              <li class="text-m order_text">
                 <%= t('service_times.tuesday') %> 
                 ： 11:00 － 23:00
               </li>
-              <li class="text-m font-medium mb-2">
+              <li class="text-m order_text">
                 <%= t('service_times.wednesday') %> ： 
                 <%= t('service_times.off_day') %>
               </li>
-              <li class="text-m font-medium mb-2">
+              <li class="text-m order_text">
                 <%= t('service_times.thursday') %> 
                 ： 11:00 － 23:00
               </li>
-              <li class="text-m font-medium mb-2">
+              <li class="text-m order_text">
                 <%= t('service_times.friday') %> 
                 ： 11:00 － 23:00
               </li>
-              <li class="text-m font-medium mb-2">
+              <li class="text-m order_text">
                 <%= t('service_times.saturday') %> 
                 ： 11:00 － 23:00
               </li>
-              <li class="text-m font-medium mb-2">
+              <li class="text-m order_text">
                 <%= t('service_times.sunday') %> 
                 ： 11:00 － 23:00
               </li>
@@ -99,14 +101,13 @@
           </table>
           <div>
           <% unless @order.completed? || @order.cancelled? %>
-            <div class="mt-4 w-full bg-red-400 hover:bg-red-250 text-black font-semibold font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline font-medium text-center">
-              <%= link_to t('order.appointment_change'), edit_order_path(@order), class: "block w-full" %>
+            <div class="mt-4 w-full bg-accent text-black font-semibold font-bold py-3 px-2 rounded font-medium text-center rounded-xl text-white">
+              <%= link_to t('order.appointment_change'), edit_order_path(@order) %>
             </div>
           <% end %>
           <% if @order.may_cancel? %>
-          <div class="mt-4 mb-4 w-full bg-red-400 hover:bg-red-250 text-black font-semibold font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline font-medium text-center">
+          <div class="mt-4 mb-4 w-full bg-gray-400 text-black font-semibold font-bold py-3 px-2 rounded font-medium text-center rounded-xl text-white">
             <%= link_to t('order.cancel_order'), cancel_order_path(@order),
-              class: "block w-full",
               data: { turbo_method: 'patch',
               turbo_confirm: t('message.are_you_sure_cancel_order') } %>
           </div>

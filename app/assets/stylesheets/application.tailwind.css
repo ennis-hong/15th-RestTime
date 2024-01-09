@@ -47,3 +47,7 @@ figure.attachment img {
 .order_table_td {
   @apply px-5 py-2 text-lg text-center text-gray-500 font-semibold;
 }
+
+.order_text {
+  @apply font-medium mb-2 text-gray-600;
+}
