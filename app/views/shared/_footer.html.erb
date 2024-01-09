@@ -6,20 +6,14 @@
   <nav>
     <header class="footer-title"><%= t('footer.about_resttime') %></header> 
     <%= link_to t('footer.our_origin'), about_path %>
-    <%= link_to t('footer.choose_us'), choose_us_path %>
-    <%= link_to t('footer.join_us'), join_us_path %>
-    <%= link_to t('footer.contact_us'), contact_us_path %>
   </nav> 
   <nav>
     <header class="footer-title"><%= t('footer.terms') %></header> 
-    <%= link_to t('footer.user_terms'), terms_path %>
     <%= link_to t('footer.privacy_policy'), privacy_path %>
-    <%= link_to t('footer.refund_policy'), refund_policy_path %>
   </nav> 
   <nav>
     <header class="footer-title"><%= t('footer.payment_issues') %></header> 
     <%= link_to t('footer.payment_methods'), payment_path %>
-    <%= link_to t('footer.order_issues'), order_question_path %>
-    <%= link_to t('footer.appointment_changes'), refund_path %>
+    <%= link_to t('footer.refund_policy'), refund_policy_path %>
   </nav>
 </footer>
