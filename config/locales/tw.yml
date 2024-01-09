@@ -143,8 +143,8 @@ tw:
     booking info: 預約資訊
     booking_item: 預約項目
     order_info: 訂單資訊
-    customer info: 客戶資訊
-    service duration: 服務時間
+    customer_info: 客戶資訊
+    service_duration: 服務時間
     established: 訂單成立
     name: 姓名
     email: 信箱
