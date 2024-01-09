@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-    before_action :authenticate_user!, except: %i[payment_result]
-    before_action :order_params, only: :create
-    before_action :find_order, only: %i[show cancel edit update]
+  before_action :authenticate_user!, except: %i[payment_result]
+  before_action :order_params, only: :create
+  before_action :find_order, only: %i[show cancel edit update]
 
   skip_before_action :verify_authenticity_token, only: :payment_result
 
@@ -84,16 +84,16 @@ class OrdersController < ApplicationController
     }
     unless @order.update(payment_hash)
       redirect_to order_path(@order),
-                  alert: t(:abnormal_payment_result, scope: %i[order message])
+                  alert: t(:abnormal_payment_result, scope: %i[message])
     end
 
     if result_params[:RtnCode] == '1'
       @order.pay!
       user = @order.user
       sign_in(user) if user
-      redirect_to order_path(@order), notice: t(:payment_successful, scope: %i[order message])
+      redirect_to order_path(@order), notice: t(:payment_successful, scope: %i[message])
     else
-      redirect_to order_path(@order), notice: t(:payment_failed, scope: %i[order message])
+      redirect_to order_path(@order), notice: t(:payment_failed, scope: %i[message])
     end
   end
 
@@ -114,21 +114,22 @@ class OrdersController < ApplicationController
       EncryptType: '1'
     }
   end
-    def payment_params(order)
-      @hash = {
-        MerchantID: ENV.fetch('ECPAY_MERCHANT_ID', nil),
-        MerchantTradeNo: order.serial.concat(Time.current.strftime('%H%M')),
-        MerchantTradeDate: Time.current.strftime('%Y/%m/%d %H:%M:%S'),
-        PaymentType: 'aio',
-        TotalAmount: order.price.to_i,
-        TradeDesc: "#{order.shop.title}:#{order.serial}",
-        ItemName: order.product.title,
-        ReturnURL: ENV.fetch('DOMAIN_NAME', nil),
-        OrderResultURL: "#{ENV.fetch('DOMAIN_NAME', nil)}/orders/payment_result",
-        ChoosePayment: 'Credit',
-        EncryptType: '1'
-      }
-    end
+
+  def payment_params(order)
+    @hash = {
+      MerchantID: ENV.fetch('ECPAY_MERCHANT_ID', nil),
+      MerchantTradeNo: order.serial.concat(Time.current.strftime('%H%M')),
+      MerchantTradeDate: Time.current.strftime('%Y/%m/%d %H:%M:%S'),
+      PaymentType: 'aio',
+      TotalAmount: order.price.to_i,
+      TradeDesc: "#{order.shop.title}:#{order.serial}",
+      ItemName: order.product.title,
+      ReturnURL: ENV.fetch('DOMAIN_NAME', nil),
+      OrderResultURL: "#{ENV.fetch('DOMAIN_NAME', nil)}/orders/payment_result",
+      ChoosePayment: 'Credit',
+      EncryptType: '1'
+    }
+  end
 
   def add_mac_value(params)
     params[:CheckMacValue] = compute_check_mac_value(params)
