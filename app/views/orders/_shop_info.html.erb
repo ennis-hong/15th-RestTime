@@ -1,0 +1,16 @@
+<ul>
+  <li class="mb-4">
+    <h2 class="text-2xl text-gray-700 font-bold">
+      <%= @order.shop.title %>
+    </h2>
+    <p class="flex items-center">
+      <span class="text-gray-500 mr-1"><%= @order.shop.city %><%= @order.shop.district %></span>
+      <span class="text-xs badge badge-accent badge-outline">TEL:<%= @order.shop.tel %></span>
+    </p>
+  </li>
+  <li class="text-m order_text tracking-wide">
+    <div class="text-gray-500">
+      <%= @order.shop.description %>
+    </div>
+  </li>
+</ul>
