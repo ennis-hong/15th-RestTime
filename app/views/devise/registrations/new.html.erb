@@ -26,7 +26,7 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-52 text-sm px-2 py-3 " %>
         </div>
 
-        <div class="field">
+        <div class="form-control w-52 m-auto mt-4">
           <%= f.label :role, t('member.role') %><br />
           <%= f.select :role, options_for_select([[t('member.general'), 'general'], [t('member.vendor'), 'vendor']]) %>
         </div>
