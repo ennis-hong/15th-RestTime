@@ -40,9 +40,11 @@
           <%= link_to t("member.log in"), new_session_path(resource_name), class: "btn btn-primary " %>
         </div>
       <% end %>
+
       <div class="mt-4 w-52 m-auto px-8">
         <%= button_to t("member.sign_in_with_google_oauth2"), user_google_oauth2_omniauth_authorize_path, { data: { turbo: false }, class: "btn btn-primary"} %>
       </div>
     </div>
   </div>
 </div>
+
