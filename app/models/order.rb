@@ -46,7 +46,4 @@ class Order < ApplicationRecord
     "RT#{today}#{code}"
   end
 
-  def human_state
-    I18n.t("aasm.order state.#{aasm_state}")
-  end
 end

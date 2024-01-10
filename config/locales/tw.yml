@@ -79,13 +79,13 @@ tw:
     lunch_start: 午休開始時間
     lunch_end: 午休結束時間
     off_day: 公休日
-    Monday: 星期一
-    Tuesday: 星期二
-    Wednesday: 星期三
-    Thursday: 星期四
-    Friday: 星期五
-    Saturday: 星期六
-    Sunday: 星期日
+    monday: 星期一
+    tuesday: 星期二
+    wednesday: 星期三
+    thursday: 星期四
+    friday: 星期五
+    saturday: 星期六
+    sunday: 星期日
     submit: 更新營業時間
     message:
       success: 營業時間更新成功
@@ -295,7 +295,7 @@ tw:
     change_my_password: 變更密碼
     check_again: 再次確認
   aasm:
-    order state:
+    order_state:
       pending: 未付款
       paid: 已付款
       refunded: 已退款
