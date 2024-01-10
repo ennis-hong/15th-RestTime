@@ -45,7 +45,7 @@ class Shop < ApplicationRecord
   end
 
   def create_service_times
-    days = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
+    days = %w[monday tuesday wednesday thursday friday saturday sunday]
     days.each do |day|
       ServiceTime.create(day_of_week: day, off_day: true, shop: self)
     end

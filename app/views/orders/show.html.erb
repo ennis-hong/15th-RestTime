@@ -24,8 +24,7 @@
       <ul class="card-body mx-10">
         <li class="text-lg font-medium mb-3">
           <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
-            <iframe class="w-full h-full border-0 rounded-lg" frameborder="0" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_API_KEY'] %>&q=<%= ERB::Util.url_encode(address(@shop)) %>" allowfullscreen>
-            </iframe>
+            <%= render 'google_map' %>
           </div>
         </li>
         <div class="p-2">
@@ -51,12 +50,16 @@
           </table>
           <div>
           <% unless @order.completed? || @order.cancelled? %>
-            <div class="mt-4 w-full bg-accent text-black font-semibold font-bold py-3 px-2 rounded font-medium text-center rounded-xl text-white">
-              <%= link_to t('order.appointment_change'), edit_order_path(@order) %>
+            <div class="order_accent_btn">
+              <%= link_to edit_order_path(@order), class: 'block-class' do %>
+            <div >
+              <%= t('order.appointment_change') %>
+            </div>
+          <% end %>
             </div>
           <% end %>
           <% if @order.may_cancel? %>
-          <div class="mt-4 mb-4 w-full bg-gray-400 text-black font-semibold font-bold py-3 px-2 rounded font-medium text-center rounded-xl text-white">
+          <div class="order_gray_btn">
             <%= link_to t('order.cancel_order'), cancel_order_path(@order),
               data: { turbo_method: 'patch',
               turbo_confirm: t('message.are_you_sure_cancel_order') } %>
@@ -76,7 +79,7 @@
                 <h4 class="text-center underline mb-2 font-bold">
                   <%= t('faqs.order.title.redemption') %>
                 </h4>
-                <p class="mb-1 text-gray-500">★ 您可以通過我們的系統或應用選擇您需要的服務或活動進行預約。系統會為您的預約生成一個獨特的QR碼，用於後續的核銷程序。</p>
+                <p class="mb-1 text-gray-500">★ 您可以通過我們的系統選擇您需要的服務進行預約。系統會為您的預約生成一個獨特的QR碼，用於後續的核銷程序。</p>
                 <p class="mb-1 text-gray-500">★ 在預約的日期和時間，請攜帶您的QR碼前往預約地點。到達預約地點時，向工作人員出示您的QR碼。工作人員將使用專業設備掃描您的QR碼，確認完您的身分，進行核銷。</p>
               </div>
               <div class="p-3">
@@ -84,7 +87,7 @@
                   <%= t('faqs.order.title.redemption_notice') %>
                 </h4>
                 <p class="mb-1 text-gray-500">★ 請確保您的QR碼清晰可見，以便快速掃描。</p>
-                <p class="mb-1 text-gray-500">★ 請妥善保管您的QR碼，若經外人使用核銷，恕不能重複使用及退費。</p>
+                <p class="mb-1 text-gray-500">★ 請妥善保管您的QR碼，若經外人使用，恕不能重複使用及退費。</p>
                 <p class="mb-1 text-gray-500">★ 如果您遇到任何問題，請即時與我們的工作人員聯繫。</p>
               </div>
             </div>

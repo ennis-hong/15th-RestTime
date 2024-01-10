@@ -51,3 +51,11 @@ figure.attachment img {
 .order_text {
   @apply font-medium mb-2 text-gray-600;
 }
+
+.order_accent_btn {
+  @apply mt-4 w-full bg-accent text-black font-semibold font-bold py-3 px-2 rounded font-medium text-center rounded-xl text-white;
+}
+
+.order_gray_btn {
+  @apply mt-4 mb-4 w-full bg-gray-400 text-black font-semibold font-bold py-3 px-2 rounded font-medium text-center rounded-xl text-white;
+}
