@@ -15,10 +15,10 @@
                     <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered" %>
                 </div>
                 <div class="form-control w-52 m-auto px-8">
-                    <%= link_to t("member.forgot your password?"), new_password_path(resource_name), class: "btn btn-primary" %>
+                    <%= link_to t("member.forgot_password?"), new_password_path(resource_name), class: "btn btn-primary" %>
                 </div>
                 <div class="form-control mt-4 w-52 m-auto px-8">
-                    <%= f.submit t('member.log in'), class: "btn btn-primary" %>
+                    <%= f.submit t('member.log_in'), class: "btn btn-primary" %>
                 </div>
             <% end %>
             <div class="mt-4 w-52 m-auto px-8">
