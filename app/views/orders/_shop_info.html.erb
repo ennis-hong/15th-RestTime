@@ -5,7 +5,7 @@
     </h2>
     <p class="flex items-center">
       <span class="text-gray-500 mr-1"><%= @order.shop.city %><%= @order.shop.district %></span>
-      <span class="text-xs badge badge-accent badge-outline">TEL:<%= @order.shop.tel %></span>
+      <%= link_to "TEL:#{@order.shop.tel}", "tel:#{@order.shop.tel}", class: 'text-xs badge badge-accent badge-outline' %>
     </p>
   </li>
   <li class="text-m order_text tracking-wide">

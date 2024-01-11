@@ -36,6 +36,7 @@ class ShopsController < ApplicationController
 
   def show
     @comments = @shop.comments.order(created_at: :desc)
+    @order = @shop.orders
   end
 
   def update
