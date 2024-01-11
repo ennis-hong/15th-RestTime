@@ -9,8 +9,8 @@
         <%= render "devise/shared/error_messages", resource: resource %>
         <%= f.hidden_field :reset_password_token %>
 
-        <div class="form-control">
-          <div>
+        <div class="form-control w-52 m-auto">
+          <div class="mb-2">
             <%= f.label :password, t('member.password'), class: "label-text text-lg" %>
             <% if @minimum_password_length %>
               <span class='text-sm'>(<%= t('member.password_min_length', min_length: @minimum_password_length) %>)</span>
@@ -19,12 +19,12 @@
           <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "input input-bordered w-52 text-sm px-2 py-3" %>
         </div>
 
-        <div class="field">
-          <%= f.label :password_confirmation, t('member.password_confirmation'), class: "label-text text-lg" %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-52 text-sm px-2 py-3 " %>
+        <div class="form-control w-52 m-auto mt-2">
+          <%= f.label :password_confirmation, t('member.password_confirmation'), class: "label-text text-lg" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-52 text-sm px-2 py-3 mb-4" %>
         </div>
 
-        <div class="actions">
+        <div class="form-control w-52 m-auto mt-2">
           <%= f.submit t('member.change_my_password'), class: "input input-bordered w-52 text-sm px-2 py-3" %>
         </div>
       <% end %>
