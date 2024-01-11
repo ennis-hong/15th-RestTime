@@ -1,7 +1,15 @@
 # frozen_string_literal: true
-
 module Users
   class SessionsController < Devise::SessionsController
+    before_action :configure_permitted_parameters, if: :devise_controller?
+
+    def after_sign_in_path_for(resource)
+      if resource.vendor?
+        vendor_index_path
+      else
+        super
+      end
+    end
     # before_action :configure_permitted_parameters, if: :devise_controller?
 
     # GET /resource/sign_in
@@ -22,5 +30,8 @@ module Users
     #   devise_parameter_sanitizer.permit(:account_update, keys: added_attrs)
     #   devise_parameter_sanitizer.permit(:sign_in, keys: added_attrs)
     # end
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_in, keys: [:role])
+    end
   end
 end

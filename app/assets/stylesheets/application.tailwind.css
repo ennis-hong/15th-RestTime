@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 .flash-alert {
-  @apply px-4 py-2 text-white bg-rose-700;
+  @apply px-4 py-2 bg-error;
 }
 
 .flash-notice {
-  @apply px-4 py-2 text-white bg-accent;
+  @apply px-4 py-2 text-white bg-primary;
 }
 
 /* 留言區的圖片設定嘴大寬高限制 */

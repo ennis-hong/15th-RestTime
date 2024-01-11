@@ -1,4 +1,4 @@
-<div class="navbar bg-accent", style="position: fixed; top: 0; z-index: 1000;">
+<nav class="navbar bg-success p-1 fixed w-full top-0 z-20 mb-11">
   <div class="navbar-start h-5">
     <div class="dropdown" data-controller="sidebar">
       <div tabindex="0" role="button" class="btn btn-ghost  btn-circle" data-action="click->sidebar#toggle">
@@ -22,10 +22,15 @@
     <ul class="flex menu menu-horizontal px-1">
       <li>
         <details>
-          <summary>
-            <i class="fa-solid fa-user"></i>
-            <li><%= current_user.email %></li>
-          </summary>
+            <summary>
+              <% if policy(:shop).index? %>
+                <div class="bg-warning text-white px-2 py-1 rounded-md text-sm inline-block">
+                  <%= t("user_roles.#{current_user.role}") %>
+                </div>
+              <% end %>
+              <i class="fa-solid fa-user"></i>
+              <%= current_user.email %>
+            </summary>
           <%# 下拉選單 %>
           <ul class="w-32 text-stone-600 ">
             <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" } %></li>
@@ -39,4 +44,4 @@
       </li>
     </ul>
   </div>
-</div>
+</nav>

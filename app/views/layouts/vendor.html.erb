@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="backstage">
+<html data-theme="mytheme">
   <head>
     <title>RestTime</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,19 +10,15 @@
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css", "data-turbo-track": "reload" %>
     
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <div class="mb-24">
-      <%= render "vendor/navbar" %>
-    </div>
-    </div>
-    <%= render "shared/flash" if flash.any? %>
-    </div>
   </head>
 
   <body>
-    <main class="p-5">
-      <div class="flex-1 m-10">
+    <div class="mb-16">
+      <%= render "vendor/navbar" %>
+    </div>
+    <%= render "shared/flash" if flash.any? %>
+    <main class="container p-8 mx-auto">
       <%= yield %>
-      </div>
     </main>
     <%= render "shared/footer" %>
   </body>
