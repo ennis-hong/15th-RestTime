@@ -283,8 +283,6 @@ tw:
     sign_in_with_google_oauth2: 請用 GOOGLE 帳號密碼登入
     password_min: 密碼最少 %{min_length} 位數
     confirmation: 確認密碼
-    send_me_reset_password_instructions: 發送密碼
-    current: 請輸入之前密碼
     update: 更新
     back: 回首頁
     role: 註冊角色
@@ -292,7 +290,11 @@ tw:
     general: 一般使用者
     welcome: 註冊成功，請修改商店資訊
     errors_check_again: 再次確認
-    change_my_password: 變更密碼
+    reset_password: 發送密碼
+    current: 請輸入之前密碼
+    update: 更新
+    back: 回首頁
+    change_password: 變更密碼
     check_again: 再次確認
   aasm:
     order_state:

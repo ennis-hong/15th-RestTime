@@ -1,7 +1,7 @@
 <div class="hero min-h-screen bg-base-200">
   <div class="hero-content flex-col lg:flex-row-reverse">
     <div class="text-center lg:text-left">
-      <h1 class="text-5xl font-bold">RESTIME</h1>
+      <h2 class="text-5xl font-bold">RESTIME</h2>
       <p class="py-6">預約放鬆，今天開始 <br>Start today, your restime.</p>
     </div>
     <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-8">
@@ -14,8 +14,8 @@
         <div class="form-control w-52 m-auto mt-4">
           <div>
             <%= f.label :password, t('member.password'), class: "label-text text-lg" %>
-            <% if @minimum_password %>
-              <span class="text-sm">( <%= t('member.password_min', min_length: @minimum_password) %> )</span>
+            <% if @minimum_password_length %>
+              <span class="text-sm">( <%= t('member.password_min', min_length: @minimum_password_length) %> )</span>
             <% end %>
           </div>
           <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered" %>
@@ -45,4 +45,3 @@
     </div>
   </div>
 </div>
-
