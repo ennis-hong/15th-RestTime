@@ -11,7 +11,7 @@ console_command = "/rails/bin/rails console"
 
 [env]
   MAIL_USERNAME = "15camprestime@gmail.com"
-  DOMAIN_NAME = "https://restime.fly.dev/"
+  DOMAIN_NAME = "https://restime.fly.dev"
   ECPAY_MERCHANT_ID = "3002607"
   ECPAY_HASH_KEY = "pwFHCqoQZGmho4w6"
   ECPAY_HASH_IV = "EkRm7iFT261dpevs"
@@ -26,6 +26,7 @@ console_command = "/rails/bin/rails console"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+
 
 [[vm]]
   cpu_kind = "shared"

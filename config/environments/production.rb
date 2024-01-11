@@ -102,7 +102,7 @@ Rails.application.configure do
     domain: ENV['DOMAIN_NAME'],
     authentication: "plain",
     user_name: ENV['MAIL_USERNAME'],
-    password: Rails.application.credentials.dig(:google, :mail_passord),
+    password: Rails.application.credentials.dig(:google, :mail_password),
     enable_starttls_auto: true
   }
   config.action_mailer.default_url_options = { host: ENV['DOMAIN_NAME'], port: 3000 }
