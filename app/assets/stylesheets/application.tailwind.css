@@ -9,7 +9,7 @@
 }
 
 .flash-notice {
-  @apply px-4 py-2 text-white bg-primary;
+  @apply px-4 py-2 text-white bg-warning;
 }
 
 /* 留言區的圖片設定嘴大寬高限制 */
