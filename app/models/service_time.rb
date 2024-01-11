@@ -6,14 +6,6 @@ class ServiceTime < ApplicationRecord
 
   default_scope { order(id: :desc) }
 
-  # 預設寫入週一至週日共七筆設定資料
-  def self.default_data(shop)
-    days = %w[monday tuesday wednesday thursday friday saturday sunday]
-    days.each do |day|
-      shop.service_times << ServiceTime.build(day_of_week: day, shop:)
-    end
-  end
-
   private
 
   def validate_open_and_close_times
