@@ -1,8 +1,7 @@
 <div class="text-sm breadcrumbs">
   <ul>
     <li><%= link_to t('home'), root_path %></li>
-    <li><%= link_to t('my_bookings'), my_bookings_orders_path %></li>
-    <li><%= t('order.order_info') %></li>
+    <li><%= @shop.title %></li>
   </ul>
 </div>
 
@@ -24,28 +23,47 @@
       <ul class="card-body mx-10">
         <li class="text-lg font-medium mb-3">
           <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
-            <%= render 'orders/google_map' %>
+            <%= render 'shared/google_map' %>
           </div>
         </li>
         <div class="p-2">
           <div class="mb-8">
-            <%= render 'shop_info' %>
+            <%= render 'shared/shop_info', resource: @shop %>
           </div>
           <div class="mx-auto">
             <div class="text-sm ">
               <%= render partial: 'shops/service_times', collection: @shop.service_times, as: :service_time%>
+              <% if user_signed_in? %>
+                <%= render 'like_shops', shop: @shop %>
+              <% end %>
             </div>
           </div>
         </div>
       </ul>
     </div>
     <div class="card md:col-span-2 bg-white-100 shadow-xl">
-    
-      <div class="card-body mt-12 mb-12">
-        
+      <div class="card-body mb-8">
+        <div class="carousel w-full">
+        <% @shop.products.each_with_index do |product, index| %>
+          <div id="slide<%= index + 1 %>" class="carousel-item relative w-full">
+            <%= image_tag product.cover.variant(:thumb), class: 'w-full' %>
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide<%= index == 0 ? @shop.products.count : index %>" class="btn btn-circle">❮</a>
+              <a href="#slide<%= index + 2 > @shop.products.count ? 1 : index + 2 %>" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+        <% end %>
+        </div>
       </div>
-      
+      <div>
+        <%= render 'booking', { shop: @shop, service_times: @shop.service_times } %>
       </div>
     </div>
   </div>
 </section>
+<div class="comment-container">
+  <%= render 'comments/form', shop: @shop %>
+  <% @comments.each do |comment| %>
+    <%= render 'comments/comment', shop: @shop, comment: comment %>
+  <% end %>
+</div>
