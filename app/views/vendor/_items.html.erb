@@ -3,7 +3,7 @@
     <div class="card-body">
       <div class="h-[300px] relative">
         <%= link_to shop_path(@shop) do %>
-          <div class="absolute h-[300px] overflow-hidden place-items-center rounded-md">
+          <div class="absolute h-[300px] min-w-full overflow-hidden place-items-center rounded-md">
             <% if @shop.cover.attached? %>
               <%= image_tag @shop.cover, class: "rounded-md w-full -translate-y-1/4 brightness-50" %>
             <% else %>
@@ -13,8 +13,8 @@
         <% end %>
       </div>
       <%= link_to shop_path(@shop) do %>
-        <article class="mt-4 z-10 absolute top-64 left-15">
-          <h2 class="text-2xl font-bold"><%= @shop.title %></h2>
+        <article class="mt-4 z-10 absolute top-64 left-15 px-5">
+          <h2 class="text-2xl font-bold text-white"><%= @shop.title %></h2>
         </article>
       <% end %>
       <h2 class="card-title"><%= t('views.shop.show.information')%></h2>
