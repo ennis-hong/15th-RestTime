@@ -14,10 +14,10 @@
 
   <body>
     <div class="mb-16">
-      <%= render "vendor/navbar" %>
+    <%= render "vendor/navbar" %>
     </div>
     <%= render "shared/flash" if flash.any? %>
-    <main class="container p-8 mx-auto">
+    <main>
       <%= yield %>
     </main>
     <%= render "shared/footer" %>

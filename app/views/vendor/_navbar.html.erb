@@ -1,8 +1,8 @@
-<nav class="navbar bg-secondary p-1 fixed w-full top-0 z-20 mb-11">
+<nav class="navbar p-1 fixed w-full top-0 z-20 mb-11">
   <div class="navbar-start h-5">
     <div class="dropdown" data-controller="sidebar">
       <div tabindex="0" role="button" class="btn btn-ghost  btn-circle" data-action="click->sidebar#toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
         </svg>
       </div>
@@ -12,13 +12,13 @@
         </ul>
       </div>
     </div>
-    <h1 class="btn btn-ghost text-2xl  text-white"><%= link_to "RestTime", root_path %></h1>
-    <div class="badge badge-warning text-white text-s"><%=t('navbar.vendor_backstage')%></div>
-    <span class="btn btn-ghost text-white"><%= link_to t('navbar.homepage_front'), index_path %></span>
+    <h1 class="btn btn-ghost text-2xl  text-secondary"><%= link_to "RestTime", root_path %></h1>
+    <div class="badge badge-warning text-secondary text-s"><%=t('navbar.vendor_backstage')%></div>
+    <span class="btn btn-ghost text-secondary"><%= link_to t('navbar.homepage_front'), index_path %></span>
 
   </div>
   <%# 中間文字 %>
-  <div class="flex-none navbar-end text-white">
+  <div class="flex-none navbar-end text-secondary">
     <ul class="flex menu menu-horizontal px-1">
       <li>
         <details>

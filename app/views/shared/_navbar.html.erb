@@ -1,13 +1,13 @@
-<nav class="navbar bg-accent p-1 fixed w-full top-0 z-20 mb-11">
+<nav class="navbar bg-white fixed w-full top-0 z-20 px-24 h-16">
   <div class="flex-1">
-    <h1 class="btn btn-ghost text-3xl text-white"><%= link_to "RestTime", root_path %></h1>
-      <span class="btn btn-sm btn-ghost text-white"><%= link_to t('navbar.homepage'), index_path %></span>
-      <span class="btn btn-sm btn-ghost text-white"><%= link_to t('navbar.products'), products_path %></span>
-      <span class="btn btn-sm btn-ghost text-white"><%= link_to t('navbar.shops'), shops_path %></span>
+    <h1 class="btn btn-ghost text-3xl text-primary hover:bg-accent"><%= link_to "RestTime", root_path %></h1>
+      <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to t('navbar.homepage'), index_path %></span>
+      <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to t('navbar.products'), products_path %></span>
+      <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to t('navbar.shops'), shops_path %></span>
   </div>
   <div class="flex items-center justify-center">
     <form action="<%= search_path %>" data-turbo="false">
-      <input type="search" name="q" class="input input-bordered h-8">
+      <input type="search" name="q" class="input input-bordered h-8 bg-white">
       <button class="btn btn-sm btn-primary">搜尋</button>
     </form>
   </div>
@@ -39,12 +39,10 @@
           </details>
         </li>
       <% else %>
-        <li class="text-white"><%= link_to '註冊', new_user_registration_path %></li>
-        <li class="text-white"><%= link_to '登入', new_user_session_path %></li>
+        <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to '註冊', new_user_registration_path %></span>
+        <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to '登入', new_user_session_path %></span>
       <% end %>
     </ul>
-
-
   </div>
 </nav>
 
