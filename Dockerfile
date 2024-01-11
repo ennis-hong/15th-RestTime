@@ -11,7 +11,12 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development:test" \
+    RAILS_ENV="production"
+
+# Update gems and bundler
+RUN gem update --system --no-document && \
+    gem install -N bundler
 
 
 # Throw-away build stage to reduce size of final image
@@ -29,6 +34,11 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
     npm install -g yarn@$YARN_VERSION && \
     rm -rf /tmp/node-build-master
+
+RUN apt-get install -y libpq-dev && \
+    apt-get install -y openssh-client
+
+
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
