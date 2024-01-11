@@ -11,12 +11,11 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development:test" \
-    RAILS_ENV="production"
+    BUNDLE_WITHOUT="development:test" 
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
-    gem install -N bundler
+    gem install bundler -v '2.4.22'
 
 
 # Throw-away build stage to reduce size of final image
@@ -24,7 +23,7 @@ FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl git libvips node-gyp pkg-config python-is-python3
+    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=18.17.1
@@ -35,10 +34,8 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
     npm install -g yarn@$YARN_VERSION && \
     rm -rf /tmp/node-build-master
 
-RUN apt-get install -y libpq-dev && \
+RUN git config --global url.https://github.com/.insteadOf git@github.com: && \
     apt-get install -y openssh-client
-
-
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -65,7 +62,8 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
+    apt-get install -y libpq-dev && \
+    apt-get install --no-install-recommends -y curl libvips && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
