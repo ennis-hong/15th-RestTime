@@ -4,11 +4,7 @@
       <div class="h-[300px] relative">
         <%= link_to shop_path(@shop) do %>
           <div class="absolute h-[300px] min-w-full overflow-hidden place-items-center rounded-md">
-            <% if @shop.cover.attached? %>
-              <%= image_tag @shop.cover, class: "rounded-md w-full -translate-y-1/4 brightness-50" %>
-            <% else %>
-              <img src="https://fakeimg.pl/1000x300/200" class="w-full">
-            <% end %>
+            <%= shop_cover(shop) %>
           </div>
         <% end %>
       </div>
