@@ -30,40 +30,41 @@
           <div class="mb-8">
             <%= render 'shared/shop_info', resource: @shop %>
           </div>
-          <div class="mx-auto">
-            <div class="text-sm ">
-              <%= render partial: 'shops/service_times', collection: @shop.service_times, as: :service_time%>
+          <div class="flex">
+            <%=render 'shared/business_hours' %>
+            <div class="w-1/4 ml-auto mt-2">
               <% if user_signed_in? %>
                 <%= render 'like_shops', shop: @shop %>
               <% end %>
             </div>
           </div>
+          <hr class="my-6">
         </div>
       </ul>
+      <div class="comment-container">
+        <%= render 'comments/form', shop: @shop %>
+        <% @comments.each do |comment| %>
+          <%= render 'comments/comment', shop: @shop, comment: comment %>
+        <% end %>
+      </div>
     </div>
     <div class="card md:col-span-2 bg-white-100 shadow-xl">
-      <div class="card-body mb-8">
-        <div class="carousel w-full">
-        <% @shop.products.each_with_index do |product, index| %>
-          <div id="slide<%= index + 1 %>" class="carousel-item relative w-full">
-            <%= image_tag product.cover.variant(:thumb), class: 'w-full' %>
-            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-              <a href="#slide<%= index == 0 ? @shop.products.count : index %>" class="btn btn-circle">❮</a>
-              <a href="#slide<%= index + 2 > @shop.products.count ? 1 : index + 2 %>" class="btn btn-circle">❯</a>
+      <div class="card-body" data-controller="carousel">
+        <div class="carousel mx-12 relative">
+          <% @shop.products.each do |product| %>
+            <div class="carousel-item " data-carousel-target="slide">
+              <%= image_tag product.cover.variant(:cover) %>
             </div>
+          <% end %>
+          <div class="absolute flex justify-between left-2 right-2 top-1/2">
+            <button class="btn glass opacity-80" data-action="carousel#previous">❮</button>
+            <button class="btn glass opacity-80" data-action="carousel#next">❯</button>
           </div>
-        <% end %>
+        </div>
+        <div class="mx-12">
+          <%= render 'booking', { shop: @shop, service_times: @shop.service_times } %>
         </div>
       </div>
-      <div>
-        <%= render 'booking', { shop: @shop, service_times: @shop.service_times } %>
-      </div>
-    </div>
+    </div >
   </div>
 </section>
-<div class="comment-container">
-  <%= render 'comments/form', shop: @shop %>
-  <% @comments.each do |comment| %>
-    <%= render 'comments/comment', shop: @shop, comment: comment %>
-  <% end %>
-</div>
