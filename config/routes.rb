@@ -75,7 +75,7 @@ Rails.application.routes.draw do
     end
 
     # Search route
-    get "/search", to: "products#search"
+    get "/search", to: "shops#search"
 
     # Home page
     get "/index", to: "pages#index"

@@ -4,7 +4,7 @@ class ShopsController < ApplicationController
   before_action :find_shop, only: %i[show]
   before_action :no_shop?, only: %i[new create]
   before_action :own_shop?, only: %i[edit update]
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show search]
   before_action :find_owned_shop, only: %i[edit update destroy]
 
   # 搜尋修改後
@@ -47,6 +47,11 @@ class ShopsController < ApplicationController
   end
 
   def destroy; end
+
+  def search
+    @shops = Shop.ransack(title_cont: params[:q]).result.page(params[:page])
+  end
+
 
   private
 
