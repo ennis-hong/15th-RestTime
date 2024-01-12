@@ -55,9 +55,4 @@ class Shop < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[city description district status street title updated_at open]
   end
-
-  # 這行刪掉會壞掉，所以保留
-  def self.ransackable_associations(_auth_object = nil)
-    ['products']
-  end
 end
