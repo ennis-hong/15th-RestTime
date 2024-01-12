@@ -101,7 +101,7 @@ class OrdersController < ApplicationController
 
   def payment_params(order)
     @hash = {
-      MerchantID: ENV.fetch('ECPAY_MERCHANT_ID', nil),
+      MerchantID: Rails.application.credentials.dig(:ecpay, :merchant_id),
       MerchantTradeNo: order.serial.concat(Time.current.strftime('%H%M')),
       MerchantTradeDate: Time.current.strftime('%Y/%m/%d %H:%M:%S'),
       PaymentType: 'aio',
@@ -122,8 +122,8 @@ class OrdersController < ApplicationController
   # 計算檢查碼
   def compute_check_mac_value(params)
     query_string = to_query_string(params)
-    query_string.prepend("HashKey=#{ENV.fetch('ECPAY_HASH_KEY', nil)}&")
-    query_string.concat("&HashIV=#{ENV.fetch('ECPAY_HASH_IV', nil)}")
+    query_string.prepend("HashKey=#{Rails.application.credentials.dig(:ecpay, :hash_key)}&")
+    query_string.concat("&HashIV=#{Rails.application.credentials.dig(:ecpay, :hash_iv)}")
     raw = urlencode_dot_net(query_string)
     @sha_code = Digest::SHA256.hexdigest(raw).upcase
   end

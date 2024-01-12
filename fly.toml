@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for restime on 2024-01-11T14:08:54+08:00
+# fly.toml app configuration file generated for restime on 2024-01-12T13:52:35+08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -9,15 +9,12 @@ console_command = "/rails/bin/rails console"
 
 [build]
 
-[env]
-  MAIL_USERNAME = "15camprestime@gmail.com"
-  DOMAIN_NAME = "https://restime.fly.dev"
-  ECPAY_MERCHANT_ID = "3002607"
-  ECPAY_HASH_KEY = "pwFHCqoQZGmho4w6"
-  ECPAY_HASH_IV = "EkRm7iFT261dpevs"
-
 [deploy]
   release_command = "./bin/rails db:prepare"
+
+[env]
+  DOMAIN_NAME = "https://restime.fly.dev"
+  MAIL_USERNAME = "15camprestime@gmail.com"
 
 [http_service]
   internal_port = 3000
@@ -27,11 +24,10 @@ console_command = "/rails/bin/rails console"
   min_machines_running = 0
   processes = ["app"]
 
-
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
-  memory_mb = 512
+  memory_mb = 1024
 
 [[statics]]
   guest_path = "/rails/public"
