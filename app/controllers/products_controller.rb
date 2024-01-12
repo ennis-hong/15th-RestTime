@@ -56,9 +56,9 @@ class ProductsController < ApplicationController
     redirect_to my_products_path, notice: t('product.delete_success')
   end
 
-  def search
-    @products = Product.ransack(title_cont: params[:q]).result.page(params[:page])
-  end
+def search
+  @shops = Shop.ransack(title_cont: params[:q]).result.page(params[:page])
+end
 
   private
 
