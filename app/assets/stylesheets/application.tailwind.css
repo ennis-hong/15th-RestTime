@@ -12,7 +12,7 @@
   @apply px-4 py-2 text-white bg-success;
 }
 
-/* 留言區的圖片設定嘴大寬高限制 */
+/* 留言區的圖片設定最大寬高限制 */
 figure.attachment img {
   max-width: 500px;
   max-height: 500px;
@@ -91,9 +91,34 @@ main {
   @apply grow;
 }
 footer {
-  @apply grow-0 flex bg-base-200
+  @apply grow-0 flex bg-base-200;
 }
 
-footer *{
-  @apply justify-between mx-6
+footer * {
+  @apply justify-between mx-6;
+}
+
+/* 設定inline日曆元件 */
+.flatpickr-calendar.inline {
+  @apply w-full shadow-none;
+}
+
+/* 設定自動寬 */
+.flatpickr-days,
+.flatpickr-weekdays,
+.dayContainer,
+.flatpickr-weeks {
+  @apply w-full;
+}
+
+.swal2-popup {
+  @apply w-auto!important flex flex-col justify-center;
+}
+
+#calendar-container {
+  @apply overflow-hidden;
+}
+
+.swal2-close:focus {
+  @apply shadow-none!important;
 }

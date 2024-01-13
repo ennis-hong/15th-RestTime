@@ -12,6 +12,7 @@
       <%= f.text_field :service_date,
                       { data: {
                         controller: 'datepicker',
+                        action: "mousedown->datepicker#initializeDatePicker",
                         serviceTimes: filter_service_times(service_times)
                       },
                       class: 'input input-bordered w-full mt-4', required: true } %>
