@@ -8,7 +8,13 @@ class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :payment_result
 
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.includes(:products, :shops)
+
+    @orders = if params[:status].present?
+                Order.where(status: params[:status]).order(created_at: :desc)
+              else
+                Order.order(created_at: :desc)
+              end
   end
 
   def new

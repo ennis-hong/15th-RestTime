@@ -17,7 +17,7 @@ class Product < ApplicationRecord
 
   has_one_attached :cover do |f|
     f.variant :cover, resize_to_limit: [800, 800]
-    f.variant :thumb, resize_to_limit: [400, 400]
+    f.variant :thumb, resize_to_limit: [120, 120]
   end
 
   # 軟刪除

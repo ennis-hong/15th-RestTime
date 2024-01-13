@@ -1,7 +1,10 @@
-<div class="card w-full">
+
+<div class="card w-full ">
   <div class="card-body">
-    <h2 class="card-title"><%= t('my_orders') %></h2>
     <div>
+    <%= link_to '查詢核銷訂單', orders_path(status: 'completed'), class: "btn text-lg" %>
+    <%= link_to '查詢未完成訂單', orders_path(status: 'pending'), class: "btn text-lg" %>
+    <%= link_to '查詢取消訂單', orders_path(status: 'cancelled'), class: "btn text-lg" %>
       <%= render @orders %> 
     </div>
   </div>

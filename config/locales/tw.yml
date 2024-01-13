@@ -159,7 +159,7 @@ tw:
     updated_order_time: 訂單更新時間
     serial: 訂單編號
     order_price: 訂單金額
-    created_date: 訂單建立日期
+    created_date: 建立日期
     price: 消費金額
     order_price: 訂單金額
     service_time: 消費時數

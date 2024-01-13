@@ -6,11 +6,13 @@ module Vendor
     before_action :find_order, only: %i[show confirm_redeem redeem]
 
     def my
-      if current_user&.shop.present?
-        @orders = current_user.shop.orders.includes(:user).order(id: :desc)
-      else
-        redirect_to root_path, alert: t('wrong_way', scope: %i[views shop message])
-      end
+      @orders = current_user.shop.orders.includes(:order, :product).order(id: :desc)
+
+      @orders = if params[:status].present?
+                  Order.where(status: params[:status]).order(created_at: :desc)
+                else
+                  Order.order(created_at: :desc)
+                end
     end
 
     def show

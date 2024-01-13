@@ -8,6 +8,9 @@
 </div>
 
 
+<%= link_to '查詢核銷訂單', my_vendor_orders_path(status: 'completed'), class: "btn text-lg" %>
+    <%= link_to '查詢未完成訂單', my_vendor_orders_path(status: 'pending'), class: "btn text-lg" %>
+    <%= link_to '查詢取消訂單', my_vendor_orders_path(status: 'cancelled'), class: "btn text-lg" %>
 <div class="overflow-x-auto">
   <table class="table" style="padding: 10px;">
     <thead>

@@ -1,22 +1,33 @@
 <div class="collapse collapse-arrow bg-gray-300 hover:bg-gray-200 my-4 rounded-lg">
-  <input type="radio" name="my-accordion-1" id="accordion-1" checked="checked" class="peer"/>
+  <input type="radio" name="my-accordion-1" id="accordion-1" checked class="peer"/>
 
-  <div class="collapse-title flex justify-between items-center text-sm">
-    <div class="flex-1 p-2">
+  <div class="collapse-title flex flex-col sm:flex-row justify-between items-center text-2xl">
+    <div class="flex items-center sm:w-1/4 p-2">
+      <% if order.product.cover.attached? %>
+        <%= image_tag order.product.cover.variant(:thumb), class: "align-middle border-gray-300 rounded-xl shadow mx-5" %>
+      <% end %>
       <span class="font-semibold text-gray-700">
         <%= order.shop.title %>
       </span>
     </div>
-    <div class="flex-1 p-2">
+    <div class="flex flex-col justify-center p-6 m-auto sm:w-1/4">
       <span class="font-semibold text-gray-700">
         <%= t('form.title') %>:
         <%= order.product.title %>
       </span>
-    </div>
-    <div class="flex-1 p-2">
       <span class="font-semibold text-gray-700">
         <%= t('order.booking_time_slot') %>:
         <%= format_datetime(order.service_date) %>
+      </span>
+    </div>
+    <div class="flex flex-col justify-center p-6 m-auto sm:w-1/4">
+      <span class="font-semibold text-gray-700">
+        <%= t('order.serial') %>:
+        <%= link_to order.serial, order_path(order) %>
+      </span>
+      <span class="font-semibold text-gray-700">
+        <%= t('order.created_date') %>:
+        <%= format_date(order.created_at) %>
       </span>
     </div>
     <div class="p-2 ml-auto">
@@ -26,44 +37,25 @@
     </div>
   </div>
   <hr>
-  <div class="collapse-content text-sm bg-gray-300">
-    <br>
-    <div class="p-2">
-      <span class="font-semibold text-gray-700">
-        <%= t('order.serial') %>
-        <%= link_to order.serial, order_path(order) %>
-      </span>
-      <span class="p-2 text-sm">
-        (<%= t('order.created_date') %>:
-        <%= format_date(order.created_at)%>)
-      </span>
-    </div>
-    <div class="p-2">
-      <%= t('order.booking_date') %>:
-      <%= format_datetime(order.service_date) %>
-    </div>
-    <div class="p-2">
-      <%= t('order.price') %>: NT$
-      <%= order.price.to_i %>
-    </div>
-    <div class="p-2 text-right">
+  <div class="collapse-content text-2xl bg-gray-300 px-4">
+    <div class="p-2 mt-4 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
       <%= link_to t('order.order_info'), order_path(order),
-      class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
+          class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
 
       <% unless order.completed? || order.cancelled? %>
         <%= link_to t('order.appointment_change'), edit_order_path(order),
-        class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded ml-2" %>
+            class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
       <% end %>
 
       <% if order.may_cancel? %>
         <%= link_to t('order.cancel_order'), cancel_order_path(order), 
-            class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-2",
+            class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded",
             data: { turbo_method: 'patch', turbo_confirm: t('message.are_you_sure_cancel_order') } %>
       <% end %>
 
       <% if order.may_pay? %>
         <%= link_to t('order.pay'), '#', 
-            class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-2" %>
+            class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
       <% end %>
 
       <% if order.paid? %>
