@@ -168,6 +168,8 @@ tw:
     redeem_order: 核銷訂單
     staff: 核銷人員
     start_end: (開始時間~結束時間)
+    comment: 評價
+
     time_start_end: 開始時間－結束時間
     choose_product: 選擇項目
     appointment_change: 變更預約
