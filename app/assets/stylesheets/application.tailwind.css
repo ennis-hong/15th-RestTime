@@ -112,7 +112,7 @@ footer * {
 }
 
 .swal2-popup {
-  @apply w-auto!important flex flex-col justify-center;
+  @apply w-auto flex flex-col justify-center;
 }
 
 #calendar-container {
@@ -120,5 +120,5 @@ footer * {
 }
 
 .swal2-close:focus {
-  @apply shadow-none!important;
+  @apply shadow-none;
 }

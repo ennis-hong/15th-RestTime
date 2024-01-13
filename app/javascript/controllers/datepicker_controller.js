@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import { MandarinTraditional } from "flatpickr/dist/l10n/zh-tw.js";
 import Swal from "sweetalert2";
 
 // Connects to data-controller="datepicker"
@@ -24,14 +25,13 @@ export default class extends Controller {
       title: "選擇日期",
       html: '<div id="calendar-container"><div id="calendar" style="text-align: center;"></div></div>',
       showCloseButton: true,
-      // width: "100%",
-      // padding: "1em",
       focusConfirm: false,
       preConfirm: () => {
         return [document.getElementById("swal-input1").value];
       },
       didOpen: () => {
         flatpickr("#calendar", {
+          locale: MandarinTraditional,
           inline: true,
           dateFormat: "Y/m/d H:i",
           minDate: new Date().fp_incr(1),
