@@ -40,9 +40,6 @@ export default class extends Controller {
       html: '<div id="calendar-container"><div id="calendar" style="text-align: center;"></div></div><div id="slots"></div>',
       showCloseButton: true,
       focusConfirm: false,
-      // preConfirm: () => {
-      //   return [document.getElementById("swal-input1").value];
-      // },
       didOpen: () => {
         flatpickr("#calendar", {
           locale: MandarinTraditional,
@@ -81,8 +78,6 @@ export default class extends Controller {
   }
 
   slots_html(slots) {
-    // console.log(`slotsStr:${slotsStr}`);
-    // slots = slotsStr.split(",");
     const newContent = document.createElement("div");
     newContent.id = "slots";
     newContent.className = "grid grid-cols-3 gap-2 my-3";
