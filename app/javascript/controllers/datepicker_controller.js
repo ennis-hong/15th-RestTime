@@ -5,6 +5,20 @@ import Swal from "sweetalert2";
 
 // Connects to data-controller="datepicker"
 export default class extends Controller {
+  static targets = ["nextBtn", "serviceDate"];
+  chooseDate = null;
+  chooseTime = null;
+  // connect() {
+  //   this.
+  //   this.
+  //   this.flatpickrInstance = null;
+  // }
+
+  // disconnect() {
+  //   this.chooseDate = null;
+  //   this.chooseTime = null;
+  // }
+
   initializeDatePicker(e) {
     e.preventDefault();
     const { servicetimes, shop } = this.element.dataset;
@@ -37,7 +51,7 @@ export default class extends Controller {
 
     Swal.fire({
       title: "選擇日期",
-      html: '<div id="calendar-container"><div id="calendar" style="text-align: center;"></div></div><hr><div id="slots"></div><hr><input id="booking_date" class="label" readonly=true />',
+      html: '<div id="calendar-container"><div id="calendar" style="text-align: center;"></div></div><hr><div id="slots"></div><hr><label id="bookingDate" class="label hidden" />',
       showCloseButton: true,
       focusConfirm: false,
       didOpen: () => {
@@ -53,11 +67,19 @@ export default class extends Controller {
             },
           ],
           onChange: function (selectedDates, dateStr, instance) {
-            console.log("change");
+            const bookingDateLabel = document.querySelector("#bookingDate");
+            bookingDateLabel.textContent = dateStr;
             callAvailable(shop, dateStr);
+            console.log(this.chooseDate);
           },
         });
       },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const bookingDateLabel = document.querySelector("#bookingDate");
+        this.serviceDateTarget.value = bookingDateLabel.textContent;
+        // this.nextBtnTarget.classList.add("bg-gray-400 hover:bg-gray-300");
+      }
     });
   }
 
@@ -71,9 +93,6 @@ export default class extends Controller {
     if (response.ok) {
       const { available_slots } = await response.json;
       return available_slots;
-    } else {
-      // const { url } = await response.json;
-      // window.location.href = url;
     }
   }
 
@@ -87,7 +106,7 @@ export default class extends Controller {
       btn.className = "btn btn-outline rounded-none";
       btn.textContent = slot;
 
-      btn.addEventListener("click", this.handleClick);
+      btn.addEventListener("click", (event) => this.handleClick(event));
 
       slotsDiv.appendChild(btn);
     });
@@ -95,9 +114,13 @@ export default class extends Controller {
     return slotsDiv;
   }
 
-  handleClick() {
+  handleClick(e) {
     const allBtn = document.querySelectorAll("button");
     allBtn.forEach((btn) => btn.classList.remove("btn-active"));
-    this.classList.add("btn-active");
+    e.currentTarget.classList.add("btn-active");
+    // this.chooseTime = e.currentTarget.textContent;
+    const bookingDateLabel = document.querySelector("#bookingDate");
+    bookingDateLabel.textContent = `${bookingDateLabel.textContent} ${e.currentTarget.textContent}`;
+    bookingDateLabel.classList.remove("hidden");
   }
 }
