@@ -108,7 +108,7 @@ footer * {
 .flatpickr-weekdays,
 .dayContainer,
 .flatpickr-weeks {
-  @apply w-full;
+  @apply w-auto flex justify-center;
 }
 
 .swal2-popup {

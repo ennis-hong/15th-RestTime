@@ -37,14 +37,14 @@ export default class extends Controller {
 
     Swal.fire({
       title: "選擇日期",
-      html: '<div id="calendar-container"><div id="calendar" style="text-align: center;"></div></div><div id="slots"></div>',
+      html: '<div id="calendar-container"><div id="calendar" style="text-align: center;"></div></div><hr><div id="slots"></div><hr><input id="booking_date" class="label" readonly=true />',
       showCloseButton: true,
       focusConfirm: false,
       didOpen: () => {
         flatpickr("#calendar", {
           locale: MandarinTraditional,
           inline: true,
-          dateFormat: "Y/m/d H:i",
+          dateFormat: "Y/m/d",
           minDate: new Date().fp_incr(1),
           maxDate: new Date().fp_incr(30),
           disable: [
@@ -78,15 +78,26 @@ export default class extends Controller {
   }
 
   slots_html(slots) {
-    const newContent = document.createElement("div");
-    newContent.id = "slots";
-    newContent.className = "grid grid-cols-3 gap-2 my-3";
-    const slotButtons = slots
-      .map((slot) => {
-        return `<button class="btn btn-outline">${slot}</button>`;
-      })
-      .join("");
-    newContent.innerHTML = slotButtons;
-    return newContent;
+    const slotsDiv = document.createElement("div");
+    slotsDiv.id = "slots";
+    slotsDiv.className = "grid grid-cols-4 gap-2 my-3";
+
+    slots.map((slot) => {
+      const btn = document.createElement("button");
+      btn.className = "btn btn-outline rounded-none";
+      btn.textContent = slot;
+
+      btn.addEventListener("click", this.handleClick);
+
+      slotsDiv.appendChild(btn);
+    });
+
+    return slotsDiv;
+  }
+
+  handleClick() {
+    const allBtn = document.querySelectorAll("button");
+    allBtn.forEach((btn) => btn.classList.remove("btn-active"));
+    this.classList.add("btn-active");
   }
 }

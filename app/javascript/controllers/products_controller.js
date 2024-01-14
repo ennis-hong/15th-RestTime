@@ -2,11 +2,13 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="products"
 export default class extends Controller {
+  static targets = ["productModal", "selectProduct", "serviceDate"];
+
   toggleModal(e) {
     e?.preventDefault();
 
-    const products_modal = document.querySelector("#products_modal");
-    products_modal.checked = !products_modal.checked;
+    const productModal = this.productModalTarget;
+    productModal.checked = !productModal.checked;
   }
 
   showCollapse(e) {
@@ -26,8 +28,9 @@ export default class extends Controller {
       'input[type="radio"][name="product_id"]:checked'
     );
     const selectedProductId = selectRadio?.value;
-    const selectProduct = document.querySelector("#product_id");
+    const selectProduct = this.selectProductTarget;
     selectProduct.value = selectedProductId;
+    this.serviceDateTarget.classList.remove("hidden");
 
     this.toggleModal();
   }
