@@ -4,7 +4,7 @@
   <div class="collapse-title flex flex-col sm:flex-row justify-between items-center text-2xl">
     <div class="flex items-center sm:w-1/4 p-2">
       <% if order.product.cover.attached? %>
-        <%= image_tag order.product.cover.variant(:thumb), class: "align-middle border-gray-300 rounded-xl shadow mx-5" %>
+        <%= image_tag order.product.cover.variant(:order_thumb), class: "align-middle border-gray-300 rounded-xl shadow mx-5" %>
       <% end %>
       <span class="font-semibold text-gray-700">
         <%= order.shop.title %>

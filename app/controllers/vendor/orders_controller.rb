@@ -6,13 +6,15 @@ module Vendor
     before_action :find_order, only: %i[show confirm_redeem redeem]
 
     def my
-      @orders = current_user.shop.orders.includes(:order, :product).order(id: :desc)
+      @orders = current_user.shop.orders.includes(:product)
 
-      @orders = if params[:status].present?
-                  Order.where(status: params[:status]).order(created_at: :desc)
-                else
-                  Order.order(created_at: :desc)
-                end
+      filter_by_date_range if params[:start_date].present? && params[:end_date].present?
+
+      sort_by_product_title if params[:sort_by] == 'product_title'
+
+      return unless params[:search].present?
+
+      search_orders
     end
 
     def show
@@ -39,6 +41,21 @@ module Vendor
 
     def find_order
       @order = Order.find(params[:id])
+    end
+
+    def filter_by_date_range
+      start_date = params[:start_date]
+      end_date = params[:end_date]
+      @orders = @orders.where(service_date: start_date..end_date, status: 'paid')
+    end
+
+    def sort_by_product_title
+      @orders = @orders.where(status: 'paid').joins(:product).order('products.title ASC')
+    end
+
+    def search_orders
+      search_term = "%#{params[:search]}%"
+      @orders = @orders.where('serial LIKE ? OR booked_name LIKE ?', search_term, search_term)
     end
   end
 end

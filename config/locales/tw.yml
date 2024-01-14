@@ -191,6 +191,13 @@ tw:
     redeeming: 進行核銷
     faqs: 常見問題
     staff_input: 請輸入核銷人員姓名
+    historical: 歷史訂單
+    unfinished: 未完成訂單
+    cancelled_order: 已取消訂單
+    recent: 近期訂單
+    product_sorting: 商品排序
+    all: 所有訂單
+    select: 搜尋
   message:
     the system is busy, please try again later: 系統忙碌中，請稍候再試
     appointment_successful: 預約成功
@@ -208,6 +215,7 @@ tw:
     order_confirmed_and_proceeding_to_payment: 訂單成立，正在前往付款頁面
     enter_the_change_time: 請輸入變更時間
     original_time: 原先預約時間
+    input_serial_or_name: 輸入訂單編號或姓名
   payment_type:
     Credit_CreditCard: 信用卡  
 

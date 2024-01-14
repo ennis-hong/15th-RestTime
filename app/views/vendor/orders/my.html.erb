@@ -7,10 +7,17 @@
   </div>
 </div>
 
+<div class="flex items-center gap-4">
+  <%# 設定三天內已付款訂單 %>
+  <%= link_to t('order.recent'), my_vendor_orders_path(start_date: (Date.today), end_date: (Date.today + 3), status: 'paid'), class: "btn text-lg" %>
+  <%= link_to t('order.product_sorting'), my_vendor_orders_path(sort_by: 'product_title', status: 'paid'), class: "btn text-lg" %>
+  <%= link_to t('order.all'), my_vendor_orders_path, class: "btn text-lg" %>
+  <%= form_with(url: my_vendor_orders_path, method: :get, local: true, class: "flex gap-2 items-center") do |form| %>
+    <%= form.text_field :search, placeholder: t('message.input_serial_or_name'), class: 'input input-bordered w-full max-w-xs' %>
+    <%= form.submit t('order.select'), class: 'btn text-lg' %>
+  <% end %>
+</div>
 
-<%= link_to '查詢核銷訂單', my_vendor_orders_path(status: 'completed'), class: "btn text-lg" %>
-    <%= link_to '查詢未完成訂單', my_vendor_orders_path(status: 'pending'), class: "btn text-lg" %>
-    <%= link_to '查詢取消訂單', my_vendor_orders_path(status: 'cancelled'), class: "btn text-lg" %>
 <div class="overflow-x-auto">
   <table class="table" style="padding: 10px;">
     <thead>
