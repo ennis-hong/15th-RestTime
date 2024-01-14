@@ -24,17 +24,25 @@ export default class extends Controller {
 
     const callAvailable = (shop, date) => {
       console.log(`shop: ${shop}`);
-      this.call_available(shop, date);
+      this.call_available(shop, date).then((availableSlots) => {
+        const content = Swal.getHtmlContainer();
+        if (content) {
+          content.replaceChild(
+            this.slots_html(availableSlots),
+            document.querySelector("#slots")
+          );
+        }
+      });
     };
 
     Swal.fire({
       title: "選擇日期",
-      html: '<div id="calendar-container"><div id="calendar" style="text-align: center;"></div></div>',
+      html: '<div id="calendar-container"><div id="calendar" style="text-align: center;"></div></div><div id="slots"></div>',
       showCloseButton: true,
       focusConfirm: false,
-      preConfirm: () => {
-        return [document.getElementById("swal-input1").value];
-      },
+      // preConfirm: () => {
+      //   return [document.getElementById("swal-input1").value];
+      // },
       didOpen: () => {
         flatpickr("#calendar", {
           locale: MandarinTraditional,
@@ -53,11 +61,6 @@ export default class extends Controller {
           },
         });
       },
-    }).then((result) => {
-      if (result.value) {
-        console.log("選擇的日期是:", result.value[0]);
-        // 處理選擇的日期
-      }
     });
   }
 
@@ -69,55 +72,26 @@ export default class extends Controller {
     });
 
     if (response.ok) {
-      const result = await response.json;
-      console.log(result);
+      const { available_slots } = await response.json;
+      return available_slots;
     } else {
-      const { url } = await response.json;
-      window.location.href = url;
+      // const { url } = await response.json;
+      // window.location.href = url;
     }
   }
 
-  // connect() {
-  //   const { servicetimes } = this.element.dataset;
-  //   const dayOfWeekToNumber = {
-  //     Sunday: 0,
-  //     Monday: 1,
-  //     Tuesday: 2,
-  //     Wednesday: 3,
-  //     Thursday: 4,
-  //     Friday: 5,
-  //     Saturday: 6,
-  //   };
-  //   const schedulerDays = JSON.parse(servicetimes);
-  //   const disabledDays = schedulerDays
-  //     .filter((day) => day.off_day)
-  //     .map((day) => dayOfWeekToNumber[day.day_of_week]);
-
-  //   flatpickr(this.element, {
-  //     enableTime: true,
-  //     time_24hr: true,
-  //     dateFormat: "Y/m/d H:i",
-  //     minuteIncrement: 15,
-  //     minDate: new Date().fp_incr(1),
-  //     maxDate: new Date().fp_incr(30),
-  //     disable: [
-  //       function (date) {
-  //         return disabledDays.includes(date.getDay());
-  //       },
-  //     ],
-  //     onChange: function (selectedDates, dateStr, instance) {
-  //       const dayOfWeek = selectedDates[0].getDay();
-  //       if (schedulerDays) {
-  //         const serviceTime = schedulerDays.find(
-  //           (item) => dayOfWeekToNumber[item.day_of_week] === dayOfWeek
-  //         );
-  //         instance.set("minTime", serviceTime.open_time);
-  //         instance.set("maxTime", serviceTime.close_time);
-  //         console.log(serviceTime.open_time.split(":")[0]);
-  //         instance.set("defaultHour", 12);
-  //         // instance.set("defaultHour", serviceTime.open_time.split(":")[0]);
-  //       }
-  //     },
-  //   });
-  // }
+  slots_html(slots) {
+    // console.log(`slotsStr:${slotsStr}`);
+    // slots = slotsStr.split(",");
+    const newContent = document.createElement("div");
+    newContent.id = "slots";
+    newContent.className = "grid grid-cols-3 gap-2 my-3";
+    const slotButtons = slots
+      .map((slot) => {
+        return `<button class="btn btn-outline">${slot}</button>`;
+      })
+      .join("");
+    newContent.innerHTML = slotButtons;
+    return newContent;
+  }
 }
