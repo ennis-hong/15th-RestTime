@@ -9,4 +9,15 @@ module OrdersHelper
   def render_steps(order)
     render order.status.to_s
   end
+
+  def tag_color(order)
+    case order.status
+    when 'cancelled'
+      'bg-red-500 text-white rounded p-1 text-sm mb-1'
+    when 'paid'
+      'bg-yellow-400 text-white rounded p-1 text-sm mb-1'
+    else
+      'bg-blue-400 text-white rounded p-1 text-sm mb-1'
+    end
+  end
 end

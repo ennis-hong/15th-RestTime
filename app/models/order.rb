@@ -33,6 +33,16 @@ class Order < ApplicationRecord
     product&.shop
   end
 
+  # simple_calendar用
+  def start_time
+    service_date
+  end
+
+  # simple_calendar用
+  def end_time
+    service_date + product.service_min.minutes
+  end
+
   private
 
   def generate_serial

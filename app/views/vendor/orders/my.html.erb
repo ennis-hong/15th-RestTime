@@ -1,3 +1,13 @@
+<div data-controller="calendar" class="text-right mr-40 my-5">
+  <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
+  <%= label_tag 'toggle_calendar', "月曆檢視" %>
+
+  <div data-calendar-target="calendar" class="hidden">
+    <%= render partial: 'calendar', locals: { order: @order } %>
+  </div>
+</div>
+
+
 <div class="overflow-x-auto">
   <table class="table" style="padding: 10px;">
     <thead>

@@ -6,6 +6,8 @@ import { application } from "./application"
 
 import CarouselController from "./carousel_controller"
 application.register("carousel", CarouselController)
+import CalendarController from "./calendar_controller"
+application.register("calendar", CalendarController)
 
 import DatepickerController from "./datepicker_controller"
 application.register("datepicker", DatepickerController)

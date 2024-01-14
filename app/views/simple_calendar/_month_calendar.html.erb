@@ -1,0 +1,63 @@
+<div class="container mx-auto mt-10">
+  <div class="wrapper bg-white rounded shadow w-full">
+    <div class="simple-calendar">
+      <nav>
+        <div class="header flex justify-between border-b p-2">
+          <span class="text-lg font-bold">
+            <time datetime="<%= start_date.strftime('%Y-%m') %>" class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></time>
+          </span>
+
+          <div class="buttons">
+            <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view %>
+
+            <%= link_to calendar.url_for_previous_view do %>
+              <button class="p-1">
+                <svg width="1em" fill="gray" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path fill-rule="evenodd" d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                  <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"/>
+                </svg>
+              </button>
+            <% end %>
+
+            <%= link_to calendar.url_for_next_view do %>
+              <button class="p-1">
+                <svg width="1em" fill="gray" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path fill-rule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                  <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+
+      <table class="table table-striped w-full">
+        <thead>
+          <tr>
+            <% date_range.slice(0, 7).each do |day| %>
+              <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                <span class="xl:block lg:block md:block sm:block hidden">
+                  <%= t('date.abbr_day_names')[day.wday] %>
+                </span>
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% date_range.each_slice(7) do |week| %>
+            <tr class="text-center h-20">
+                <% week.each do |day| %>
+                  <%= content_tag :td, class: "border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300" do %>
+                    <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+                  <% end %>
+                <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

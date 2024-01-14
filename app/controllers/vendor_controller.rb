@@ -15,6 +15,12 @@ class VendorController < ApplicationController
     authorize @shop
   end
 
+  def my
+    @orders = Order.where(
+      service_date: Time.now.beginning_of_month.beginning_of_week..Time.now.end_of_month.end_of_week
+    )
+  end
+
   def create
     authorize :shop
     @shop = current_user.build_shop(shop_params)
