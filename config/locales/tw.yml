@@ -192,12 +192,13 @@ tw:
     faqs: 常見問題
     staff_input: 請輸入核銷人員姓名
     historical: 歷史訂單
-    unfinished: 未完成訂單
-    cancelled_order: 已取消訂單
+    unfinished: 未完成
+    cancelled_order: 已取消
     recent: 近期訂單
     product_sorting: 商品排序
     all: 所有訂單
     select: 搜尋
+    ready_for_use: 尚未使用 
   message:
     the system is busy, please try again later: 系統忙碌中，請稍候再試
     appointment_successful: 預約成功

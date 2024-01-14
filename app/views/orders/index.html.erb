@@ -2,6 +2,7 @@
 <div class="card w-full ">
   <div class="card-body">
     <div>
+    <%= link_to t('order.ready_for_use'), orders_path(status: 'paid'), class: "btn text-lg" %>
     <%= link_to t('order.historical'), orders_path(status: 'completed'), class: "btn text-lg" %>
     <%= link_to t('order.unfinished'), orders_path(status: 'pending'), class: "btn text-lg" %>
     <%= link_to t('order.cancelled_order'), orders_path(status: 'cancelled'), class: "btn text-lg" %>
