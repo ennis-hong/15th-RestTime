@@ -37,6 +37,12 @@ Rails.application.routes.draw do
             patch :like
           end
         end
+
+        resources :bookings, only: [] do
+          member do
+            patch :available_slots
+          end
+        end
       end
     end
 

@@ -13,7 +13,8 @@
                       { data: {
                         controller: 'datepicker',
                         action: "mousedown->datepicker#initializeDatePicker",
-                        serviceTimes: filter_service_times(service_times)
+                        serviceTimes: filter_service_times(service_times),
+                        shop: @shop.id,
                       },
                       class: 'input input-bordered w-full mt-4', required: true } %>
       <%= f.submit t("form.Next"), class: 'mt-4 w-full bg-gray-400 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>

@@ -1,12 +1,13 @@
 import { Controller } from "@hotwired/stimulus";
 import { MandarinTraditional } from "flatpickr/dist/l10n/zh-tw.js";
+import { patch } from "@rails/request.js";
 import Swal from "sweetalert2";
 
 // Connects to data-controller="datepicker"
 export default class extends Controller {
   initializeDatePicker(e) {
     e.preventDefault();
-    const { servicetimes } = this.element.dataset;
+    const { servicetimes, shop } = this.element.dataset;
     const dayOfWeekToNumber = {
       Sunday: 0,
       Monday: 1,
@@ -20,6 +21,11 @@ export default class extends Controller {
     const disabledDays = schedulerDays
       .filter((day) => day.off_day)
       .map((day) => dayOfWeekToNumber[day.day_of_week]);
+
+    const callAvailable = (shop, date) => {
+      console.log(`shop: ${shop}`);
+      this.call_available(shop, date);
+    };
 
     Swal.fire({
       title: "選擇日期",
@@ -43,6 +49,7 @@ export default class extends Controller {
           ],
           onChange: function (selectedDates, dateStr, instance) {
             console.log("change");
+            callAvailable(shop, dateStr);
           },
         });
       },
@@ -53,6 +60,23 @@ export default class extends Controller {
       }
     });
   }
+
+  async call_available(shop, booking_date) {
+    const url = `/api/v1/bookings/${shop}/available_slots`;
+
+    const response = await patch(url, {
+      body: JSON.stringify({ booking_date: booking_date }),
+    });
+
+    if (response.ok) {
+      const result = await response.json;
+      console.log(result);
+    } else {
+      const { url } = await response.json;
+      window.location.href = url;
+    }
+  }
+
   // connect() {
   //   const { servicetimes } = this.element.dataset;
   //   const dayOfWeekToNumber = {
