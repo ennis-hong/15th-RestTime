@@ -9,8 +9,8 @@ export default class extends Controller {
 
   initializeDatePicker(e) {
     e.preventDefault();
-    const { serviceTimes, shop } = this.element.dataset;
-    console.log(serviceTimes);
+    const { serviceTimes, shop, product } = this.element.dataset;
+
     const dayOfWeekToNumber = {
       Sunday: 0,
       Monday: 1,
@@ -25,8 +25,8 @@ export default class extends Controller {
       .filter((day) => day.off_day)
       .map((day) => dayOfWeekToNumber[day.day_of_week]);
 
-    const callAvailable = (shop, date) => {
-      this.call_available(shop, date).then((availableSlots) => {
+    const callAvailable = (shop, date, productId) => {
+      this.call_available(shop, date, productId).then((availableSlots) => {
         const content = Swal.getHtmlContainer();
         if (content) {
           content.replaceChild(
@@ -57,7 +57,10 @@ export default class extends Controller {
           onChange: function (selectedDates, dateStr, instance) {
             const bookingDateLabel = document.querySelector("#bookingDate");
             bookingDateLabel.textContent = dateStr;
-            callAvailable(shop, dateStr);
+            const productId = product
+              ? product
+              : this.selectProductTarget?.value;
+            callAvailable(shop, dateStr, productId);
           },
         });
       },
@@ -71,13 +74,13 @@ export default class extends Controller {
     });
   }
 
-  async call_available(shop, booking_date) {
+  async call_available(shop, booking_date, productId) {
     const url = `/api/v1/bookings/${shop}/available_slots`;
 
     const response = await patch(url, {
       body: JSON.stringify({
         booking_date: booking_date,
-        product: this.selectProductTarget.value,
+        product: productId,
       }),
     });
 
