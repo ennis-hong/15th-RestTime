@@ -16,8 +16,10 @@ export default class extends Controller {
 
   scrollNext() {
     const items = this.itemTargets;
+    // 檢查至少一個元素以上
     if (items.length > 0) {
       const firstItem = items[0];
+      // 渲染到第一個元素
       firstItem.parentNode.appendChild(firstItem);
     }
   }
