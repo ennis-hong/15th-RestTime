@@ -36,6 +36,7 @@ class ShopsController < ApplicationController
 
   def show
     @comments = @shop.comments.order(created_at: :desc)
+    @order = current_user&.orders&.find_by(shop_id: @shop.id, status: 'paid')
   end
 
   def update
@@ -54,6 +55,10 @@ class ShopsController < ApplicationController
 
 
   private
+
+  def render_comment_form(order)
+    render partial: 'comments/form', locals: { order:, shop: params[:shop] }
+  end
 
   def shop_params
     params.require(:shop).permit(
