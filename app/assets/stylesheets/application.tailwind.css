@@ -73,3 +73,16 @@ figure.attachment img {
   object-fit: cover; /* 裁剪並保持圖片的比例 */
 }
 
+html,
+body {
+  @apply h-full m-0 flex flex-col;
+}
+body {
+  @apply flex flex-col;
+}
+main {
+  @apply grow;
+}
+footer {
+  @apply grow-0;
+}
