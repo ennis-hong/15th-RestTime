@@ -145,6 +145,7 @@ tw:
     booking_end_time: 結束時間
     contact_info: 聯絡資訊
     booking_info: 預約資訊
+    confirm_booking_info: 請確認預約細項
     booking_item: 預約項目
     order_info: 訂單資訊
     customer_info: 客戶資訊
@@ -199,6 +200,7 @@ tw:
     all: 所有訂單
     select: 搜尋
     ready_for_use: 尚未使用 
+    book_now: 立即預約
   message:
     the system is busy, please try again later: 系統忙碌中，請稍候再試
     appointment_successful: 預約成功
@@ -217,6 +219,7 @@ tw:
     enter_the_change_time: 請輸入變更時間
     original_time: 原先預約時間
     input_serial_or_name: 輸入訂單編號或姓名
+    input_booked_name: 請填寫預約者姓名
   payment_type:
     Credit_CreditCard: 信用卡  
 
@@ -266,6 +269,9 @@ tw:
     price_order: 價格排序
     service_order: 服務時間排序
     update_order: 更新排序
+    hot: 熱門商品
+    more: (繼續閱讀)
+    flash_sale: 限時優惠
 
 
   datetime:

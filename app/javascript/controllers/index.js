@@ -24,6 +24,9 @@ application.register("products", ProductsController)
 import QrcodeController from "./qrcode_controller"
 application.register("qrcode", QrcodeController)
 
+import ScrollController from "./scroll_controller"
+application.register("scroll", ScrollController)
+
 import SidebarController from "./sidebar_controller"
 application.register("sidebar", SidebarController)
 

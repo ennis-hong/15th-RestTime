@@ -1,49 +1,44 @@
-<div class="grid grid-cols-2 gap-4 mt-8">
-  <div>
-    <div class="card w-full bg-white-100 shadow-xl">
-      <div class="card-body gap-4">
-        <div class="card-title"><%= t('order.booking_info') %></div>
-        <div class="flex justify-between">
-          <span><%= booking_product.title %><%= booking_product.service_min %><%= t('order.min') %></span>
-          <span><%= t('order.currency') %> <%= booking_product.price.to_i %></span>
-        </div>
-        <table class="table text-center">
-          <thead>
-            <tr class="border-2 border-gray-500">
-              <th><%= t('order.booking_date') %></th>
-              <th><%= t('order.booking_start_time') %></th>
-              <th><%= t('order.booking_end_time') %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= format_date(current_booking.service_date) %></td>
-              <td><%= format_time_without_sec(current_booking.service_date) %></td>
-              <td><%= booking_end_time(current_booking) %></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="flex justify-between border-2  border-gray-500 p-4">
-          <span><%= t('order.price') %>：</span>
-          <span><%= t('order.currency') %> <%= booking_product.price.to_i %></span>
-        </div>        
-      </div>
-    </div>
-    <%= render 'form', order: @order%>
-  </div>
-  <div>
-    <div class="card w-full bg-white-100 shadow-xl">
-      <% if booking_shop.cover.attached? %>
-        <figure><%= image_tag booking_shop.cover, class: "w-full h-[300px]" %></figure>
-      <% else %>
-        <figure><img src="https://fakeimg.pl/1000x300/200" class="w-full h-[300px]"></figure>
-      <% end %>
-      <div class="card-body gap-4">
-        <div class="card-title">
-            <p><%= booking_shop.title %></p>
-            <span><%= booking_product.title %><%= booking_product.service_min %><%= t('order.min') %></span>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="text-sm breadcrumbs">
+  <ul>
+    <li><%= link_to t('home'), root_path %></li>
+    <li><%= link_to @shop.title, shop_path(@shop) %></li>
+    <li><%= t('order.booking_info') %></li>
+  </ul>
 </div>
+
+<section class="container mx-auto p-5">
+  <div class="h-[300px] relative">
+    <article class="mt-4 z-10 absolute top-64 left-10 text-white">
+      <h1 class="text-xl font-bold"><%= @shop.title %></h1>
+    </article>
+    <div class="absolute h-[300px] overflow-hidden place-items-center">
+      <% if @shop.cover.attached? %>
+        <%= image_tag @shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+      <% else %>
+        <img src="https://fakeimg.pl/1000x300/200" class="w-full">
+      <% end %>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="card md:col-span-2 bg-white-100 shadow-xl">
+      <ul class="card-body mx-10">
+        <li class="text-lg font-medium mb-3">
+          <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
+            <%= render 'shared/google_map' %>
+          </div>
+        </li>
+        <li class="p-2">
+          <div class="mb-8">
+            <%= render 'shared/shop_info', resource: @shop %>
+            <%= render 'shared/product_info', resource: @shop %>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="card md:col-span-2 bg-white-100 shadow-xl">
+      <div class="mx-12">
+        <%= render 'form', order: @order%>
+      </div>
+    </div >
+  </div>
+</section>

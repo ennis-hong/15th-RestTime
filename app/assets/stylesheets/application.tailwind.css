@@ -67,10 +67,17 @@ figure.attachment img {
   transition: transform 0.7s ease; /* 開始慢、中間快、結束慢 */
 }
 
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  object-fit: cover; /* 裁剪並保持圖片的比例 */
+ul[data-controller="scroll"] {
+  height: 300px;
+  overflow: hidden;
+}
+
+li[data-scroll-target="item"] {
+  transition: transform 0.8s ease-in-out;
+}
+
+li[data-scroll-target="item"]:hover {
+  transform: scale(0.95);
 }
 
 html,
