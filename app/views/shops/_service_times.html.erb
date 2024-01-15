@@ -1,10 +1,11 @@
 <div>
   <p class="flex justify-between items-center mx-2">
     <span class="badge my-2 border py-4 text-sm">
-      <%= t(service_time.day_of_week, scope: %i[service_times]) %>
+      <%= t(service_time.day_of_week.downcase, scope: %i[service_times]) %>
     </span>
     <span class="my-2 border p-2 text-sm">
       <%= display_service_time(service_time) %>
     </span>
   </p>
 </div>
+
