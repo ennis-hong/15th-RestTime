@@ -26,7 +26,7 @@
   height="450"
   frameborder="0" style="border:0"
   referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key=<%=ENV['GOOGLE_API_KEY']%>&q=<%= ERB::Util.url_encode(address(@shop))%>"
+  src="https://www.google.com/maps/embed/v1/place?key=<%= Rails.application.credentials.dig(:google, :api_key) %>&q=<%= ERB::Util.url_encode(address(@shop))%>"
   allowfullscreen>
   </iframe>
 
