@@ -10,7 +10,11 @@
       <h1 class="text-xl font-bold"><%= @shop.title %></h1>
     </article>
     <div class="absolute h-[300px] overflow-hidden place-items-center">
+      <% if @shop.cover.attached? %>
         <%= image_tag @shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+      <% else %>
+        <img src="https://fakeimg.pl/1000x300/200" class="w-full">
+      <% end %>
     </div>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
