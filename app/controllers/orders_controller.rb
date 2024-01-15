@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @shop = current_user.shop
     @order = Order.new
   end
 
