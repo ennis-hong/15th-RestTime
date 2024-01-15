@@ -2,33 +2,37 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import CarouselController from "./carousel_controller"
-application.register("carousel", CarouselController)
-import CalendarController from "./calendar_controller"
-application.register("calendar", CalendarController)
+import CarouselController from "./carousel_controller";
+application.register("carousel", CarouselController);
 
-import DatepickerController from "./datepicker_controller"
-application.register("datepicker", DatepickerController)
+import CalendarController from "./calendar_controller";
+application.register("calendar", CalendarController);
 
-import FlashController from "./flash_controller"
-application.register("flash", FlashController)
+import DatepickerController from "./datepicker_controller";
+application.register("datepicker", DatepickerController);
 
-import LikeController from "./like_controller"
-application.register("like", LikeController)
+import FlashController from "./flash_controller";
+application.register("flash", FlashController);
 
-import ProductsController from "./products_controller"
-application.register("products", ProductsController)
+import LikeController from "./like_controller";
+application.register("like", LikeController);
 
-import QrcodeController from "./qrcode_controller"
-application.register("qrcode", QrcodeController)
+import ProductsController from "./products_controller";
+application.register("products", ProductsController);
 
-import ScrollController from "./scroll_controller"
-application.register("scroll", ScrollController)
+import QrcodeController from "./qrcode_controller";
+application.register("qrcode", QrcodeController);
 
-import SidebarController from "./sidebar_controller"
-application.register("sidebar", SidebarController)
+import ScrollController from "./scroll_controller";
+application.register("scroll", ScrollController);
 
-import TimepickerController from "./timepicker_controller"
-application.register("timepicker", TimepickerController)
+import SidebarController from "./sidebar_controller";
+application.register("sidebar", SidebarController);
+
+import Sweetalert2Controller from "./sweetalert2_controller";
+application.register("sweetalert", Sweetalert2Controller);
+
+import TimepickerController from "./timepicker_controller";
+application.register("timepicker", TimepickerController);

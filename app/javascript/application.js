@@ -2,5 +2,5 @@
 import "@hotwired/turbo-rails";
 import "./controllers";
 import "./scripts";
-import "trix"
-import "@rails/actiontext"
+import "trix";
+import "@rails/actiontext";
