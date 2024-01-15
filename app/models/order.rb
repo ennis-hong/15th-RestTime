@@ -55,5 +55,4 @@ class Order < ApplicationRecord
 
     "RT#{today}#{code}"
   end
-
 end

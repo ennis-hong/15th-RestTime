@@ -22,14 +22,15 @@
                   </span>
                 </div>
               </div>
+              <hr class="border-2">
               <p>
                 <%= product.description.truncate(90) %>
                 <span class="text-sm text-gray-400">
                   <%= link_to t('product.more'), shop_path(@shop) %>
                 </span>
               </p>
-              <span class="text-right">
-                <%= link_to t('order.book_now'), shop_path(@shop), class: 'text-lg text-orange-600' %>
+              <span class="ml-auto badge badge-lg badge-accent badge-outline text-right">
+                <%= link_to t('order.book_now'), shop_path(@shop), class: 'm-2 text-xl text-orange-600 ' %>
               </span>
             </div>
           </div>
