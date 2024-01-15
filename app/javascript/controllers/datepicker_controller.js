@@ -6,18 +6,6 @@ import Swal from "sweetalert2";
 // Connects to data-controller="datepicker"
 export default class extends Controller {
   static targets = ["nextBtn", "serviceDate"];
-  chooseDate = null;
-  chooseTime = null;
-  // connect() {
-  //   this.
-  //   this.
-  //   this.flatpickrInstance = null;
-  // }
-
-  // disconnect() {
-  //   this.chooseDate = null;
-  //   this.chooseTime = null;
-  // }
 
   initializeDatePicker(e) {
     e.preventDefault();
@@ -37,7 +25,6 @@ export default class extends Controller {
       .map((day) => dayOfWeekToNumber[day.day_of_week]);
 
     const callAvailable = (shop, date) => {
-      console.log(`shop: ${shop}`);
       this.call_available(shop, date).then((availableSlots) => {
         const content = Swal.getHtmlContainer();
         if (content) {
@@ -70,15 +57,15 @@ export default class extends Controller {
             const bookingDateLabel = document.querySelector("#bookingDate");
             bookingDateLabel.textContent = dateStr;
             callAvailable(shop, dateStr);
-            console.log(this.chooseDate);
           },
         });
       },
     }).then((result) => {
       if (result.isConfirmed) {
         const bookingDateLabel = document.querySelector("#bookingDate");
-        this.serviceDateTarget.value = bookingDateLabel.textContent;
-        // this.nextBtnTarget.classList.add("bg-gray-400 hover:bg-gray-300");
+        if (bookingDateLabel.checkVisibility()) {
+          this.serviceDateTarget.value = bookingDateLabel.textContent;
+        }
       }
     });
   }
@@ -118,7 +105,7 @@ export default class extends Controller {
     const allBtn = document.querySelectorAll("button");
     allBtn.forEach((btn) => btn.classList.remove("btn-active"));
     e.currentTarget.classList.add("btn-active");
-    // this.chooseTime = e.currentTarget.textContent;
+
     const bookingDateLabel = document.querySelector("#bookingDate");
     bookingDateLabel.textContent = `${bookingDateLabel.textContent} ${e.currentTarget.textContent}`;
     bookingDateLabel.classList.remove("hidden");

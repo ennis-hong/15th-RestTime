@@ -46,10 +46,19 @@
             <%= form_with model: @order, data: { turbo: false } do |f| %>
               <%= f.label :service_date, t('order.reschedule_the_booking_time'), class: 'text-lg text-gray-700 font-bold' %>
               <hr class="mt-1">
-              <%= f.text_field :service_date, data: { controller: 'datepicker', serviceTimes: filter_service_times(@order.product.shop.service_times)}, class: 'input input-bordered w-full mt-4 text-center' %>
+              <%= f.text_field :service_date,
+                    value: format_datetime(@order.service_date), 
+                    data: {
+                        products_target: 'serviceDate',
+                        datepicker_target: 'serviceDate',
+                        controller: 'datepicker',
+                        action: "mousedown->datepicker#initializeDatePicker",
+                        serviceTimes: filter_service_times(@order.product.shop.service_times),
+                        shop: @shop.id,
+                      }, class: 'input input-bordered w-full mt-4 text-center' %>
               <%= f.button t('order.change_booking_time'), 
-              class: 'order_accent_btn',
-              type: 'submit' %>
+                    class: 'order_accent_btn',
+                    type: 'submit' %>
             <% end %>
               <%= link_to t('form.back'), request.referrer, class: 'order_gray_btn btn text-lg' %>
           </div>
