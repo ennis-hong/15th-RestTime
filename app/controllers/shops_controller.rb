@@ -56,10 +56,6 @@ class ShopsController < ApplicationController
 
   private
 
-  def render_comment_form(order)
-    render partial: 'comments/form', locals: { order:, shop: params[:shop] }
-  end
-
   def shop_params
     params.require(:shop).permit(
       :title, :tel, :description,
