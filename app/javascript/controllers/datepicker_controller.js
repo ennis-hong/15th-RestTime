@@ -5,11 +5,12 @@ import Swal from "sweetalert2";
 
 // Connects to data-controller="datepicker"
 export default class extends Controller {
-  static targets = ["nextBtn", "serviceDate"];
+  static targets = ["nextBtn", "serviceDate", "selectProduct"];
 
   initializeDatePicker(e) {
     e.preventDefault();
-    const { servicetimes, shop } = this.element.dataset;
+    const { serviceTimes, shop } = this.element.dataset;
+    console.log(serviceTimes);
     const dayOfWeekToNumber = {
       Sunday: 0,
       Monday: 1,
@@ -19,7 +20,7 @@ export default class extends Controller {
       Friday: 5,
       Saturday: 6,
     };
-    const schedulerDays = JSON.parse(servicetimes);
+    const schedulerDays = JSON.parse(serviceTimes);
     const disabledDays = schedulerDays
       .filter((day) => day.off_day)
       .map((day) => dayOfWeekToNumber[day.day_of_week]);
@@ -74,7 +75,10 @@ export default class extends Controller {
     const url = `/api/v1/bookings/${shop}/available_slots`;
 
     const response = await patch(url, {
-      body: JSON.stringify({ booking_date: booking_date }),
+      body: JSON.stringify({
+        booking_date: booking_date,
+        product: this.selectProductTarget.value,
+      }),
     });
 
     if (response.ok) {
