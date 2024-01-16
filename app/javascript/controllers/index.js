@@ -18,6 +18,9 @@ application.register("flash", FlashController);
 import LikeController from "./like_controller";
 application.register("like", LikeController);
 
+import ProductInfoController from "./product_info_controller";
+application.register("product-info", ProductInfoController);
+
 import ProductsController from "./products_controller";
 application.register("products", ProductsController);
 

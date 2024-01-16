@@ -60,48 +60,56 @@
       </div>
     </div >
   </div>
-
-  
-
 </section>
-<div class="card md:col-span-2 mt-4">
-  <div class="carousel w-full">
-    <div id="slide1" class="carousel-item relative w-full">
-    <% @shop.products.each do |product| %>
-      <div class="card card-compact w-96 bg-gray-200 mx-2 relative">
-        <figure class="relative h-48 overflow-hidden">
-          <%= image_tag product.cover.variant(:cover) %>
-          <div class="absolute bottom-0 left-0 right-0 bg-opacity-75 bg-gray-700 p-2">
-            <div class="absolute bottom-0 left-0 right-0 bg-opacity-75 bg-gray-700 p-2 flex items-center justify-center">
-              <p class="text-sm font-semibold text-center text-white">
+<section>
+  <h3 class="text-center text-3xl text-gray-600 my-6"><%= t('product.hot') %></h3>
+  <div class="card md:col-span-2 mt-4">
+    <div class="carousel">
+      <div class="carousel-item relative w-full ">
+      <% @products_on_sale.each do |product| %>
+    <div data-controller="product-info"
+        data-product-info-title-value="<%= product.title %>"
+        data-product-info-description-value="<%= product.description %>"
+        data-product-info-price-value="<%= "NT#{format_price(product.price)}" %>"
+        data-product-info-image-url-value="<%= url_for(product.cover.variant(:cover)) %>"
+        data-product-info-service-min-value="<%= "#{product.service_min}#{t('order.min')}" %>"
+        data-product-info-url-value="<%= product_url(product) %>"
+        data-action="click->product-info#showDetails"
+        class="card card-compact w-96 bg-gray-200 <%= @onsale_count >= 5 ? 'mx-2' : 'mx-auto' %> relative cursor-pointer">
+        
+          <figure class="relative h-48 overflow-hidden">
+            <%= image_tag product.cover.variant(:cover) %>
+            <div class="absolute bottom-0 left-0 right-0 bg-opacity-75 bg-gray-700 p-2 rounded-tl rounded-tr">
+              <p class="text-sm font-semibold text-center text-white ">
                 <%= t('product.flash_sale') %>
-                <span class="text-2xl font-bold text-orange-600">
+                <span class="text-2xl font-bold text-orange-500">
                   $<%= format_price(product.price) %>
                 </span>
               </p>
             </div>
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title text-lg">
+              <%= product.title.truncate(13) %>
+              <hr class="border-3">
+            </h2>
+            <p>
+              <%= product.description.truncate(100) %>
+              <span class="text-sm text-gray-400">
+                <%= t('product.more') %>
+              </span>
+            </p>
           </div>
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title">
-            <%= product.title %>
-          <hr class="border-3">
-          </h2>
-          <p>
-            <%= product.description.truncate(90) %>
-            <span class="text-sm text-gray-400">
-              <%= link_to t('product.more'), shop_path(@shop) %>
-            </span>
-          </p>
         </div>
-      </div>
-    <% end %>
-    </div> 
+      <% end %>
+      </div> 
+    </div>
   </div>
-</div>
+</section>
 <div class="comment-container">
   <%= render 'comments/form', shop: @shop %>
   <% @comments.each do |comment| %>
     <%= render 'comments/comment', shop: @shop, comment: comment %>
   <% end %>
 </div>
+

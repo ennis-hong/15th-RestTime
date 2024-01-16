@@ -1,12 +1,113 @@
 
-<% if policy(@product).update? %>
-  <%= link_to t('product.delete'), product_path(@product), class: 'btn', method: :delete, data: {
-   turbo_method: 'delete',
-   turbo_confirm: t('product.confirm_delete')
- } %>
-<% end %>
-<%= image_tag @product.cover.variant(:thumb) if @product.cover.attached? %>
+<div class="text-sm breadcrumbs">
+  <ul>
+    <li><%= link_to t('home'), root_path %></li>
+    <li><%= @product.shop.title %></li>
+  </ul>
+</div>
 
-<h3><%=t('form.price')%>:<%= @product.price %><%=t('product.doller')%></h3>
-<h3><%=t('form.service_min')%>:<%= @product.service_min %><%=t('product.min')%></h3>
-<p><%=t('form.description')%>:<%= simple_format(@product.description) %></p>
+<section class="container mx-auto p-5">
+  <div class="h-[300px] relative">
+    <article class="mt-4 z-10 absolute top-64 left-10 text-white">
+      <h1 class="text-xl font-bold"><%= @product.shop.title %></h1>
+    </article>
+    <div class="absolute h-[300px] overflow-hidden place-items-center">
+      <% if @product.shop.cover.attached? %>
+        <%= image_tag @product.shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+      <% else %>
+        <img src="https://fakeimg.pl/1000x300/200" class="w-full">
+      <% end %>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="card md:col-span-2 bg-white-100 shadow-xl">
+      <div class="card-body mx-10">
+        <ul class="text-lg font-medium mb-3">
+          <li class="mb-4">
+            <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
+              <%= render 'shared/google_map' %>
+            </div>
+          </li>
+          <div class="p-2">
+            <div class="mb-8">
+              <%= render 'shared/shop_info',resource: @shop %>
+            </div>
+          </div>
+          <div class="flex">
+            <%=render 'shared/business_hours' %>
+          </div>
+          <hr class="my-6">
+        </ul>
+      </div>
+    </div>
+    <div class="card md:col-span-2 bg-white-100 shadow-xl">
+      <div class="card md:col-span-2">
+        <div class="card-body">
+          <div class="carousel mx-12">
+            <div class="">
+              <div class="card w-full bg-base-100 image-full">
+                <figure><%= image_tag @product.cover.variant(:cover) %></figure>
+                <div class="card-body">
+                  <h2 class="card-title">商品title</h2>
+                  <%= @product.service_min %>
+                  <p><%= @product.description %></p>
+                </div>
+              </div>
+              <div class="">
+                <%= render 'booking', { shop: @shop, product: @product, service_times: @shop.service_times } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+    </div >
+  </div>
+</section>
+<section>
+  <h3 class="text-center text-3xl text-gray-600 my-6"><%= t('product.hot') %></h3>
+  <div class="card md:col-span-2 mt-4">
+    <div class="carousel">
+      <div class="carousel-item relative w-full ">
+      <% @products_on_sale.each do |product| %>
+    <div data-controller="product-info"
+        data-product-info-title-value="<%= product.title %>"
+        data-product-info-description-value="<%= product.description %>"
+        data-product-info-price-value="<%= "NT#{format_price(product.price)}" %>"
+        data-product-info-image-url-value="<%= url_for(product.cover.variant(:cover)) %>"
+        data-product-info-service-min-value="<%= "#{product.service_min}#{t('order.min')}" %>"
+        data-product-info-url-value="<%= product_url(product) %>"
+        data-action="click->product-info#showDetails"
+        class="card card-compact w-96 bg-gray-200 <%= @onsale_count >= 5 ? 'mx-2' : 'mx-auto' %> relative cursor-pointer">
+        
+          <figure class="relative h-48 overflow-hidden">
+            <%= image_tag product.cover.variant(:cover) %>
+            <div class="absolute bottom-0 left-0 right-0 bg-opacity-75 bg-gray-700 p-2 rounded-tl rounded-tr">
+              <p class="text-sm font-semibold text-center text-white ">
+                <%= t('product.flash_sale') %>
+                <span class="text-2xl font-bold text-orange-500">
+                  $<%= format_price(product.price) %>
+                </span>
+              </p>
+            </div>
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title text-lg">
+              <%= product.title.truncate(13) %>
+              <hr class="border-3">
+            </h2>
+            <p>
+              <%= product.description.truncate(100) %>
+              <span class="text-sm text-gray-400">
+                <%= t('product.more') %>
+              </span>
+            </p>
+          </div>
+        </div>
+      <% end %>
+      </div> 
+    </div>
+  </div>
+</section>
+

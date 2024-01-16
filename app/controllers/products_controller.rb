@@ -14,7 +14,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    authorize :product
+    # authorize :product
+    @shop = current_user.shop
+    @products_on_sale = @shop.products.where(onsale: true)
+    @onsale_count = @shop.products.count { |product| product.onsale }
   end
 
   def my
