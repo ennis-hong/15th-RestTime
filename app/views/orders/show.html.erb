@@ -24,12 +24,12 @@
       <ul class="card-body mx-10">
         <li class="text-lg font-medium mb-3">
           <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
-            <%= render 'shared/google_map' %>
+            <%= render 'shared/google_map', shop: @order.shop %>
           </div>
         </li>
         <div class="p-2">
           <div class="mb-8">
-            <%= render 'shared/shop_info', resource: @order.shop %>
+            <%= render 'shared/shop_info', shop: @order.shop %>
           </div>
           <%= render "shared/business_hours" %>
         </div>

@@ -11,7 +11,7 @@
       <h1 class="text-xl font-bold"><%= @shop.title %></h1>
     </article>
     <div class="absolute h-[300px] overflow-hidden place-items-center">
-        <%= shop_cover(@shop, :thumb) %>
+        <%= image_tag @shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
     </div>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -19,12 +19,12 @@
       <ul class="card-body mx-10">
         <li class="text-lg font-medium mb-3">
           <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
-            <%= render 'shared/google_map' %>
+            <%= render 'shared/google_map', shop: @shop %>
           </div>
         </li>
         <div class="p-2">
           <div class="mb-8">
-            <%= render 'shared/shop_info', resource: @shop %>
+            <%= render 'shared/shop_info', shop: @shop %>
           </div>
           <div class="flex">
             <%=render 'shared/business_hours' %>
@@ -37,12 +37,6 @@
           <hr class="my-6">
         </div>
       </ul>
-      <div class="comment-container">
-        <%= render 'comments/form', shop: @shop %>
-        <% @comments.each do |comment| %>
-          <%= render 'comments/comment', shop: @shop, comment: comment %>
-        <% end %>
-      </div>
     </div>
     <div class="card md:col-span-2 bg-white-100 shadow-xl">
       <div class="card-body" data-controller="carousel">

@@ -1,7 +1,7 @@
 <div class="text-sm breadcrumbs">
   <ul>
     <li><%= link_to t('home'), root_path %></li>
-    <li><%= link_to @shop.title, shop_path(@shop) %></li>
+    <li><%= link_to booking_shop.title, shop_path(booking_shop) %></li>
     <li><%= t('order.booking_info') %></li>
   </ul>
 </div>
@@ -9,11 +9,11 @@
 <section class="container mx-auto p-5">
   <div class="h-[300px] relative">
     <article class="mt-4 z-10 absolute top-64 left-10 text-white">
-      <h1 class="text-xl font-bold"><%= @shop.title %></h1>
+      <h1 class="text-xl font-bold"><%= booking_shop.title %></h1>
     </article>
     <div class="absolute h-[300px] overflow-hidden place-items-center">
-      <% if @shop.cover.attached? %>
-        <%= image_tag @shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+      <% if booking_shop.cover.attached? %>
+        <%= image_tag booking_shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
       <% else %>
         <img src="https://fakeimg.pl/1000x300/200" class="w-full">
       <% end %>
@@ -24,13 +24,13 @@
       <ul class="card-body mx-10">
         <li class="text-lg font-medium mb-3">
           <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
-            <%= render 'shared/google_map' %>
+            <%= render 'shared/google_map', shop: booking_shop %>
           </div>
         </li>
         <li class="p-2">
           <div class="mb-8">
-            <%= render 'shared/shop_info', resource: @shop %>
-            <%= render 'shared/product_info', resource: @shop %>
+            <%= render 'shared/shop_info', shop: booking_shop %>
+            <%= render 'shared/product_info', shop: booking_shop %>
           </div>
         </li>
       </ul>
