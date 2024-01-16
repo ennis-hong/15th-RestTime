@@ -101,8 +101,8 @@ tw:
         contact: 聯繫方式
         status: 狀態
         create shop: "建立店家"
-        sort by city: "依照城市排序"
-        sort by updated at: "更新時間排序"
+        sort_by_city: "依照城市排序"
+        sort_by_updated_at: "更新時間排序"
       show:
         address: 地址
         comment: 店家評價
@@ -349,7 +349,7 @@ tw:
         redemption: 預約使用核銷說明
         redemption_notice: 核銷注意
   footer:
-    about_resttime: 認識ResttTime
+    about_restime: 認識ResTime
     our_origin: 我們的誕生
     terms: 條款
     privacy_policy: 隱私權政策
