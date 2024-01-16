@@ -233,6 +233,7 @@ tw:
     system_notification: 系統通知
     appointment: 預約管理
     message: 客戶訊息
+    my_order_calendar: 我的預定月曆
 
   product:
     create_success: 產品創建成功
@@ -343,7 +344,6 @@ tw:
       - 星期五
       - 星期六
 
-    date:
     month_names:
       - 一月
       - 二月
