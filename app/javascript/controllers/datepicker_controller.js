@@ -24,8 +24,8 @@ export default class extends Controller {
     const disabledDays = schedulerDays
       .filter((day) => day.off_day)
       .map((day) => dayOfWeekToNumber[day.day_of_week]);
-
-    const callAvailable = (shop, date, productId) => {
+    const productId = this.selectProductTarget.value;
+    const callAvailable = (shop, date) => {
       this.call_available(shop, date, productId).then((availableSlots) => {
         const content = Swal.getHtmlContainer();
         if (content) {
@@ -57,10 +57,7 @@ export default class extends Controller {
           onChange: function (selectedDates, dateStr, instance) {
             const bookingDateLabel = document.querySelector("#bookingDate");
             bookingDateLabel.textContent = dateStr;
-            const productId = product
-              ? product
-              : this.selectProductTarget?.value;
-            callAvailable(shop, dateStr, productId);
+            callAvailable(shop, dateStr);
           },
         });
       },

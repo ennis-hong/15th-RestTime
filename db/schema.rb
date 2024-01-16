@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_06_175513) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_16_035456) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -155,6 +155,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_175513) do
     t.string "contact"
     t.string "contactphone"
     t.string "status"
+    t.integer "overlap", default: 1, null: false
     t.index ["deleted_at"], name: "index_shops_on_deleted_at"
     t.index ["user_id"], name: "index_shops_on_user_id"
   end

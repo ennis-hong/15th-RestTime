@@ -143,6 +143,7 @@ tw:
     booking_time_slot: 預約時段
     booking_start_time: 開始時間
     booking_end_time: 結束時間
+    booking_full: 此預約時段已滿，請重新選取
     contact_info: 聯絡資訊
     booking_info: 預約資訊
     confirm_booking_info: 請確認預約細項

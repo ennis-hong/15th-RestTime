@@ -48,6 +48,7 @@
             <%= form_with model: @order, data: { turbo: false } do |f| %>
               <%= f.label :service_date, t('order.reschedule_the_booking_time'), class: 'text-lg text-gray-700 font-bold' %>
               <hr class="mt-1">
+              <%= f.hidden_field :product_id, data: { datepicker_target: 'selectProduct' }%>
               <%= f.text_field :service_date,
                     value: format_datetime(@order.service_date), 
                     data: {

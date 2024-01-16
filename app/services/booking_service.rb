@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class BookingService
-  def initialize(service_times = {}, bookings = [], product = nil)
-    @service_times = service_times
-    @bookings = bookings
+  def initialize(shop, product)
+    @shop = shop
+    @service_times = shop.service_times
+    @bookings = shop.orders.valid
     @product = product
   end
+
 
   # 生成指定日期所有預約時段
   def generate_time_slots(date)
@@ -37,12 +39,16 @@ class BookingService
           booking[:service_date] <= slot &&
           booking[:service_date] + booking[:service_min].minutes > slot
       end
-      overlapping_booking < 3
+      overlapping_booking < @product.shop.overlap
     end
   end
 
   # 簡化用於顯示時分
   def display_available_slots(date)
     available_slots(date).map { |slot| slot.strftime('%H:%M') }
+  end
+
+  def available_booking?(date)
+    available_slots(date).include?(date)
   end
 end
