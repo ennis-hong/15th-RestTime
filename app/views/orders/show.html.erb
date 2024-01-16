@@ -1,12 +1,11 @@
-<div class="text-sm breadcrumbs">
-  <ul>
-    <li><%= link_to t('home'), root_path %></li>
-    <li><%= link_to t('my_bookings'), orders_path %></li>
-    <li><%= t('order.order_info') %></li>
-  </ul>
-</div>
-
 <section class="container mx-auto p-5">
+  <div class="text-sm breadcrumbs">
+    <ul>
+      <li><%= link_to t('home'), root_path %></li>
+      <li><%= link_to t('navbar.mybookings'), orders_path %></li>
+      <li><%= t('order.order_info') %></li>
+    </ul>
+  </div>
   <div class="h-[300px] relative">
     <article class="mt-4 z-10 absolute top-64 left-10 text-white">
       <h1 class="text-xl font-bold"><%= @order.shop.title %></h1>
