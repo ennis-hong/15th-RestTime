@@ -8,7 +8,6 @@ class BookingService
     @product = product
   end
 
-
   # 生成指定日期所有預約時段
   def generate_time_slots(date)
     slots = []

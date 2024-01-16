@@ -6,13 +6,13 @@ module Api
       before_action :find_shop, only: [:available_slots]
 
       def available_slots
-        date_range = params[:booking_date].to_date.beginning_of_day..params[:booking_date].to_date.end_of_day
         product = @shop.products.find_by(id: params[:product])
 
         booking_service = BookingService.new(@shop, product)
         available_slots = booking_service.display_available_slots(
-                                          DateTime.parse(params[:booking_date],
-                                          '%Y/%m/%d %H:%M'))
+                            DateTime.parse(params[:booking_date],
+                                          '%Y/%m/%d %H:%M')
+                          )
         render json: { available_slots: }
       end
 

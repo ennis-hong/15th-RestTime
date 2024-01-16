@@ -26,9 +26,7 @@ class OrdersController < ApplicationController
     @order.service_min = booking_product.service_min
 
     booking_service = BookingService.new(booking_product.shop, booking_product)
-    unless booking_service.available_booking?(@order.service_date)
-      return render :new, notice: t('order.booking_full')
-    end
+    return render :new, notice: t('order.booking_full') unless booking_service.available_booking?(@order.service_date)
 
     if @order.save
       add_mac_value(payment_params(@order))

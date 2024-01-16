@@ -12,7 +12,7 @@ class Order < ApplicationRecord
 
   before_create :generate_serial
 
-  scope :valid, ->{ where.not(status: %i[completed cancelled]) }
+  scope :valid, -> { where.not(status: %i[completed cancelled]) }
 
   aasm column: 'status', no_direct_assignment: true do
     state :pending, initial: true
