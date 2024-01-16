@@ -6,7 +6,7 @@ module Vendor
     before_action :find_order, only: %i[show confirm_redeem redeem]
 
     def my
-      @orders = current_user.shop.orders.includes(:product)
+      @orders = current_user_shop.orders.includes(:product)
 
       filter_by_date_range if params[:start_date].present? && params[:end_date].present?
 
