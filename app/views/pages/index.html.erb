@@ -19,13 +19,13 @@
   </div>
 </div>
 
-<section class="p-10 pb-28">
-  <h2 class="text-2xl text-center p-10">熱門精選，立即體驗</h2>
-  <div class="grid grid-cols-3 space-x-5 h-36">
-    <%= link_to root_path do %>
-      <div class="hero min-h-full bg-center" style="background-image: url('<%= asset_url('pages/banner2.avif') %>');">
+<h2 class="text-2xl text-center p-10">熱門精選，立即體驗</h2>
+<section class="pb-28">
+  <div class="flex-col md:grid grid-cols-3 space-x-2 ">
+    <%= link_to shops_path(q: { s: 'updated_at desc' }) do %>
+      <div class="hero bg-center min-w-screen md:flex-1" style="background-image: url('<%= asset_url('pages/banner2.avif') %>');">
         <div class="hero-overlay bg-opacity-60 bg-gray-400"></div>
-        <div class="hero-content text-center text-neutral-content">
+        <div class="hero-content text-center text-neutral-content flex items-center justify-center">
           <div class="max-w-md">
             <h2 class="m-5 text-3xl text-white">新上架精選</h2>
           </div>
@@ -34,9 +34,9 @@
     <% end %>
 
     <%= link_to root_path do %>
-      <div class="hero min-h-full bg-center" style="background-image: url('<%= asset_url('pages/banner3.avif') %>');">
+      <div class="hero min-w-screen md:flex-1 bg-center" style="background-image: url('<%= asset_url('pages/banner3.avif') %>');">
         <div class="hero-overlay bg-opacity-60 bg-gray-400"></div>
-        <div class="hero-content text-center text-neutral-content">
+        <div class="hero-content text-center text-neutral-content flex items-center justify-center">
           <div class="max-w-md">
             <h2 class="m-5 text-3xl text-white">冬季按摩推薦</h2>
           </div>
@@ -45,9 +45,9 @@
     <% end %>
 
     <%= link_to root_path do %>
-      <div class="hero min-h-full bg-center" style="background-image: url('<%= asset_url('pages/banner4.avif') %>');">
+      <div class="hero min-w-screen md:flex-1 bg-center" style="background-image: url('<%= asset_url('pages/banner4.avif') %>');">
         <div class="hero-overlay bg-opacity-60 bg-gray-400"></div>
-        <div class="hero-content text-center text-neutral-content">
+        <div class="hero-content text-center text-neutral-content flex items-center justify-center">
           <div class="max-w-md">
             <h2 class="m-5 text-3xl text-white">美甲口碑推薦</h2>
           </div>
@@ -57,7 +57,7 @@
   </div>
 </section>
 
-<section class="p-10 pt-24 bg-primary pb-28">
+<section class="p-5 bg-primary hidden">
   <h2 class="text-2xl text-white text-center p-10">輕鬆預約，享受美好</h2>
   <div class="carousel carousel-center p-4 space-x-4 bg-ghost">
     <div class="carousel-item">
@@ -72,8 +72,17 @@
       <% end %>
     </div> 
 
-    <!-- Repeat the structure for other carousel items -->
+        <div class="carousel-item">
+      <%= link_to root_path do %>
+        <img src="<%= asset_url('pages/shops/1.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+      <% end %>
+    </div> 
 
+    <div class="carousel-item">
+      <%= link_to root_path do %>
+        <img src="<%= asset_url('pages/shops/2.avif') %>" class="rounded-box" style="width: 300px; height: 300px; object-fit: cover;" />
+      <% end %>
+    </div> 
   </div>
 </section>
 
