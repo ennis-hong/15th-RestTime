@@ -1,8 +1,6 @@
 <% [:notice, :alert].each do |type| %>
   <% if flash[type] %>
-    <div data-controller="sweetalert" data-sweetalert-target="abc" data-content="<%= flash[type] %>" class="flash-<%= type %> flex items-center justify-between">
-      <%= flash[type] %>
-          <button data-action="flash#close" class="px-2 pmt-16 y-1 bg-white text-black rounded">x</button>
+    <div data-controller="sweetalert" data-sweetalert-target="abc" data-content="<%= flash[type] %>">
     </div>
   <% end %>
 <% end %>
