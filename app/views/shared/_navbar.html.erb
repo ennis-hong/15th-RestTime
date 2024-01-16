@@ -1,48 +1,66 @@
-<nav class="navbar bg-white fixed w-full top-0 z-20 px-24 h-16">
-  <div class="flex-1">
-    <h1 class="btn btn-ghost text-3xl text-primary hover:bg-accent"><%= link_to "RestTime", root_path %></h1>
-      <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to t('navbar.homepage'), index_path %></span>
-      <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to t('navbar.products'), products_path %></span>
-      <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to t('navbar.shops'), shops_path %></span>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <div class=" bg-white fixed w-full top-0 z-20 opacity-95">
+      <div x-data="{ open: false }" class="flex flex-col w-full px-4 mx-auto items-center justify-between md:flex-row">
+        <div class="flex flex-row items-center justify-between p-4">
+            <h1 class="text-2xl text-primary">
+              <%= link_to "RestTime", root_path %>
+            </h1>
+          <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
+            <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+              <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+              <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+        <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex xl:justify-center xl:flex-row">
+          <ul class="menu md:menu-horizontal">
+            <div class="flex items-center justify-center">
+              <form action="<%= search_path %>" data-turbo="false">
+                <input type="search" name="q" class="input input-bordered h-7 bg-white">
+                <button class="btn btn-sm btn-primary"><%= t(:search) %></button>
+              </form>
+            </div>
+            <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
+              <%= link_to t('navbar.homepage'), index_path %>
+            </span>
+            <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
+              <%= link_to t('navbar.products'), products_path %>
+            </span>
+            <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
+              <%= link_to t('navbar.shops'), shops_path %>
+            </span>
+            <% if user_signed_in? %>
+              <li>
+                <details>
+                  <summary class="text-center">
+                    <% if policy(:shop).index? %>
+                      <div class="bg-warning text-white px-2 py-1 rounded-md text-sm">
+                        <%= t("user_roles.#{current_user.role}") %>
+                      </div>
+                    <% end %>
+                    <i class="fa-solid fa-user"></i>
+                    <%= current_user.email%>
+                  </summary>
+                  <!-- 下拉選單 -->
+                  <ul class="py-5">
+                    <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" } %></li>
+                    <li><%= link_to(t('navbar.edit password'), edit_registration_path(:user)) %></li>
+                    <% if policy(:shop).index? %>
+                      <li><%= link_to t('navbar.my_backstage'), vendor_index_path, class: 'text-red-500' %></li>
+                    <% end %>
+                    <li><%= link_to t('my_orders'), orders_path %></li>
+                  </ul>
+                </details>
+              </li>
+            <% else %>
+              <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
+                <%= link_to '註冊', new_user_registration_path %>
+              </span>
+              <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
+                <%= link_to '登入', new_user_session_path %>
+              </span>
+            <% end %>
+          </ul>  
+        </nav>
+    </div>
   </div>
-  <div class="flex items-center justify-center">
-    <form action="<%= search_path %>" data-turbo="false">
-      <input type="search" name="q" class="input input-bordered h-8 bg-white">
-      <button class="btn btn-sm btn-primary"><%= t(:search) %></button>
-    </form>
-  </div>
-  <div class="flex-none">
-    <ul class="flex gap-3 menu menu-horizontal px-1">
-      <% if user_signed_in? %>
-        <li>
-          <details>
-            <summary>
-              <% if policy(:shop).index? %>
-                <div class="bg-warning text-white px-2 py-1 rounded-md text-sm inline-block">
-                  <%= t("user_roles.#{current_user.role}") %>
-                </div>
-              <% end %>
-              <i class="fa-solid fa-user"></i>
-              <%= current_user.email %>
-            </summary>
-  
-            <%# 下拉選單 %>
-            <ul class="py-5">
-              <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" } %></li>
-              <li><%= link_to(t('navbar.edit password'), edit_registration_path(:user)) %></li>
-              <% if policy(:shop).index? %>
-                <li><%= link_to t('navbar.my_backstage'), vendor_index_path, class: 'text-red-500' %></li>
-              <% end %>
-              
-              <li><%= link_to t('my_orders'), orders_path %></li>
-            </ul>
-          </details>
-        </li>
-      <% else %>
-        <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to '註冊', new_user_registration_path %></span>
-        <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent"><%= link_to '登入', new_user_session_path %></span>
-      <% end %>
-    </ul>
-  </div>
-</nav>
-

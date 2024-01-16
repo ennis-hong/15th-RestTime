@@ -1,3 +1,4 @@
+<div class="max-w-screen">
 <nav class="navbar p-1 fixed w-full top-0 z-20 mb-11">
   <div class="navbar-start h-5">
     <div class="dropdown" data-controller="sidebar">
@@ -9,25 +10,9 @@
       <div data-sidebar-target="menu" class="hidden">
         <ul tabindex="0" data-sidebar-target="menu" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow text-stone-600 bg-base-100 rounded-box w-52">
           <%= render "vendor/sidebar" %>
-        </ul>
-      </div>
-    </div>
-    <h1 class="btn btn-ghost text-2xl  text-secondary"><%= link_to "RestTime", root_path %></h1>
-    <div class="badge badge-warning text-secondary text-s"><%=t('navbar.vendor_backstage')%></div>
-    <span class="btn btn-ghost text-secondary"><%= link_to t('navbar.homepage_front'), index_path %></span>
-
-  </div>
-  <%# 中間文字 %>
-  <div class="flex-none navbar-end text-secondary">
-    <ul class="flex menu menu-horizontal px-1">
       <li>
         <details>
             <summary>
-              <% if policy(:shop).index? %>
-                <div class="bg-warning text-white px-2 py-1 rounded-md text-sm inline-block">
-                  <%= t("user_roles.#{current_user.role}") %>
-                </div>
-              <% end %>
               <i class="fa-solid fa-user"></i>
               <%= current_user.email %>
             </summary>
@@ -42,6 +27,20 @@
           </ul>
         </details>
       </li>
-    </ul>
+        </ul>
+      </div>
+    </div>
+    <h1 class="btn btn-ghost text-2xl  text-secondary"><%= link_to "RestTime", root_path %></h1>
+    <span class="btn btn-ghost text-secondary"><%= link_to t('navbar.homepage_front'), index_path %></span>
+
+  </div>
+  <%# 中間文字 %>
+  <div class="flex-none navbar-end text-secondary p-2">
+        <div class="badge badge-warning text-secondary text-s"><%= link_to t('navbar.mybackstage'), vendor_index_path %></div>
   </div>
 </nav>
+</div>
+
+
+
+
