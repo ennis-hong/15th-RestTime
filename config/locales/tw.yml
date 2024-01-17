@@ -148,6 +148,7 @@ tw:
     booking_full: 此預約時段已滿，請重新選取
     contact_info: 聯絡資訊
     booking_info: 預約資訊
+    product_info: 商品資訊
     confirm_booking_info: 請確認預約細項
     booking_item: 預約項目
     order_info: 訂單資訊
