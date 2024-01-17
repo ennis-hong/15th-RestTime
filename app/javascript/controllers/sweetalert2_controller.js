@@ -6,12 +6,12 @@ export default class extends Controller {
 
   connect() {
     Swal.fire({
-      position: "top-end",
+      position: "center",
       text: this.alertTarget.dataset.content,
-      icon: "success",
+      icon: "error",
       showConfirmButton: false,
-      width: "200px",
-      timer: 1500,
+      width: "300px",
+      timer: 3000,
     });
   }
 }
