@@ -162,4 +162,6 @@ footer {
 #slots .btn-outline {
   border-color: white;
   border: 1px solid;
+.pagination span {
+  @apply join-item btn btn-primary m-0;
 }
