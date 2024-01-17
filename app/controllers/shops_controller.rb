@@ -43,6 +43,7 @@ class ShopsController < ApplicationController
     if @shop.update(shop_params)
       redirect_to vendor_index_path, notice: t(:updated, scope: %i[views shop message])
     else
+      flash.now[:alert] = '更新商店資訊時發生錯誤'
       render :edit
     end
   end
@@ -52,7 +53,6 @@ class ShopsController < ApplicationController
   def search
     @shops = Shop.ransack(title_cont: params[:q]).result.page(params[:page])
   end
-
 
   private
 

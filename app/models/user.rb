@@ -47,7 +47,6 @@ class User < ApplicationRecord
 
     shop = Shop.new(
       title: email,
-      description: 'Default Description',
       district: 'Default District',
       city: 'Default City',
       street: 'Default Street',

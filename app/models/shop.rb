@@ -21,14 +21,14 @@ class Shop < ApplicationRecord
   after_create :create_service_times
 
   validates :title, presence: true
-  validates :description, presence: true
   validates :district, presence: true
   validates :city, presence: true
   validates :street, presence: true
   validates :contact, presence: true
-  validates :tel, presence: true, length: { maximum: 50 },
+  validates :tel, presence: true, length: { maximum: 10 },
                   format: { with: /\A[\d\+\-\(\)]+\z/, message: '格式不正確' }
-  validates :contactphone, presence: true, length: { maximum: 50 },
+
+  validates :contactphone, presence: true, length: { maximum: 10 },
                            format: { with: /\A[\d\+\-\(\)]+\z/, message: '格式不正確' }
 
   def set_default_status
