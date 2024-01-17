@@ -18,10 +18,12 @@ tw:
     mybackstage: 我的後台
     mybookings: 我的預定
     vendor_backstage: 商家後台
+    search_shop: 搜尋店家
 
 
   
   search: 搜尋
+
   home: 首頁
   my_orders: 我的預約 
   cancel: 取消

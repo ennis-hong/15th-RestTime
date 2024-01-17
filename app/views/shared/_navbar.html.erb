@@ -16,7 +16,7 @@
           <ul class="menu md:menu-horizontal">
             <div class="flex items-center justify-center">
               <form action="<%= search_path %>" data-turbo="false">
-                <input type="search" name="q" class="input input-bordered h-7 bg-white">
+                <input type="search" name="q" class="input input-bordered" placeholder="<%= t('navbar.search_shop')%>">
                 <button class="btn btn-sm btn-primary"><%= t(:search) %></button>
               </form>
             </div>

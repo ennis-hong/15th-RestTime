@@ -10,7 +10,7 @@
         </p>
         <div class="flex items-center justify-center">
           <form action="<%= search_path %>" data-turbo="false">
-            <input type="search" name="q" class="input input-bordered">
+            <input type="search" name="q" class="input input-bordered" placeholder="<%= t('navbar.search_shop')%>">
             <button class="btn btn-primary"><%= t('homepage.star') %></button>
           </form>
         </div>
@@ -33,7 +33,7 @@
       </div>
     <% end %>
 
-    <%= link_to root_path do %>
+    <%= link_to shops_path(q: { s: 'city desc' }) do %>
       <div class="hero min-w-screen md:flex-1 bg-center" style="background-image: url('<%= asset_url('pages/banner3.avif') %>');">
         <div class="hero-overlay bg-opacity-60 bg-gray-400"></div>
         <div class="hero-content text-center text-neutral-content flex items-center justify-center">
