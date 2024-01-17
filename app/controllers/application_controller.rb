@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_layout
-    if current_user&.vendor?
+    if user_signed_in? && current_user.vendor?
       'vendor'
     else
       'application'

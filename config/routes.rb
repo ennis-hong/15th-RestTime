@@ -6,15 +6,17 @@ Rails.application.routes.draw do
   end
 
   # Devise routes
-  devise_for :users, skip: :omniauth_callbacks, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
   devise_for :users, only: :omniauth_callbacks, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   # Global scope with locale parameter
   scope '(:lang)', locale: /en|tw/ do
+
     root 'pages#index'
+
+    devise_for :users, skip: :omniauth_callbacks, controllers: {
+        sessions: 'users/sessions',
+        registrations: 'users/registrations'
+    }
 
     resources :products do
       collection do
