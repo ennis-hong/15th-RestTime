@@ -1,52 +1,77 @@
-<section class="container mx-auto p-5">
-  <div class="text-sm breadcrumbs">
-    <ul>
+<section class="container mx-auto p-1 md:p-5">
+  <div class="mx-2 text-sm my-2 md:text-sm breadcrumbs">
+    <ul class="text-gray-600 mx-auto">
       <li><%= link_to t('home'), root_path %></li>
-      <li><%= @shop.title %></li>
+      <li><span class="text-orange-700 font-bold"><%= @shop.title %></span></li>
     </ul>
   </div>
-  <div class="h-[300px] relative">
-    <article class="mt-4 z-10 absolute top-64 left-10 text-white">
-      <h1 class="text-xl font-bold"><%= @shop.title %></h1>
+  <div class="hidden md:block h-[300px] relative">
+    <article class="absolute bottom-0 left-4 md:left-10 z-10 text-white">
+      <h1 class="text-sm md:text-xl font-bold"><%= @shop.title %></h1>
     </article>
-    <div class="absolute h-[300px] overflow-hidden place-items-center">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
       <% if @shop.cover.attached? %>
-        <%= image_tag @shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+        <%= image_tag @shop.cover, class: "w-full h-full object-cover brightness-50" %>
       <% else %>
-        <img src="https://fakeimg.pl/1000x300/200" class="w-full">
+        <img src="https://fakeimg.pl/1000x300/200" class="w-full h-full object-cover">
       <% end %>
     </div>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-    <div class="card md:col-span-2 bg-white-100 shadow-xl">
-      <ul class="card-body mx-10">
-        <li class="text-lg font-medium mb-3">
-          <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
-            <%= render 'shared/google_map', shop: @shop %>
-          </div>
-        </li>
-        <div class="p-2">
-          <div class="mb-8">
-            <%= render 'shared/shop_info', shop: @shop %>
-          </div>
-          <div class="flex">
-            <%=render 'shared/business_hours' %>
-            <div class="w-1/4 ml-auto mt-2">
-              <% if user_signed_in? %>
-                <%= render 'like_shops', shop: @shop %>
-              <% end %>
+
+  <%# 手機顯示輪撥 %>
+  <div class="h-48 order-1 md:hidden" data-controller="carousel">
+    <div class="carousel h-48">
+      <% @shop.products.each do |product| %>
+        <div class="carousel-item " data-carousel-target="slide">
+          <picture class="p-2 md:hidden"><%= image_tag product.cover.variant(:cover) %></picture>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols mb-10 md:grid-cols-4 gap-4">
+    <div class="order-2 md:order-1 md:card col-span-2 bg-white-100 shadow-xl">
+      <div class="md:card-body mx-2 mb-10 md:mx-10">
+        <ul class="text-lg font-medium mb-3">
+          <li class="mb-4">
+            <div class="hidden aspect-w-16 aspect-h-9 w-full max-w-full mb-4 md:block">
+              <%= render 'shared/google_map', shop: @shop %>
+            </div>
+          </li>
+          <div class="p-2">
+            <div class="md:mb-10">
+              <li>
+                <%= render 'shared/shop_info',shop: @shop %>
+              </li>
+              <li class="md:hidden">
+                <p class="p-2 text-sm text-gray-500"><%=@shop.description %></p>
+              </li>
             </div>
           </div>
-          <hr class="my-6">
-        </div>
-      </ul>
+          <li class="mb-4">
+            <h4 class="text-2xl text-center my-4 md:hidden">
+              <%= t('order.shop_location') %>
+              <hr class="border-2 mt-2">
+            </h4>
+            <div class="p-2 md:hidden aspect-w-16 aspect-h-9 w-full max-w-full mb-4 md:block">
+              <%= render 'shared/google_map', shop: @shop %>
+            </div>
+            <hr class="border-2 mt-6">
+          </li>
+          <div class="flex-row md:flex">
+            <%=render 'shared/business_hours', class: 'mb-10' %>
+          </div>
+          <hr class="mt-6 mb-8">
+        </ul>
+      </div>
     </div>
-    <div class="card md:col-span-2 bg-white-100 shadow-xl">
+    <%# 桌機顯示輪撥 %>
+    <div class="hidden md:block order-2 card col-span-2 bg-white-100 shadow-xl">
       <div class="card-body" data-controller="carousel">
         <div class="carousel mx-12 relative">
           <% @shop.products.each do |product| %>
             <div class="carousel-item " data-carousel-target="slide">
-              <%= image_tag product.cover.variant(:cover) %>
+              <picture class="hidden md:block"><%= image_tag product.cover.variant(:cover) %></picture>
             </div>
           <% end %>
           <div class="absolute flex justify-between left-2 right-2 top-1/2">
@@ -54,14 +79,21 @@
             <button class="btn glass opacity-80" data-action="carousel#next">❯</button>
           </div>
         </div>
-        <div class="mx-12">
+        <div class="hidden md:block mx-12">
           <%= render 'booking', { shop: @shop, service_times: @shop.service_times } %>
         </div>
       </div>
     </div >
   </div>
 </section>
-<section>
+
+
+
+
+
+
+
+<section class="hidden md:block">
   <h3 class="text-center text-3xl text-gray-600 my-6"><%= t('product.hot') %></h3>
   <div class="card md:col-span-2 mt-4">
     <div class="carousel">

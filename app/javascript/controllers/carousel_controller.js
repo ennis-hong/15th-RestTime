@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="carousel"
 export default class extends Controller {
   static targets = ["slide"];
+
   // 初始
   initialize() {
     // 第一張
@@ -11,6 +12,8 @@ export default class extends Controller {
     this.showCurrentSlide();
     // 自動播放
     this.startAutoPlay();
+    // 禁用觸摸滑動
+    this.disableTouchSwipe();
   }
 
   startAutoPlay() {
@@ -18,6 +21,7 @@ export default class extends Controller {
     this.autoPlayTimer = setInterval(() => {
       this.next();
     }, 5000);
+    this.disableTouchSwipe();
   }
 
   next() {
