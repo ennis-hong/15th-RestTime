@@ -170,11 +170,12 @@ tw:
     service_time: 消費時數
     qrcode: 顯示QR CODE
     google_map: 顯示店家位置
+    shop_location: 店家位置
     redeem_order: 核銷訂單
     staff: 核銷人員
     start_end: (開始時間~結束時間)
     comment: 評價
-
+    original_price: 原價
     time_start_end: 開始時間－結束時間
     choose_product: 選擇項目
     appointment_change: 變更預約
@@ -224,6 +225,7 @@ tw:
     original_time: 原先預約時間
     input_serial_or_name: 輸入訂單編號或姓名
     input_booked_name: 請填寫預約者姓名
+    input_booking_datetime: 請選擇預約日期和時段
   payment_type:
     Credit_CreditCard: 信用卡  
 

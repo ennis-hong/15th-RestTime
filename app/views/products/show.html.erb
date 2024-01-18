@@ -1,26 +1,31 @@
-<section class="container mx-auto p-5">
-  <div class="text-sm breadcrumbs">
-    <ul>
+<section class="container mx-auto p-1 md:p-5">
+  <div class="mx-2 text-sm my-2 md:text-sm breadcrumbs">
+    <ul class="text-gray-600 mx-auto">
       <li><%= link_to t('home'), root_path %></li>
       <li><%= link_to @product.shop.title, shop_path(@product.shop)  %></li>
-      <li><%= t('order.product_info') %></li>
+      <li><span class="text-orange-700 font-bold"><%= t('order.product_info') %></span></li>
     </ul>
   </div>
-  <div class="h-[300px] relative">
-    <article class="mt-4 z-10 absolute top-64 left-10 text-white">
-      <h1 class="text-xl font-bold"><%= @product.shop.title %></h1>
+  <div class="hidden md:block h-[300px] relative">
+    <article class="absolute bottom-0 left-4 md:left-10 z-10 text-white">
+      <h1 class="text-sm md:text-xl font-bold"><%= @product.shop.title %></h1>
     </article>
-    <div class="absolute h-[300px] overflow-hidden place-items-center">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
       <% if @product.shop.cover.attached? %>
-        <%= image_tag @product.shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+        <%= image_tag @product.shop.cover, class: "w-full h-full object-cover brightness-50" %>
       <% else %>
-        <img src="https://fakeimg.pl/1000x300/200" class="w-full">
+        <img src="https://fakeimg.pl/1000x300/200" class="w-full h-full object-cover">
       <% end %>
     </div>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-    <div class="card md:col-span-2 bg-white-100 shadow-xl">
-      <div class="card-body mx-10">
+  <div class="grid grid-cols mb-10 md:grid-cols-4 gap-4">
+    <div class="order-2 md:order-1 md:card col-span-2 bg-white-100 shadow-xl  ">
+      <div class="md:card-body mx-10 mb-10">
+        <%#= 手機顯示 %>
+        <h4 class="text-2xl text-center my-2 md:hidden">
+          <%= t('order.shop_location') %>
+          <hr class="border-2">
+        </h4>
         <ul class="text-lg font-medium mb-3">
           <li class="mb-4">
             <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
@@ -28,46 +33,85 @@
             </div>
           </li>
           <div class="p-2">
-            <div class="mb-8">
-              <%= render 'shared/shop_info',shop: @product.shop %>
+            <div class="mb-10">
+              <ul>
+                <%= render 'shared/shop_info',shop: @product.shop %>
+              </ul>
             </div>
           </div>
-          <div class="flex">
-            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-slate-100 w-2/3 text-center mx-auto">
-              <div class="collapse-title text-2xl font-medium text-gray-600">
-                <%= t('service_times.title') %>
+          <div class="flex-row md:flex">
+            <div class="collapse collapse-arrow border border-base-300 bg-slate-100 mb-3 md:hidden">
+              <input type="checkbox"/> 
+              <div class="collapse-title text-2xl text-center text-gray-600 font-medium">
+                <h4>店家簡介</h4>
               </div>
-              <div class="collapse-content text-2xl"> 
-                <%= render partial: 'shops/service_times', collection: booking_shop.service_times, as: :service_time %>
+              <div class="collapse-content text-gray-700"> 
+                <p class="p-2"><%=@shop.description %></p>
               </div>
             </div>
+            <%=render 'shared/business_hours', class: 'mb-10' %>
           </div>
-          <hr class="my-6">
+          <hr class="mt-6 mb-8">
         </ul>
       </div>
     </div>
-    <div class="card md:col-span-2 bg-white-100 shadow-xl">
-      <div class="card md:col-span-2">
-        <div class="card-body">
-          <div class="carousel mx-12">
-            <div class="">
-              <div class="card w-full bg-base-100 image-full">
-                <figure><%= image_tag @product.cover.variant(:cover) %></figure>
-                <div class="card-body">
-                  <h2 class="card-title">商品title</h2>
+    <%#= 桌機顯示 %>
+    <div class="card hidden order-2 md:block col-span-2 bg-white-100 shadow-xl">
+      <div class="relative md:mx-12">
+        <figure class="p-8">
+          <%= image_tag @product.cover.variant(:cover), class: "w-full" %>
+        </figure>
+        <div class="absolute bottom-0 left-0 w-full p-8">
+          <div class="bg-white bg-opacity-75 p-4">
+            <div class="card-title mx-12 text-2xl flex justify-between">
+              <h2 class="ml-auto"></h2>
+                <%= @product.title %>
+                <span class="badge badge-secondary">
                   <%= @product.service_min %>
-                  <p><%= @product.description %></p>
-                </div>
-              </div>
-              <div class="">
-                <%= render 'booking', { shop: booking_shop, product: @product, service_times: booking_shop.service_times } %>
-              </div>
+                  <%= t('order.min') %>
+                </span>
+              </h2>
             </div>
           </div>
         </div>
       </div>
+      <div class="mx-12 px-8">
+        <div class="text-lg text-gray-600">
+          <div>
+            <p class="px-8 border-l border-r"><%= @product.description %></p>
+          <%= render 'booking', { shop: @shop, product: @product, service_times: @product.shop.service_times } %>
+          </div>
+        </div>
+      </div>
     </div>
-        
-    </div >
+    <%#= 手機顯示 %>
+    <div class="card mb-10 order-1 md:order-3 md:hidden col-span-2 bg-white-100 shadow-xl">
+      <div class="relative md:mx-12">
+        <figure class="mt-2 md:p-8">
+          <%= image_tag @product.cover.variant(:cover), class: "w-full" %>
+        </figure>
+        <div class="absolute bottom-0 left-0 w-full bg-white bg-opacity-75 p-4">
+          <div class="flex justify-end">
+            <h2 class="card-title">
+            <%= @product.title %>
+            <div class="badge badge-secondary">
+              <%= @product.service_min %>
+              <%= t('order.min') %>
+            </div>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 text-sm text-gray-600">
+        <p><%= @product.description %></p>
+      </div>
+    </div>
   </div>
 </section>
+
+<div class="fixed bottom-0 w-full md:hidden bg-emerald-600 opacity-90 rounded-t-lg">
+  <div class="relative">
+    <div class="diagonal-bg"></div>
+    <%= render 'booking_sm', { shop: @shop, product: @product, service_times: @product.shop.service_times } %>
+  </div>
+</div>

@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
 
   def show
     authorize :product
-    @shop = current_user.shop
+    @shop = @product.shop
   end
 
   def my
