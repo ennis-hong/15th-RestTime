@@ -13,6 +13,7 @@ class Order < ApplicationRecord
   before_create :generate_serial
 
   scope :valid, -> { where.not(status: %i[completed cancelled]) }
+  scope :with_status, ->(status) { where(status:) if status.present? }
 
   aasm column: 'status', no_direct_assignment: true do
     state :pending, initial: true

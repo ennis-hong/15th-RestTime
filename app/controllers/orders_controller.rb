@@ -8,11 +8,7 @@ class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :payment_result
 
   def index
-    if params[:status].present?
-      @orders = Order.where(status: params[:status]).order(created_at: :desc)
-    else
-      @orders = Order.order(created_at: :desc)
-    end
+    @orders = current_user.orders.with_status(params[:status]).order(created_at: :desc)
   end
 
   def new
@@ -36,6 +32,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    authorize @order
     @shop = @order.shop
     @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
   end
@@ -47,11 +44,13 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    authorize @order
     @shop = @order.shop
     @url_string = confirm_redeem_vendor_order_url(@order, status: 'completed', host: request.host_with_port)
   end
 
   def update
+    authorize @order
     new_service_date = params[:order][:service_date]
 
     return unless @order.service_date != new_service_date
@@ -66,6 +65,7 @@ class OrdersController < ApplicationController
   end
 
   def cancel
+    authorize @order
     if @order.cancelled?
       redirect_to @order, alert: t('can_not_cancel', scope: %i[message])
     elsif @order.cancel!
