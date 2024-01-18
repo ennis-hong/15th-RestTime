@@ -106,7 +106,7 @@
   </div>
 </section>
 <div class="comment-container">
-  <%= render 'comments/form', shop: @shop %>
+  <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
   <% @comments.each do |comment| %>
     <%= render 'comments/comment', shop: @shop, comment: comment %>
   <% end %>

@@ -119,13 +119,6 @@ footer {
   @apply shadow-none;
 }
 
-.custom-order-1 {
-  order: 1;
-}
-.custom-order-2 {
-  order: 2;
-}
-
 .diagonal-bg {
   position: absolute;
   top: 0;
@@ -137,6 +130,5 @@ footer {
     rgba(255, 255, 255, 0.3),
     rgb(175, 196, 126, 1)
   );
-
   z-index: -1;
 }
