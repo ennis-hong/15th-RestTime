@@ -1,6 +1,11 @@
 <% [:notice, :alert].each do |type| %>
   <% if flash[type] %>
-    <div data-controller="flash"data-flash-target="alert"data-content="<%= flash[type] %>"data-status="<%= type == :notice ? 'success' : 'error' %>">
+    <div 
+      data-controller="flash"
+      data-flash-target="alert"
+      data-content="<%= flash[type] %>"
+      data-status="<%= type == :notice ? 'success' : 'error' %>"
+    >
     </div>
   <% end %>
 <% end %>

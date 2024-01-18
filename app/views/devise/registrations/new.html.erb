@@ -1,38 +1,32 @@
-<div class="hero min-h-screen bg-base-200"data-controller= "sweetalert">
+<div class="hero min-h-screen bg-base-200" data-controller="sweetalert">
   <div class="hero-content flex-col lg:flex-row-reverse">
     <div class="text-center lg:text-left">
       <h2 class="text-5xl font-bold">RESTIME</h2>
       <p class="py-6">預約放鬆，今天開始 <br>Start today, your restime.</p>
     </div>
+
     <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-8">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'card-body') do |f| %>
-<% if resource.errors.any? %>
-  <ul>
-    <% resource.errors.each do |error| %>
-      <li>
-        <% case error.attribute %>
-          <% when :email %>
-            <% if error.type.eql?(:taken) %>
-              <p class="text-red-500 text-center font-bold text-lg">該電子郵件地址已經被註冊</p>
-            <% elsif error.type.eql?(:blank) %>
-              <p class="text-red-500 text-center font-bold text-lg">信箱不可以空白</p>
-            
+        <% if resource.errors.any? %>
+          <ul>
+            <% resource.errors.each do |error| %>
+              <li>
+                <% case error.attribute %>
+                  <% when :email %>
+                    <% if error.type.eql?(:taken) %>
+                      <p class="text-red-500 text-center font-bold text-lg"><%= t('member.taken') %></p>
+                    <% elsif error.type.eql?(:blank) %>
+                      <p class="text-red-500 text-center font-bold text-lg"><%= t('member.blank') %></p>
+                    <% end %>
+                  <% when :password %>
+                    <% if error.type.eql?(:blank) %>
+                      <p class="text-red-500 text-center font-bold text-lg"><%= t('member.blank') %></p>
+                    <% end %>
+                <% end %>
+              </li>
             <% end %>
-          <% when :password %>
-            <% if error.type.eql?(:blank) %>
-              <p class="text-red-500 text-center font-bold text-lg">密碼不可以空白</p>
-            <% end %>
-          <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-
-
-
-
-
+          </ul>
+        <% end %>
 
         <div class="form-control w-52 m-auto">
           <%= f.label :email, t('member.email'), class: "label" %>
@@ -66,10 +60,11 @@
         <div class="form-control mt-4 w-52 m-auto px-8">
           <%= link_to t("member.log_in"), new_session_path(resource_name), class: "btn btn-primary " %>
         </div>
+
+        <div class="mt-4 w-52 m-auto px-8">
+          <%= button_to t("member.sign_in_with_google_oauth2"), user_google_oauth2_omniauth_authorize_path, { data: { turbo: false }, class: "btn btn-primary"} %>
+        </div>
       <% end %>
-      <div class="mt-4 w-52 m-auto px-8">
-        <%= button_to t("member.sign_in_with_google_oauth2"), user_google_oauth2_omniauth_authorize_path, { data: { turbo: false }, class: "btn btn-primary"} %>
-      </div>
     </div>
   </div>
 </div>
