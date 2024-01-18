@@ -10,9 +10,8 @@ module Api
 
         booking_service = BookingService.new(@shop, product)
         available_slots = booking_service.display_available_slots(
-                            DateTime.parse(params[:booking_date],
-                                          '%Y/%m/%d %H:%M')
-                          )
+          DateTime.parse(params[:booking_date], '%Y/%m/%d %H:%M')
+        )
         render json: { available_slots: }
       end
 

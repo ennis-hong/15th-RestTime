@@ -18,9 +18,11 @@ class BookingService
 
     service_minutes = @product&.service_min&.minutes || 30.minutes
 
-    start_time = Time.new(date.year, date.month, date.day, open_time.hour, open_time.min, 0)
-    end_time = Time.new(date.year, date.month, date.day, close_time.hour, close_time.min,
-                        0) - service_minutes
+    start_time = Time.zone.local(date.year, date.month, date.day,
+                                 open_time.hour, open_time.min, 0)
+    end_time = Time.zone.local(date.year, date.month, date.day,
+                               close_time.hour, close_time.min, 0) - service_minutes
+
     while start_time < end_time
       slots << start_time
       start_time += 15.minutes # 每隔15分鐘
