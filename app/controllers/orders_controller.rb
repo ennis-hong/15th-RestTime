@@ -3,7 +3,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: %i[payment_result]
   before_action :order_params, only: :create
-  before_action :find_order, only: %i[show cancel edit update]
+  before_action :find_order, only: %i[show cancel edit update, payment]
 
   skip_before_action :verify_authenticity_token, only: :payment_result
 
@@ -77,6 +77,12 @@ class OrdersController < ApplicationController
     else
       redirect_to @order, alert: t('cancellation_error', scope: %i[message])
     end
+  end
+
+  def payment
+    authorize @order
+    add_mac_value(payment_params(@order))
+    render :create
   end
 
   def payment_result
