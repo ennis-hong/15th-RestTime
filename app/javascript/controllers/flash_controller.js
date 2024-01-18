@@ -1,8 +1,40 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
+import Swal from "sweetalert2";
 
-// Connects to data-controller="flash"
 export default class extends Controller {
-  close() {
-    this.element.remove();
+  static targets = ["alert"];
+
+  connect() {
+    if (this.isLoginSuccess()) {
+      this.successalert();
+    } else {
+      this.erroralert();
+    }
+  }
+
+  isLoginSuccess() {
+    return this.alertTarget.dataset.status === "success";
+  }
+
+  successalert() {
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      text: this.alertTarget.dataset.content,
+      showConfirmButton: false,
+      timer: 3000,
+      width: "300px",
+    });
+  }
+
+  erroralert() {
+    Swal.fire({
+      position: "center",
+      text: this.alertTarget.dataset.content,
+      icon: "error",
+      showConfirmButton: false,
+      width: "300px",
+      timer: 3000,
+    });
   }
 }

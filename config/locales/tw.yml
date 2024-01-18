@@ -317,6 +317,8 @@ tw:
     back: 回首頁
     change_password: 變更密碼
     check_again: 再次確認
+    taken: 該電子郵件地址已經被註冊
+    blank: 信箱密碼不可以空白
   aasm:
     order_state:
       pending: 未付款
