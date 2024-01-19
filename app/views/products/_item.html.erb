@@ -1,4 +1,4 @@
-<div class="card w-85 h-72 shadow-xl bg-slate-50">
+<div class="card w-72 h-72 shadow-xl bg-slate-50">
         <%= link_to edit_product_path(product) do %>
         <figure class="h-44 w-90 rounded-t-xl">
           <%= product_cover(product) %>
@@ -10,11 +10,5 @@
       </div>
 
       <span>NT$ <%= product.price %></span>
-
-      <%= link_to product_path(product) do %>
-        <div class="card-actions justify-end mt-[-30px]">
-          <button class="btn btn-sm btn-outline btn-primary"><%= t('product.check') %></button>
-        </div>
-      <% end %>
     </div>
 </div>

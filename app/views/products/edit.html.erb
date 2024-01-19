@@ -1,2 +1,27 @@
-<h1>編輯商品</h1>
+<h2 class="m-5">編輯商品</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 m-5 gap-5">
 <%= render 'products/form', product: @product %>
+
+  <div class="card">
+      <div class="p-10 mx-auto w-full h-full">
+    <% if policy(@product).update? %>
+      <%= link_to t('product.delete'), product_path(@product), class: 'btn btn-primary mb-3', method: :delete, data: {
+        turbo_method: 'delete',
+        turbo_confirm: t('product.confirm_delete')
+      } %>
+    <% end %>
+
+    <div class="card shadow-xl bg-slate-50">
+      <figure class="rounded-t-xl h-64">
+        <%= image_tag @product.cover.variant(:thumb), class: 'w-full h-full object-cover' if @product.cover.attached? %>
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title"><%= @product.title %></h2>
+        <h3><%= t('form.price') %>: <%= @product.price %> <%= t('product.doller') %></h3>
+        <h3><%= t('form.service_min') %>: <%= @product.service_min %> <%= t('product.min') %></h3>
+        <p><%= t('form.description') %>: <%= simple_format(@product.description) %></p>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
