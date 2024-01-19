@@ -30,8 +30,5 @@ application.register("scroll", ScrollController);
 import SidebarController from "./sidebar_controller";
 application.register("sidebar", SidebarController);
 
-import Sweetalert2Controller from "./sweetalert2_controller";
-application.register("sweetalert", Sweetalert2Controller);
-
 import TimepickerController from "./timepicker_controller";
 application.register("timepicker", TimepickerController);

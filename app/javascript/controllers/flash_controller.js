@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 import Swal from "sweetalert2";
 
 export default class extends Controller {
-  static targets = ["alert"];
+  static targets = ["flash"];
 
   connect() {
     if (this.isLoginSuccess()) {
@@ -13,14 +13,14 @@ export default class extends Controller {
   }
 
   isLoginSuccess() {
-    return this.alertTarget.dataset.status === "success";
+    return this.flashTarget.dataset.status === "success";
   }
 
   successalert() {
     Swal.fire({
       position: "top-end",
       icon: "success",
-      text: this.alertTarget.dataset.content,
+      text: this.flashTarget.dataset.content,
       showConfirmButton: false,
       timer: 3000,
       width: "300px",
@@ -30,7 +30,7 @@ export default class extends Controller {
   erroralert() {
     Swal.fire({
       position: "center",
-      text: this.alertTarget.dataset.content,
+      text: this.flashTarget.dataset.content,
       icon: "error",
       showConfirmButton: false,
       width: "300px",

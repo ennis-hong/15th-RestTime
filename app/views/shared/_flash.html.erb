@@ -2,7 +2,7 @@
   <% if flash[type] %>
     <div 
       data-controller="flash"
-      data-flash-target="alert"
+      data-flash-target="flash"
       data-content="<%= flash[type] %>"
       data-status="<%= type == :notice ? 'success' : 'error' %>"
     >
