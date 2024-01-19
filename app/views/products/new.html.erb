@@ -1,2 +1,4 @@
-<h1><%= t('product.create')%></h1>
+<h2 class="text-2xl font-semibold text-primary m-7"><%= t('product.create')%></h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 <%= render 'products/form', product: @product %>
+</div>

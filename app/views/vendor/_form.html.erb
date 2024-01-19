@@ -1,6 +1,6 @@
 <%= display_errors(shop) %>
-<div class="card bg-white-100 shadow-xl">
-  <h2 class="text-2xl font-semibold leading-7 text-gray-900 mb-5"><%= t('views.shop.index.title') %></h2>
+<div class="card bg-white-100 shadow-lg">
+  <h2 class="text-2xl font-semibold text-primary mb-5"><%= t('views.shop.index.title') %></h2>
   <div class="card-body">    
       <%= form_with model: shop, data: { turbo: true } do |form| %>
         <div class="space-y-12 mx-4 w-80">
@@ -12,9 +12,9 @@
                 <%= form.text_field :title, class: 'input input-bordered w-full max-w-xs' %>
 
               </div>
-              <div class="sm:col-span-full">
+              <div>
                 <%= form.label :cover, t('form.shop.cover'), class: 'block text-sm font-medium text-gray-700' %>
-                <%= form.file_field :cover, class: 'file-input file-input-bordered  w-full max-w-xs' %>
+                <%= form.file_field :cover, class: 'file-input file-input-sm file-input-bordered w-4/6 md:file-input-md w-full' %>
               </div>
               <div class="col-span-full">
                 <div class="flex">
@@ -23,9 +23,9 @@
                 </div>
                 <%= form.text_field :tel, class: 'input input-bordered w-full max-w-xs' %>
               </div>
-              <div class="sm:col-span-full">
+              <div class="col-span-full">
                 <%= form.label :description, t('form.shop.description'), class: 'block text-sm font-medium text-gray-700'  %>
-                <%= form.text_area :description, class: , class: 'textarea textarea-bordered w-full max-w-xs' %>
+                <%= form.text_area :description, class: 'textarea textarea-bordered md:w-full' %>
               </div>
               <div class="col-span-full">
                 <div class="flex">
@@ -74,7 +74,7 @@
     </div>
   </div>
   <div class="card">
-    <h2 class="text-2xl font-semibold leading-7 text-gray-900 mb-5"><%= t('views.shop.index.status') %></h2>
+    <h2 class="text-2xl font-semibold text-primary mb-5"><%= t('views.shop.index.status') %></h2>
     <%= render 'vendor/form_select_shop_status', shop: @shop %>
     <%= render 'vendor/items', shop: @shop %>
   </div>

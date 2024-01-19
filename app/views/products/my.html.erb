@@ -1,7 +1,9 @@
 <div class="container m-10">
+  <h2 class="text-2xl font-semibold text-primary m-7">
   <%= t('vendor.my_product') %>
+  <%= link_to t('vendor.create_product'), new_product_path, class: 'btn btn-sm btn-outline btn-primary m-4' %>
+  </h2>
 
-  <%= link_to t('vendor.create_product'), new_product_path, class: 'btn btn-primary mb-4' %>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 m-5 gap-5">
     <%= render partial: 'item', collection: @products, as: :product %>
