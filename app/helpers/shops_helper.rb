@@ -5,7 +5,7 @@ module ShopsHelper
     if shop.cover.attached?
       image_tag shop.cover.variant(variant), class: 'w-full h-full object-cover'
     else
-      image_tag 'shops/default.png', class: 'w-full h-full object-cover'
+      image_tag 'shops/default_cover.png', class: 'w-full h-full object-cover'
     end
   end
 
@@ -33,14 +33,6 @@ module ShopsHelper
         open_time: format_time_without_sec(service_time.open_time),
         close_time: format_time_without_sec(service_time.close_time)
       }
-    end
-  end
-
-  def shop_cover(shop, variant = :thumb)
-    if shop.cover.attached?
-      image_tag shop.cover.variant(variant)
-    else
-      image_tag 'shops/default_cover.png'
     end
   end
 end

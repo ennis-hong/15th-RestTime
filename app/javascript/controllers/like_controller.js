@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus";
 import { patch } from "@rails/request.js";
 
-const LIKE_LABEL = "加入收藏";
-const UNLIKE_LABEL = "取消收藏";
+const LIKE_LABEL = "收藏";
+const UNLIKE_LABEL = "取消";
 // Connects to data-controller="like"
 export default class extends Controller {
   static targets = ["btn"];

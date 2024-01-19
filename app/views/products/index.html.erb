@@ -1,27 +1,27 @@
-<p class="fs-5 p-1">商品列表</p>
 
-<div class="grid grid-cols-1 gap-3">
+<div class="container m-auto my-10">
+  <p class="fs-5 p-1">商品列表</p>
+  <div class="grid grid-cols-1 mb-3 md:grid-cols-3">
     <%= search_form_for @q do |f| %>
-      <div class="btn">
+      <div class="btn btn-outline btn-primary hover:bg-accent">
         <%= f.sort_link :price, t('product.price_order') %>
       </div>
 
-      <div class="btn">
+      <div class="btn btn-outline btn-primary hover:bg-accent">
         <%= f.sort_link :service_min, t('product.service_order') %>
       </div>
 
-      <div class="btn">
+      <div class="btn btn-outline btn-primary hover:bg-accent">
         <%= f.sort_link :updated_at, t('product.update_order') %>
       </div>
     <% end %> 
-</div>
+  </div>
 
-<ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-
+<div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
   <%= render @products %>
-
-</ul>
+</div>
 
 <footer>
   <%= paginate @products %>
 </footer>
+</div>

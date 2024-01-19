@@ -1,18 +1,20 @@
-<div class="grid grid-cols-1 gap-3">
-  <%= search_form_for @q do |f| %>
-    <div class="btn">
-      <%= f.sort_link :city, t('views.shop.index.sort_by_city'), default_order: 'desc' %>
-    </div>
+<div class="container m-auto my-10">
+  <div class="grid grid-cols-1 mb-3 md:grid-cols-3">
+    <%= search_form_for @q do |f| %>
+      <div class="btn btn-outline btn-primary hover:bg-accent">
+        <%= f.sort_link :city, t('views.shop.index.sort_by_city'), default_order: 'desc' %>
+      </div>
+      <div class="btn btn-outline btn-primary hover:bg-accent">
+        <%= f.sort_link :updated_at, t('views.shop.index.sort_by_updated'), default_order: 'desc' %>
+      </div>
+    <% end %>
+  </div>
 
-    <div class="btn">
-      <%= f.sort_link :updated_at, t('views.shop.index.sort_by_updated_at'), default_order: 'desc' %>
-    </div>
-  <% end %>
+  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+    <%= render @shops %>
+  </div>
+
+  <footer>
+    <%= paginate @shops %>
+  </footer>
 </div>
-
-<ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-  <%= render @shops %>
-</ul>
-<footer>
-  <%= paginate @shops %>
-</footer>

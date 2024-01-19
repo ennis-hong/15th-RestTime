@@ -20,6 +20,8 @@ class Shop < ApplicationRecord
   before_create :set_default_status
   after_create :create_service_times
 
+  scope :status, -> { where(status: 'open') }
+
   validates :title, presence: true
   validates :district, presence: true
   validates :city, presence: true
@@ -40,8 +42,7 @@ class Shop < ApplicationRecord
   end
 
   def average_rating
-    total_ratings = comments.any? ? comments.average(:rating) : 0
-    total_ratings.round
+    comments.average(:rating)&.round || 0
   end
 
   def create_service_times
@@ -54,5 +55,10 @@ class Shop < ApplicationRecord
   # 商店排序用，允許被搜尋到的東西
   def self.ransackable_attributes(_auth_object = nil)
     %w[city description district status street title updated_at open]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[comments like_shops like_user orders products service_times
+       user]
   end
 end

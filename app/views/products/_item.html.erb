@@ -1,22 +1,20 @@
-<div class="card w-85 gap-2 glass">
+<div class="card w-85 h-72 shadow-xl bg-slate-50">
+        <%= link_to edit_product_path(product) do %>
+        <figure class="h-44 w-90 rounded-t-xl">
+          <%= product_cover(product) %>
+        </figure>
+      <% end %>
+    <div class="card-body">
+      <div class="card-title">
+        <%= link_to product.title, edit_product_path(product) %>
+      </div>
 
-<%= tag.li data: { id: product.id },
-           class: class_names('p-2', grayscale: !product.onsale, 'grayscale-0': product.onsale) do %>
-  <div class="card-body">
-    <%= link_to edit_product_path(product) do %>
-      <figure>
-        <%= product_cover(product) %>
-      </figure>
-    <% end %>
-    <div class="card-tittle">
-      <%= link_to product.title, edit_product_path(product) %>
+      <span>NT$ <%= product.price %></span>
+
+      <%= link_to product_path(product) do %>
+        <div class="card-actions justify-end mt-[-30px]">
+          <button class="btn btn-sm btn-outline btn-primary"><%= t('product.check') %></button>
+        </div>
+      <% end %>
     </div>
-    <span>NT$ <%= product.price %></span>
-    <%= link_to product_path(product) do %>
-    <div class="card-actions justify-end">
-      <button class="btn"><%= t('product.check') %></button>
-    <% end %> 
-     </div>
-  </div>
-<% end %>
 </div>

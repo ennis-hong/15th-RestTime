@@ -1,12 +1,13 @@
-<%= t('vendor.my_product') %>
+<div class="container m-10">
+  <%= t('vendor.my_product') %>
 
-<%= link_to t('vendor.create_product'), new_product_path, class: 'btn btn-primary mb-4' %>
+  <%= link_to t('vendor.create_product'), new_product_path, class: 'btn btn-primary mb-4' %>
 
-<ul data-controller="drag"
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 m-5 gap-5">
-  <%= render partial: 'item', collection: @products, as: :product %>
-</ul>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 m-5 gap-5">
+    <%= render partial: 'item', collection: @products, as: :product %>
+  </div>
 
-<footer>
-  <%= paginate @products %>
-</footer>
+  <footer>
+    <%= paginate @products %>
+  </footer>
+</div>

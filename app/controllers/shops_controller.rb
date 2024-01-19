@@ -11,7 +11,7 @@ class ShopsController < ApplicationController
   def index
     @shop = current_user&.shop
     @q = Shop.ransack(params[:q])
-    @shops = @q.result(distinct: true).order(order_by).page(params[:page])
+    @shops = @q.result(distinct: true).order(order_by).status.page(params[:page])
   end
 
   def new
