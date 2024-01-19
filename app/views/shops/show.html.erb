@@ -60,11 +60,25 @@
             <div class="p-2 md:hidden aspect-w-16 aspect-h-9 w-full max-w-full mb-4 md:block">
               <%= render 'shared/google_map', shop: @shop %>
             </div>
-            <hr class="border-2 mt-6">
+            <hr class="border-2 mt-2">
           </li>
         </ul>
-        <div class="flex-row md:flex">
+      </div>
+      <div class="mx-2">
+        <div>
           <%=render 'shared/business_hours', class: 'mb-10' %>
+        </div>
+        <div class="collapse collapse-arrow text-center border border-base-300 bg-slate-100 mb-3 ">
+          <input type="checkbox"/> 
+          <div class="collapse-title text-2xl text-gray-600 font-medium">
+            <h4 class="text-center">評論</h4>
+          </div>
+          <div class="collapse-content text-gray-700"> 
+            <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
+            <% @comments.each do |comment| %>
+              <%= render 'comments/comment', shop: @shop, comment: comment %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
@@ -135,12 +149,6 @@
       </div>
     </div>
   </section>
-  <div class="comment-container">
-    <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
-    <% @comments.each do |comment| %>
-      <%= render 'comments/comment', shop: @shop, comment: comment %>
-    <% end %>
-  </div>
 </section>
 
 

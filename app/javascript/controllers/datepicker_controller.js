@@ -64,7 +64,7 @@ export default class extends Controller {
     }).then((result) => {
       if (result.isConfirmed) {
         const bookingDateLabel = document.querySelector("#bookingDate");
-        if (bookingDateLabel.checkVisibility()) {
+        if (!bookingDateLabel.hidden) {
           this.serviceDateTarget.value = bookingDateLabel.textContent;
         }
       }
@@ -111,7 +111,9 @@ export default class extends Controller {
     e.currentTarget.classList.add("btn-active");
 
     const bookingDateLabel = document.querySelector("#bookingDate");
-    bookingDateLabel.textContent = `${bookingDateLabel.textContent} ${e.currentTarget.textContent}`;
+    bookingDateLabel.textContent = `${
+      bookingDateLabel.textContent.split(" ")[0]
+    } ${e.currentTarget.textContent}`;
     bookingDateLabel.classList.remove("hidden");
   }
 }
