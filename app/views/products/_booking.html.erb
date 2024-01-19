@@ -1,4 +1,7 @@
-<div class="card w-full bg-white-100 shadow-xl mb-4" data-controller="products">
+<div class="card w-full bg-white-100 shadow-xl mb-4" 
+    data-controller="datepicker"
+    data-service-times="<%= filter_service_times(service_times).to_json %>" 
+    data-shop="<%= shop.id %>" >
   <div class="card-body flex justify-between">
     <div>
       <h3 class=" text-2xl text-gray-600 text-right">
@@ -17,33 +20,14 @@
     <%= form_with url: booking_path, data: { turbo: false } do |f| %>
       <%= f.hidden_field :shop_id, value: shop.id %>
       <%= f.hidden_field :product_id, value: product.id,
-                  data:{ action: "mousedown->products#toggleModal" }%>
+                  data:{ datepicker_target: "selectProduct" }%>
       <%= f.text_field :service_date,
                       { data: {
-                        controller: 'datepicker',
-                        serviceTimes: filter_service_times(service_times)
+                        datepicker_target: 'serviceDate',
+                        action: "mousedown->datepicker#initializeDatePicker"
                       },
                       class: 'input input-bordered w-full mt-4', required: true } %>
       <%= f.submit t("form.Next"), class: 'mt-4 w-full bg-gray-400 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
     <% end %>
-  </div>
-  <div>
-    <input type="checkbox" id="products_modal" data-products-target="product_modal" class="modal-toggle" />
-    <div class="modal" role="dialog">
-      <div class="modal-box w-6/12">
-        <h3 class="font-bold text-lg"><%= t('order.choose_product') %></h3>
-        <%= render partial:'shops/radio_product',
-            collection: shop.products, as: :product, locals: { index: 1 }%>
-        <div class="modal-action">
-          <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" 
-                    data-action="products#toggleModal">✕</button>
-            <button class="btn" data-action="products#toggleModal"><%= t('cancel') %></button>
-          </form>
-          <button class="btn" data-controller="products" 
-                  data-action="products#selectProductOption"><%= t('ok') %></button>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

@@ -38,7 +38,7 @@ class ShopsController < ApplicationController
     @comments = @shop.comments.order(created_at: :desc)
     @order = current_user&.orders&.find_by(shop_id: @shop.id, status: 'paid')
     @products_on_sale = @shop.products.where(onsale: true)
-    @onsale_count = @shop.products.count { |product| product.onsale }
+    @onsale_count = @shop.products.count(&:onsale)
   end
 
   def update
