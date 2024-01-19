@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "payment_#{@order.id}" do %>
+    <%= render 'payment', hash: @hash , sha_code: @sha_code %>
+<% end %>

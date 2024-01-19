@@ -3,7 +3,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: %i[payment_result]
   before_action :order_params, only: :create
-  before_action :find_order, only: %i[show cancel edit update, payment]
+  before_action :find_order, only: %i[show cancel edit update payment]
 
   skip_before_action :verify_authenticity_token, only: :payment_result
 
@@ -82,7 +82,7 @@ class OrdersController < ApplicationController
   def payment
     authorize @order
     add_mac_value(payment_params(@order))
-    render :create
+    respond_to(&:turbo_stream)
   end
 
   def payment_result

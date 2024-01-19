@@ -20,4 +20,8 @@ class OrderPolicy < ApplicationPolicy
   def cancel?
     show?
   end
+
+  def payment?
+    user.orders.include?(record) && record.may_pay?
+  end
 end
