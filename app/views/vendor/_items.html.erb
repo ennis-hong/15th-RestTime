@@ -2,22 +2,22 @@
   <div class="card w-full bg-white-100 shadow-xl rounded-md">
     <div class="card-body">
       <div class="h-[300px] relative">
-        <%= link_to shop_path(@shop) do %>
+        <%= link_to shop_path(shop) do %>
           <div class="absolute h-[300px] min-w-full overflow-hidden place-items-center rounded-md">
             <%= shop_cover(shop) %>
           </div>
         <% end %>
       </div>
-      <%= link_to shop_path(@shop) do %>
+      <%= link_to shop_path(shop) do %>
         <article class="mt-4 z-10 absolute top-64 left-15 px-5">
-          <h2 class="text-2xl font-bold text-white"><%= @shop.title %></h2>
+          <h2 class="text-2xl font-bold text-white"><%= shop.title %></h2>
         </article>
       <% end %>
       <h2 class="card-title"><%= t('views.shop.show.information')%></h2>
       <div class="collapse line-container">
         <input type="checkbox" checked />
         <div class="collapse-title flex justify-between">
-          <div class="font-medium"><%= address(@shop) %></div>
+          <div class="font-medium"><%= address(shop) %></div>
           <div><%= t('views.shop.show.map') %></div>
         </div>
         <div class="collapse-content">
@@ -26,7 +26,7 @@
             height="450"
             frameborder="0" style="border:0"
             referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=<%= Rails.application.credentials.dig(:google, :api_key) %>&q=<%= ERB::Util.url_encode(address(@shop))%>"
+            src="https://www.google.com/maps/embed/v1/place?key=<%= Rails.application.credentials.dig(:google, :api_key) %>&q=<%= ERB::Util.url_encode(address(shop))%>"
             allowfullscreen>
           </iframe>
         </div>
@@ -43,8 +43,8 @@
         </div>
         <div class="collapse-content">
           <ul>
-            <% if @shop.service_times.present? %>
-              <%= render partial: 'shops/service_times', collection: @shop.service_times, as: :service_time %>
+            <% if shop.service_times.present? %>
+              <%= render partial: 'shops/service_times', collection: shop.service_times, as: :service_time %>
             <% end %>
           </ul>
         </div>
@@ -55,7 +55,7 @@
             <%= t('views.shop.show.description') %>
           </div>
           <div class="collapse-content">
-            <p><%= @shop.description %></p>
+            <p><%= shop.description %></p>
           </div>
         </div>
       </div>
