@@ -61,7 +61,6 @@
                                       message: t("message.proceeding_to_payment"),
                                       action: "loading#loading"
                                     },
-        <%= link_to t('order.pay'), payment_order_path(order), data: { turbo_method: "patch" },
             class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
         <div id="payment_<%= order.id %>"></div>
       <% end %>
