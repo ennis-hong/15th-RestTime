@@ -1,16 +1,22 @@
 <section class="flex items-center">
   <%= radio_button_tag :product_id, product.id, false, 
       { data: {action: "change->products#showCollapse"}, class: "radio" } %>
-  <div class="collapse" data-controller="products">
+  <div class="collapse bg-white" data-controller="products">
     <%= radio_button_tag "my-accordion", product.id, nil,
         { data: {action: "change->products#showCollapse"} } %>
-    <div class="collapse-title text-xl font-medium flex justify-between">
+    <div class="collapse-title font-medium flex flex-col ">
       <div>
-        <p><%= product.title %></p>
+        <h4 class="text-lg text-gray-700 md:text-2xl"><%= product.title %></h4>
       </div>
-      <p><%= t('order.currency') %> <%= product.price.to_i %></p>
+      <div class="mt-2">
+        <p class="text-xs md:text-xl"><%= t('order.currency') %>
+          <span class="text-xl text-red-600"><%= format_price(product.price) %></span>
+        </p>
+      </div>
+      <hr class="border-2">
     </div>
-    <div class="collapse-content w-11/12"> 
+
+    <div class="collapse-content mx-2 md:mx-4"> 
       <p><%= product.description %></p>
     </div>
   </div>

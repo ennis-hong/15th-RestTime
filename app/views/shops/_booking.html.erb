@@ -13,7 +13,7 @@
                     action: "mousedown->products#toggleModal",
                     products_target: "selectProduct",
                     datepicker_target: "selectProduct",
-                  },class: "select select-lg select-bordered w-full", required: true } %>
+                  },class: "select select-lg select-bordered w-full ", required: true } %>
       <%= f.text_field :service_date,
                       { data: {
                         products_target: 'serviceDate',
@@ -24,18 +24,21 @@
       <%= f.submit t("form.Next"),{ data:{
                         datepicker_target: 'nextBtn',
                       },class: 'mt-4 w-full bg-gray-300 
-                                text-black font-semibold py-2 px-4 rounded 
+                                text-black font-semibold p-2 py-4 rounded 
                                 focus:outline-none focus:shadow-outline' } %>
     <% end %>
   </div>
   <div>
     <input type="checkbox" id="products_modal" data-products-target="productModal" class="modal-toggle" />
-    <div class="modal" role="dialog">
-      <div class="modal-box w-6/12">
-        <h3 class="font-bold text-lg"><%= t('order.choose_product') %></h3>
+    <div class="modal bg-white" role="dialog">
+      <div class="opacity-100 h-2/3 md:h-full modal-box bg-white md:w-/12">
+        <h3 class="font-bold text-2xl text-center">
+          <%= t('order.choose_product') %>
+          <hr class="border-2 my-2">
+        </h3>
         <%= render partial:'radio_product',
             collection: shop.products, as: :product, locals: { index: 1 }%>
-        <div class="modal-action">
+        <div class="modal-action text-center">
           <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" 
                     data-action="products#toggleModal">✕</button>

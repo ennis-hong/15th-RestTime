@@ -128,8 +128,34 @@ footer {
   left: 0;
   background: linear-gradient(
     to top right,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.4),
     rgb(175, 196, 126, 1)
   );
   z-index: -1;
+}
+
+.modal-box {
+  background-color: white;
+}
+
+#slots .btn-outline.btn-active {
+  background-color: rgb(166, 189, 110);
+  color: var(--fallback-b1, oklch(var(--b1) / var(--tw-text-opacity)));
+  font-size: 0.8rem;
+  border-radius: 5px;
+}
+
+#slots .btn {
+  font-size: 0.8rem;
+  border-radius: 5px;
+}
+
+#slots .btn:hover {
+  background-color: rgb(175, 196, 126);
+  color: black;
+}
+
+#slots .btn-outline {
+  border-color: white;
+  border: 1px solid;
 }

@@ -6,9 +6,14 @@
     </ul>
   </div>
   <div class="hidden md:block h-[300px] relative">
-    <article class="absolute bottom-0 left-4 md:left-10 z-10 text-white">
+    <div class="absolute bottom-0 left-4 md:left-10 z-10 text-white">
       <h1 class="text-sm md:text-xl font-bold"><%= @shop.title %></h1>
-    </article>
+    </div>
+    <div class="absolute top-5 md:right-5 z-10 text-white">
+      <% if user_signed_in? && %>
+        <%= render 'like_shops', shop: @shop%>
+      <% end %>
+    </div>
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
       <% if @shop.cover.attached? %>
         <%= image_tag @shop.cover, class: "w-full h-full object-cover brightness-50" %>
@@ -17,7 +22,6 @@
       <% end %>
     </div>
   </div>
-
   <%# 手機顯示輪撥 %>
   <div class="h-48 order-1 md:hidden" data-controller="carousel">
     <div class="carousel h-48">
@@ -58,11 +62,10 @@
             </div>
             <hr class="border-2 mt-6">
           </li>
-          <div class="flex-row md:flex">
-            <%=render 'shared/business_hours', class: 'mb-10' %>
-          </div>
-          <hr class="mt-6 mb-8">
         </ul>
+        <div class="flex-row md:flex">
+          <%=render 'shared/business_hours', class: 'mb-10' %>
+        </div>
       </div>
     </div>
     <%# 桌機顯示輪撥 %>
@@ -79,68 +82,73 @@
             <button class="btn glass opacity-80" data-action="carousel#next">❯</button>
           </div>
         </div>
+        <%# 桌機表單 %>
         <div class="hidden md:block mx-12">
           <%= render 'booking', { shop: @shop, service_times: @shop.service_times } %>
         </div>
       </div>
     </div >
   </div>
-</section>
-
-
-
-
-
-
-
-<section class="hidden md:block">
-  <h3 class="text-center text-3xl text-gray-600 my-6"><%= t('product.hot') %></h3>
-  <div class="card md:col-span-2 mt-4">
-    <div class="carousel">
-      <div class="carousel-item relative w-full ">
-      <% @products_on_sale.each do |product| %>
-    <div data-controller="product-info"
-        data-product-info-title-value="<%= product.title %>"
-        data-product-info-description-value="<%= product.description %>"
-        data-product-info-price-value="<%= "NT#{format_price(product.price)}" %>"
-        data-product-info-image-url-value="<%= url_for(product.cover.variant(:cover)) %>"
-        data-product-info-service-min-value="<%= "#{product.service_min}#{t('order.min')}" %>"
-        data-product-info-url-value="<%= product_url(product) %>"
-        data-action="click->product-info#showDetails"
-        class="card card-compact w-96 bg-gray-200 <%= @onsale_count >= 5 ? 'mx-2' : 'mx-auto' %> relative cursor-pointer">
-        
-          <figure class="relative h-48 overflow-hidden">
-            <%= image_tag product.cover.variant(:cover) %>
-            <div class="absolute bottom-0 left-0 right-0 bg-opacity-75 bg-gray-700 p-2 rounded-tl rounded-tr">
-              <p class="text-sm font-semibold text-center text-white ">
-                <%= t('product.flash_sale') %>
-                <span class="text-2xl font-bold text-orange-500">
-                  $<%= format_price(product.price) %>
-                </span>
-              </p>
+  <section class="hidden md:block mx-12">
+    <h3 class="text-center text-3xl text-gray-600 my-6">
+      <%= t('product.hot') %>
+    </h3>
+    <div class="mt-4">
+      <div class="carousel">
+        <div class="carousel-item relative w-full">
+          <% @products_on_sale.sample(3).each do |product| %>
+            <div data-controller="product-info"
+                data-product-info-title-value="<%= product.title %>"
+                data-product-info-description-value="<%= product.description %>"
+                data-product-info-price-value="<%= "NT#{format_price(product.price)}" %>"
+                data-product-info-image-url-value="<%= url_for(product.cover.variant(:cover)) %>"
+                data-product-info-service-min-value="<%= "#{product.service_min}#{t('order.min')}" %>"
+                data-product-info-url-value="<%= product_url(product) %>"
+                data-action="click->product-info#showDetails"
+                class="card card-compact w-96 bg-gray-200 mx-10 relative cursor-pointer">
+              
+              <figure class="relative h-48 overflow-hidden">
+                <%= image_tag product.cover.variant(:cover) %>
+                <div class="absolute bottom-0 left-0 right-0 bg-opacity-75 bg-gray-700 p-2 rounded-tl rounded-tr">
+                  <p class="text-sm font-semibold text-center text-white">
+                    <%= t('product.flash_sale') %>
+                    <span class="text-2xl font-bold text-orange-500">
+                      $<%= format_price(product.price) %>
+                    </span>
+                  </p>
+                </div>
+              </figure>
+              <div class="card-body">
+                <h2 class="card-title text-lg">
+                  <%= product.title.truncate(13) %>
+                </h2>
+                <p>
+                  <%= product.description.truncate(100) %>
+                  <span class="text-sm text-gray-400">
+                    <%= t('product.more') %>
+                  </span>
+                </p>
+              </div>
             </div>
-          </figure>
-          <div class="card-body">
-            <h2 class="card-title text-lg">
-              <%= product.title.truncate(13) %>
-            </h2>
-            <p>
-              <%= product.description.truncate(100) %>
-              <span class="text-sm text-gray-400">
-                <%= t('product.more') %>
-              </span>
-            </p>
-          </div>
-        </div>
-      <% end %>
-      </div> 
+          <% end %>
+        </div> 
+      </div>
     </div>
+  </section>
+  <div class="comment-container">
+    <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
+    <% @comments.each do |comment| %>
+      <%= render 'comments/comment', shop: @shop, comment: comment %>
+    <% end %>
   </div>
 </section>
-<div class="comment-container">
-  <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
-  <% @comments.each do |comment| %>
-    <%= render 'comments/comment', shop: @shop, comment: comment %>
-  <% end %>
+
+
+<%# 手機表單 %>
+<div class="fixed bottom-0 w-full md:hidden bg-emerald-600 opacity-95 md:hidden">
+  <div class="relative">
+    <div class="diagonal-bg bg-white bg-opacity-100"></div>
+    <%= render 'booking', { shop: @shop, service_times: @shop.service_times } %>
+  </div>
 </div>
 
