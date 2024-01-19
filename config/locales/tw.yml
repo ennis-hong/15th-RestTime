@@ -222,6 +222,7 @@ tw:
     payment_failed: 付款失敗
     abnormal_payment_result: 付款結果異常
     order_confirmed_and_proceeding_to_payment: 訂單成立，正在前往付款頁面
+    proceeding_to_payment: 正在前往付款頁面
     enter_the_change_time: 請輸入變更時間
     original_time: 原先預約時間
     input_serial_or_name: 輸入訂單編號或姓名
