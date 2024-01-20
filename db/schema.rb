@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_16_035456) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_035456) do
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_like_shops_on_shop_id"
     t.index ["user_id"], name: "index_like_shops_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "notifiable_type", null: false
+    t.bigint "notifiable_id", null: false
+    t.string "title"
+    t.text "message"
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -184,6 +197,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_035456) do
   add_foreign_key "comments", "users"
   add_foreign_key "like_shops", "shops"
   add_foreign_key "like_shops", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "shops"
   add_foreign_key "orders", "users"

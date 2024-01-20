@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :liked_shops, through: :like_shops, source: :shop
   has_many :orders
   has_many :comments
+  has_many :notifications
   after_create :create_default_shop
 
   def liked?(shop)

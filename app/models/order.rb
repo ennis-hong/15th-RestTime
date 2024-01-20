@@ -13,6 +13,7 @@ class Order < ApplicationRecord
   belongs_to :product
 
   before_create :generate_serial
+  after_update :create_payment_notification if :paid?
 
   scope :valid, -> { where.not(status: %i[completed cancelled]) }
   scope :with_status, ->(status) { where(status:) if status.present? }
@@ -48,6 +49,10 @@ class Order < ApplicationRecord
     service_date + product.service_min.minutes
   end
 
+  def paid?
+    status == 'paid'
+  end
+
   private
 
   def generate_serial
@@ -59,5 +64,9 @@ class Order < ApplicationRecord
     code = SecureRandom.alphanumeric.upcase[0..digits - 1]
 
     "RT#{today}#{code}"
+  end
+
+  def create_payment_notification
+    shop.user.notifications.create(notifiable: self, title: "【訂單通知】", message: "訂單編號#{serial}<br/>預約日期：#{service_date}")
   end
 end
