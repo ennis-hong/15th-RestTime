@@ -119,7 +119,6 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
 
   # line
   def linepay_payment(order) # rubocop:disable Metrics/MethodLength
-    @nonce = SecureRandom.uuid
     @order = order
 
     # body
@@ -127,36 +126,28 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
     packages_id = "package#{SecureRandom.uuid}"
     amount = @order.price.to_i
 
-    @body = { amount:,
-              currency: 'TWD',
-              orderId: order_id,
-              packages: [{ id: packages_id,
-                           amount:,
-                           products: [{
-                             name: @order.product.title,
-                             quantity: 1,
-                             price: amount
-                           }] }],
-              redirectUrls: { confirmUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s,
-                              cancelUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s } }
+    body = { amount:,
+             currency: 'TWD',
+             orderId: order_id,
+             packages: [{ id: packages_id,
+                          amount:,
+                          products: [{
+                            name: @order.product.title,
+                            quantity: 1,
+                            price: amount
+                          }] }],
+             redirectUrls: { confirmUrl: "#{Rails.application.credentials.line.DOMAIN_NAME}#{Rails.application.credentials.line.CONFIRM_URL}", # rubocop:disable Layout/LineLength
+                             cancelUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s } }
     # header
-    secret = Rails.application.credentials.line.SECRET_KEY
     signature_uri = "/#{Rails.application.credentials.line.VERSION}/payments/request"
-    message = "#{secret}#{signature_uri}#{@body.to_json}#{@nonce}"
-    hash = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), secret, message)
-    @signature = Base64.strict_encode64(hash)
-    @header = { 'Content-Type': 'application/json',
-                'X-LINE-ChannelId': "#{Rails.application.credentials.line[:CHANNEL_ID]}", # rubocop:disable Style/RedundantInterpolation
-                'X-LINE-Authorization-Nonce': @nonce,
-                'X-LINE-Authorization': @signature }
-
+    create_header(signature_uri, body)
     conn = Faraday.new(
       url: "#{Rails.application.credentials.line.LINEPAY_SITE}/#{Rails.application.credentials.line.VERSION}/payments/request",
       headers: @header
     )
 
     response = conn.post do |req|
-      req.body = @body.to_json
+      req.body = body.to_json
     end
     parsed_response = JSON.parse(response.body)
     if parsed_response['returnCode'] == '0000'
@@ -167,25 +158,58 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
     end
   end
 
-  def confirm
-    response = Faraday.post("#{Rails.application.credentials.line.LINEPAY_SITE}/#{Rails.application.credentials.line.VERSION}/payments/#{params[:transactionId]}/confirm") do |req|
-      request_header(req)
-      req.body = {
-        amount:,
-        currency: 'TWD'
-      }.to_json
-    end
+  def confirm # rubocop:disable Metrics/MethodLength
+    transaction_id = params[:transactionId]
+    order_serial = params[:orderId].to_s.gsub(/\d{6}\z/, '')
+    @order = Order.find_by(serial: order_serial)
+    amount = @order.price.to_i
 
-    result = JSON.parse(response.body)
+    body = {
+      amount:,
+      currency: 'TWD'
+    }
+    signature_uri = "/#{Rails.application.credentials.line.VERSION}/payments/#{transaction_id}/confirm"
+    create_header(signature_uri, body)
 
-    if result['returnCode'] == '0000'
-      @order.pay!
-      redirect_to products_path, notice: '您的訂單已成功付款'
+    if @order.present? && @order.user == current_user
+
+      conn = Faraday.new(
+        url: "#{Rails.application.credentials.line.LINEPAY_SITE}/v3/payments/#{transaction_id}/confirm",
+        headers: @header
+      )
+
+      response = conn.post do |req|
+        req.body = body.to_json
+      end
+      parsed_response = JSON.parse(response.body)
+      puts "Confirm Response: #{response.body}"
+
+      if parsed_response['returnCode'] == '0000'
+        trade_no = parsed_response['info']['transactionId']
+        @order.pay!(trade_no:)
+        puts @order
+        redirect_to orders_path, notice: '您的訂單已成功付款'
+      else
+        puts "API error: #{parsed_response['returnCode']} - #{parsed_response['returnMessage']}"
+        puts "Sent header: #{@header}, body: #{@header}"
+        redirect_to root_path, notice: '支付失败，请联系客服处理'
+      end
     else
-      puts "API error：#{result['returnCode']} - #{result['returnMessage']}"
-
-      redirect_to root_path, notice: '支付失败，请联系客服处理'
+      # 订单不存在或不属于当前用户的处理逻辑
+      redirect_to root_path, notice: '无效的订单'
     end
+  end
+
+  def create_header(signature_uri, body)
+    nonce = SecureRandom.uuid
+    secret = Rails.application.credentials.line.SECRET_KEY
+    message = "#{secret}#{signature_uri}#{body.to_json}#{nonce}"
+    hash = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), secret, message)
+    @signature = Base64.strict_encode64(hash)
+    @header = { 'Content-Type': 'application/json',
+                'X-LINE-ChannelId': "#{Rails.application.credentials.line[:CHANNEL_ID]}", # rubocop:disable Style/RedundantInterpolation
+                'X-LINE-Authorization-Nonce': nonce,
+                'X-LINE-Authorization': @signature }
   end
 
   def cancel

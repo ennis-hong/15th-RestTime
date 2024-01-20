@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     resources :orders, only: %i[index show new create edit update] do
       collection do
         post :payment_result
+        get :confirm
       end
       member do
         patch :cancel
