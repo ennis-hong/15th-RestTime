@@ -1,24 +1,33 @@
-<section class="container mx-auto p-5">
-  <div class="text-sm breadcrumbs">
+<section class="container mx-auto p-1 md:p-5">
+  <div class="mx-2 text-sm my-2 md:text-sm breadcrumbs">
     <ul>
       <li><%= link_to t('home'), root_path %></li>
       <li><%= link_to t('navbar.mybookings'), orders_path %></li>
-      <li><%= t('order.order_info') %></li>
+      <li>
+        <span class="text-orange-700 font-bold">
+        <%= t('order.order_info') %></li>
+        </span>
     </ul>
   </div>
-  <div class="h-[300px] relative">
-    <article class="mt-4 z-10 absolute top-64 left-10 text-white">
-      <h1 class="text-xl font-bold"><%= @order.shop.title %></h1>
-    </article>
-    <div class="absolute h-[300px] overflow-hidden place-items-center">
-      <% if @order.shop.cover.attached? %>
-        <%= image_tag @order.shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+  <div class="hidden md:block h-[300px] relative">
+    <div class="absolute bottom-0 left-4 md:left-10 z-10 text-white">
+      <h1 class="text-sm md:text-xl font-bold"><%= booking_shop.title %></h1>
+    </div>
+    <div class="absolute top-5 md:right-5 z-10 text-white">
+      <% if user_signed_in? && %>
+        <%= render 'shops/like_shops', shop: booking_shop%>
+      <% end %>
+    </div>
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+      <% if booking_shop.cover.attached? %>
+        <%= image_tag booking_shop.cover, class: "w-full h-full object-cover brightness-50" %>
       <% else %>
-        <img src="app/assets/images/shops/default_cover.png" class="w-full">
+        <img src="app/assets/images/shops/default_cover.png" class="w-full h-full object-cover">
       <% end %>
     </div>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+  <%# 桌機 %>
+  <div class="hidden md:grid grid-cols-1 md:grid-cols-4 gap-4">
     <div class="card md:col-span-2 bg-white-100 shadow-xl">
       <ul class="card-body mx-10">
         <li class="text-lg font-medium mb-3">
@@ -118,4 +127,106 @@
       </div>
     </div>
   </div>
+
+  <div class="card order-1 md:order-3 md:hidden col-span-2 bg-white-100 shadow-xl">
+      <div class="relative md:mx-12">
+        <figure class="mt-2 md:p-8">
+          <%= image_tag booking_product.cover.variant(:cover), class: "w-full" %>
+        </figure>
+        <div class="absolute bottom-0 left-0 w-full bg-white bg-opacity-60 px-4 md:p-4">
+          <div class="justify-end">
+            <h2 class="card-title text-xl">
+              <%= booking_product.title %>
+            </h2>
+            <div class="badge badge-secondary text-sm">
+              <%= booking_product.service_min %>
+              <%= t('order.min') %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%# 手機顯示 %>
+      <div class="text-sm text-gray-600 md:hidden">
+        <div class="card">
+          <div class="card-body">
+            <div class="steps">
+              <%= render_steps(@order) %>
+            </div>
+          </div>
+          <div>
+          <table class="min-w-full table-auto border-collapse bg-slate-100 shadow-lg text-sm text-gray-800 rounded-lg overflow-hidden">
+            <%= render 'order_table' %>
+          </table>
+          <div>
+          <div>
+          <div class="p-4">
+            <% unless @order.completed? || @order.cancelled? %>
+              <div class="order_accent_btn">
+                <%= link_to edit_order_path(@order), class: 'block-class' do %>
+              <div >
+                <%= t('order.appointment_change') %>
+              </div>
+            <% end %>
+              </div>
+            <% end %>
+            <% if @order.may_cancel? %>
+            <div class="order_gray_btn">
+              <%= link_to t('order.cancel_order'), cancel_order_path(@order),
+                data: { turbo_method: 'patch',
+                turbo_confirm: t('message.are_you_sure_cancel_order') } %>
+            </div>
+            <% end %>
+          </div>
+
+            <details class="collapse collapse-arrow border border-base-200 bg-gray-200 mb-5 px-5">
+              <summary class="collapse-title text-lg font-medium ">
+                <h3 class="text-center px-5">
+                  <%= t('order.faqs') %>
+                </h3>
+              </summary>
+              <div class="collapse-content"> 
+                  <div class="p-3">
+                    <h4 class="text-center underline mb-2 font-bold">
+                      <%= t('faqs.order.title.redemption') %>
+                    </h4>
+                    <p class="mb-1 text-gray-500">★ 您可以通過我們的系統選擇您需要的服務進行預約。系統會為您的預約生成一個獨特的QR碼，用於後續的核銷程序。</p>
+                    <p class="mb-1 text-gray-500">★ 在預約的日期和時間，請攜帶您的QR碼前往預約地點。到達預約地點時，向工作人員出示您的QR碼。工作人員將使用專業設備掃描您的QR碼，確認完您的身分，進行核銷。</p>
+                  </div>
+                  <div class="p-3">
+                    <h4 class="text-center underline mb-3 font-bold">
+                      <%= t('faqs.order.title.redemption_notice') %>
+                    </h4>
+                    <p class="mb-1 text-gray-500">★ 請確保您的QR碼清晰可見，以便快速掃描。</p>
+                    <p class="mb-1 text-gray-500">★ 請妥善保管您的QR碼，若經外人使用，恕不能重複使用及退費。</p>
+                    <p class="mb-1 text-gray-500">★ 如果您遇到任何問題，請即時與我們的工作人員聯繫。</p>
+                  </div>
+              </div>
+            </details>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+  
+<%# QR CODE %>
+<% if @order.paid? %>
+  <div class="fixed bottom-0 w-full md:hidden bg-emerald-600 opacity-95 z-10 md:hidden">
+    <div class="relative px-8 py-1">
+      <div class="diagonal-bg bg-white bg-opacity-100"></div>
+        <details class="collapse collapse-arrow bg-emerald-300 bg-opacity-90">
+          <summary class="collapse-title text-lg font-medium text-center flex justify-center">
+            <h3 class="font-bold">
+              <%= t('order.qrcode') %>
+            </h3>
+          </summary>
+          <div class="collapse-content flex justify-center"> 
+            <div>
+              <canvas data-controller="qrcode" data-text="<%= @url_string %>"></canvas>
+            </div>
+          </div>
+        </details>
+    </div>
+  </div>
+<% end %>
