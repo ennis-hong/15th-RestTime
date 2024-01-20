@@ -212,27 +212,6 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
                 'X-LINE-Authorization': @signature }
   end
 
-  def cancel
-    @order = current_user.orders.find(params[:id])
-
-    if @order.paid?
-      response = Faraday.post("#{Rails.application.credentials.line.LINEPAY_SITE}/#{Rails.application.credentials.line.VERSION}/payments/#{@order[:transaction_id]}/refund") do |req|
-        request_header(req)
-      end
-      result = JSON.parse(response.body)
-
-      if result['returnCode'] == '0000'
-        @order.refund!
-        redirect_to orders_path, notice: "訂單 #{@order.num}已完成退款"
-        @notice = current_user.notices.create(notices: flash[:notice])
-      else
-        redirect_to orders_path, notice: '退款失敗'
-      end
-    else
-      redirect_to root_path
-    end
-  end
-
   private
 
   def payment_params(order)
