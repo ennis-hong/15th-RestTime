@@ -58,7 +58,9 @@
       </div>
       <details class="collapse collapse-arrow text-center border border-base-300 bg-slate-100 mb-3">
         <summary class="collapse-title text-xl font-medium px-1">
-          <h4 class="text-center"><%= t('helpers.submit.product.comment') %></h4>
+          <h4 class="text-2xl text-center text-gray-600 font-medium">
+            <%= t('helpers.submit.product.comment') %>
+          </h4>
         </summary>
         <div class="collapse-content"> 
           <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
