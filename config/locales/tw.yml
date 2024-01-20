@@ -152,6 +152,7 @@ tw:
     product_info: 商品資訊
     confirm_booking_info: 請確認預約細項
     booking_item: 預約項目
+    payment_type: 付款方式
     order_info: 訂單資訊
     customer_info: 客戶資訊
     service_duration: 服務時間

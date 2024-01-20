@@ -19,7 +19,12 @@
       <div>
         <%= form.text_field :booked_email, value: current_user.email, class: 'input w-full input-bordered text-center', placeholder: '請輸入您的電子郵件' %>
       </div>
-      <%= form.submit t('order.confirm'), class: 'btn btn-primary' %>
+      <div>
+        <%= form.label :payment_type, t('order.payment_type'), class: 'label' %>
+        <%= form.select :payment_type, ['Credit Card', 'LinePay'], { prompt: t('order.payment_type') }, class: 'select w-full input-bordered' %>
+      </div>
+
+      <%= form.submit t('order.confirm'), class: 'btn btn-primary mt-4' %>
     <% end %>
   </div>
 </div>

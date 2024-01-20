@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OrdersController < ApplicationController
+class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :authenticate_user!, except: %i[payment_result]
   before_action :order_params, only: :create
   before_action :find_order, only: %i[show cancel edit update payment]
@@ -26,7 +26,12 @@ class OrdersController < ApplicationController
     return render :new, notice: t('order.booking_full') unless booking_service.available_booking?(@order.service_date)
 
     if @order.save
-      add_mac_value(payment_params(@order))
+      case params[:order][:payment_type]
+      when 'LinePay'
+        redirect_to root_path
+      when 'Credit Card'
+        add_mac_value(payment_params(@order))
+      end
     else
       render :new
     end
