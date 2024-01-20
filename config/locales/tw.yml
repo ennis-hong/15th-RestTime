@@ -201,7 +201,7 @@ tw:
     historical: 歷史訂單
     unfinished: 未完成
     cancelled_order: 已取消
-    recent: 近期訂單
+    recent: 近三日服務
     product_sorting: 商品排序
     all: 所有訂單
     select: 搜尋

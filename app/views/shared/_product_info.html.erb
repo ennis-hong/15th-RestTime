@@ -1,4 +1,4 @@
-<div class="text-2xl mt-5">
+<div class="hidden md:block text-2xl mt-5">
   <h4><%= t('product.hot') %></h4>
 </div>
 <hr class="border">
@@ -7,30 +7,31 @@
     <li data-scroll-target="item" class="text-xl order_text tracking-wide">
       <div class="h-96 carousel-item h-full">
         <div class="text-gray-500">
-          <div class="card my-3">
+          <div class="card md:my-3">
             <div class="card-body border rounded-md border-gray-500">
-              <div class="flex items-center justify-between">
-                <h2 class="card-title text-2xl text-gray-700 mr-4">
+              <div class="md:flex items-center justify-between">
+                <h2 class="card-title text-lg md:text-gray-700 text-2xl mr-4">
                   <%= product.title %>
                 </h2>
                 <div class="flex items-center">
-                  <p class="text-sm font-semibold mr-2">
+                  <p class="text-sm font-semibold md:text-sm mr-2">
                     <%= t('product.flash_sale') %>
                   </p>
-                  <span class="text-xl font-bold text-orange-600 mr-2">
+                  <span class="text-sm font-bold text-orange-600 md:text-xl mr-2">
                     $<%= format_price(product.price) %>
                   </span>
                 </div>
               </div>
               <hr class="border-2">
               <p>
-                <%= product.description.truncate(90) %>
+                <span class="hidden md:block text-lg"><%= product.description.truncate(90) %></span>
+                <span class="text-sm md:hidden"><%= product.description.truncate(50) %></span>
                 <span class="text-sm text-gray-400">
                   <%= link_to t('product.more'), shop_path(shop) %>
                 </span>
               </p>
-              <span class="ml-auto badge badge-lg badge-accent badge-outline text-right">
-                <%= link_to t('order.book_now'), shop_path(shop), class: 'm-2 text-xl text-orange-600 ' %>
+              <span class="ml-auto badge  badge-accent badge-outline text-right md:badge-lg">
+                <%= link_to t('order.book_now'), shop_path(shop), class: 'text-sm md:m-2 text-orange-600 md:text-xl' %>
               </span>
             </div>
           </div>

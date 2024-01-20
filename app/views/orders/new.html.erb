@@ -1,43 +1,217 @@
-<section class="container mx-auto p-5">
-  <div class="text-sm breadcrumbs">
-    <ul>
+<section class="container mx-auto p-1 md:p-5">
+  <div class="mx-2 text-sm my-2 md:text-sm breadcrumbs">
+    <ul class="text-gray-600 mx-auto">
       <li><%= link_to t('home'), root_path %></li>
       <li><%= link_to booking_shop.title, shop_path(booking_shop) %></li>
-      <li><%= t('order.booking_info') %></li>
+      <li>
+        <span class="text-orange-700 font-bold">
+          <%= t('order.booking_info') %>
+        </span>
+      </li>
     </ul>
   </div>
-  <div class="h-[300px] relative">
-    <article class="mt-4 z-10 absolute top-64 left-10 text-white">
-      <h1 class="text-xl font-bold"><%= booking_shop.title %></h1>
-    </article>
-    <div class="absolute h-[300px] overflow-hidden place-items-center">
+  <div class="hidden md:block h-[300px] relative">
+    <div class="absolute bottom-0 left-4 md:left-10 z-10 text-white">
+      <h1 class="text-sm md:text-xl font-bold"><%= booking_shop.title %></h1>
+    </div>
+    <div class="absolute top-5 md:right-5 z-10 text-white">
+      <% if user_signed_in? && %>
+        <%= render 'shops/like_shops', shop: booking_shop%>
+      <% end %>
+    </div>
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
       <% if booking_shop.cover.attached? %>
-        <%= image_tag booking_shop.cover, class: "w-full -translate-y-1/4 brightness-50" %>
+        <%= image_tag booking_shop.cover, class: "w-full h-full object-cover brightness-50" %>
       <% else %>
-        <img src="https://fakeimg.pl/1000x300/200" class="w-full">
+        <img src="app/assets/images/shops/default_cover.png" class="w-full h-full object-cover">
       <% end %>
     </div>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-    <div class="card md:col-span-2 bg-white-100 shadow-xl">
-      <ul class="card-body mx-10">
-        <li class="text-lg font-medium mb-3">
-          <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
-            <%= render 'shared/google_map', shop: booking_shop %>
+  <div class="grid grid-cols mb-10 md:grid-cols-4 gap-4">
+    <div class="order-2 md:order-1 md:card col-span-2 bg-white-100 shadow-xl">
+      <div class="md:card-body mx-10 mb-10">
+        <%#= 手機顯示 %>
+        <h4 class="text-2xl text-center my-2 md:hidden">
+          <%= t('order.shop_location') %>
+          <hr class="border-2">
+        </h4>
+        <ul class="text-lg font-medium mb-3">
+          <li class="mb-4">
+            <div class="aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
+              <%= render 'shared/google_map', shop: booking_shop %>
+            </div>
+          </li>
+          <div class="p-2">
+            <div class="mb-10">
+              <ul>
+                <%= render 'shared/shop_info',shop: booking_shop %>
+              </ul>
+            </div>
           </div>
-        </li>
-        <li class="p-2">
-          <div class="mb-8">
-            <%= render 'shared/shop_info', shop: booking_shop %>
+          <div class="flex-row md:flex">
+            <div class="collapse collapse-arrow border border-base-300 bg-slate-100 mb-3 md:hidden">
+              <input type="checkbox"/> 
+              <div class="collapse-title text-2xl text-center text-gray-600 font-medium">
+                <h4><%= t('form.shop.description') %></h4>
+              </div>
+              <div class="collapse-content text-gray-700"> 
+                <p class="p-2"><%=booking_shop.description %></p>
+              </div>
+            </div>
             <%= render 'shared/product_info', shop: booking_shop %>
           </div>
-        </li>
-      </ul>
-    </div>
-    <div class="card md:col-span-2 bg-white-100 shadow-xl">
-      <div class="mx-12">
-        <%= render 'form', order: @order%>
+          <hr class="mt-6 mb-8">
+        </ul>
       </div>
-    </div >
+    </div>
+    <%#= 桌機顯示 %>
+    <div class="card hidden order-2 md:block col-span-2 bg-white-100 shadow-xl">
+      <div class="relative md:mx-12">
+        <figure class="p-8">
+          <%= image_tag booking_product.cover.variant(:cover), class: "w-full" %>
+        </figure>
+        <div class="absolute bottom-0 left-0 w-full p-8">
+          <div class="bg-white bg-opacity-75 p-4">
+            <div class="card-title mx-12 text-2xl flex justify-between">
+              <h2 class="ml-auto"></h2>
+                <%= booking_product.title %>
+                <span class="badge badge-secondary">
+                  <%= booking_product.service_min %>
+                  <%= t('order.min') %>
+                </span>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mx-12 px-8">
+        <div class="text-lg text-gray-600">
+          <table class="md:p-2 min-w-full table-auto border-collapse bg-slate-100 shadow-lg text-lg text-gray-800 rounded-lg overflow-hidden">
+            <thead class="bg-gray-300">
+              <tr>
+                <th class="px-2 py-2 text-center text-gray-600 rounded-tl-lg">
+                  <%= t('order.booking_date') %>
+                </th>
+                <th class="px-2 py-2 text-center text-gray-500">
+                  <%= format_date(current_booking.service_date) %>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="px-2 py-2 text-center text-gray-600 font-semibold">
+                  <%= t('order.booking_start_time') %>
+                </td>
+                <td class="px-2 py-2 text-center text-gray-500 font-semibold">
+                  <%= format_time_without_sec(current_booking.service_date) %>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
+                  <%= t('order.booking_end_time') %>
+                </td>
+                <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
+                  <%= booking_end_time(current_booking) %>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot class="bg-gray-300 shadow">
+              <tr>
+                <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
+                  <%= t('order.price') %>
+                </td>
+                <td class="px-12 py-2  text-center text-gray-500 font-semibold ">
+                  <%= t('order.currency') %> <%= booking_product.price.to_i %>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          <div>
+            <p class="px-8 border-l border-r md:hidden">
+              <%= booking_shop.description %>
+            </p>
+          <%= render 'form', order: @order%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%#= 手機顯示 %>
+    <div class="card order-1 md:order-3 md:hidden col-span-2 bg-white-100 shadow-xl">
+      <div class="relative md:mx-12">
+        <figure class="mt-2 md:p-8">
+          <%= image_tag booking_product.cover.variant(:cover), class: "w-full" %>
+        </figure>
+        <div class="absolute bottom-0 left-0 w-full bg-white bg-opacity-60 px-4 md:p-4">
+          <div class="justify-end">
+            <h2 class="card-title text-xl">
+              <%= booking_product.title %>
+            </h2>
+            <div class="badge badge-secondary text-sm">
+              <%= booking_product.service_min %>
+              <%= t('order.min') %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="p-4 text-sm text-gray-600">
+        <div class="mx-2">
+          <%= form_with model: @order, data: { turbo:false }, class: 'flex flex-col gap-2' do |form| %>
+          <div>
+            <%= form.text_field :booked_name, placeholder: t('message.input_booked_name'), class: 'input w-full input-bordered text-center' %>
+          </div>
+          <div>
+            <%= form.text_field :booked_email, value: current_user.email, class: 'input w-full input-bordered text-center' %>
+          </div>
+          <%= form.submit t('order.confirm'), class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+<%# 手機版確認資訊 %>
+<div class="fixed bottom-0 w-full md:hidden p-2">
+  <table class="p-3 min-w-full table-auto border-collapse bg-slate-100 shadow-lg text-lg text-gray-800 rounded-lg overflow-hidden">
+    <thead class="bg-gray-300">
+        <tr>
+          <th class="px-2 py-1 text-center text-gray-600 rounded-tl-lg">
+            <%= t('order.booking_date') %>
+          </th>
+          <th class="px-2 py-1 text-center text-gray-500">
+            <%= format_date(current_booking.service_date) %>
+          </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="px-2 py-1 text-center text-gray-600 font-semibold">
+            <%= t('order.booking_start_time') %>
+          </td>
+          <td class="px-2 py-1 text-center text-gray-500 font-semibold">
+            <%= format_time_without_sec(current_booking.service_date) %>
+          </td>
+        </tr>
+        <tr>
+          <td class="px-2 py-1 text-center text-gray-600 font-semibold ">
+            <%= t('order.booking_end_time') %>
+          </td>
+          <td class="px-2 py-1 text-center text-gray-500 font-semibold ">
+            <%= booking_end_time(current_booking) %>
+          </td>
+        </tr>
+    </tbody>
+    <tfoot class="bg-gray-300 shadow">
+        <tr>
+          <td class="px-12 py-1 text-center text-gray-600 font-semibold ">
+            <%= t('order.price') %>
+          </td>
+          <td class="px-12 py-1 text-center text-gray-500 font-semibold ">
+            <%= t('order.currency') %>
+            <%= format_price(booking_product.price) %>
+          </td>
+        </tr>
+    </tfoot>
+  </table>
+</div>
+

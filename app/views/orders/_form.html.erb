@@ -1,10 +1,8 @@
 <div class="card w-full bg-white-100 shadow-xl">
   <div class="card-body gap-4">
-    <div class="card-title text-xl text-gray-700 text-center">
-      <%= t('order.confirm_booking_info') %>
-    </div>
+    
     <% if order.errors.any? %>
-      <section class="p-4 my-4 text-white bg-rose-600 rounded">
+      <section class="md:p-4 my-4 text-white bg-rose-600 rounded">
         <ul>
         <% order.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -13,57 +11,15 @@
       </section>
     <% end %>
     <div>
-      <table class="min-w-full table-auto border-collapse bg-slate-100 shadow-lg text-lg text-gray-800 rounded-lg overflow-hidden">
-        <thead class="bg-gray-300">
-          <tr>
-            <th class="px-2 py-2 text-center text-gray-600 rounded-tl-lg">
-              <%= t('order.booking_date') %>
-            </th>
-            <th class="px-2 py-2 text-center text-gray-500">
-              <%= format_date(current_booking.service_date) %>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="px-2 py-2 text-center text-gray-600 font-semibold">
-              <%= t('order.booking_start_time') %>
-            </td>
-            <td class="px-2 py-2 text-center text-gray-500 font-semibold">
-              <%= format_time_without_sec(current_booking.service_date) %>
-            </td>
-          </tr>
-          <tr>
-            <td class="px-2 py-2 text-center text-gray-600 font-semibold ">
-              <%= t('order.booking_end_time') %>
-            </td>
-            <td class="px-2 py-2 text-center text-gray-500 font-semibold ">
-              <%= booking_end_time(current_booking) %>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot class="bg-gray-300 shadow">
-          <tr>
-            <td class="px-12 py-2  text-center text-gray-600 font-semibold ">
-              <%= t('order.price') %>
-            </td>
-            <td class="px-12 py-2  text-center text-gray-500 font-semibold ">
-              <%= t('order.currency') %> <%= booking_product.price.to_i %>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
     </div>
     <%= form_with model: order, data: { turbo:false }, class: 'flex flex-col gap-2' do |form| %>
       <div>
-        <%= form.label :booked_name, t('order.name') , class: 'label' %>
         <%= form.text_field :booked_name, placeholder: t('message.input_booked_name'), class: 'input w-full input-bordered text-center' %>
       </div>
       <div>
-        <%= form.label :booked_email, t('order.email'), class: 'label' %>
-        <%= form.text_field :booked_email, value: current_user.email, class: 'input w-full input-bordered text-center' %>
+        <%= form.text_field :booked_email, value: current_user.email, class: 'input w-full input-bordered text-center', placeholder: '請輸入您的電子郵件' %>
       </div>
-      <%= form.submit t('order.confirm'), class: 'btn btn-primary mt-4' %>
+      <%= form.submit t('order.confirm'), class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>
