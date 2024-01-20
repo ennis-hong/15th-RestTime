@@ -171,32 +171,25 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
     signature_uri = "/#{Rails.application.credentials.line.VERSION}/payments/#{transaction_id}/confirm"
     create_header(signature_uri, body)
 
-    if @order.present? && @order.user == current_user
+    conn = Faraday.new(
+      url: "#{Rails.application.credentials.line.LINEPAY_SITE}/v3/payments/#{transaction_id}/confirm",
+      headers: @header
+    )
 
-      conn = Faraday.new(
-        url: "#{Rails.application.credentials.line.LINEPAY_SITE}/v3/payments/#{transaction_id}/confirm",
-        headers: @header
-      )
+    response = conn.post do |req|
+      req.body = body.to_json
+    end
+    parsed_response = JSON.parse(response.body)
+    puts "Confirm Response: #{response.body}"
 
-      response = conn.post do |req|
-        req.body = body.to_json
-      end
-      parsed_response = JSON.parse(response.body)
-      puts "Confirm Response: #{response.body}"
-
-      if parsed_response['returnCode'] == '0000'
-        trade_no = parsed_response['info']['transactionId']
-        @order.pay!(trade_no:)
-        puts @order
-        redirect_to orders_path, notice: '您的訂單已成功付款'
-      else
-        puts "API error: #{parsed_response['returnCode']} - #{parsed_response['returnMessage']}"
-        puts "Sent header: #{@header}, body: #{@header}"
-        redirect_to root_path, notice: '支付失败，请联系客服处理'
-      end
+    if parsed_response['returnCode'] == '0000'
+      trade_no = parsed_response['info']['transactionId']
+      @order.pay!(trade_no:)
+      user = @order.user
+      sign_in(user) if user
+      redirect_to order_path(@order), notice: t(:payment_successful, scope: %i[message])
     else
-      # 订单不存在或不属于当前用户的处理逻辑
-      redirect_to root_path, notice: '无效的订单'
+      redirect_to order_path(@order), notice: t(:payment_failed, scope: %i[message])
     end
   end
 
