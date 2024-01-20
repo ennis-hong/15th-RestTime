@@ -145,12 +145,12 @@ footer {
 #slots .btn-outline.btn-active {
   background-color: rgb(166, 189, 110);
   color: var(--fallback-b1, oklch(var(--b1) / var(--tw-text-opacity)));
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   border-radius: 5px;
 }
 
 #slots .btn {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   border-radius: 5px;
 }
 
