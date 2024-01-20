@@ -77,9 +77,10 @@ class LinePay # rubocop:disable Layout/EmptyLineAfterMagicComment
   end
 
   def body
-    order_id = "order#{SecureRandom.uuid}"
+    # body
+    order_id = "#{@order.serial}-#{Time.now.strftime('%H%M%S')}"
     packages_id = "package#{SecureRandom.uuid}"
-    amount = params[:quantity].to_i * params[:price].to_i
+    amount = @order.price
 
     @body = { amount:,
               currency: 'TWD',
@@ -87,12 +88,12 @@ class LinePay # rubocop:disable Layout/EmptyLineAfterMagicComment
               packages: [{ id: packages_id,
                            amount:,
                            products: [{
-                             name: params[:name],
+                             name: @order.product.title,
                              quantity: 1,
-                             price: params[:price].to_i
+                             price: amount
                            }] }],
-              redirectUrls: { confirmUrl: "#{Rails.application.credentials.line.DOMAIN_NAME}/products",
-                              cancelUrl: "#{Rails.application.credentials.line.DOMAIN_NAME}" } }
+              redirectUrls: { confirmUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s,
+                              cancelUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s } }
   end
 
   private
@@ -102,18 +103,15 @@ class LinePay # rubocop:disable Layout/EmptyLineAfterMagicComment
   end
 
   def header
-    get_signature
-    @header = { 'Content-Type': 'application/json',
-                'X-LINE-ChannelId': Rails.application.credentials.line.CHANNEL_ID.to_s,
-                'X-LINE-Authorization-Nonce': @nonce,
-                'X-LINE-Authorization': @signature }
-  end
-
-  def get_signature
+    # get_signature
     secrect = Rails.application.credentials.line.SECRET_KEY
     signature_uri = "/#{Rails.application.credentials.line.VERSION}/payments/request"
     message = "#{secrect}#{signature_uri}#{@body.to_json}#{@nonce}"
     hash = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), secrect, message)
     @signature = Base64.strict_encode64(hash)
+    @header = { 'Content-Type': 'application/json',
+                'X-LINE-ChannelId': Rails.application.credentials.line.CHANNEL_ID.to_s,
+                'X-LINE-Authorization-Nonce': @nonce,
+                'X-LINE-Authorization': @signature }
   end
 end
