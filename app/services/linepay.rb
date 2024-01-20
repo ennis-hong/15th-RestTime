@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 class LinePay # rubocop:disable Layout/EmptyLineAfterMagicComment
-  before_action :header_nonce, only: [:create]
-  before_action :body, only: [:create]
-  before_action :header, only: [:create]
+  before_action :header_nonce, :body, :header, only: [:linepay_payment]
 
-  def create
+  def linepay_payment
     @nonce = SecureRandom.uuid
     begin
       conn = Faraday.new(
@@ -47,12 +45,6 @@ class LinePay # rubocop:disable Layout/EmptyLineAfterMagicComment
 
       redirect_to root_path, notice: '支付失败，请联系客服处理'
     end
-  rescue Faraday::Error => e
-    puts "error：#{e.message}"
-    redirect_to root_path, notice: '支付请求失败，请稍后重试'
-  rescue StandardError => e
-    puts "unknow error：#{e.message}"
-    redirect_to root_path, notice: '支付请求失败，请稍后重试'
   end
 
   def cancel
@@ -76,26 +68,6 @@ class LinePay # rubocop:disable Layout/EmptyLineAfterMagicComment
     end
   end
 
-  def body
-    # body
-    order_id = "#{@order.serial}-#{Time.now.strftime('%H%M%S')}"
-    packages_id = "package#{SecureRandom.uuid}"
-    amount = @order.price
-
-    @body = { amount:,
-              currency: 'TWD',
-              orderId: order_id,
-              packages: [{ id: packages_id,
-                           amount:,
-                           products: [{
-                             name: @order.product.title,
-                             quantity: 1,
-                             price: amount
-                           }] }],
-              redirectUrls: { confirmUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s,
-                              cancelUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s } }
-  end
-
   private
 
   def header_nonce
@@ -113,5 +85,24 @@ class LinePay # rubocop:disable Layout/EmptyLineAfterMagicComment
                 'X-LINE-ChannelId': Rails.application.credentials.line.CHANNEL_ID.to_s,
                 'X-LINE-Authorization-Nonce': @nonce,
                 'X-LINE-Authorization': @signature }
+  end
+
+  def body
+    order_id = "#{@order.serial}-#{Time.now.strftime('%H%M%S')}"
+    packages_id = "package#{SecureRandom.uuid}"
+    amount = @order.price
+
+    @body = { amount:,
+              currency: 'TWD',
+              orderId: order_id,
+              packages: [{ id: packages_id,
+                           amount:,
+                           products: [{
+                             name: @order.product.title,
+                             quantity: 1,
+                             price: amount
+                           }] }],
+              redirectUrls: { confirmUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s,
+                              cancelUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s } }
   end
 end

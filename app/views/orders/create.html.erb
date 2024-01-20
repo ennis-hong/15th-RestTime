@@ -1,2 +1,6 @@
 <h1><%= t("order_confirmed_and_proceeding_to_payment", scope: %i[message]) %><span class="loading loading-dots loading-lg"></span></h1>
+
+
+<% if params[:order][:payment_type] == 'Credit Card' %>
 <%= render 'payment', hash: @hash, sha_code: @sha_code%>
+<% end %>
