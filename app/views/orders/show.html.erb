@@ -43,14 +43,28 @@
           <table class="min-w-full table-auto border-collapse bg-slate-100 shadow-lg text-lg text-gray-800 rounded-lg overflow-hidden mb-8">
             <%= render 'order_table' %>
           </table>
-          <div>
+          <% if @order.may_pay? %>
+            <%= link_to payment_order_path(@order), 
+                                        { data: { 
+                                          turbo_method: "patch",
+                                          controller: "loading",
+                                          message: t("message.proceeding_to_payment"),
+                                          action: "loading#loading"
+                                        },
+                class: 'block-class'} do %>
+              <div class="order_warning_btn">
+                <%= t('order.pay') %>
+                <div id="payment_<%= @order.id %>"></div>
+              </div>
+            <% end %>
+          <% end %>
           <% unless @order.completed? || @order.cancelled? %>
             <div class="order_accent_btn">
               <%= link_to edit_order_path(@order), class: 'block-class' do %>
-            <div >
-              <%= t('order.appointment_change') %>
-            </div>
-          <% end %>
+                <div >
+                  <%= t('order.appointment_change') %>
+                </div>
+              <% end %>
             </div>
           <% end %>
           <% if @order.may_cancel? %>
