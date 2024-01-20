@@ -1,5 +1,5 @@
 <section class="container mx-auto p-1 md:p-5">
-  <div class="mx-2 text-sm my-2 md:text-sm breadcrumbs">
+  <div class="mx-4 text-sm mt-2 md:text-sm breadcrumbs">
     <ul class="text-gray-600 mx-auto">
       <li><%= link_to t('home'), root_path %></li>
       <li><span class="text-orange-700 font-bold"><%= @shop.title %></span></li>
@@ -22,19 +22,60 @@
       <% end %>
     </div>
   </div>
-  <%# 手機顯示輪撥 %>
-  <div class="h-48 order-1 md:hidden" data-controller="carousel">
-    <div class="carousel h-48">
-      <% @shop.products.each do |product| %>
-        <div class="carousel-item " data-carousel-target="slide">
-          <picture class="p-2 md:hidden"><%= image_tag product.cover.variant(:cover) %></picture>
+  
+  <div class=" mb-10 grid-cols-4 gap-4 md:hidden">
+    <div class="card col-span-2 bg-white-100 shadow-xl">
+      <div class="p-2">
+        <%# 手機顯示輪撥 %>
+        <div class="h-48 order-1 md:hidden" data-controller="carousel">
+          <div class="carousel h-48">
+            <% @shop.products.each do |product| %>
+              <div class="carousel-item " data-carousel-target="slide">
+                <picture class="p-2 md:hidden"><%= image_tag product.cover.variant(:cover) %></picture>
+              </div>
+            <% end %>
+          </div>
         </div>
-      <% end %>
+        <div class="p-4">
+          <div>
+            <%= render 'shared/shop_info',shop: @shop %>
+          </div>
+          <div class="mb-2">
+            <p class="text-sm text-gray-500"><%=@shop.description %></p>
+          </div>
+          <h4 class="text-2xl text-center my-4 md:hidden">
+            <%= t('order.shop_location') %>
+            <hr class="border-2 mt-2">
+          </h4>
+          <div class="p-2 md:hidden aspect-w-16 aspect-h-9 w-full max-w-full mb-4 md:block">
+            <%= render 'shared/google_map', shop: @shop %>
+          </div>
+          <hr class="border-2 mt-2">
+        </div>
+      </div>
+      <div>
+        <%=render 'shared/business_hours', class: 'mb-10' %>
+      </div>
+      <details class="collapse collapse-arrow text-center border border-base-300 bg-slate-100 mb-3">
+        <summary class="collapse-title text-xl font-medium px-1">
+          <h4 class="text-center"><%= t('helpers.submit.product.comment') %></h4>
+        </summary>
+        <div class="collapse-content"> 
+          <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
+          <% @comments.each do |comment| %>
+            <%= render 'comments/comment', shop: @shop, comment: comment %>
+          <% end %>
+        </div>
+      </details>
     </div>
   </div>
+  
 
-  <div class="grid grid-cols mb-10 md:grid-cols-4 gap-4">
-    <div class="order-2 md:order-1 md:card col-span-2 bg-white-100 shadow-xl">
+
+
+  <%# 桌機 %>
+  <div class="hidden md:grid grid-cols mb-10 md:grid-cols-4 gap-4">
+    <div class="md:card col-span-2 bg-white-100 shadow-xl">
       <div class="md:card-body mx-2 mb-10 md:mx-10">
         <ul class="text-lg font-medium mb-3">
           <li class="mb-4">
@@ -47,17 +88,10 @@
               <li>
                 <%= render 'shared/shop_info',shop: @shop %>
               </li>
-              <li class="md:hidden">
-                <p class="p-2 text-sm text-gray-500"><%=@shop.description %></p>
-              </li>
             </div>
           </div>
           <li class="mb-4">
-            <h4 class="text-2xl text-center my-4 md:hidden">
-              <%= t('order.shop_location') %>
-              <hr class="border-2 mt-2">
-            </h4>
-            <div class="p-2 md:hidden aspect-w-16 aspect-h-9 w-full max-w-full mb-4 md:block">
+            <div class="p-2 aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
               <%= render 'shared/google_map', shop: @shop %>
             </div>
             <hr class="border-2 mt-2">
@@ -71,7 +105,9 @@
         <div class="collapse collapse-arrow text-center border border-base-300 bg-slate-100 mb-3 ">
           <input type="checkbox"/> 
           <div class="collapse-title text-2xl text-gray-600 font-medium">
-            <h4 class="text-center">評論</h4>
+            <h4 class="text-center">
+              <%= t('helpers.submit.product.comment') %>
+            </h4>
           </div>
           <div class="collapse-content text-gray-700"> 
             <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
@@ -103,6 +139,7 @@
       </div>
     </div >
   </div>
+  <%# 其他熱門商品(桌機) %>
   <section class="hidden md:block mx-12">
     <h3 class="text-center text-3xl text-gray-600 my-6">
       <%= t('product.hot') %>
