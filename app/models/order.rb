@@ -13,25 +13,35 @@ class Order < ApplicationRecord
   belongs_to :product
 
   before_create :generate_serial
-  after_update :create_payment_notification if :paid?
+
+  delegate :user, to: :shop, prefix: true, allow_nil: true
 
   scope :valid, -> { where.not(status: %i[completed cancelled]) }
   scope :with_status, ->(status) { where(status:) if status.present? }
 
-  aasm column: 'status', no_direct_assignment: true do
+  aasm :status, column: 'status', no_direct_assignment: true do
     state :pending, initial: true
     state :paid, :refunded, :cancelled, :completed
 
     event :pay do
       transitions from: :pending, to: :paid
+      after do
+        send_notification(shop_user)
+      end
     end
 
     event :complete do
       transitions from: %i[pending paid], to: :completed
+      after do
+        send_notification(user)
+      end
     end
 
     event :cancel do
       transitions from: %i[pending paid], to: :cancelled
+      after do
+        send_notification(shop_user)
+      end
     end
   end
 
@@ -66,7 +76,15 @@ class Order < ApplicationRecord
     "RT#{today}#{code}"
   end
 
-  def create_payment_notification
-    shop.user.notifications.create(notifiable: self, title: "【訂單通知】", message: "訂單編號#{serial}<br/>預約日期：#{service_date}")
+  def send_notification(recipient)
+    status = I18n.t(self.aasm(:status).current_state.to_s, scope: %i[aasm order_state])
+    title = "【訂單#{status}通知】"
+    message = "訂單#{serial} #{status}"
+
+    recipient.notifications.create(
+      notifiable: self,
+      title: title,
+      message: message
+    )
   end
 end

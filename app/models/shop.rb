@@ -47,8 +47,11 @@ class Shop < ApplicationRecord
 
   def create_service_times
     days = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
-    days.each do |day|
-      ServiceTime.create(day_of_week: day, off_day: true, shop: self)
+    ActiveRecord::Base.transaction do
+      days.each do |day|
+        st = ServiceTime.new(day_of_week: day, off_day: true, shop: self)
+        st.save!
+      end
     end
   end
 
