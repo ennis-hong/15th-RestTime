@@ -7,10 +7,6 @@
       <h3 class="mx-5 text-xl text-white">
         <%= t('order.currency') %>
         <span class="text-xl text-red-400 mx-1"><%= format_price(product.price) %></span>
-        <div class="text-sm text-gray-600">
-          <%= t('order.original_price') %>
-          <span class="line-through"><%= format_price(product.price / 0.8 ) %></span>
-        </div>
       </h3>
     </div>
     <%= form_with url: booking_path, data: { turbo: false } do |f| %>
