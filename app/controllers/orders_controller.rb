@@ -28,9 +28,9 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
 
     if @order.save
       case params[:order][:payment_type]
-      when 'LinePay'
+      when 'LINEPay'
         linepay_payment(@order)
-      when 'Credit Card'
+      when 'CreditCard'
         add_mac_value(payment_params(@order))
       end
     else
