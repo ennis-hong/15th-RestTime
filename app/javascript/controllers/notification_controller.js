@@ -3,25 +3,22 @@ import { destroy } from "@rails/request.js"
 
 // Connects to data-controller="notification"
 export default class extends Controller {
-  static targets = ["element", "notification"]
-  hidden() {
-    this.elementTarget.classList.add("hidden")
-  }
+  static targets = ["notification"]
 
   delete() {
     const { notification } = this.element.dataset
-    console.log(notification)
-    console.log(this.notificationTargets)
 
-    this.call_destroy(notification).then((res) => {
-      if (res.ok) {
-        const removeTarget = document.querySelector(
-          `#notification_${notification}`
-        )
-        if (removeTarget) {
-          removeTarget.remove()
-        }
-      } else {
+    this.call_destroy(notification).then((count) => {
+      const removeTarget = document.querySelector(
+        `#notification_${notification}`
+      )
+      if (removeTarget) {
+        removeTarget.remove()
+      }
+
+      if (count == 0) {
+        const badge = document.querySelector("#badge")
+        badge.classList.add("hidden")
       }
     })
   }
@@ -30,6 +27,9 @@ export default class extends Controller {
     const url = `/notifications/${notification}`
     const response = await destroy(url)
 
-    return response
+    if (response.ok) {
+      const { count } = await response.json
+      return count
+    }
   }
 }

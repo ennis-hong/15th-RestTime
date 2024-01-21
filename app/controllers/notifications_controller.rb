@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
   def destroy
     authorize @notification
     @notification.destroy
-    render json: { message: 'success' }
+    render json: { count: current_user.notifications.count }
   end
 
   private

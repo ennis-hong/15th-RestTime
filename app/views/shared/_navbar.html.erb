@@ -33,27 +33,14 @@
               <button class="btn btn-ghost btn-circle dropdown dropdown-end" >
                 <div class="indicator">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                  <span id="badge" data-notification-target="element" class="badge badge-xs badge-primary indicator-item 
+                  <span id="badge" class="badge badge-xs badge-primary indicator-item 
                   <%= "hidden" if current_user.notifications.top_five.count == 0 %>" ></span>
+                  <%= turbo_stream_from current_user %>
                 </div>
-                <div id="notification" class="card overflow-auto mt-3 shadow dropdown-content z-[1] w-min bg-base-100 min-h-72 md:w-[500px]">
-                  <div class="card-content">
-                    <% current_user.notifications.top_five.each do |notification| %>
-                      <section id="notification_<%= notification.id%>" 
-                                class="flex items-center space-between m-2" 
-                                data-controller="notification" 
-                                data-notification="<%= notification.id %>">
-                          <p class="flex-shrink-0 w-4/12"><%= notification.title %></p>
-                          <p class="flex-grow flex-wrap w-6/12">
-                            <%= sanitize notification.message, tags: %w(a), attributes: %w(href) %>
-                          </p>
-                          <div class="btn btn-ghost btn-circle w-2/12" 
-                                data-action="click->notification#delete" >
-                            <i class="fa-solid fa-trash flex-shrink-0"> </i>
-                          </div>
-                          <hr>
-                      </section>
-                    <% end %>
+                <div id="notification" class="card mt-3 shadow dropdown-content z-[1] w-min bg-base-100 min-h-72 md:w-[500px] md:overflow-auto">
+                  <div class="card-content h-72 overflow-auto">
+                    <%= render partial: 'shared/notification', 
+                                collection: current_user.notifications, as: :notification %>
                   </div>
                 </div>
               </button>

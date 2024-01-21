@@ -27,9 +27,6 @@ application.register("loading", LoadingController)
 import NotificationController from "./notification_controller"
 application.register("notification", NotificationController)
 
-import ProductsController from "./products_controller"
-application.register("products", ProductsController)
-
 import QrcodeController from "./qrcode_controller"
 application.register("qrcode", QrcodeController)
 

@@ -1,0 +1,14 @@
+<section id="notification_<%= notification.id%>" 
+                        class="flex items-center space-between m-2" 
+                        data-controller="notification" 
+                        data-notification="<%= notification.id %>">
+  <p class="flex-shrink-0 w-4/12"><%= notification.title %></p>
+  <p class="flex-grow flex-wrap w-6/12">
+    <%= sanitize notification.message, tags: %w(a), attributes: %w(href) %>
+  </p>
+  <div class="btn btn-ghost btn-circle w-2/12" 
+        data-action="click->notification#delete" >
+    <i class="fa-solid fa-trash flex-shrink-0"> </i>
+  </div>
+  <hr>
+</section>
