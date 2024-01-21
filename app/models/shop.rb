@@ -58,10 +58,17 @@ class Shop < ApplicationRecord
     message = "<a href='#{edit_service_times_path}'>#{I18n.t('message.set_business_hours')}</a>"
     send_notification(user, message)
   end
+  
+  #Geocoder
+  geocoded_by :address
+  after_validation :geocode, if: ->(obj) { obj.address_changed? }
 
-  # 商店排序用，允許被搜尋到的東西
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[city description district status street title updated_at open]
+  def address
+    [city, district, street].compact.join(' ')
+  end
+
+  def address_changed?
+    city_changed? || district_changed? || street_changed?
   end
 
   def self.ransackable_associations(_auth_object = nil)

@@ -102,7 +102,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
     t.integer "quantitiy", default: 1
     t.integer "service_min"
     t.string "booked_name"
-    t.string "booked_email"
+    t.string "booked_email", null: false
     t.bigint "user_id", null: false
     t.bigint "shop_id", null: false
     t.bigint "product_id", null: false
@@ -110,12 +110,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
     t.datetime "cancelled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "staff"
     t.datetime "payment_date"
     t.string "payment_type"
     t.string "payment_type_charge_fee"
     t.string "return_code"
     t.string "return_msg"
-    t.string "staff"
     t.string "trade_no"
     t.index ["cancelled_at"], name: "index_orders_on_cancelled_at"
     t.index ["product_id"], name: "index_orders_on_product_id"
@@ -142,7 +142,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
   end
 
   create_table "service_times", force: :cascade do |t|
-    t.string "day_of_week"
+    t.string "day_of_week", null: false
     t.time "open_time"
     t.time "close_time"
     t.time "lunch_start"
@@ -169,7 +169,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
     t.string "contactphone"
     t.string "status"
     t.integer "overlap", default: 1, null: false
+    t.float "latitude"
+    t.float "longitude"
     t.index ["deleted_at"], name: "index_shops_on_deleted_at"
+    t.index ["latitude"], name: "index_shops_on_latitude"
+    t.index ["longitude"], name: "index_shops_on_longitude"
     t.index ["user_id"], name: "index_shops_on_user_id"
   end
 
@@ -182,9 +186,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "role"
     t.string "provider"
     t.string "uid"
-    t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

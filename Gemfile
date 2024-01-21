@@ -112,3 +112,5 @@ gem 'simple_calendar', '~> 3.0'
 
 # linepay
 gem 'faraday', '~> 2.9'
+# 經緯度套件
+gem "geocoder", "~> 1.8"
