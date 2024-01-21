@@ -80,6 +80,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :notifications, only: %i[destroy]
+
     # Static pages
     %w(about privacy refund_policy payment).each do |page|
       get "/#{page}", to: "pages##{page}"

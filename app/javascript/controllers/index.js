@@ -24,6 +24,9 @@ application.register("product-info", ProductInfoController)
 import LoadingController from "./loading_controller"
 application.register("loading", LoadingController)
 
+import NotificationController from "./notification_controller"
+application.register("notification", NotificationController)
+
 import ProductsController from "./products_controller"
 application.register("products", ProductsController)
 
@@ -38,6 +41,3 @@ application.register("sidebar", SidebarController)
 
 import TimepickerController from "./timepicker_controller"
 application.register("timepicker", TimepickerController)
-
-import ToggleController from "./toggle_controller"
-application.register("toggle", ToggleController)
