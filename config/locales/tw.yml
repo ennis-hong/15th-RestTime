@@ -231,6 +231,7 @@ tw:
     input_serial_or_name: 輸入訂單編號或姓名
     input_booked_name: 請填寫預約者姓名
     input_booking_datetime: 請選擇預約日期和時段
+    set_business_hours: 前往設定營業時間
   payment_type:
     Credit_CreditCard: 信用卡  
 
@@ -336,7 +337,7 @@ tw:
       paid: 已付款
       refunded: 已退款
       cancelled: 已取消
-      completed: 已核銷
+      completed: 已完成
       confirm: 確認
       pay: 付款
       complete: 完成

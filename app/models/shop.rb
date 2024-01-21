@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Shop < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   enum status: { closed: 'closed', open: 'open', busy: 'busy', shutdown: 'ShutDown' }
   paginates_per 8
   belongs_to :user
@@ -49,10 +51,12 @@ class Shop < ApplicationRecord
     days = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
     ActiveRecord::Base.transaction do
       days.each do |day|
-        st = ServiceTime.new(day_of_week: day, off_day: true, shop: self)
+        st = ServiceTime.new(day_of_week: day, off_day: false, shop: self)
         st.save!
       end
     end
+    message = "<a href='#{edit_service_times_path}'>#{I18n.t("message.set_business_hours")}</a>"
+    send_notification(user, message)
   end
 
   # 商店排序用，允許被搜尋到的東西
@@ -63,5 +67,12 @@ class Shop < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[comments like_shops like_user orders products service_times
        user]
+  end
+
+  def send_notification(recipient, message)
+    recipient.notifications.create(
+      notifiable: self,
+      message: message
+    )
   end
 end

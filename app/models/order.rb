@@ -2,6 +2,7 @@
 
 class Order < ApplicationRecord
   include AASM
+  include Rails.application.routes.url_helpers
   acts_as_paranoid
 
   attr_accessor :linepay_transaction_id
@@ -41,6 +42,7 @@ class Order < ApplicationRecord
       transitions from: %i[pending paid], to: :cancelled
       after do
         send_notification(shop_user)
+        send_notification(user)
       end
     end
   end
@@ -78,8 +80,9 @@ class Order < ApplicationRecord
 
   def send_notification(recipient)
     status = I18n.t(self.aasm(:status).current_state.to_s, scope: %i[aasm order_state])
-    title = "【訂單#{status}通知】"
-    message = "訂單#{serial} #{status}"
+    title = "【訂單通知】"
+    link = recipient.vendor? ? vendor_order_path(self) : order_path(self)
+    message = "<a href='#{link}'>訂單#{serial} #{status}</a>"
 
     recipient.notifications.create(
       notifiable: self,

@@ -1,11 +1,14 @@
 <%= turbo_stream.prepend "notification" do %>
-   <li><%= link_to vendor_order_path(notification.notifiable_id) do %>
-      <p><%= notification.title %></p><p><%= notification.message %></p>
-      <% end %>
-   </li>
+   <div>
+      <p><%= notification.title %></p>
+      <p><%= notification.message %></p>
+   </div>
+   <hr>
 <% end %>
+      
+
 <%= turbo_stream.replace "badge" do %>
-   <span id="badge" data-toggle-target="element" class="badge badge-xs badge-primary indicator-item"></span>
+   <span id="badge" data-toggle-target="element" class="badge badge-xs badge-primary z-[1] indicator-item"></span>
 <% end %>
 
 

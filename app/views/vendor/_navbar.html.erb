@@ -39,29 +39,20 @@
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-              <span id="badge" data-toggle-target="element" class="badge badge-xs badge-primary indicator-item hidden"></span>
+              <span id="badge" data-toggle-target="element" class="badge badge-xs badge-primary indicator-item <%= "hidden" if current_user.notifications.top_five.count == 0 %>"></span>
               <%= turbo_stream_from current_user %>
         </div>
-        <%
-=begin%>
- <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content bg-base-100 shadow inset-x-0 md:w-96 h-72 "> 
-<%
-=end%>
-            <ul id="notification" class="card-body overflow-auto mt-3 p-2 shadow menu dropdown-content z-[1] w-min bg-base-100 md:w-96">
-              <% current_user.notifications.top_five.each do |notification| %>
-                <%= link_to vendor_order_path(notification.notifiable_id) do %>
-                <li class="md:flex">
-                  <p><%= notification.title %></p>
-                  <p><%= notification.message %></p>
-                </li>
-                <% end %>
-              <% end %>
-            </ul>
-        <%
-=begin%>
- </div> 
-<%
-=end%>
+        <div id="notification" class="card overflow-auto mt-3 shadow dropdown-content z-[1] w-min bg-base-100 min-h-72 md:w-80">
+          <div class="card-body">
+            <% current_user.notifications.top_five.each do |notification| %>
+            <div>
+                <p><%= notification.title %></p>
+                <p><%= sanitize notification.message, tags: %w(strong em a), attributes: %w(href) %></p>
+            </div>
+            <hr>
+            <% end %>
+          </div>
+        </div>
       </div>
       <div class="badge badge-warning text-secondary text-s"><%= link_to t('navbar.mybackstage'), vendor_index_path %></div>
     </div>
