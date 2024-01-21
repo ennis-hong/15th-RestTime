@@ -3,7 +3,7 @@
 class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :authenticate_user!, except: %i[payment_result]
   before_action :order_params, only: :create
-  before_action :find_order, only: %i[show cancel edit update payment]
+  before_action :find_order, only: %i[show cancel edit update payment linepay]
   before_action :header_nonce, only: [:linepay_payment]
 
   skip_before_action :verify_authenticity_token, only: %i[payment_result confirm]
@@ -156,6 +156,11 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
       redirect_to order_path(@order), notice: t(:payment_failed, scope: %i[message])
       puts parsed_response
     end
+  end
+
+  # line再次付款
+  def linepay
+    linepay_payment(@order)
   end
 
   def confirm # rubocop:disable Metrics/MethodLength

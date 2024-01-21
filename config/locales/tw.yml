@@ -186,6 +186,8 @@ tw:
     reschedule_the_booking_time: 重新選擇預約時段
     cancel_order: 取消訂單
     pay: 付款
+    linepay: LINE Pay付款
+    creditcardpay: 信用卡付款
     paid: 已付款
     ordered: 已預訂
     payment_method: 付款方式

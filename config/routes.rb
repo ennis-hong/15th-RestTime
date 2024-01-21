@@ -62,6 +62,7 @@ Rails.application.routes.draw do
       member do
         patch :cancel
         patch :payment
+        get :linepay
       end
     end
 

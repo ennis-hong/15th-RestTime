@@ -53,8 +53,8 @@
             data: { turbo_method: 'patch', turbo_confirm: t('message.are_you_sure_cancel_order') } %>
       <% end %>
 
-      <% if order.may_pay? %>
-        <%= link_to t('order.pay'), payment_order_path(order), 
+      <% if order.may_pay?%>
+        <%= link_to t('order.creditcardpay'), payment_order_path(order), 
                                     data: { 
                                       turbo_method: "patch",
                                       controller: "loading",
@@ -63,7 +63,10 @@
                                     },
             class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
         <div id="payment_<%= order.id %>"></div>
+        <%= link_to t('order.linepay'), linepay_order_path(order),data: { turbo: false},
+              class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
       <% end %>
+
 
       <% if order.paid? %>
         <%= link_to t('order.comment'), shop_path(order.shop), 
