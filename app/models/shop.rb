@@ -25,7 +25,7 @@ class Shop < ApplicationRecord
   validates :city, presence: true
   validates :street, presence: true
   validates :contact, presence: true
-  validates :tel, presence: true, length: { maximum: 10 },
+  validates :tel, presence: true, length: { maximum: 15 },
                   format: { with: /\A[\d\+\-\(\)]+\z/, message: '格式不正確' }
 
   validates :contactphone, presence: true, length: { maximum: 10 },
