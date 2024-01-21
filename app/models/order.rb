@@ -79,15 +79,15 @@ class Order < ApplicationRecord
   end
 
   def send_notification(recipient)
-    status = I18n.t(self.aasm(:status).current_state.to_s, scope: %i[aasm order_state])
-    title = "【訂單通知】"
+    status = I18n.t(aasm(:status).current_state.to_s, scope: %i[aasm order_state])
+    title = '【訂單通知】'
     link = recipient.vendor? ? vendor_order_path(self) : order_path(self)
     message = "<a href='#{link}'>訂單#{serial} #{status}</a>"
 
     recipient.notifications.create(
       notifiable: self,
-      title: title,
-      message: message
+      title:,
+      message:
     )
   end
 end

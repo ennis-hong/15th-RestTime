@@ -55,7 +55,7 @@ class Shop < ApplicationRecord
         st.save!
       end
     end
-    message = "<a href='#{edit_service_times_path}'>#{I18n.t("message.set_business_hours")}</a>"
+    message = "<a href='#{edit_service_times_path}'>#{I18n.t('message.set_business_hours')}</a>"
     send_notification(user, message)
   end
 
@@ -72,7 +72,7 @@ class Shop < ApplicationRecord
   def send_notification(recipient, message)
     recipient.notifications.create(
       notifiable: self,
-      message: message
+      message:
     )
   end
 end

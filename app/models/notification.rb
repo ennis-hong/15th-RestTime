@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :notifiable, polymorphic: true
@@ -10,8 +12,8 @@ class Notification < ApplicationRecord
   def notify_order
     broadcast_render_to(
       user,
-      partial: "notifications/new",
-      local: { target: "notification", notification: self }
+      partial: 'notifications/new',
+      local: { target: 'notification', notification: self }
     )
   end
 end
