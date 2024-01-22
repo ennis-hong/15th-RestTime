@@ -168,17 +168,15 @@ footer {
 .pagination span.current,
 .pagination span.gap {
   @apply shadow-none;
-  /* 为链接和间隔应用圆角 */
 }
 
 .pagination {
-  @apply join btn btn-primary hover:bg-[#496A4F] bg-[#496A4F] content-center rounded-lg; /* 确保保留圆角 */
+  @apply join btn btn-primary hover:bg-[#496A4F] bg-[#496A4F] content-center rounded-lg;
   > * {
     @apply join-item btn btn-primary hover:bg-[#567B5C] bg-[#496A4F] border-none;
   }
   .first,
   .perv,
-  .next,
   .last {
     @apply hidden;
   }
