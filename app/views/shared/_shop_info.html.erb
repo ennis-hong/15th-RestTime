@@ -4,7 +4,7 @@
       <%= shop.title %>
     </h2>
     <div class="rating rating-md gap-x-2">
-      <% @shop.average_rating.times do %>
+      <% shop.average_rating.times do %>
         <input type="radio" name="rating-7" class="mask mask-star-2 bg-yellow-400" disabled/>
       <% end %> 
     </div>
