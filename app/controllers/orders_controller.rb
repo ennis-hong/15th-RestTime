@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLength
+class OrdersController < ApplicationController
   before_action :authenticate_user!, except: %i[payment_result]
   before_action :order_params, only: :create
   before_action :find_order, only: %i[show cancel edit update payment linepay]
@@ -163,7 +163,7 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
     linepay_payment(@order)
   end
 
-  def confirm # rubocop:disable Metrics/MethodLength
+  def confirm
     transaction_id = params[:transactionId]
     order_serial = params[:orderId].to_s.gsub(/\d{6}\z/, '')
     @order = Order.find_by(serial: order_serial)
