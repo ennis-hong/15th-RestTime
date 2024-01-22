@@ -2,9 +2,6 @@
   <div>
       <h2 class="menu-title"><%= t('vendor.my_backstage') %></h2>
       <li>
-        <%= link_to t('vendor.system_notification'), '#' %>
-      </li>
-      <li>
         <%= link_to  t('vendor.my_shop'), vendor_index_path%>
         <ul>
           <li><%= link_to t('service_times.title'), edit_service_times_path %></li>
@@ -18,8 +15,5 @@
       </li>
       <li>
         <%= link_to t('vendor.my_order'), my_vendor_orders_path %>
-      </li>
-      <li>
-        <%= link_to t('vendor.message'), '#' %>
       </li>
   </div>

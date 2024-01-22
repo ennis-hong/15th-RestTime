@@ -4,8 +4,6 @@ class ServiceTime < ApplicationRecord
   belongs_to :shop
   before_validation :validate_open_and_close_times, on: :update
 
-  default_scope { order(id: :desc) }
-
   private
 
   def validate_open_and_close_times

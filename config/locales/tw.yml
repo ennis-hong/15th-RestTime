@@ -90,6 +90,7 @@ tw:
     saturday: 星期六
     sunday: 星期日
     submit: 更新營業時間
+    choose_times: 選擇時間
     message:
       success: 營業時間更新成功
       Close time can't be blank if open time is set: 設定開始時間必須填寫結束時間
