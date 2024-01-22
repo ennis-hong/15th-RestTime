@@ -1,10 +1,10 @@
-<footer class="md:footer mx-20 px-8 pt-6 bg-base-200 text-base-content">
-  <aside class="relative w-72 mx-auto overflow-hidden">
+<footer class="z-10 w-screen pt-2 bg-base-200 text-base-content">
+  <aside class="w-72 mx-auto overflow-hidden">
     <%= link_to root_path do %>
-      <%= image_tag "pages/logo.png", { alt:"RESTIME", class:"mix-blend-multiply scale-125" } %>
+      <%= image_tag "pages/logo.png", { alt:"RESTIME", class:"mix-blend-multiply scale-0.8 md:scale-1" } %>
     <% end %>
   </aside>
-  <div class="md:flex mt-10 mx-auto">
+  <div class="mt-6 mx-auto md:flex ">
     <nav class="w-52">
       <header class="footer-title"><%= t('footer.about_restime') %></header> 
       <%= link_to t('footer.our_origin'), about_path %>
