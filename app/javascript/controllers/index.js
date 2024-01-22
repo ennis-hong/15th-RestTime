@@ -21,11 +21,8 @@ application.register("like", LikeController)
 import ProductInfoController from "./product_info_controller"
 application.register("product-info", ProductInfoController)
 
-import LoadingController from "./loading_controller"
-application.register("loading", LoadingController)
-
-import NotificationController from "./notification_controller"
-application.register("notification", NotificationController)
+import ProductsController from "./products_controller"
+application.register("products", ProductsController)
 
 import QrcodeController from "./qrcode_controller"
 application.register("qrcode", QrcodeController)
@@ -38,3 +35,6 @@ application.register("sidebar", SidebarController)
 
 import TimepickerController from "./timepicker_controller"
 application.register("timepicker", TimepickerController)
+
+import NotificationController from "./notification_controller"
+application.register("notification", NotificationController)
