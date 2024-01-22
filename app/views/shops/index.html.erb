@@ -14,7 +14,21 @@
     <%= render @shops %>
   </div>
 
-  <section class="m-6">
-    <%= paginate @shops %>
-  </section>
+<div data-controller="location">
+  <%= link_to '附近店家', shops_path, data: { location_target: 'link', action: 'location#nearby_shop'} %>
 </div>
+
+<% @nearby_shops.each do |nearby_shop| %>
+  <%= nearby_shop.title %>
+  <%= nearby_shop.city %>
+  <%= nearby_shop.district %>
+  <%= nearby_shop.street %>
+<% end %>
+
+<ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+  <%= render @shops %>
+</ul>
+
+<footer>
+  <%= paginate @shops %>
+</footer>

@@ -2,49 +2,27 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  connect() {
+  static targets = ["link"];
+
+  nearby_shop() {
     this.getLocation();
   }
 
   getLocation() {
+    // 檢查瀏覽器是否支援 Geolocation API
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        this.handlePosition.bind(this),
-        this.handleError.bind(this)
-      );
+      // 若支援，則請求當前位置，並將當前位置資訊傳給 handlePosition 方法處理
+      navigator.geolocation.getCurrentPosition(this.handlePosition.bind(this));
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      alert("您的瀏覽器不支援地理定位。請嘗試更新您的瀏覽器或使用其他瀏覽器。");
     }
   }
 
   handlePosition(position) {
-    fetch("/your_endpoint", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
-      },
-      body: JSON.stringify({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json(); // 或 response.text()
-        } else {
-          throw new Error("Network response was not ok.");
-        }
-      })
-      .catch((error) => {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-      });
-  }
-
-  handleError(error) {
-    console.error("Error in obtaining position:", error);
+    const url = new URL(this.linkTarget.href);
+    url.searchParams.append("latitude", position.coords.latitude);
+    url.searchParams.append("longitude", position.coords.longitude);
+    // 重定向瀏覽器到新構建的 URL
+    window.location = url.toString();
   }
 }
