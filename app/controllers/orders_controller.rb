@@ -136,8 +136,8 @@ class OrdersController < ApplicationController # rubocop:disable Metrics/ClassLe
                             quantity: 1,
                             price: amount
                           }] }],
-             redirectUrls: { confirmUrl: "#{Rails.application.credentials.line.DOMAIN_NAME}#{Rails.application.credentials.line.CONFIRM_URL}", # rubocop:disable Layout/LineLength
-                             cancelUrl: Rails.application.credentials.line.DOMAIN_NAME.to_s } }
+             redirectUrls: { confirmUrl: "#{ENV.fetch('DOMAIN_NAME', nil)}#{Rails.application.credentials.line.CONFIRM_URL}", # rubocop:disable Layout/LineLength
+                             cancelUrl: ENV['DOMAIN_NAME'].to_s } }
     # header
     signature_uri = "/#{Rails.application.credentials.line.VERSION}/payments/request"
     create_header(signature_uri, body)
