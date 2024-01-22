@@ -58,8 +58,8 @@ class Shop < ApplicationRecord
     message = "<a href='#{edit_service_times_path}'>#{I18n.t('message.set_business_hours')}</a>"
     send_notification(user, message)
   end
-  
-  #Geocoder
+
+  # Geocoder
   geocoded_by :address
   after_validation :geocode, if: ->(obj) { obj.address_changed? }
 
@@ -82,9 +82,9 @@ class Shop < ApplicationRecord
       message:
     )
   end
-  
-  def self.ransackable_attributes(auth_object = nil)
-    ["city", "contact", "contactphone", "created_at", "deleted_at", "description", "district", "id", "id_value", "latitude", "longitude", "overlap", "status", "street", "tel", "title", "updated_at", "user_id"]
-  end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[city contact contactphone created_at deleted_at description district id id_value
+       latitude longitude overlap status street tel title updated_at user_id]
+  end
 end

@@ -8,23 +8,23 @@ class ShopsController < ApplicationController
   before_action :find_owned_shop, only: %i[edit update destroy]
 
   def index
-    latitude = params[:latitude]
-    longitude = params[:longitude]
+    @latitude = params[:latitude]
+    @longitude = params[:longitude]
     # 預設緯度範圍2公里
     radius = params[:radius]&.to_f || 2
 
     puts "Latitude: #{params[:latitude]}, Longitude: #{params[:longitude]}"
 
-    if latitude.present? && longitude.present?
-      @nearby_shops = Shop.near([latitude, longitude], radius)
-    else
-      #避免@shops為nil
-      @nearby_shops = []
-    end
+    @nearby_shops = if @latitude.present? && @longitude.present?
+                      Shop.near([@latitude, @longitude], radius)
+                    else
+                      # 避免@shops為nil
+                      []
+                    end
     @q = Shop.ransack(params[:q])
     @shops = @q.result(distinct: true).order(order_by).status.page(params[:page])
   end
-  
+
   def new
     @shop = Shop.new
     authorize @shop

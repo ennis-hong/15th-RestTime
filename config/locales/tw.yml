@@ -105,6 +105,8 @@ tw:
         create shop: 建立店家
         sort_by_city: 依照城市排序
         sort_by_updated: 更新時間排序
+        near: 附近店家
+        featured: 精選店家
       show:
         address: 地址
         comment: 店家評價

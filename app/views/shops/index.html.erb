@@ -7,28 +7,59 @@
       <div class="btn btn-outline btn-primary hover:bg-accent">
         <%= f.sort_link :updated_at, t('views.shop.index.sort_by_updated'), default_order: 'desc' %>
       </div>
+      <div data-controller="location" class="btn btn-outline btn-primary hover:bg-accent">
+        <%= link_to t('views.shop.index.near'), shops_path, data: { location_target: 'link', action: 'location#nearby_shop'} %>
+      </div>
     <% end %>
   </div>
+  
+  <% if @latitude.present? && @longitude.present? %>
+    <div>
+      <h3 class="text-2xl text-gray-700"><%= t('views.shop.index.near') %></h3>
+      <hr class="border-2 my-4">
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+        <% @nearby_shops.each do |nearby_shop| %>
+          <div class="card w-96 h-80 shadow-xl bg-slate-50">
+            <%= link_to shop_path(nearby_shop) do %>
+              <figure class="h-44 w-90 rounded-t-xl">
+                <%= shop_cover(nearby_shop, :thumb) %>
+              </figure>
+            <% end %>
+            <div class="card-body">
+              <h2 class="card-title">
+                <%= link_to nearby_shop.title, shop_path(nearby_shop), class: 'hover:text-primary' %>
+                <div class="badge badge-neutral"><%= nearby_shop.city %></div>
+              </h2>
+              <div class="rating mt-2">
+                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400 px-5" />
+                <%= link_to shop_path(nearby_shop) do %>
+                  <%= nearby_shop.average_rating %>
+                  <span>(<%= nearby_shop.comments.count %>)</span>
+                <% end %>
+              </div>
+              <div class="card-actions justify-end mt-[-40px]">
+                <% if user_signed_in? %>
+                  <%= render 'like_shops', shop: nearby_shop %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
-  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-    <%= render @shops %>
+
+  <div>
+    <h3 class="text-2xl text-gray-700 mt-10"><%= t('views.shop.index.featured') %></h3>
+    <hr class="border-2 my-4 ">
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+      <%= render @shops %>
+    </div>
   </div>
 
-<div data-controller="location">
-  <%= link_to '附近店家', shops_path, data: { location_target: 'link', action: 'location#nearby_shop'} %>
+  <footer>
+    <%= paginate @shops %>
+  </footer>
+
 </div>
-
-<% @nearby_shops.each do |nearby_shop| %>
-  <%= nearby_shop.title %>
-  <%= nearby_shop.city %>
-  <%= nearby_shop.district %>
-  <%= nearby_shop.street %>
-<% end %>
-
-<ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-  <%= render @shops %>
-</ul>
-
-<footer>
-  <%= paginate @shops %>
-</footer>
