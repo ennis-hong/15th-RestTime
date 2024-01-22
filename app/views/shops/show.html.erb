@@ -79,39 +79,29 @@
   <div class="hidden md:grid grid-cols mb-10 md:grid-cols-4 gap-4">
     <div class="md:card col-span-2 bg-white-100 shadow-xl">
       <div class="md:card-body mx-2 mb-10 md:mx-10">
-        <ul class="text-lg font-medium mb-3">
+        <ul class="text-lgfont-medium mb-3">
           <li class="mb-4">
             <div class="hidden aspect-w-16 aspect-h-9 w-full max-w-full mb-4 md:block">
               <%= render 'shared/google_map', shop: @shop %>
             </div>
           </li>
-          <div class="p-2">
-            <div class="md:mb-10">
+            <div class="p-2">
               <li>
                 <%= render 'shared/shop_info',shop: @shop %>
               </li>
             </div>
-          </div>
-          <li class="mb-4">
-            <div class="p-2 aspect-w-16 aspect-h-9 w-full max-w-full mb-4">
-              <%= render 'shared/google_map', shop: @shop %>
-            </div>
-            <hr class="border-2 mt-2">
-          </li>
         </ul>
-      </div>
+
       <div class="mx-2">
         <div>
-          <%=render 'shared/business_hours', class: 'mb-10' %>
+          <%=render 'shared/business_hours'%>
         </div>
-        <div class="collapse collapse-arrow text-center border border-base-300 bg-slate-100 mb-3 ">
+        <div class="collapse collapse-arrow border border-base-300 bg-slate-100 mb-3">
           <input type="checkbox"/> 
-          <div class="collapse-title text-2xl text-gray-600 font-medium">
-            <h4 class="text-center">
+          <div class="collapse-title text-2xl text-center text-gray-600 font-medium">
               <%= t('helpers.submit.product.comment') %>
-            </h4>
           </div>
-          <div class="collapse-content text-gray-700"> 
+          <div class="collapse-content text-gray-700 w-96 h-auto"> 
             <%= render partial: 'comments/form', locals: { order: @order, shop: @shop } if @order %>
             <% @comments.each do |comment| %>
               <%= render 'comments/comment', shop: @shop, comment: comment %>
@@ -119,6 +109,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
     <%# 桌機顯示輪撥 %>
     <div class="hidden md:block order-2 card col-span-2 bg-white-100 shadow-xl">

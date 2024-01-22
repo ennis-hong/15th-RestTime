@@ -3,6 +3,12 @@
     <h2 class="text-xl md:text-2xl text-gray-700 font-bold">
       <%= shop.title %>
     </h2>
+    <div class="rating rating-md gap-x-2">
+      <% @shop.average_rating.times do %>
+        <input type="radio" name="rating-7" class="mask mask-star-2 bg-yellow-400" disabled/>
+      <% end %> 
+    </div>
+
     <div class="flex-row md:flex items-center">
     <span class="text-sm md:text-lg text-gray-500 mr-2">
       <%= address(shop) %>

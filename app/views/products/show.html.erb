@@ -8,7 +8,7 @@
   </div>
   <div class="hidden md:block h-[300px] relative">
     <div class="absolute bottom-0 left-4 md:left-10 z-10 text-white">
-      <h1 class="text-sm md:text-xl font-bold"><%= @product.shop.title %></h1>
+      <h2 class="text-sm md:text-xl font-bold"><%= @product.shop.title %></h2>
     </div>
     <div class="absolute top-5 md:right-5 z-10 text-white">
       <% if user_signed_in? && %>
@@ -19,7 +19,7 @@
       <% if @product.shop.cover.attached? %>
         <%= image_tag @product.shop.cover, class: "w-full h-full object-cover brightness-50" %>
       <% else %>
-        <img src="https://fakeimg.pl/1000x300/200" class="w-full h-full object-cover">
+        <%= image_tag 'shops/default_cover.png', class: 'w-full h-full object-cover' %>
       <% end %>
     </div>
   </div>
@@ -69,7 +69,7 @@
         <div class="absolute bottom-0 left-0 w-full p-8">
           <div class="bg-white bg-opacity-75 p-4">
             <div class="card-title mx-12 text-2xl flex justify-between">
-              <h2 class="ml-auto"></h2>
+              <h2 class="ml-auto text-md">
                 <%= @product.title %>
                 <span class="badge badge-secondary">
                   <%= @product.service_min %>

@@ -1,7 +1,7 @@
 <%= form_with(model: [shop, shop.comments.build]) do |f| %>
   <div class="form-control">
   <%= f.label :rating, t('comment.rating') %>
-    <div class="rating rating-md mb-3 gap-x-2">
+    <div class="rating rating-sm mb-3 gap-x-2">
       <% (1..5).each do |rating_value| %>
         <%= f.radio_button :rating, rating_value, id: "rating-#{rating_value}", class: "mask mask-star-2 bg-yellow-400" %>
       <% end %>
