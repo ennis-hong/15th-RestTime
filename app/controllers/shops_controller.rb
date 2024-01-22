@@ -20,7 +20,7 @@ class ShopsController < ApplicationController
     @q = Shop.ransack(params[:q])
     @shops = @q.result(distinct: true).order(order_by).status.page(params[:page])
   end
-
+  
   def new
     @shop = Shop.new
     authorize @shop
