@@ -4,20 +4,20 @@ Rails.application.routes.draw do
   authenticate :user, -> user { user.admin? } do
     mount Avo::Engine => '/avo'
   end
-
+  
   # Devise routes
   devise_for :users, only: :omniauth_callbacks, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-
+  
   # Global scope with locale parameter
   scope '(:lang)', locale: /en|tw/ do
-
+    
     root 'pages#index'
-
+    
     devise_for :users, skip: :omniauth_callbacks, controllers: {
-        sessions: 'users/sessions',
-        registrations: 'users/registrations'
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
     }
-
+    
     resources :products do
       collection do
         get :my
@@ -26,6 +26,9 @@ Rails.application.routes.draw do
     end
 
     resources :shops do
+      collection do
+        get :nearby_shops
+      end
       resources :comments, shallow: true, only: [:create, :destroy]
     end
 
@@ -93,5 +96,6 @@ Rails.application.routes.draw do
     # Home page
     get "/index", to: "pages#index"
 
+    
   end
 end
