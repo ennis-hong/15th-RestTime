@@ -15,8 +15,8 @@ class ShopsController < ApplicationController
 
     puts "Latitude: #{params[:latitude]}, Longitude: #{params[:longitude]}"
 
-    @nearby_shops = (@latitude.present? && @longitude.present?) && Shop.near([@latitude, @longitude], radius) || []
-    
+    @nearby_shops = ((@latitude.present? && @longitude.present?) && Shop.near([@latitude, @longitude], radius)) || []
+
     @q = Shop.ransack(params[:q])
     @shops = @q.result(distinct: true).order(order_by).status.page(params[:page])
   end
