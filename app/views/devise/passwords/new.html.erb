@@ -2,25 +2,41 @@
     <div class="hero-content flex-col lg:flex-row-reverse">
         <div class="text-center lg:text-left">
             <h2 class="text-5xl font-bold">RESTIME</h2>
-            <p class="py-6">預約放鬆，今天開始 <br> Start today, your restime</p>
+            <p class="py-6">預約放鬆，今天開始 <br>Start today , your restime.</p>
         </div>
-        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-8">
-            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, class: 'card-body') do |f| %>
+        <div class="card shrink-0 w-screen max-w-sm shadow-2xl bg-base-100 p-8 text-lg">
+            <%= form_for(resource, as: resource_name, 
+                                   url: password_path(resource_name), 
+                                   html: { method: :post }) do |f| %>
                 <%= render "devise/shared/error_messages", resource: resource %>
-                <div class="form-control w-52 m-auto">
+                <div class="form-control my-2">
                     <%= f.label :email, t('member.email'), class: "label" %>
-                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered" %>
+                    <%= f.email_field :email, autofocus: true, 
+                                              autocomplete: "email", 
+                                              class: "input input-bordered",
+                                              placeholder:"example@example.com" %>
                 </div>
-                <div class="form-control w-52 m-auto mt-4">
-                    <%= f.submit t('member.reset_password'), class: "input input-bordered w-52 text-sm px-2" %>
+                <div class="form-control my-2">
+                    <%= f.submit t('member.reset_password'), class: "btn btn-primary w-full text-lg" %>
                 </div>
             <% end %>
-            <div class="form-control mt-4 w-52 m-auto px-8">
-                <%= link_to t("member.log_in"), new_session_path(resource_name), class: "btn btn-primary " %>
-                <%= link_to t("member.sign_up"), new_registration_path(resource_name), class: "btn btn-primary mt-2" %>
+            <div class="inline-flex items-center justify-center w-full">
+                <hr class="w-full h-px my-4 border-primary border-1">
+                <span class="absolute px-3 font-medium text-primary -translate-x-1/2 bg-base-100 left-1/2">OR</span>
             </div>
-            <div class="mt-2 w-52 m-auto px-8">
-                <%= button_to t("member.sign_in_with_google_oauth2"), user_google_oauth2_omniauth_authorize_path, { data: { turbo: false }, class: "btn btn-primary"} %>
+            <div class="form-control">
+                <%= link_to t("member.log_in"), new_session_path(resource_name), 
+                                                class: "btn btn-primary text-lg" %>
+                <%= link_to t("member.sign_up"), new_registration_path(resource_name), 
+                                                 class: "btn btn-primary mt-2 text-lg" %>
+            </div>
+            <div class="my-2">
+                <%= button_to user_google_oauth2_omniauth_authorize_path, 
+                                { data: { turbo: false }, 
+                                class: "btn btn-outline btn-primary w-full text-lg"} do %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" id="google"><path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path><path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path><path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"></path><path fill="#EB4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"></path></svg>
+                <span><%= t("member.sign_in_with_google_oauth2") %></span>
+                <% end %>
             </div>
         </div>
     </div>

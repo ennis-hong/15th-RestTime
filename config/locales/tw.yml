@@ -318,7 +318,7 @@ tw:
     log_in: 登入
     sign_up: 註冊
     forgot_password?: 忘記密碼
-    sign_in_with_google_oauth2: 請用 GOOGLE 帳號密碼登入
+    sign_in_with_google_oauth2: Google 登入
     password_min: 密碼最少 %{min_length} 位數
     confirmation: 確認密碼
     update: 更新
