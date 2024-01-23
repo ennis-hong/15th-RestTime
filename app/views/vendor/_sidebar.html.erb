@@ -1,19 +1,19 @@
 <!-- 側邊欄 -->
   <div>
-      <h2 class="menu-title"><%= t('vendor.my_backstage') %></h2>
+      <h2 class="menu-title text-xl"><%= t('vendor.my_backstage') %></h2>
       <li>
-        <%= link_to  t('vendor.my_shop'), vendor_index_path%>
+        <%= link_to  t('vendor.my_shop'), vendor_index_path , class:"text-lg"%>
         <ul>
-          <li><%= link_to t('service_times.title'), edit_service_times_path %></li>
+          <li><%= link_to t('service_times.title'), edit_service_times_path , class:"text-lg" %></li>
         </ul>
       </li>
-      <li>
-        <%= link_to  t('vendor.my_product'), my_products_path%>
+      <li class="text-xl">
+        <%= link_to  t('vendor.my_product'), my_products_path , class:"text-lg" %>
         <ul>
-          <li><%= link_to t('vendor.create_product'), new_product_path %></li>
+          <li><%= link_to t('vendor.create_product'), new_product_path , class:"text-lg" %></li>
         </ul>
       </li>
-      <li>
-        <%= link_to t('vendor.my_order'), my_vendor_orders_path %>
+      <li class="text-xl">
+        <%= link_to t('vendor.my_order'), my_vendor_orders_path , class:"text-lg" %>
       </li>
   </div>

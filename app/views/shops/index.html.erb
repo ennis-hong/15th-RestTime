@@ -3,13 +3,13 @@
     <div class="mb-3 text-center">
     <%= search_form_for @q do |f| %>
       <div class="p-2">
-        <span class="badge badge-primary"><%= t('product.default_order') %></span>
-        <span class="text-sm p-1"><%= t('product.order_updated_by') %></span>
+        <span class="badge badge-primary text-lg"><%= t('product.default_order') %></span>
+        <span class="text-lg p-1"><%= t('product.order_updated_by') %></span>
       </div>
-      <div class="btn btn-outline btn-primary hover:bg-accent">
+          <div class="btn btn-outline btn-primary hover:bg-accent text-lg">
         <%= f.sort_link :city, t('views.shop.index.sort_by_city'), default_order: 'desc' %>
       </div>
-      <div class="btn btn-outline btn-primary hover:bg-accent">
+          <div class="btn btn-outline btn-primary hover:bg-accent text-lg">
         <%= f.sort_link :updated_at, t('views.shop.index.sort_by_updated'), default_order: 'desc' %>
       </div>
       <div data-controller="location" class="btn btn-outline btn-primary hover:bg-accent">

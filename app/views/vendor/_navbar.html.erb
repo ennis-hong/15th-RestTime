@@ -8,30 +8,30 @@
           </svg>
         </div>
         <div data-sidebar-target="menu" class="hidden">
-          <ul tabindex="0" data-sidebar-target="menu" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow text-stone-600 bg-base-100 rounded-box w-52">
+          <ul tabindex="0" data-sidebar-target="menu" class="menu menu-sm dropdown-content w-72 mt-5 m-4 z-[1] p-2 shadow text-stone-600 bg-base-100 rounded-box">
             <%= render "vendor/sidebar" %>
         <li>
           <details>
-              <summary>
+              <summary class="text-lg">
                 <i class="fa-solid fa-user"></i>
                 <%= current_user.email %>
               </summary>
             <%# 下拉選單 %>
             <ul class="w-32 text-stone-600 ">
-              <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" } %></li>
-              <li><%= link_to(t('navbar.edit_password'), edit_registration_path(:user)) %></li>
+              <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" }, class:'text-lg' %></li>
+              <li><%= link_to(t('navbar.edit_password'), edit_registration_path(:user), class: 'text-lg') %></li>
               <% if policy(:shop).index? %>
-                <li><%= link_to t('navbar.mybackstage'), vendor_index_path, class: 'text-red-500' %></li>
+                <li><%= link_to t('navbar.mybackstage'), vendor_index_path, class: 'text-red-500 text-lg' %></li>
               <% end %>
-              <li><%= link_to t('navbar.mybookings'), orders_path %></li>
+              <li><%= link_to t('navbar.mybookings'), orders_path,class:'text-lg' %></li>
             </ul>
           </details>
         </li>
           </ul>
         </div>
       </div>
-      <h1 class="btn btn-ghost text-2xl  text-secondary"><%= link_to "ResTime", root_path %></h1>
-      <span class="btn btn-ghost text-secondary"><%= link_to t('navbar.homepage_front'), index_path %></span>
+      <h1 class="btn btn-ghost text-3xl  text-secondary"><%= link_to "ResTime", root_path %></h1>
+      <span class="btn btn-ghost text-secondary text-lg"><%= link_to t('navbar.homepage_front'), index_path %></span>
 
     </div>
     <%# 中間文字 %>
@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="badge badge-primary text-white text-s"><%= link_to t('navbar.mybackstage'), vendor_index_path %></div>
+      <div class="badge badge-primary text-white text-md"><%= link_to t('navbar.mybackstage'), vendor_index_path, class:'text-lg' %></div>
     </div>
   </nav>
 </div>

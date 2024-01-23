@@ -2,7 +2,7 @@
   <div class=" bg-white fixed w-full top-0 z-20 opacity-95">
       <div x-data="{ open: false }" class="flex flex-col w-full px-4 mx-auto items-center justify-between md:flex-row">
         <div class="flex flex-row items-center justify-between p-4">
-            <h1 class="text-2xl text-primary">
+            <h1 class="text-2xl text-primary font-bold">
               <%= link_to "ResTime", root_path %>
             </h1>
           <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
@@ -16,18 +16,18 @@
           <section class="menu md:menu-horizontal md:flex md:items-center md:justify-center">
             <div class="flex items-center justify-center">
               <form action="<%= search_path %>" data-turbo="false">
-                <input type="search" name="q" class="input input-sm input-bordered" placeholder="<%= t('navbar.search_shop')%>">
-                <button class="btn btn-sm btn-primary"><%= t(:search) %></button>
+                <input type="search" name="q" class="input input-sm input-bordered text-lg" placeholder="<%= t('navbar.search_shop')%>">
+                <button class="btn btn-sm btn-primary text-lg"><%= t(:search) %></button>
               </form>
             </div>
             <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-              <%= link_to t('navbar.homepage'), index_path %>
+              <%= link_to t('navbar.homepage'), index_path, class:'text-lg' %>
             </span>
             <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-              <%= link_to t('navbar.products'), products_path %>
+              <%= link_to t('navbar.products'), products_path, class:'text-lg' %>
             </span>
             <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-              <%= link_to t('navbar.shops'), shops_path %>
+              <%= link_to t('navbar.shops'), shops_path, class:'text-lg' %>
             </span>
             <% if user_signed_in? %>
               <div class="flex justify-center dropdown md:dropdown-end justify-self-center">
@@ -54,25 +54,27 @@
                       </div>
                     <% end %>
                     <i class="fa-solid fa-user"></i>
+                    <div class="text-lg">
                     <%= current_user.email%>
+                    </div>
                   </summary>
                   <!-- 下拉選單 -->
                   <ul class="py-5">
-                    <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" } %></li>
-                    <li><%= link_to(t('navbar.edit password'), edit_registration_path(:user)) %></li>
+                    <li><%= link_to t('navbar.logout'), destroy_user_session_path, data: { turbo_method: "delete" }, class:'text-lg' %></li>
+                    <li><%= link_to(t('navbar.edit password'), edit_registration_path(:user), class:'text-lg') %></li>
                     <% if policy(:shop).index? %>
-                      <li><%= link_to t('navbar.my_backstage'), vendor_index_path, class: 'text-red-500' %></li>
+                      <li><%= link_to t('navbar.my_backstage'), vendor_index_path, class: 'text-red-500 text-lg' %></li>
                     <% end %>
-                    <li><%= link_to t('my_orders'), orders_path %></li>
+                    <li><%= link_to t('my_orders'), orders_path, class:'text-lg' %></li>
                   </ul>
                 </details>
               </li>
             <% else %>
               <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-                <%= link_to '註冊', new_user_registration_path %>
+                <%= link_to '註冊', new_user_registration_path, class:'text-lg' %>
               </span>
               <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-                <%= link_to '登入', new_user_session_path %>
+                <%= link_to '登入', new_user_session_path, class:'text-lg' %>
               </span>
             <% end %>
           </section>  
