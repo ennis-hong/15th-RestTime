@@ -146,6 +146,7 @@ tw:
     currency: NTD
     booking: 開始預約
     booking_date: 預約日期
+    booking_time: 預約時間
     booking_time_slot: 預約時段
     booking_start_time: 開始時間
     booking_end_time: 結束時間
@@ -165,9 +166,11 @@ tw:
     total: 總計
     confirm: 確認預約
     status: 訂單狀態
+    state: 狀態
     updated_status_time: 狀態更新時間 
     updated_order_time: 訂單更新時間
     serial: 訂單編號
+    number: 編號
     order_price: 訂單金額
     created_date: 建立日期
     price: 消費金額
