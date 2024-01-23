@@ -1,7 +1,7 @@
 
 <h2 class="text-2xl font-semibold text-primary mx-10 mt-6"><%= t('service_times.title') %></h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-  <section class="form-control mx-10 my-6 p-6 bg-white rounded-xl shadow-xl">
+  <section class="form-control justify-self-center mx-10 my-6 p-6 bg-white rounded-xl shadow-xl w-full">
     <%= form_with(model: @service_times, url: service_times_path, method: :patch, data:{ turbo: false }) do |f| %>
       <% @service_times.each do |service_time| %>
         <%= fields_for "service_times[]", service_time do |service_time_field| %>

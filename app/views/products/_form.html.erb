@@ -17,7 +17,7 @@
 
           <div class="col-span-full">
             <%= form.label :price, t('form.price'), class: 'block text-sm font-medium text-gray-700' %>
-            <%= form.number_field :price, class: 'input input-bordered w-full max-w-xs', min: 0 %>
+            <%= form.number_field :price, step: 1, min: 0, class: 'input input-bordered w-full max-w-xs', min: 0 %>
           </div>
 
           <div class="col-span-full">

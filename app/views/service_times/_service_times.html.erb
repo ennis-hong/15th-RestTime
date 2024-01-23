@@ -1,4 +1,4 @@
-<div>
+<div class="mb-6">
   <%= display_errors(service_time) %>
   <div class="flex items-center ">
     <div>
@@ -13,7 +13,7 @@
     </div>
   </div>
   <section class="grid gap-x-4 content-center">
-    <div class="flex">
+    <div class="md:flex">
       <%= render 'input_time', column: :open_time, value: service_time.open_time, service_time_field: %>
       <%= render 'input_time', column: :close_time, value: service_time.close_time, service_time_field: %>
     </div>    

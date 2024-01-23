@@ -9,6 +9,6 @@
         <%= link_to product.title, edit_product_path(product) %>
       </div>
 
-      <span>NT$ <%= product.price %></span>
+      <span>NT$ <%= product.price.to_i %></span>
     </div>
 </div>

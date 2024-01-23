@@ -163,6 +163,9 @@
           <div>
             <%= form.text_field :booked_email, value: current_user.email, class: 'input w-full input-bordered text-center' %>
           </div>
+          <div>
+            <%= form.select :payment_type, [[t('payment_type.Credit_CreditCard'),'CreditCard'], ['LINEPay','LINEPay']], { prompt: t('order.payment_type') }, class: 'input w-full input-bordered text-center' %>
+          </div>
           <%= form.submit t('order.confirm'), class: 'btn btn-primary' %>
           <% end %>
         </div>
