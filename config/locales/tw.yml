@@ -49,7 +49,7 @@ tw:
       contact: 聯繫人
       contactphone: 聯絡電話
       cover: 店家封面
-      status: 目前店家狀態
+      status: 店家狀態
       update: 修改店家資訊
       
   activerecord:
@@ -119,7 +119,7 @@ tw:
         contact: 聯繫人
         contactphone: 聯絡電話
         cover: 店家封面
-        status: 目前店家狀態
+        status: 店家狀態
         comment: 評論
         ownder: 店主
         information: 店家資訊

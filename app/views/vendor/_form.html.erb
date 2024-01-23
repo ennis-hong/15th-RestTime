@@ -9,19 +9,19 @@
                   <span class="text-red-600">*</span>
                   <%= form.label :title, t('form.shop.title'), class: 'block text-sm font-medium text-gray-700' %>
                 </div>
-                <%= form.text_field :title, class: 'input input-bordered w-full max-w-xs' %>
+                <%= form.text_field :title, class: 'input input-bordered w-fit max-w-xs  md:w-full' %>
 
               </div>
               <div>
                 <%= form.label :cover, t('form.shop.cover'), class: 'block text-sm font-medium text-gray-700' %>
-                <%= form.file_field :cover, class: 'file-input file-input-sm file-input-bordered w-4/6 md:file-input-md w-full' %>
+                <%= form.file_field :cover, class: 'file-input file-input-sm file-input-bordered md:file-input-md w-full' %>
               </div>
               <div class="col-span-full">
                 <div class="flex">
                   <span class="text-red-600">*</span>
                   <%= form.label :tel, t('form.shop.tel'), class: 'block text-sm font-medium text-gray-700'  %>
                 </div>
-                <%= form.text_field :tel, class: 'input input-bordered w-full max-w-xs' %>
+                <%= form.text_field :tel, class: 'input input-bordered w-fit max-w-xs  md:w-full' %>
               </div>
               <div class="col-span-full">
                 <%= form.label :description, t('form.shop.description'), class: 'block text-sm font-medium text-gray-700'  %>
@@ -32,21 +32,21 @@
                   <span class="text-red-600">*</span>
                   <%= form.label :city, t('form.shop.city'), class: 'block text-sm font-medium text-gray-700'  %>
                 </div>
-                <%= form.select :city, options_for_select(county_options), {}, class: 'input input-bordered w-full max-w-xs' %>
+                <%= form.select :city, options_for_select(county_options), {}, class: 'input input-bordered w-fit max-w-xs md:w-full' %>
               </div>
               <div class="col-span-full">
                 <div class="flex">
                   <span class="text-red-600">*</span>
                   <%= form.label :district, t('form.shop.district'), class: 'block text-sm font-medium text-gray-700'  %>
                 </div>
-                <%= form.text_field :district, class: 'input input-bordered w-full max-w-xs' %>
+                <%= form.text_field :district, class: 'input input-bordered w-fit md:w-full max-w-xs' %>
               </div>
               <div class="sm:col-span-full">
                 <div class="flex">
                   <span class="text-red-600">*</span>
                   <%= form.label :street, t('form.shop.street'), class: 'block text-sm font-medium text-gray-700'  %>
                 </div>
-                <%= form.text_area :street, class: 'textarea textarea-bordered w-full max-w-xs' %>
+                <%= form.text_area :street, class: 'textarea textarea-bordered w-fit max-w-xs md:w-full ' %>
               </div>
                   <h2 class="text-2xl font-semibold leading-7 text-gray-900 mb-5"><%= t('views.shop.index.contact') %></h2>
 
@@ -56,14 +56,14 @@
                   <span class="text-red-600">*</span>
                   <%= form.label :contact, t('form.shop.contact'), class: 'block text-sm font-medium text-gray-700'  %>
                 </div>
-                <%= form.text_field :contact, class: 'input input-bordered w-full max-w-xs' %>
+                <%= form.text_field :contact, class: 'input input-bordered w-fit max-w-xs  md:w-full' %>
               </div>
               <div class="col-span-full">
                 <div class="flex">
                   <span class="text-red-600">*</span>
                   <%= form.label :contactphone, t('form.shop.contactphone') %>
                 </div>
-                <%= form.text_field :contactphone, class: 'input input-bordered w-full max-w-xs' %>
+                <%= form.text_field :contactphone, class: 'input input-bordered w-fit max-w-xs  md:w-full' %>
               </div>
               <div class="col-span-full">
                 <%= form.submit class: 'btn btn-accent' %>
@@ -74,7 +74,9 @@
     </div>
   </div>
   <div class="card">
-    <h2 class="text-2xl font-semibold text-primary mb-5"><%= t('views.shop.index.status') %></h2>
+    <div class="m-2">
+      <h2 class="text-2xl font-semibold text-primary mb-5"><%= t('views.shop.index.status') %></h2>
+    </div>
     <%= render 'vendor/form_select_shop_status', shop: @shop %>
     <%= render 'vendor/items', shop: @shop %>
   </div>
