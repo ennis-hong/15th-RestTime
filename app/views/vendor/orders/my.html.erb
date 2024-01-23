@@ -1,97 +1,99 @@
-<div data-controller="calendar" class="text-right mr-40 my-5 mx-16">
-  <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
-  <%= label_tag 'toggle_calendar', "月曆檢視" %>
 
-  <div data-calendar-target="calendar" class="hidden">
-    <%= render partial: 'calendar', locals: { order: @order } %>
+  <div data-controller="calendar" class="text-right mr-40 my-5 mx-16">
+    <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
+    <%= label_tag 'toggle_calendar', "月曆檢視" %>
+
+    <div data-calendar-target="calendar" class="hidden">
+      <%= render partial: 'calendar', locals: { order: @order } %>
+    </div>
   </div>
-</div>
+<div class="container m-10">
+  <div class="flex items-center gap-4">
+    <%# 設定三天內已付款訂單 %>
+    <%= link_to t('order.recent'), my_vendor_orders_path(start_date: (Date.today), end_date: (Date.today + 3), status: 'paid'), class: "btn text-lg" %>
+    <%= link_to t('order.product_sorting'), my_vendor_orders_path(sort_by: 'product_title', status: 'paid'), class: "btn text-lg" %>
+    <%= link_to t('order.all'), my_vendor_orders_path, class: "btn text-lg" %>
+    <%= form_with(url: my_vendor_orders_path, method: :get, local: true, class: "flex gap-2 items-center") do |form| %>
+      <%= form.text_field :search, placeholder: t('message.input_serial_or_name'), class: 'input input-bordered w-full max-w-xs' %>
+      <%= form.submit t('order.select'), class: 'btn text-lg' %>
+    <% end %>
+  </div>
 
-<div class="flex items-center gap-4">
-  <%# 設定三天內已付款訂單 %>
-  <%= link_to t('order.recent'), my_vendor_orders_path(start_date: (Date.today), end_date: (Date.today + 3), status: 'paid'), class: "btn text-lg" %>
-  <%= link_to t('order.product_sorting'), my_vendor_orders_path(sort_by: 'product_title', status: 'paid'), class: "btn text-lg" %>
-  <%= link_to t('order.all'), my_vendor_orders_path, class: "btn text-lg" %>
-  <%= form_with(url: my_vendor_orders_path, method: :get, local: true, class: "flex gap-2 items-center") do |form| %>
-    <%= form.text_field :search, placeholder: t('message.input_serial_or_name'), class: 'input input-bordered w-full max-w-xs' %>
-    <%= form.submit t('order.select'), class: 'btn text-lg' %>
-  <% end %>
-</div>
-
-<div class="overflow-x-auto">
-  <table class="table" style="padding: 10px;">
-    <thead>
-      <tr>
-        <th><%= t('order.customer_info') %></th>
-        <th>
-          <%= t('order.customer_info')%>/
-          <%= t('order.created_date') %>
-        </th>
-        <th><%= t('order.booking_item') %></th>
-        <th><%= t('order.booking_date') %></th>
-        <th>
-          <%= t('order.booking_time_slot')%>
-          <%= t('order.start_end') %>
-        </th>
-        <th><%= t('order.service_duration') %></th>
-        <th>
-          <button class="btn btn-ghost btn-xs">
-            <%= t('order.status') %>
-          </button>
-        </th>
-        <th><%= t('order.updated_status_time') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-      <tr>
-        <td>
-          <div class="flex items-center gap-3">
-            <div>
-              <div class="font-bold">
-                <%= order.booked_name %>
-              </div>
-              <div class="text-sm opacity-50">
-                <%= order.booked_email %>
+  <div class="overflow-x-auto">
+    <table class="table" style="padding: 10px;">
+      <thead>
+        <tr>
+          <th><%= t('order.customer_info') %></th>
+          <th>
+            <%= t('order.customer_info')%>/
+            <%= t('order.created_date') %>
+          </th>
+          <th><%= t('order.booking_item') %></th>
+          <th><%= t('order.booking_date') %></th>
+          <th>
+            <%= t('order.booking_time_slot')%>
+            <%= t('order.start_end') %>
+          </th>
+          <th><%= t('order.service_duration') %></th>
+          <th>
+            <button class="btn btn-ghost btn-xs">
+              <%= t('order.status') %>
+            </button>
+          </th>
+          <th><%= t('order.updated_status_time') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+        <tr>
+          <td>
+            <div class="flex items-center gap-3">
+              <div>
+                <div class="font-bold">
+                  <%= order.booked_name %>
+                </div>
+                <div class="text-sm opacity-50">
+                  <%= order.booked_email %>
+                </div>
               </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <%= link_to order.serial, vendor_order_path(order) %>
-          <br/>
-          <span class="badge badge-ghost badge-xs">
-            <%= format_date(order.created_at) %>
-          </span>
-          <span class="badge badge-ghost badge-xs">
-            <%= link_to t('order.order_info'), vendor_order_path(order) %>
-          </span>
-        </td>
-        <td>
-          <%= order.product.title %>
-        </td>
-        <td>
-          <%= format_date(order.service_date) %>
-        </td>
-        <td>
-          <%= format_datetime(order.service_date) %>~
-          <%= booking_end_time(order) %>
-        </td>
-        <td>
-          <%= order.product.service_min %><%= t('order.min') %>
-        </td>
-        <td>
-          <button class="btn btn-ghost btn-xs">
-            <%= t("aasm.order_state.#{order.status}") %>
-          </button>
-        </td>
-        <td>
-          <%= format_datetime(order.updated_at) %>
-        </td>
-      </tr>
-    </tbody>
-    <% end %>
-    <tfoot>
-    </tfoot>
-  </table>
+          </td>
+          <td>
+            <%= link_to order.serial, vendor_order_path(order) %>
+            <br/>
+            <span class="badge badge-ghost badge-xs">
+              <%= format_date(order.created_at) %>
+            </span>
+            <span class="badge badge-ghost badge-xs">
+              <%= link_to t('order.order_info'), vendor_order_path(order) %>
+            </span>
+          </td>
+          <td>
+            <%= order.product.title %>
+          </td>
+          <td>
+            <%= format_date(order.service_date) %>
+          </td>
+          <td>
+            <%= format_datetime(order.service_date) %>~
+            <%= booking_end_time(order) %>
+          </td>
+          <td>
+            <%= order.product.service_min %><%= t('order.min') %>
+          </td>
+          <td>
+            <button class="btn btn-ghost btn-xs">
+              <%= t("aasm.order_state.#{order.status}") %>
+            </button>
+          </td>
+          <td>
+            <%= format_datetime(order.updated_at) %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
 </div>

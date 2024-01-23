@@ -40,3 +40,4 @@
 config/credentials/development.key
 config/credentials/production.key
 .vscode/settings.json
+config/master.key

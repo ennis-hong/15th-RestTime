@@ -1,25 +1,31 @@
-<div class="container m-auto my-10">
-  <p class="text-2xl font-semibold text-primary m-7">商品列表</p>
-  <div class="grid grid-cols-1 mb-3 md:grid-cols-3">
-    <%= search_form_for @q do |f| %>
-      <div class="btn btn-outline btn-primary hover:bg-accent">
-        <%= f.sort_link :price, t('product.price_order') %>
+
+  <div class="container m-auto">
+    <p class="text-2xl font-semibold text-primary text-center m-7"><%= t('product.products') %></p>
+    <div class="mb-3 text-center">
+      <%= search_form_for @q do |f| %>
+        <div class="p-2">
+          <span class="badge badge-primary"><%= t('product.default_order') %></span>
+          <span class="text-sm p-1"><%= t('product.order_updated_by') %></span>
+        </div>
+        <div class="btn btn-outline btn-primary hover:bg-accent">
+          <%= f.sort_link :price, t('product.price_order') %>
+        </div>
+
+        <div class="btn btn-outline btn-primary hover:bg-accent">
+          <%= f.sort_link :service_min, t('product.service_order') %>
+        </div>
+
+        <div class="btn btn-outline btn-primary hover:bg-accent">
+          <%= f.sort_link :updated_at, t('product.update_order') %>
+        </div>
+      <% end %> 
+    </div>
+
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <%= render @products %>
       </div>
 
-      <div class="btn btn-outline btn-primary hover:bg-accent">
-        <%= f.sort_link :service_min, t('product.service_order') %>
-      </div>
-
-      <div class="btn btn-outline btn-primary hover:bg-accent">
-        <%= f.sort_link :updated_at, t('product.update_order') %>
-      </div>
-    <% end %> 
+    <footer class="m-10">
+      <%= paginate @products %>
+    </footer>
   </div>
-
-  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-    <%= render @products %>
-  </div>
-
-  <%= paginate @products %>
-</div>
-

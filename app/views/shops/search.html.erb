@@ -1,5 +1,7 @@
-<h1 class="text-2xl"><%=t('product.search')%></h1>
-
-<ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-  <%= render @shops %>
-</ul>
+<div class="m-16 justify-evenly">
+<h2 class="text-2xl text-primary m-2"><%=t('product.search')%></h1>
+  <div class="text-md m-2">「<%= params[:q] %>」的搜尋結果：</div>
+  <ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+    <%= render @shops %>
+  </ul>
+</div>

@@ -1,4 +1,4 @@
-<section class="container mx-auto p-1 md:p-5">
+<section class="container mx-auto p-10 md:p-5">
   <div class="mx-4 text-sm mt-2 md:text-sm breadcrumbs">
     <ul class="text-gray-600 mx-auto">
       <li><%= link_to t('home'), root_path %></li>
@@ -58,7 +58,7 @@
       </div>
       <details class="collapse collapse-arrow text-center border border-base-300 bg-slate-100 mb-3">
         <summary class="collapse-title text-xl font-medium px-1">
-          <h4 class="text-2xl text-center text-gray-600 font-medium">
+          <h4 class="text-lg text-center text-gray-600 font-medium">
             <%= t('helpers.submit.product.comment') %>
           </h4>
         </summary>
@@ -76,7 +76,7 @@
 
 
   <%# 桌機 %>
-  <div class="hidden md:grid grid-cols mb-10 md:grid-cols-4 gap-4">
+  <div class="hidden p-10 md:grid grid-cols mb-10 md:grid-cols-4 gap-4">
     <div class="md:card col-span-2 bg-white-100 shadow-xl">
       <div class="md:card-body mx-2 mb-10 md:mx-10">
         <ul class="text-lgfont-medium mb-3">
@@ -98,7 +98,7 @@
         </div>
         <div class="collapse collapse-arrow border border-base-300 bg-slate-100 mb-3">
           <input type="checkbox"/> 
-          <div class="collapse-title text-2xl text-center text-gray-600 font-medium">
+          <div class="collapse-title text-lg text-center text-gray-600 font-medium">
               <%= t('helpers.submit.product.comment') %>
           </div>
           <div class="collapse-content text-gray-700 w-96 h-auto"> 
@@ -156,7 +156,7 @@
                 <div class="absolute bottom-0 left-0 right-0 bg-opacity-75 bg-gray-700 p-2 rounded-tl rounded-tr">
                   <p class="text-sm font-semibold text-center text-white">
                     <%= t('product.flash_sale') %>
-                    <span class="text-2xl font-bold text-orange-500">
+                    <span class="text-lg font-bold text-orange-500">
                       $<%= format_price(product.price) %>
                     </span>
                   </p>

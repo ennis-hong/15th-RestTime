@@ -1,14 +1,14 @@
-<div class="card w-96 h-80 shadow-xl bg-slate-50">
+<div class="card w-72 h-80 m-auto md:w-64 lg:w-72 shadow-xl bg-slate-50">
       <%= link_to product_path(product) do %>
         <figure class="h-44 w-90 rounded-t-xl">
           <%= product_cover(product) %>
         </figure>
       <% end %>
       <div class="card-body">
-      <h2 class="card-title">
-        <%= link_to product.title, product_path(product) %>
-      </h2>
-      <div class="badge badge-neutral">NT$ <%= product.price %> | <%= product.service_min %>分鐘
-      </div>
+        <h2 class="card-title">
+          <%= link_to product.title, product_path(product) %>
+        </h2>
+        <div class="badge badge-neutral">NT$ <%= product.price %> | <%= product.service_min %>分鐘
+        </div>
       </div>
 </div>

@@ -83,7 +83,7 @@ class ShopsController < ApplicationController
 
   # 搜尋新增
   def order_by
-    params.dig(:q, :s) || 'city desc'
+    params.dig(:q, :s) || 'updated_at desc'
   end
 
   def no_shop?

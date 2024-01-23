@@ -74,6 +74,6 @@ class ProductsController < ApplicationController
   end
 
   def order_by
-    params.dig(:q, :s) || 'price asc'
+    params.dig(:q, :s) || 'updated_at desc'
   end
 end
