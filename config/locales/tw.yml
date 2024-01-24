@@ -396,6 +396,7 @@ tw:
       - 十一月
       - 十二月
 
-    like_shops:
-      title: 收藏店家
-      description: 收藏店家清單
+  like: 
+    shops: 收藏店家
+    no_shop: 沒有收藏店家
+    my: 我的收藏

@@ -1,8 +1,19 @@
-<!-- app/views/your_controller/show_user_like_shops.html.erb -->
+<div class="container m-auto my-10">
+  <div>
+    <h3 class="text-2xl text-primary mt-10"><%= t('like.shops') %></h3>
+    <hr class="border-2 my-4 ">
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+      <% if @shops.present? %>
+        <%= render "like_shops/shop", shops: @shops %>
+      <% else %>
+        <div>
+          <span class="text-lg"><%=t('like.no_shop')%></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<h1>Your Liked Shops</h1>
-
-<% @user_like_shops.each do |like_shop| %>
-  <p><%= like_shop.shop.name %></p>
-  <!-- Assuming your Shop model has a 'name' attribute -->
-<% end %>
+<section class="m-6">
+  <%= paginate @shops %>
+</section>
