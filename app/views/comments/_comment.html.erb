@@ -7,17 +7,16 @@
                         <i class="hidden fa-solid fa-user "></i>
                         <span class="label-text text-stone-950 p-2"><%= comment.user.email %></span>
                         <div class="flex rating rating-sm gap-x-1 ml-7">
-                        <% comment.rating.to_i.times do %>
-                            <input type="radio" name="rating-7" class="mask mask-star-2 bg-yellow-400" disabled/>
-                        <% end %>
+                            <% comment.rating.to_i.times do %>
+                                <input type="radio" name="rating-7" class="mask mask-star-2 bg-yellow-400" disabled/>
+                            <% end %>
+                        </div>
                     </div>
-                    </div>
-
                 </div>
                 <span class="label-text-alt text-slate-600"><%= time_ago_in_words(comment.created_at) %></span>
             </div>
-                <hr/>
-                <div class="trix-content">
+            <hr/>
+            <div class="trix-content">
                 <%= comment.body %>
             </div>
         </div>
