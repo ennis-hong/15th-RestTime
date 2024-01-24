@@ -395,3 +395,7 @@ tw:
       - 十月
       - 十一月
       - 十二月
+
+    like_shops:
+      title: 收藏店家
+      description: 收藏店家清單

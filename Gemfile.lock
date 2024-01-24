@@ -165,6 +165,7 @@ GEM
     faraday-net_http (3.1.0)
       net-http
     ffi (1.16.3)
+    geocoder (1.8.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
@@ -432,6 +433,7 @@ DEPENDENCIES
   ecpay_payment (~> 1.1)
   faker (~> 3.2)
   faraday (~> 2.9)
+  geocoder (~> 1.8)
   image_processing (~> 1.12)
   jbuilder
   jsbundling-rails

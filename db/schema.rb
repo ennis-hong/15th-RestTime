@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_21_044826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rating", default: 0, null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_comments_on_order_id"
     t.index ["shop_id"], name: "index_comments_on_shop_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -110,12 +112,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
     t.datetime "cancelled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "staff"
     t.datetime "payment_date"
     t.string "payment_type"
     t.string "payment_type_charge_fee"
     t.string "return_code"
     t.string "return_msg"
+    t.string "staff"
     t.string "trade_no"
     t.index ["cancelled_at"], name: "index_orders_on_cancelled_at"
     t.index ["product_id"], name: "index_orders_on_product_id"
@@ -197,6 +199,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_073542) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "products"
   add_foreign_key "bookings", "users"
+  add_foreign_key "comments", "orders"
   add_foreign_key "comments", "shops"
   add_foreign_key "comments", "users"
   add_foreign_key "like_shops", "shops"

@@ -4,20 +4,20 @@ Rails.application.routes.draw do
   authenticate :user, -> user { user.admin? } do
     mount Avo::Engine => '/avo'
   end
-  
+
   # Devise routes
   devise_for :users, only: :omniauth_callbacks, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  
+
   # Global scope with locale parameter
   scope '(:lang)', locale: /en|tw/ do
-    
+
     root 'pages#index'
-    
+
     devise_for :users, skip: :omniauth_callbacks, controllers: {
       sessions: 'users/sessions',
       registrations: 'users/registrations'
     }
-    
+
     resources :products do
       collection do
         get :my
@@ -85,6 +85,9 @@ Rails.application.routes.draw do
 
     resources :notifications, only: %i[destroy]
 
+    resources :like_shops, only: [:index]
+
+
     # Static pages
     %w(about privacy refund_policy payment).each do |page|
       get "/#{page}", to: "pages##{page}"
@@ -96,6 +99,6 @@ Rails.application.routes.draw do
     # Home page
     get "/index", to: "pages#index"
 
-    
+
   end
 end

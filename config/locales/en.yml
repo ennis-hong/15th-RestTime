@@ -17,3 +17,7 @@ en:
 
   vendor:
     myproduct: "my_product"
+
+  like_shops:
+    title: "Like Shops"
+    description: "This is a list of like shops."
