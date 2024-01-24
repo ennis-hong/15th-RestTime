@@ -20,7 +20,7 @@
       <%= t('order.created_date') %>
     </td>
     <td class="order_table_td">
-      <%= format_date(@order.created_at) %>
+      <%= format_datetime(@order.created_at) %>
     </td>
   </tr>
   <tr>
@@ -28,7 +28,7 @@
       <%= t('order.updated_status_time') %>
     </td>
     <td class="order_table_td">
-      <%= format_date(@order.updated_at) %>
+      <%= format_datetime(@order.updated_at) %>
     </td>
   </tr>
   <tr>
@@ -111,7 +111,7 @@
   </tr>
   <tr>
     <td class="order_table_td">
-      <%= t('order.name') %>
+      <%= t('order.customer_name') %>
     </td>
     <td class="order_table_td">
       <%= @order.booked_name %>

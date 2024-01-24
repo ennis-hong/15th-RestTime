@@ -162,6 +162,7 @@ tw:
     service_duration: 服務時間
     established: 訂單成立
     name: 姓名
+    customer_name: 顧客
     email: 信箱
     total: 總計
     confirm: 確認預約

@@ -1,3 +1,6 @@
+<div data-controller="calendar" class="text-right mr-40 my-5 mx-16 hidden md:block">
+  <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
+  <%= label_tag 'toggle_calendar', "月曆檢視" %>
 
   <div data-controller="calendar" class="text-right mr-40 my-5 mx-16">
     <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
@@ -19,7 +22,7 @@
     <% end %>
   </div>
 
-<div class="mx-4 md:flex items-center gap-4">
+<div class="mx-4 mt-8 md:flex items-center gap-4">
   <%# 設定三天內已付款訂單 %>
   <%= link_to t('order.recent'), my_vendor_orders_path(start_date: (Date.today), end_date: (Date.today + 3), status: 'paid'), class: "btn text-lg" %>
   <%= link_to t('order.product_sorting'), my_vendor_orders_path(sort_by: 'product_title', status: 'paid'), class: "btn text-lg" %>
@@ -104,13 +107,13 @@
 <%# 手機 %>
 <div class="mt-2 mx-2 md:hidden">
   <% @orders.each do |order| %>
-    <div class="collapse collapse-arrow bg-gray-200 my-4">
-      <input type="checkbox" /> 
+    <div class="collapse collapse-arrow bg-red-200 my-3">
+      <input type="checkbox"/>
       <div class="collapse-title text-sm font-medium">
         <div class="flex items-center justify-between">
-          <div class="text-lg font-medium w-3/5">
+          <div class="text-lg font-medium w-3/5 md-4">
             <h3 class="text-green-700">
-              <span class="text-gray-500"><%= t('order.name') %>：</span>
+              <span class="text-gray-500"><%= t('order.customer_name') %>：</span>
               <%= order.booked_name %>
             </h3>
           </div>
@@ -127,16 +130,20 @@
           </h4>
         </div>
       </div>
-      <div class="collapse-content px-8">
-        <div>
+      <%= link_to vendor_order_path(order) do %>
+        <div class="collapse-content mx-2 bg-gray-200 rounded-xl p-4">
           <div>
-            <%= t('order.booking_date') %>：<%= format_datetime(order.service_date) %> ~
-            <%= booking_end_time(order) %>
+            <div>
+              <%= t('order.booking_date') %>：<%= format_datetime(order.service_date) %> ~
+              <%= booking_end_time(order) %>
+            </div>
+            <div><%= t('order.booking_item') %>：
+            <span class="text-red-700 text-sm font-bold">
+              <%= order.product.title %>
+            </span>
           </div>
-          <div><%= t('order.booking_item') %>：
-          <%= link_to order.product.title, vendor_order_path(order), class: "text-red-700 text-lg md:text-xl font-bold" %>
         </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </div>
