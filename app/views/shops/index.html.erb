@@ -12,7 +12,7 @@
           <div class="btn btn-outline btn-primary hover:bg-accent text-lg">
         <%= f.sort_link :updated_at, t('views.shop.index.sort_by_updated'), default_order: 'desc' %>
       </div>
-      <div data-controller="location" class="btn btn-outline btn-primary hover:bg-accent">
+      <div data-controller="location" class="btn btn-outline btn-primary hover:bg-accent text-lg">
         <%= link_to t('views.shop.index.near'), shops_path, data: { location_target: 'link', action: 'location#nearby_shop'} %>
       </div>
     <% end %>
