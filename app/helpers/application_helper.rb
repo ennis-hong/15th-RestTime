@@ -4,7 +4,7 @@ module ApplicationHelper
   def county_options
     [
       %w[基隆市 基隆市],
-      %w[臺北市 臺北市],
+      %w[台北市 台北市],
       %w[新北市 新北市],
       %w[桃園市 桃園市],
       %w[新竹市 新竹市],
