@@ -44,8 +44,16 @@ figure.attachment img {
   @apply px-2 py-4 mb-2 text-stone-100 text-xl text-center  bg-accent font-black;
 }
 
+.order_table_th_sm {
+  @apply px-2 py-2 mb-2 text-stone-100 text-xl bg-accent font-black;
+}
+
 .order_table_td {
   @apply px-5 py-2 text-lg text-center text-gray-500 font-semibold;
+}
+
+.order_table_td_sm {
+  @apply px-2 py-1 text-lg text-gray-500 font-semibold;
 }
 
 .order_text {
@@ -162,26 +170,4 @@ footer {
 #slots .btn-outline {
   border-color: white;
   border: 1px solid;
-}
-
-.pagination span {
-  @apply join-item btn btn-primary m-0;
-}
-
-.pagination a,
-.pagination span.current,
-.pagination span.gap {
-  @apply shadow-none;
-}
-
-.pagination {
-  @apply join btn btn-primary hover:bg-[#496A4F] bg-[#496A4F] content-center rounded-lg;
-  > * {
-    @apply join-item btn btn-primary hover:bg-[#567B5C] bg-[#496A4F] border-none;
-  }
-  .first,
-  .prev,
-  .last {
-    @apply hidden;
-  }
 }

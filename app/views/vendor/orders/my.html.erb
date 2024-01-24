@@ -1,4 +1,15 @@
-<div data-controller="calendar" class="text-right mr-40 my-5 mx-16 hidden md:block">
+<div class="mx-2 text-sm mt-2 md:text-sm breadcrumbs md:hidden">
+  <ul class="text-gray-600 mx-auto">
+    <li><%= link_to t('home'), root_path %></li>
+    <li>
+      <span class="text-orange-700 font-bold">
+        <%= t('vendor.my_order') %>
+      </span>
+    </li>
+  </ul>
+</div>
+
+<div data-controller="calendar" class="hidden md:block text-right mr-40 my-5 mx-16 ">
   <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
   <%= label_tag 'toggle_calendar', "月曆檢視" %>
 
@@ -22,7 +33,7 @@
     <% end %>
   </div>
 
-<div class="mx-4 mt-8 md:flex items-center gap-4">
+<div class="mx-4 md:flex items-center gap-4 md:mt-8">
   <%# 設定三天內已付款訂單 %>
   <%= link_to t('order.recent'), my_vendor_orders_path(start_date: (Date.today), end_date: (Date.today + 3), status: 'paid'), class: "btn text-lg" %>
   <%= link_to t('order.product_sorting'), my_vendor_orders_path(sort_by: 'product_title', status: 'paid'), class: "btn text-lg" %>
@@ -40,110 +51,108 @@
   <% end %>
 </div>
 
+
 <%# md %>
-<div class="overflow-x-auto hidden md:block mt-4">
-  <table class="table divide-y divide-gray-200 overflow-hidden">
-    <thead class="text-lg text-gray-700">
-      <tr>
-        <th>
-          <%= t('order.customer_info') %>
-        </th>
-        <th>
-          <%= t('order.order_info') %>
-        </th>
-        <th>
-          <%= t('order.booking_item') %>
-        </th>
-        <th>
-          <%= t('order.booking_date') %>
-          ｜<%= t('order.service_duration') %>｜
-        </th>
-        <th>
-          <button class="btn btn-ghost btn-lg">
-            <%= t('order.status') %>
-          </button>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-      <tr>
-        <td>
-          <div class="flex items-center gap-3">
-            <div>
-              <div class="font-bold text-lg md:text-xl">
-                <%= order.booked_name %>
+<% if @orders.present? %>
+  <div class="overflow-x-auto hidden md:block mt-4">
+    <table class="table divide-y divide-gray-200 overflow-hidden">
+      <thead class="text-lg text-gray-700">
+        <tr>
+          <th><%= t('order.customer_info') %></th>
+          <th><%= t('order.order_info') %></th>
+          <th><%= t('order.booking_item') %></th>
+          <th><%= t('order.booking_date') %>｜<%= t('order.service_duration') %>｜</th>
+          <th><button class="btn btn-ghost btn-lg"><%= t('order.status') %></button></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td>
+              <div class="flex items-center gap-3">
+                <div>
+                  <div class="font-bold text-lg md:text-xl"><%= order.booked_name %></div>
+                  <div class="text-sm opacity-50 md:text-lg"><%= order.booked_email %></div>
+                </div>
               </div>
-              <div class="text-sm opacity-50 md:text-lg">
-                <%= order.booked_email %>
-              </div>
-            </div>
-          </div>
-        </td>
-        <td>
-          <%= link_to order.serial, vendor_order_path(order), class: "text-red-700 text-lg md:text-xl font-bold" %>
-        </td>
-        <td class="text-xl font-bold">
-          <%= order.product.title %>
-        </td>
-        <td class="md:text-lg">
-          <%= format_datetime(order.service_date) %>~
-          <%= booking_end_time(order) %>
-          ｜<%= order.product.service_min %><%= t('order.min') %>｜
-        </td>
-        <td>
-          <button class="btn btn-ghost btn-lg mr-2 font-bold text-red-700">
-            <%= t("aasm.order_state.#{order.status}") %>
-          </button>
-        </td>
-      </tr>
-    </tbody>
+            </td>
+            <td>
+              <%= link_to order.serial, vendor_order_path(order), class: "text-red-700 text-lg md:text-xl font-bold" %>
+            </td>
+            <td class="text-xl font-bold">
+              <%= order.product.title %>
+            </td>
+            <td class="md:text-lg">
+              <%= format_datetime(order.service_date) %>~<%= booking_end_time(order) %>｜<%= order.product.service_min %><%= t('order.min') %>｜
+            </td>
+            <td>
+              <button class="btn btn-ghost btn-lg mr-2 font-bold text-red-700">
+                <%= t("aasm.order_state.#{order.status}") %>
+              </button>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% else %>
+      <div class="hidden md:block mx-4">
+        <span class="text-xl text-gray-600"><%= t('message.no_order') %></span>
+      </div>
     <% end %>
     <tfoot>
     </tfoot>
   </table>
 </div>
 
+
 <%# 手機 %>
-<div class="mt-2 mx-2 md:hidden">
-  <% @orders.each do |order| %>
-    <div class="collapse collapse-arrow bg-red-200 my-3">
-      <input type="checkbox"/>
-      <div class="collapse-title text-sm font-medium">
-        <div class="flex items-center justify-between">
-          <div class="text-lg font-medium w-3/5 md-4">
-            <h3 class="text-green-700">
-              <span class="text-gray-500"><%= t('order.customer_name') %>：</span>
-              <%= order.booked_name %>
-            </h3>
-          </div>
-          <div class="text-lg font-medium w-2/5">
-            <h3 class="text-green-700"> 
-              <span class="text-gray-500"><%= t('order.state') %>:</span>
-              <%= t("aasm.order_state.#{order.status}") %></h3>
-          </div>
-        </div>
-        <div class="text-sm font-medium mt-2">
-          <h4 class="text-green-700">
-            <span class="text-gray-500 text-lg"><%= t('order.number') %>：</span>
-            <%= order.serial  %>
-          </h4>
-        </div>
-      </div>
-      <%= link_to vendor_order_path(order) do %>
-        <div class="collapse-content mx-2 bg-gray-200 rounded-xl p-4">
-          <div>
-            <div>
-              <%= t('order.booking_date') %>：<%= format_datetime(order.service_date) %> ~
-              <%= booking_end_time(order) %>
+<% if @orders.present? %>
+  <div class="mt-2 mx-2 md:hidden">
+    <% @orders.each do |order| %>
+      <div class="collapse collapse-arrow bg-white my-3">
+        <input type="checkbox"/>
+        <div class="collapse-title text-sm font-medium">
+          <div class="flex items-center justify-between">
+            <div class="text-lg font-medium w-3/5 md-4">
+              <h3>
+                <span class="text-gray-500"><%= t('order.customer_name') %>：</span>
+                <%= order.booked_name %>
+              </h3>
             </div>
-            <div><%= t('order.booking_item') %>：
-            <span class="text-red-700 text-sm font-bold">
+            <div class="text-lg font-medium w-2/5 text-right">
+              <h3>
+                <div class="badge badge-outline text-red-500 font-bold">
+                  <%= t("aasm.order_state.#{order.status}") %>
+                </div>
+              </h3>
+            </div>
+          </div>
+          <div class="text-lg font-medium mt-2">
+            <h4 class="text-gray-700 text-lg">
               <%= order.product.title %>
-            </span>
+            </h4>
           </div>
         </div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+          <div class="collapse-content rounded-xl">
+            <%= link_to vendor_order_path(order) do %>
+              <div>
+                <div class="font-bold mb-1">
+                  <%= t('order.booking_date') %>：<%= format_datetime(order.service_date) %> ~
+                  <%= booking_end_time(order) %>
+                </div>
+                <div class="font-bold">
+                  <span><%= t('order.number') %>：</span>
+                  <%= order.serial  %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="mx-4 mt-2 md:hidden">
+    <p class="text-lg text-gray-600">
+      <%= t('message.no_order') %>
+    </p>
+  </div>
+<% end %>

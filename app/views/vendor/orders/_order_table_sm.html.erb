@@ -1,111 +1,111 @@
 <thead>
   <tr >
-    <th class="order_table_th rounded-tl-2xl opacity-90">
+    <th class="order_table_th_sm rounded-tl-2xl opacity-90">
       <%= t('order.order_info') %>
     </th>
-    <th class="order_table_th rounded-tr-2xl opacity-90">
+    <th class="order_table_th_sm rounded-tr-2xl opacity-90">
       <%= t('order.detailed') %>
     </th>
   </tr>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.serial') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= @order.serial %>
     </td>
   </tr>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.created_date') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= format_datetime(@order.created_at) %>
     </td>
   </tr>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.updated_status_time') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= format_datetime(@order.updated_at) %>
     </td>
   </tr>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.order_price') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.currency') %><%= format_price(@order.price) %>
     </td>
   </tr>
   <% if @order.paid? %>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.payment_method') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t("payment_type.#{@order.payment_type}") %>
     </td>
   </tr>
   <% end %>
   <tr>
-    <td class="order_table_td ">
+    <td class="order_table_td_sm ">
       <%= t('order.status') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t("aasm.order_state.#{@order.status}") %>
     </td>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.booking_item') %>
     </td>
-    <td class="order_table_td ">
+    <td class="order_table_td_sm ">
       <%= truncate(@order.product.title, length: 13) %>
     </td>
   </tr>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.booking_start_time') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= format_datetime(@order.service_date) %>
     </td>
   </tr>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.booking_end_time') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= "#{format_date(@order.service_date)} #{booking_end_time(@order)}" %>
     </td>
   </tr>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.service_time') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= @order.service_min %><%= t('order.min') %>
     </td>
   </tr>
 </tbody>
 <tfoot>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.customer_name') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= @order.booked_name %>
     </td>
   </tr>
   <tr>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= t('order.email') %>
     </td>
-    <td class="order_table_td">
+    <td class="order_table_td_sm">
       <%= @order.booked_email %>
     </td>
   </tr>

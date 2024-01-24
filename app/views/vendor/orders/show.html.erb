@@ -1,10 +1,26 @@
-<div class="mt-8 p-3">
-  <div class="card bg-white shadow-xl">
-    <div class="card-body p-4 mt-4">
-      <table class="table-auto text-center w-full mb-4 bg-slate-100 ">
-        <%= render 'order_table' %>
-      </table>
-      <% if @order.paid? %>
+<div class="p-3">
+  <div class="mx-2 text-sm my-2 md:text-sm breadcrumbs">
+    <ul class="text-gray-600 mx-auto">
+      <li><%= link_to t('home'), root_path %></li>
+      <li><%= link_to t('vendor.my_order'), my_vendor_orders_path %></li>
+      <li>
+        <span class="text-orange-700 font-bold">
+          <%= t('order.order_info') %>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div class="hidden md:block"> 
+          <table class="table-auto text-center w-full mb-4 bg-slate-100 ">
+              <%= render 'order_table' %>
+          </table>
+  </div>   
+  <div class="md:hidden">
+          <table class="table-auto text-center w-full mb-4 bg-slate-100 ">
+          <%= render 'order_table_sm' %>
+          </table>
+  </div>
+  <% if @order.paid? %>
         <%# md %>
         <div class="hidden md:card shadow-xl p-5 mb-5">
           <%= form_with(url: redeem_vendor_order_path(@order, status: params[:status], staff: params[:staff]), method: :patch, data: { turbo_confirm: t('message.please_confirm_again') }) do |f| %>
@@ -16,9 +32,7 @@
             </div>
           <% end %>
         </div>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 </div>
 <%# 手機 %>
 <% if @order.paid? %>

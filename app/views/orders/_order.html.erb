@@ -1,77 +1,138 @@
-<div class="collapse collapse-arrow bg-gray-300 hover:bg-gray-200 my-4 rounded-lg">
-  <input type="radio" name="my-accordion-1" id="accordion-1" checked class="peer"/>
+<%# md %>
+<div class="hidden md:block">
+  <div class="collapse collapse-arrow bg-gray-300 hover:bg-gray-200 my-4 rounded-lg">
+    <input type="checkbox"/>
+    <div class="collapse-title flex flex-col sm:flex-row justify-between items-center text-2xl">
+      <div class="flex items-center sm:w-1/4 p-2">
+        <% if order.product.cover.attached? %>
+          <%= image_tag order.product.cover.variant(:order_thumb), class: "align-middle border-gray-300 rounded-xl shadow mx-5" %>
+        <% end %>
+        <span class="font-semibold text-gray-700">
+          <%= order.shop.title %>
+        </span>
+      </div>
+      <div class="flex flex-col justify-center p-6 m-auto sm:w-1/4">
+        <span class="font-semibold text-gray-700">
+          <%= t('form.title') %>:
+          <%= order.product.title %>
+        </span>
+        <span class="font-semibold text-gray-700">
+          <%= t('order.booking_time_slot') %>:
+          <%= format_datetime(order.service_date) %>
+        </span>
+      </div>
+      <div class="flex flex-col justify-center p-6 m-auto sm:w-1/4">
+        <span class="font-semibold text-gray-700">
+          <%= t('order.serial') %>:
+          <%= link_to order.serial, order_path(order) %>
+        </span>
+        <span class="font-semibold text-gray-700">
+          <%= t('order.created_date') %>:
+          <%= format_date(order.created_at) %>
+        </span>
+      </div>
+      <div class="p-2 ml-auto">
+        <span class="font-semibold text-gray-700">
+          <%= t("aasm.order_state.#{order.status}") %>
+        </span>
+      </div>
+    </div>
+    <hr>
+    <div class="collapse-content text-2xl bg-gray-300 px-4">
+      <div class="p-2 mt-4 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
+        <%= link_to t('order.order_info'), order_path(order),
+            class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
 
-  <div class="collapse-title flex flex-col sm:flex-row justify-between items-center text-2xl">
-    <div class="flex items-center sm:w-1/4 p-2">
-      <% if order.product.cover.attached? %>
-        <%= image_tag order.product.cover.variant(:order_thumb), class: "align-middle border-gray-300 rounded-xl shadow mx-5" %>
-      <% end %>
-      <span class="font-semibold text-gray-700">
-        <%= order.shop.title %>
-      </span>
-    </div>
-    <div class="flex flex-col justify-center p-6 m-auto sm:w-1/4">
-      <span class="font-semibold text-gray-700">
-        <%= t('form.title') %>:
-        <%= order.product.title %>
-      </span>
-      <span class="font-semibold text-gray-700">
-        <%= t('order.booking_time_slot') %>:
-        <%= format_datetime(order.service_date) %>
-      </span>
-    </div>
-    <div class="flex flex-col justify-center p-6 m-auto sm:w-1/4">
-      <span class="font-semibold text-gray-700">
-        <%= t('order.serial') %>:
-        <%= link_to order.serial, order_path(order) %>
-      </span>
-      <span class="font-semibold text-gray-700">
-        <%= t('order.created_date') %>:
-        <%= format_date(order.created_at) %>
-      </span>
-    </div>
-    <div class="p-2 ml-auto">
-      <span class="font-semibold text-gray-700">
-        <%= t("aasm.order_state.#{order.status}") %>
-      </span>
+        <% unless order.completed? || order.cancelled? %>
+          <%= link_to t('order.appointment_change'), edit_order_path(order),
+              class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
+        <% end %>
+
+        <% if order.may_cancel? %>
+          <%= link_to t('order.cancel_order'), cancel_order_path(order), 
+              class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded",
+              data: { turbo_method: 'patch', turbo_confirm: t('message.are_you_sure_cancel_order') } %>
+        <% end %>
+
+        <% if order.may_pay?%>
+          <%= link_to t('order.creditcardpay'), payment_order_path(order), 
+                                      data: { 
+                                        turbo_method: "patch",
+                                        controller: "loading",
+                                        message: t("message.proceeding_to_payment"),
+                                        action: "loading#loading"
+                                      },
+              class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
+          <div id="payment_<%= order.id %>" class="hidden"></div>
+          <%= link_to t('order.linepay'), linepay_order_path(order),data: { turbo: false},
+                class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
+        <% end %>
+
+
+        <% if order.paid? %>
+          <%= link_to t('order.comment'), shop_path(order.shop), 
+              class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded ml-2" %>
+        <% end %>
+      </div>
     </div>
   </div>
-  <hr>
-  <div class="collapse-content text-2xl bg-gray-300 px-4">
-    <div class="p-2 mt-4 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
-      <%= link_to t('order.order_info'), order_path(order),
-          class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
+</div>
 
-      <% unless order.completed? || order.cancelled? %>
-        <%= link_to t('order.appointment_change'), edit_order_path(order),
-            class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded" %>
-      <% end %>
+<%# 手機 %>
+<div class="md:hidden">
+  <div class="collapse collapse-arrow bg-gray-300 hover:bg-gray-200 my-4 rounded-lg">
+    <input type="checkbox"/>
+    <div class="collapse-title items-center text-sm">
+        <p class="font-semibold text-gray-700">
+          <%= t('form.title') %>:
+          <%= order.product.title %>
+        </p>
+        <p class="font-semibold text-gray-700">
+          <%= t('order.booking_time_slot') %>:
+          <%= format_datetime(order.service_date) %>
+        </p>
+        <p class="font-semibold text-gray-700 my-2">
+          <%= t('order.status') %>:
+          <span class="">
+            <%= t("aasm.order_state.#{order.status}") %>
+          </span>
+        </p>
+    </div>
+    <div class="collapse-content text-sm bg-gray-300 px-4">
+      <div class="p-2 mt-4 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
+        <%= link_to t('order.order_info'), order_path(order),
+            class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded text-center" %>
 
-      <% if order.may_cancel? %>
-        <%= link_to t('order.cancel_order'), cancel_order_path(order), 
-            class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded",
-            data: { turbo_method: 'patch', turbo_confirm: t('message.are_you_sure_cancel_order') } %>
-      <% end %>
+        <% unless order.completed? || order.cancelled? %>
+          <%= link_to t('order.appointment_change'), edit_order_path(order),
+              class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded text-center" %>
+        <% end %>
 
-      <% if order.may_pay?%>
-        <%= link_to t('order.creditcardpay'), payment_order_path(order), 
-                                    data: { 
-                                      turbo_method: "patch",
-                                      controller: "loading",
-                                      message: t("message.proceeding_to_payment"),
-                                      action: "loading#loading"
-                                    },
-            class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
-        <div id="payment_<%= order.id %>"></div>
-        <%= link_to t('order.linepay'), linepay_order_path(order),data: { turbo: false},
-              class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
-      <% end %>
+        <% if order.may_cancel? %>
+          <%= link_to t('order.cancel_order'), cancel_order_path(order), 
+              class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-center",
+              data: { turbo_method: 'patch', turbo_confirm: t('message.are_you_sure_cancel_order') } %>
+        <% end %>
 
+        <% if order.may_pay?%>
+          <%= link_to t('order.creditcardpay'), payment_order_path(order), 
+                                      data: { 
+                                        turbo_method: "patch",
+                                        controller: "loading",
+                                        message: t("message.proceeding_to_payment"),
+                                        action: "loading#loading"
+                                      },
+              class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-center" %>
+          <div id="payment_<%= order.id %>" class="hidden"></div>
+          <%= link_to t('order.linepay'), linepay_order_path(order),data: { turbo: false},
+                class: "bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-center" %>
+        <% end %>
 
-      <% if order.paid? %>
-        <%= link_to t('order.comment'), shop_path(order.shop), 
-            class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded ml-2" %>
-      <% end %>
+        <% if order.paid? %>
+          <%= link_to t('order.comment'), shop_path(order.shop), 
+              class: "bg-slate-500 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded text-center" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

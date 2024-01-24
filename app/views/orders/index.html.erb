@@ -1,12 +1,29 @@
-
-<div class="card w-full ">
+<div class="card w-full">
+  <div class="mx-10 text-sm mt-2 md:text-sm breadcrumbs">
+    <ul class="text-gray-600 mx-auto">
+      <li><%= link_to t('home'), root_path %></li>
+      <li>
+        <span class="text-orange-700 font-bold">
+          <%= t('my_orders') %>
+        </span>
+      </li>
+    </ul>
+  </div>
   <div class="card-body">
     <div>
-    <%= link_to t('order.ready_for_use'), orders_path(status: 'paid'), class: "btn text-lg" %>
-    <%= link_to t('order.historical'), orders_path(status: 'completed'), class: "btn text-lg" %>
-    <%= link_to t('order.unfinished'), orders_path(status: 'pending'), class: "btn text-lg" %>
-    <%= link_to t('order.cancelled_order'), orders_path(status: 'cancelled'), class: "btn text-lg" %>
-      <%= render @orders %> 
+    <%= link_to t('order.ready_for_use'), orders_path(status: 'paid'), class: "btn text-xs md:text-lg " %>
+    <%= link_to t('order.historical'), orders_path(status: 'completed'), class: "btn text-xs md:text-lg" %>
+    <%= link_to t('order.unfinished'), orders_path(status: 'pending'), class: "btn text-xs md:text-lg" %>
+    <%= link_to t('order.cancelled_order'), orders_path(status: 'cancelled'), class: "btn text-xs md:text-lg" %>
     </div>
+    <% if @orders.present? %>
+      <div>
+        <%= render @orders %> 
+      </div>
+    <% else %>
+      <div class="md:mt-4">
+        <span class="text-lg text-gray-600 md:text-2xl"><%= t('message.no_order') %></span>
+      </div>
+    <% end %>  
   </div>
 </div>
