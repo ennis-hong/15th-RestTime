@@ -1,9 +1,8 @@
-<h1>Like Shops</h1>
+<!-- app/views/your_controller/show_user_like_shops.html.erb -->
 
-<ul>
-  <% @like_shops.each do |like_shop| %>
-    <li>
-      <strong><%= like_shop.shop_id %></strong>
-    </li>
-  <% end %>
-</ul>
+<h1>Your Liked Shops</h1>
+
+<% @user_like_shops.each do |like_shop| %>
+  <p><%= like_shop.shop.name %></p>
+  <!-- Assuming your Shop model has a 'name' attribute -->
+<% end %>
