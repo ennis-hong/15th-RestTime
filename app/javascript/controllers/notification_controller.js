@@ -19,6 +19,9 @@ export default class extends Controller {
       if (count == 0) {
         const badge = document.querySelector("#badge")
         badge.classList.add("hidden")
+
+        const empty_message = document.querySelector("#empty_message")
+        empty_message.classList.remove("hidden")
       }
     })
   }

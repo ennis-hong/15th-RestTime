@@ -5,4 +5,11 @@
    <span id="badge" class="badge badge-xs badge-primary z-[1] indicator-item"></span>
 <% end %>
 
+<%= turbo_stream.prepend "empty_message" do %>
+   <template>
+        <div>
+            <script>document.querySelector("#empty_message").classList.add("hidden");</script>
+        </div>
+   </template>
+<% end %>
 

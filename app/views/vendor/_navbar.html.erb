@@ -1,14 +1,16 @@
 <div class="max-w-screen">
   <nav class="navbar bg-white p-1 fixed w-full top-0 z-20 mb-11">
     <div class="navbar-start h-5">
-      <div class="dropdown" data-controller="sidebar">
-        <div tabindex="0" role="button" class="btn btn-ghost  btn-circle" data-action="click->sidebar#toggle">
+      <div class="dropdown" data-controller="toggle">
+        <div tabindex="0" role="button" class="btn btn-ghost  btn-circle" data-action="click->toggle#toggle">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
           </svg>
         </div>
-        <div data-sidebar-target="menu" class="hidden">
-          <ul tabindex="0" data-sidebar-target="menu" class="menu menu-sm dropdown-content w-72 mt-5 m-4 z-[1] p-2 shadow text-stone-600 bg-base-100 rounded-box">
+        <div data-toggle-target="element" class="hidden">
+          <ul tabindex="0" data-toggle-target="element" 
+                           class="menu menu-sm dropdown-content w-72 mt-5 m-4 z-[1] p-2 
+                                  shadow text-stone-600 bg-base-100 rounded-box">
             <%= render "vendor/sidebar" %>
         <li>
           <details>
@@ -36,7 +38,8 @@
     </div>
     <%# 中間文字 %>
     <div class="flex-none navbar-end text-secondary p-2">
-      <div class="flex justify-center dropdown md:dropdown-end">
+      <div class="flex justify-center justify-self-center" data-controller="toggle"     
+                                                           data-action="click->toggle#toggle">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
           <div class="indicator">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
@@ -45,13 +48,25 @@
             <%= turbo_stream_from current_user %>
           </div>
         </div>
-        <div tabindex="0" class="dropdown-content z-[1] card card-compact w-screen p-2 shadow bg-base-100 md:w-[520px]">
-          <div id="notification" class="card-content h-72 overflow-auto">
-            <%= render partial: 'shared/notification', collection: current_user.notifications, as: :notification %>
+        <div tabindex="0" class="absolute top-full card rounded-none
+                                  md:top-[72px] md:right-2.5 md:rounded-lg z-[1] 
+                                  card-compact w-screen p-2 shadow 
+                                  bg-base-100 md:w-[580px] hidden" 
+                          data-toggle-target="element">
+          <div id="notification" class="card-content min-h-20 max-h-72 
+                                        grid items-center overflow-auto text-xl">
+            <section id="empty_message" class="<%= "hidden" if current_user.notifications.count > 0 %>">
+              <p class="text-center text-xl"><%= t('message.no_message') %></p>
+            </section>  
+            <%= render partial: 'shared/notification', 
+                       collection: current_user.notifications, 
+                       as: :notification %>
           </div>
         </div>
       </div>
-      <div class="badge badge-lg badge-primary text-white text-md"><%= link_to t('navbar.mybackstage'), vendor_index_path, class:'text-lg' %></div>
+      <div class="badge badge-lg badge-primary text-white text-md">
+        <%= link_to t('navbar.mybackstage'), vendor_index_path, class:'text-lg' %>
+      </div>
     </div>
   </nav>
 </div>
