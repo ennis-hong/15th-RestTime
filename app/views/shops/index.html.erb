@@ -1,5 +1,7 @@
 <div class="container m-auto">
-  <p class="text-2xl font-semibold text-primary text-center my-3 ml-6 md:text-start mx-2"><%= t('navbar.shops') %></p>
+  <p class="text-2xl font-semibold text-primary text-center my-3 ml-6 md:mx-2">
+    <%= t('navbar.shops') %>
+  </p>
   <div class="mb-3 text-center py-2">
     <%= search_form_for @q do |f| %>
       <div class="pb-4">
@@ -22,52 +24,48 @@
 
   <% if @latitude.present? && @longitude.present? %>
     <div>
-      <h3 class="text-2xl text-gray-700 my-3 ml-6"><%= t('views.shop.index.near') %></h3>
-      <hr class="border-2 my-4">
-      <div class="grid grid-cols-1 gap-y-5 md:grid-cols-2 lg:grid-cols-4">
-        <% @nearby_shops.each do |nearby_shop| %>
-          <%# 附近店家卡片 %>
-          <div class="card w-[330px] h-80 m-auto lg:w-72 shadow-xl bg-slate-50 mb-8">
-            <%= link_to shop_path(nearby_shop) do %>
-              <% if shop.cover.attached? %>
-                <figure class="h-44 w-[330px] md:w-72 rounded-t-xl relative">
-                  <%= shop_cover(nearby_shop, :thumb) %>
-                </figure>
-              <% else %>
-                <figure class="h-44 w-[330px] md:w-72 rounded-t-xl relative">
-                  <%= image_tag 'app/assets/images/shops/default_cover.png'%>
-                </figure>
-              <% end %>  
-              <div class="favorite-icon absolute top-2 right-2">
-                <% if user_signed_in? %>
-                  <%= render 'like_shops', shop: nearby_shop do %>
-                    <%= image_tag('heart_icon.png', alt: 'Favorite') %>
+      <% if not @nearby_shops.any? %>
+        <div class="badge badge-lg badge-ghost font-bold ml-4 text-gray-400 text-lg md:text-xl">
+          <p><%= t('message.nearby_no_shop') %></p>
+        </div>
+      <% else %>
+        <%# 顯示附近店家卡片 %>
+        <h3 class="text-2xl text-gray-700 my-3 ml-6"><%= t('views.shop.index.near') %></h3>
+        <hr class="border-2 my-4">
+        <div class="grid grid-cols-1 gap-y-5 md:grid-cols-2 lg:grid-cols-4">
+          <% @nearby_shops.each do |nearby_shop| %>
+            <div class="card w-[330px] h-80 m-auto lg:w-72 shadow-xl bg-slate-50 mb-8">
+              <%= link_to shop_path(nearby_shop) do %>
+                  <figure class="h-44 w-[330px] md:w-72 rounded-t-xl relative">
+                    <%= shop_cover(nearby_shop, :thumb) %>
+                  </figure>
+                <div class="favorite-icon absolute top-2 right-2">
+                  <% if user_signed_in? %>
+                    <%= render 'like_shops', shop: nearby_shop do %>
+                      <%= image_tag('heart_icon.png', alt: 'Favorite') %>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </div>
-            <% end %>
-            <div class="card-body">
-              <h2 class="card-title">
-                <%= link_to nearby_shop.title, shop_path(nearby_shop), class: 'hover:text-primary' %>
-              </h2>
-              <div class="rating mt-2 flex items-center justify-between">
-                <div class="badge badge-neutral mr-4"><%= nearby_shop.city %></div>
-                <div class="flex items-center">
-                  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400 px-5" />
-                  <%= link_to shop_path(nearby_shop) do %>
-                    <%= nearby_shop.average_rating %>
-                    <span>(<%= nearby_shop.comments.count %>)</span>
-                  <% end %>
+                </div>
+              <% end %>
+              <div class="card-body">
+                <h2 class="card-title">
+                  <%= link_to nearby_shop.title, shop_path(nearby_shop), class: 'hover:text-primary' %>
+                </h2>
+                <div class="rating mt-2 flex items-center justify-between">
+                  <div class="badge badge-neutral mr-4"><%= nearby_shop.city %></div>
+                  <div class="flex items-center">
+                    <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400 px-5" />
+                    <%= link_to shop_path(nearby_shop) do %>
+                      <%= nearby_shop.average_rating %>
+                      <span>(<%= nearby_shop.comments.count %>)</span>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  <% else %>
-    <div class="badge badge-lg badge-ghost text-xl font-bold text-gray-400">
-      <p><%= t('message.nearby_no_shop') %></p>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 
