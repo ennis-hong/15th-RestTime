@@ -18,7 +18,7 @@
       <% if @shop.cover.attached? %>
         <%= image_tag @shop.cover, class: "w-full h-full object-cover brightness-50" %>
       <% else %>
-        <img src="https://fakeimg.pl/1000x300/200" class="w-full h-full object-cover">
+        <%= image_tag 'shops/default_cover.png', class: "w-full h-full object-cover brightness-50" %>
       <% end %>
     </div>
   </div>
@@ -32,7 +32,7 @@
             <% @shop.products.each do |product| %>
               <div class="carousel-item " data-carousel-target="slide">
                 <picture class="p-2 md:hidden">
-                  <%= image_tag product.cover.variant(:cover) %>
+                  <%= product_cover(product) %>
                 </picture>
               </div>
             <% end %>
@@ -117,10 +117,20 @@
     <div class="hidden md:block order-2 card col-span-2 bg-white-100 shadow-xl">
       <div class="card-body" data-controller="carousel">
         <div class="carousel mx-12 relative">
-          <% @shop.products.each do |product| %>
-            <div class="carousel-item " data-carousel-target="slide">
-              <picture class="hidden md:block"><%= image_tag product.cover.variant(:cover) %></picture>
-            </div>
+          <% if @shop.products.any? %>
+            <% @shop.products.each do |product| %>
+              <div class="carousel-item" data-carousel-target="slide">
+                <% if product.cover.attached? %>
+                  <picture class="hidden md:block">
+                    <%= image_tag product.cover.variant(:cover) %>
+                  </picture>
+                <% else %>
+                  <%= image_tag 'shops/default_cover.png', class: 'w-full h-full object-cover' %>
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <%= image_tag 'shops/default_cover.png', class: 'w-full h-full object-cover' %>
           <% end %>
           <div class="absolute flex justify-between left-2 right-2 top-1/2">
             <button class="btn glass opacity-80" data-action="carousel#previous">❮</button>
@@ -147,14 +157,14 @@
                 data-product-info-title-value="<%= product.title %>"
                 data-product-info-description-value="<%= product.description %>"
                 data-product-info-price-value="<%= "NT#{format_price(product.price)}" %>"
-                data-product-info-image-url-value="<%= url_for(product.cover.variant(:cover)) %>"
+                data-product-info-image-url-value="<%= product.cover.attached? ? url_for(product.cover.variant(:cover)) : asset_path('products/default.jpeg') %>"
                 data-product-info-service-min-value="<%= "#{product.service_min}#{t('order.min')}" %>"
                 data-product-info-url-value="<%= product_url(product) %>"
                 data-action="click->product-info#showDetails"
                 class="card card-compact w-96 bg-gray-200 mx-10 relative cursor-pointer">
               
               <figure class="relative h-48 overflow-hidden">
-                <%= image_tag product.cover.variant(:cover) %>
+                <%= product_cover(product) %>
                 <div class="absolute bottom-0 left-0 right-0 bg-opacity-75 bg-gray-700 p-2 rounded-tl rounded-tr">
                   <p class="text-sm font-semibold text-center text-white">
                     <%= t('product.flash_sale') %>
