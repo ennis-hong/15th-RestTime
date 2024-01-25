@@ -28,6 +28,8 @@ class Order < ApplicationRecord
       transitions from: :pending, to: :paid
       after do
         send_notification(shop_user)
+        OrderMailer.new_order_email_to_general(self).deliver_later
+        OrderMailer.new_order_email_to_vendor(self).deliver_later
       end
     end
 

@@ -243,7 +243,8 @@ tw:
     no_order: 目前沒有訂單
     nearby_no_shop: 目前附近沒有店家
   payment_type:
-    Credit_CreditCard: 信用卡  
+    Credit_CreditCard: 信用卡
+    LINEPay: LINEPay
 
 
   shop_status:

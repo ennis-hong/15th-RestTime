@@ -29,7 +29,7 @@
           <%# 附近店家卡片 %>
           <div class="card w-[330px] h-80 m-auto lg:w-72 shadow-xl bg-slate-50 mb-8">
             <%= link_to shop_path(nearby_shop) do %>
-              <% if booking_shop.cover.attached? %>
+              <% if shop.cover.attached? %>
                 <figure class="h-44 w-[330px] md:w-72 rounded-t-xl relative">
                   <%= shop_cover(nearby_shop, :thumb) %>
                 </figure>

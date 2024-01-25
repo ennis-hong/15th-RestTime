@@ -31,7 +31,9 @@
           <div class="carousel h-48">
             <% @shop.products.each do |product| %>
               <div class="carousel-item " data-carousel-target="slide">
-                <picture class="p-2 md:hidden"><%= image_tag product.cover.variant(:cover) %></picture>
+                <picture class="p-2 md:hidden">
+                  <%= image_tag product.cover.variant(:cover) %>
+                </picture>
               </div>
             <% end %>
           </div>
