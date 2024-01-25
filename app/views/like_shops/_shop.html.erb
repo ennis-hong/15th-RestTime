@@ -1,8 +1,7 @@
 <% shops.each do |shop| %>
-  <div class="card sm:w-80 h-80 m-auto md:w-72 shadow-xl bg-slate-50">
-    
+  <div class="card w-[330px] h-80 m-auto lg:w-72 shadow-xl bg-slate-50">
     <%= link_to shop_path(shop) do %>
-      <figure class="h-44 w-90 rounded-t-xl">
+      <figure class="h-44 w-[330px] md:w-72 rounded-t-xl">
         <%= shop_cover(shop, :thumb) %>
       </figure>
     <% end %>

@@ -65,8 +65,8 @@
                     <% if policy(:shop).index? %>
                       <li><%= link_to t('navbar.my_backstage'), vendor_index_path, class: 'text-red-500 text-lg' %></li>
                     <% end %>
-                    <li><%= link_to t('my_orders'), orders_path %></li>
-                    <li><%= link_to t('like.my'), like_shops_path %></li>
+                    <li><%= link_to t('my_orders'), orders_path, class:'text-lg' %></li>
+                    <li><%= link_to t('like.my'), like_shops_path, class:'text-lg' %></li>
                   </ul>
                 </details>
               </li>
