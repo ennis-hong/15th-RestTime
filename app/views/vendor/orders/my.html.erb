@@ -13,25 +13,11 @@
   <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
   <%= label_tag 'toggle_calendar', "月曆檢視" %>
 
-  <div data-controller="calendar" class="text-right mr-40 my-5 mx-16">
-    <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
-    <%= label_tag 'toggle_calendar', "月曆檢視" %>
-
     <div data-calendar-target="calendar" class="hidden">
       <%= render partial: 'calendar', locals: { order: @order } %>
     </div>
   </div>
-<div class="container m-10">
-  <div class="flex items-center gap-4">
-    <%# 設定三天內已付款訂單 %>
-    <%= link_to t('order.recent'), my_vendor_orders_path(start_date: (Date.today), end_date: (Date.today + 3), status: 'paid'), class: "btn text-lg" %>
-    <%= link_to t('order.product_sorting'), my_vendor_orders_path(sort_by: 'product_title', status: 'paid'), class: "btn text-lg" %>
-    <%= link_to t('order.all'), my_vendor_orders_path, class: "btn text-lg" %>
-    <%= form_with(url: my_vendor_orders_path, method: :get, local: true, class: "flex gap-2 items-center") do |form| %>
-      <%= form.text_field :search, placeholder: t('message.input_serial_or_name'), class: 'input input-bordered w-full max-w-xs' %>
-      <%= form.submit t('order.select'), class: 'btn text-lg' %>
-    <% end %>
-  </div>
+  
 
 <div class="mx-4 md:flex items-center gap-4 md:mt-8">
   <%# 設定三天內已付款訂單 %>
