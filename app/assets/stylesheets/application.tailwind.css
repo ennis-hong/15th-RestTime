@@ -172,10 +172,6 @@ footer {
   border: 1px solid;
 }
 
-.pagination {
-  @apply flex;
-}
-
 .pagination span {
   @apply mr-2 p-0 btn btn-outline text-primary text-lg align-middle hover:bg-primary hover:text-2xl;
 }
