@@ -50,7 +50,7 @@ module Vendor
     end
 
     def sort_by_product_title
-      @orders = @orders.where(status: 'paid').joins(:product).order('products.title ASC')
+      @orders = @orders.joins(:product).order('products.title ASC')
     end
 
     def search_orders

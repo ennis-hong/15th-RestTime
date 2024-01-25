@@ -32,7 +32,7 @@
         </span>
       </div>
       <div class="p-2 ml-auto">
-        <span class="font-semibold text-gray-700">
+        <span class="font-semibold text-red-700">
           <%= t("aasm.order_state.#{order.status}") %>
         </span>
       </div>
@@ -91,11 +91,10 @@
           <%= t('order.booking_time_slot') %>:
           <%= format_datetime(order.service_date) %>
         </p>
-        <p class="font-semibold text-gray-700 my-2">
-          <%= t('order.status') %>:
-          <span class="">
+        <p class="font-semibold text-gray-700 my-4">
+          <div class="badge badge-outline text-red-500 font-bold">
             <%= t("aasm.order_state.#{order.status}") %>
-          </span>
+          </div>
         </p>
     </div>
     <div class="collapse-content text-sm bg-gray-300 px-4">
