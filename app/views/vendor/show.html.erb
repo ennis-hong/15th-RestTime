@@ -2,7 +2,7 @@
   <% if @shop.cover.attached? %>
     <%= image_tag @shop.cover, class: "w-full h-auto" %>
   <% else %>
-    <img src="https://fakeimg.pl/1000x300/200" class="w-full h-auto">
+    <img src="/app/assets/images/shops/default_cover.png" class="w-full h-auto">
   <% end %>
 
   <article class="mt-4">

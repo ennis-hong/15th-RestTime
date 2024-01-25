@@ -32,7 +32,7 @@
                   <span class="text-red-600">*</span>
                   <%= form.label :city, t('form.shop.city'), class: 'block text-sm font-medium text-gray-700'  %>
                 </div>
-                <%= form.select :city, options_for_select(county_options), {}, class: 'input input-bordered w-fit max-w-xs md:w-full' %>
+                <%= form.select :city, options_for_select(county_options, @shop.city), {}, class: 'input input-bordered w-fit max-w-xs md:w-full' %>
               </div>
               <div class="col-span-full">
                 <div class="flex">
