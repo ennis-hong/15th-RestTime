@@ -173,7 +173,7 @@ footer {
 }
 
 .pagination span {
-  @apply mr-2 p-0 btn btn-outline text-primary text-lg align-middle hover:bg-primary hover:text-2xl;
+  @apply mr-2 p-0 btn btn-outline btn-sm text-primary text-lg align-middle hover:bg-primary hover:text-2xl;
 }
 
 .pagination .page > a,
@@ -182,7 +182,7 @@ footer {
 }
 
 .pagination .current {
-  @apply w-10 text-lg underline underline-offset-2 hover:bg-primary;
+  @apply w-10 text-lg underline underline-offset-2;
 }
 
 .pagination .prev,
