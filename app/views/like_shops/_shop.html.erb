@@ -1,9 +1,16 @@
-<% shops.each do |shop| %>
-  <div class="card w-[330px] h-80 m-auto lg:w-72 shadow-xl bg-slate-50">
+<div class="card w-[330px] h-80 m-auto lg:w-72 shadow-xl bg-slate-50">
+  <% shops.each do |shop| %>
     <%= link_to shop_path(shop) do %>
-      <figure class="h-44 w-[330px] md:w-72 rounded-t-xl">
+      <figure class="h-44 w-[330px] md:w-72 rounded-t-xl relative">
         <%= shop_cover(shop, :thumb) %>
       </figure>
+      <div class="favorite-icon absolute top-2 right-2">
+        <% if user_signed_in? %>
+          <%= render 'shops/like_shops', shop: shop do %>
+            <%= image_tag('heart_icon.png', alt: 'Favorite') %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
 
     <div class="card-body">
@@ -25,5 +32,5 @@
       </div>
 
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
