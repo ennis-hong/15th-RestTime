@@ -103,7 +103,7 @@ tw:
         contact: 聯繫方式
         status: 狀態
         create shop: 建立店家
-        sort_by_city: 依照城市排序
+        sort_by_city: 城市排序
         sort_by_updated: 更新時間排序
         near: 附近店家
         featured: 精選店家
@@ -266,6 +266,7 @@ tw:
 
   product:
     products: 商品列表
+    products_featured: 精選商品
     create_success: 產品創建成功
     update_success: 產品更新成功
     delete_success: 產品刪除成功
@@ -283,7 +284,7 @@ tw:
     update_success: 更新成功
     delete_success: 刪除成功
     price_order: 價格排序
-    service_order: 服務時間排序
+    service_order: 服務時間
     update_order: 更新排序
     hot: 熱門商品
     more: (繼續閱讀)

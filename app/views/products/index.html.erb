@@ -1,27 +1,32 @@
 
   <div class="container m-auto">
-    <p class="text-2xl font-semibold text-primary text-center m-7"><%= t('product.products') %></p>
-    <div class="mb-3 text-center">
+    <p class="text-2xl font-semibold text-primary text-center my-3 ml-6 md:text-start mx-2"><%= t('product.products') %></p>
+    <div class="mb-3 text-center py-2">
       <%= search_form_for @q do |f| %>
-        <div class="p-2">
+        <div class="pb-4">
           <span class="badge badge-lg badge-primary text-lg"><%= t('product.default_order') %></span>
-          <span class="p-1 text-lg"><%= t('product.order_updated_by') %></span>
+          <span class="text-lg"><%= t('product.order_updated_by') %></span>
         </div>
-        <div class="btn btn-outline btn-primary hover:bg-accent text-lg">
-          <%= f.sort_link :price, t('product.price_order') %>
-        </div>
+        <div class="flex justify-center space-x-2 mx-4">
+          <div class="btn btn-outline btn-primary hover:bg-accent text-lg whitespace-nowrap">
+            <%= f.sort_link :price, t('product.price_order') %>
+          </div>
 
-        <div class="btn btn-outline btn-primary hover:bg-accent text-lg">
-          <%= f.sort_link :service_min, t('product.service_order') %>
-        </div>
+          <div class="btn btn-outline btn-primary hover:bg-accent text-lg whitespace-nowrap">
+            <%= f.sort_link :service_min, t('product.service_order') %>
+          </div>
 
-        <div class="btn btn-outline btn-primary hover:bg-accent text-lg">
-          <%= f.sort_link :updated_at, t('product.update_order') %>
+          <div class="btn btn-outline btn-primary hover:bg-accent text-lg whitespace-nowrap">
+            <%= f.sort_link :updated_at, t('product.update_order') %>
+          </div>
         </div>
       <% end %> 
     </div>
 
-      <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+    <h3 class="text-2xl text-gray-700 mt-3 ml-6"><%= t('product.products_featured') %></h3>
+    <hr class="border-2 my-4">
+
+      <div class="grid grid-cols-1 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
         <%= render @products %>
       </div>
 
