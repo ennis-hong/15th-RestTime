@@ -409,3 +409,6 @@ tw:
     shops: 收藏店家
     no_shop: 沒有收藏店家
     my: 我的收藏
+  pagination:
+    next: 下一頁
+    previous: 上一頁
