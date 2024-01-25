@@ -20,15 +20,16 @@
                 <button class="btn btn-sm btn-primary text-lg"><%= t(:search) %></button>
               </form>
             </div>
-            <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-              <%= link_to t('navbar.homepage'), index_path, class:'text-lg' %>
-            </span>
-            <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-              <%= link_to t('navbar.products'), products_path, class:'text-lg' %>
-            </span>
-            <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-              <%= link_to t('navbar.shops'), shops_path, class:'text-lg' %>
-            </span>
+
+            <section>
+              <%= link_to t('navbar.homepage'), index_path, 
+                          class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg ml-2' %>
+              <%= link_to t('navbar.products'), products_path, 
+                          class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+              <%= link_to t('navbar.shops'), shops_path, 
+                          class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+            </section>
+
             <% if user_signed_in? %>
               <div class="flex justify-center justify-self-center" data-controller="toggle"     
                                                                    data-action="click->toggle#toggle">
@@ -79,12 +80,10 @@
                 </details>
               </li>
             <% else %>
-              <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-                <%= link_to '註冊', new_user_registration_path, class:'text-lg' %>
-              </span>
-              <span class="btn btn-sm btn-ghost text-stone-700 hover:bg-accent">
-                <%= link_to '登入', new_user_session_path, class:'text-lg' %>
-              </span>
+              <%= link_to '註冊', new_user_registration_path, 
+                                 class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+              <%= link_to '登入', new_user_session_path, 
+                                 class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
             <% end %>
           </section>  
         </nav>
