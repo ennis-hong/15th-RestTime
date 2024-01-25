@@ -1,8 +1,14 @@
 <div class="card w-[330px] h-80 m-auto lg:w-72 shadow-xl bg-slate-50">
   <%= link_to shop_path(shop) do %>
-    <figure class="h-44 w-[330px] md:w-72 rounded-t-xl relative">
-      <%= shop_cover(shop, :thumb) %>
-    </figure>
+    <% if booking_shop.cover.attached? %>
+      <figure class="h-44 w-[330px] md:w-72 rounded-t-xl relative">
+        <%= shop_cover(shop, :thumb) %>
+      </figure>
+    <% else %>
+      <figure class="h-44 w-[330px] md:w-72 rounded-t-xl relative">
+        <%= image_tag 'app/assets/images/shops/default_cover.png'%>
+      </figure>
+    <% end %>  
     <div class="favorite-icon absolute top-2 right-2">
       <% if user_signed_in? %>
         <%= render 'like_shops', shop: shop do %>
