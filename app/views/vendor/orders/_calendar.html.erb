@@ -3,6 +3,7 @@
     <h2 class="m-5 text-xl"><%=t('vendor.my_order_calendar')%></h2>
     <span class="bg-blue-400 text-white rounded p-1 text-sm mb-1"><%=t('order.ordered')%></span>
     <span class="bg-yellow-400 text-white rounded p-1 text-sm mb-1"><%=t('order.paid')%></span>
+    <span class="bg-slate-500 text-white rounded p-1 text-sm mb-1"><%=t('order.completed')%></span>
     <span class="bg-red-500 text-white rounded p-1 text-sm mb-1"><%=t('order.cancelled')%></span>
   </div>
 
@@ -17,7 +18,7 @@
       <% orders.each do |order| %>
         <div class="bottom flex-grow py-1 w-full cursor-pointer overflow-visible">
           <div class="<%= tag_color(order) %>">
-            <%= link_to "#{order.service_date.strftime('%k:%M')} - #{order.end_time.strftime('%k:%M')} #{order.booked_email}", order %>
+            <%= link_to "#{order.service_date.strftime('%k:%M')} - #{order.end_time.strftime('%k:%M')} #{order.booked_email}", vendor_order_path(order) %>
           </div>
         </div>
       <% end %>
