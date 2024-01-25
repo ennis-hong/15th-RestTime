@@ -16,6 +16,8 @@ module OrdersHelper
       'bg-red-500 text-white rounded p-1 text-sm mb-1'
     when 'paid'
       'bg-yellow-400 text-white rounded p-1 text-sm mb-1'
+    when 'completed'
+      'bg-slate-500 text-white rounded p-1 text-sm mb-1'
     else
       'bg-blue-400 text-white rounded p-1 text-sm mb-1'
     end
