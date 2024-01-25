@@ -9,7 +9,6 @@ export default class extends Controller {
   }
 
   toggle() {
-    debugger
     this.elementTarget.classList.toggle("hidden")
     if (!this.elementTarget.classList.contains("hidden")) {
       document.addEventListener("click", this.handleOutsideClick.bind(this))

@@ -21,14 +21,15 @@
               </form>
             </div>
 
-            <section>
-              <%= link_to t('navbar.homepage'), index_path, 
-                          class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg ml-2' %>
-              <%= link_to t('navbar.products'), products_path, 
-                          class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
-              <%= link_to t('navbar.shops'), shops_path, 
-                          class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
-            </section>
+            <span class="flex items-center justify-center">
+              <%= link_to t('navbar.homepage'), index_path, class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+            </span>
+            <span class="flex items-center justify-center">
+              <%= link_to t('navbar.products'), products_path, class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+            </span>
+            <span class="flex items-center justify-center">
+              <%= link_to t('navbar.shops'), shops_path, class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+            </span>
 
             <% if user_signed_in? %>
               <div class="flex justify-center justify-self-center" data-controller="toggle"     
@@ -80,10 +81,12 @@
                 </details>
               </li>
             <% else %>
-              <%= link_to '註冊', new_user_registration_path, 
-                                 class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
-              <%= link_to '登入', new_user_session_path, 
-                                 class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+              <span class="flex items-center justify-center">
+                <%= link_to '註冊', new_user_registration_path, class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+              </span>
+              <span class="flex items-center justify-center">
+                <%= link_to '登入', new_user_session_path, class:'btn btn-sm btn-ghost text-stone-700 hover:bg-accent text-lg' %>
+              </span>
             <% end %>
           </section>  
         </nav>
