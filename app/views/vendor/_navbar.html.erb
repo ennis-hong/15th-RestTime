@@ -33,7 +33,9 @@
         </div>
       </div>
       <h1 class="btn btn-ghost text-3xl  text-secondary"><%= link_to "ResTime", root_path %></h1>
-
+      <div class="badge badge-primary text-white text-sm d-none d-sm-block hidden">
+        <%= link_to t('navbar.mybackstage'), vendor_index_path, class: 'text-lg' %>
+      </div>
     </div>
     <%# 中間文字 %>
     <div class="flex-none navbar-end text-secondary p-2">
@@ -63,9 +65,7 @@
           </div>
         </div>
       </div>
-      <div class="badge badge-lg badge-primary text-white text-md">
-        <%= link_to t('navbar.mybackstage'), vendor_index_path, class:'text-lg' %>
-      </div>
+
     </div>
   </nav>
 </div>
