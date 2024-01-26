@@ -59,7 +59,7 @@ class ShopsController < ApplicationController
   def destroy; end
 
   def search
-    @shops = Shop.ransack(title_cont: params[:q]).result.page(params[:page])
+    @shops = Shop.ransack(title_cont: params[:q]).result.page(params[:page]).order('updated_at desc')
   end
 
   private
