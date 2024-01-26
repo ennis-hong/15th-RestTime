@@ -135,7 +135,11 @@
   <div class="card order-1 md:order-3 md:hidden col-span-2 bg-white-100 shadow-xl">
       <div class="relative md:mx-12">
         <figure class="mt-2 md:p-8">
-          <%= image_tag booking_product.cover.variant(:cover), class: "w-full" %>
+          <% if booking_shop.cover.attached? %>
+            <%= image_tag booking_shop.cover, class: "w-full h-full object-cover brightness-50" %>
+          <% else %>
+            <img src="app/assets/images/shops/default_cover.png" class="w-full h-full object-cover">
+          <% end %>
         </figure>
         <div class="absolute bottom-0 left-0 w-full bg-white bg-opacity-60 px-4 md:p-4">
           <div class="justify-end">
