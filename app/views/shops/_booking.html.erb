@@ -20,12 +20,11 @@
                         datepicker_target: 'serviceDate',
                         action: "mousedown->datepicker#initializeDatePicker",
                       },
-                      class: 'input input-bordered w-full mt-4 hidden', required: true } %>
-      <%= f.submit t("form.Next"),{ data:{
-                        datepicker_target: 'nextBtn',
-                      },class: 'mt-4 w-full bg-gray-300 
-                                text-black font-semibold p-2 py-4 rounded 
-                                focus:outline-none focus:shadow-outline' } %>
+                      class: 'input input-bordered w-full mt-4 hidden cursor-pointer', required: true } %>
+      <%= f.submit t("form.Next"), { 
+        data: { datepicker_target: 'nextBtn',}, 
+        class: 'mt-4 w-full bg-gray-300 text-black font-semibold p-2 py-4 rounded focus:outline-none focus:shadow-outline cursor-pointer'} %>
+
     <% end %>
   </div>
   <div>

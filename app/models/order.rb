@@ -8,6 +8,7 @@ class Order < ApplicationRecord
   attr_accessor :linepay_transaction_id
 
   validates :booked_email, presence: true
+  validates :booked_name, presence: true
 
   belongs_to :user
   belongs_to :shop
