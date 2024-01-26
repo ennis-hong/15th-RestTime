@@ -14,9 +14,7 @@
   <%= label_tag 'toggle_calendar', "月曆檢視" %>
 
     <div data-calendar-target="calendar" class="hidden">
-      <div class="mx-auto text-center">
       <%= render partial: 'calendar', locals: { order: @order } %>
-      <div>
     </div>
 </div>
   
