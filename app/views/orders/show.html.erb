@@ -195,6 +195,28 @@
               <% end %>
             </div>
             <% end %>
+            <% if @order.may_pay? %>
+              <%= link_to payment_order_path(@order), 
+                                          { data: { 
+                                            turbo_method: "patch",
+                                            controller: "loading",
+                                            message: t("message.proceeding_to_payment"),
+                                            action: "loading#loading"
+                                          },
+                  class: 'block-class'} do %>
+                <div class="order_warning_btn">
+                  <%= t('order.creditcardpay') %>
+                  <div id="payment_<%= @order.id %>"></div>
+                </div>
+              <% end %>
+                <div class="order_warning_btn">
+                  <%= link_to linepay_order_path(@order), class: "block-class" do %>
+                    <div>
+                      <%= t('order.linepay') %>
+                    </div>
+                  <% end %>
+                </div>
+            <% end %>
           </div>
 
             <details class="collapse collapse-arrow border border-base-200 bg-gray-200 mb-5 px-5">
