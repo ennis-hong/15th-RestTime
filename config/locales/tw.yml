@@ -139,6 +139,7 @@ tw:
       not_saved: Email錯誤
       close_time_blank: 設定開始時間必須填寫結束時間
       open_time_blank: 設定結束時間必須填寫開始時間
+      time_blank: 營業時間未設定
     
   order:
     detailed: 詳細內容
