@@ -1,4 +1,4 @@
-<div class=" text-sm mx-4 mt-4 md:text-sm mx-2 mt-2 breadcrumbs md:hidden">
+<div class=" text-sm mx-4 mt-4 text-center breadcrumbs md:hidden">
   <ul class="text-gray-600 mx-auto">
     <li><%= link_to t('home'), root_path %></li>
     <li>
@@ -9,14 +9,16 @@
   </ul>
 </div>
 
-<div data-controller="calendar" class="hidden md:block text-right mr-40 my-5 mx-16 ">
+<div data-controller="calendar" class="hidden md:block text-right mr-40 my-5 mx-16">
   <input type="checkbox" class="toggle" checked data-action="change->calendar#toggleCalendar">
   <%= label_tag 'toggle_calendar', "月曆檢視" %>
 
     <div data-calendar-target="calendar" class="hidden">
+      <div class="mx-auto text-center">
       <%= render partial: 'calendar', locals: { order: @order } %>
+      <div>
     </div>
-  </div>
+</div>
   
 
 <div class="mx-4 md:flex items-center gap-4 md:mt-8">
