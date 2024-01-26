@@ -87,4 +87,9 @@ class Shop < ApplicationRecord
     %w[city contact contactphone created_at deleted_at description district id id_value
        latitude longitude overlap status street tel title updated_at user_id]
   end
+
+  def service_time_not_set?
+    service_times.where('updated_at = created_at').count == service_times.count
+  end
+
 end
