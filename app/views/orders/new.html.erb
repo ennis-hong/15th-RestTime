@@ -161,28 +161,9 @@
           </div>
         </div>
       </div>
-      
-      <div class="p-4 text-sm text-gray-600">
-        <div class="mx-2">
-          <%= form_with model: @order, data: { turbo:false }, class: 'flex flex-col gap-2' do |form| %>
-          <div>
-            <%= form.text_field :booked_name, placeholder: t('message.input_booked_name'), class: 'input w-full input-bordered text-center' %>
-          </div>
-          <div>
-            <%= form.text_field :booked_email, value: current_user.email, class: 'input w-full input-bordered text-center' %>
-          </div>
-          <div>
-            <%= form.select :payment_type, [[t('payment_type.Credit_CreditCard'),'CreditCard'], ['LINEPay','LINEPay']], { prompt: t('order.payment_type') }, class: 'input w-full input-bordered text-center' %>
-          </div>
-          <%= form.submit t('order.confirm'), class: 'btn btn-primary' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<%# 手機版確認資訊 %>
-<div class="fixed bottom-0 w-full md:hidden p-2">
+
+      <%# 手機版確認資訊 %>
+<div class="w-full md:hidden p-2">
   <table class="p-3 min-w-full table-auto border-collapse bg-slate-100 shadow-lg text-lg text-gray-800 rounded-lg overflow-hidden">
     <thead class="bg-gray-300">
         <tr>
@@ -226,3 +207,24 @@
   </table>
 </div>
 
+
+      
+      <div class="p-4 text-sm text-gray-600">
+        <div class="mx-2">
+          <%= form_with model: @order, data: { turbo:false }, class: 'flex flex-col gap-2' do |form| %>
+          <div>
+            <%= form.text_field :booked_name, placeholder: t('message.input_booked_name'), class: 'input w-full input-bordered text-center' %>
+          </div>
+          <div>
+            <%= form.text_field :booked_email, value: current_user.email, class: 'input w-full input-bordered text-center' %>
+          </div>
+          <div>
+            <%= form.select :payment_type, [[t('payment_type.Credit_CreditCard'),'CreditCard'], ['LINEPay','LINEPay']], { prompt: t('order.payment_type') }, class: 'input w-full input-bordered text-center' %>
+          </div>
+          <%= form.submit t('order.confirm'), class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
