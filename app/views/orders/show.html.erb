@@ -59,15 +59,14 @@
                                           controller: "loading",
                                           message: t("message.proceeding_to_payment"),
                                           action: "loading#loading"
-                                        },
-                class: 'block-class'} do %>
+                                        }} do %>
               <div class="order_warning_btn">
                 <%= t('order.creditcardpay') %>
                 <div id="payment_<%= @order.id %>"></div>
               </div>
             <% end %>
               <div class="order_warning_btn">
-                <%= link_to linepay_order_path(@order), class: "block-class" do %>
+                <%= link_to linepay_order_path(@order) do %>
                   <div>
                     <%= t('order.linepay') %>
                   </div>
@@ -76,7 +75,7 @@
           <% end %>
           <% unless @order.completed? || @order.cancelled? %>
             <div class="order_accent_btn">
-              <%= link_to edit_order_path(@order), class: 'block-class' do %>
+              <%= link_to edit_order_path(@order) do %>
                 <div >
                   <%= t('order.appointment_change') %>
                 </div>
@@ -85,7 +84,7 @@
           <% end %>
           <% if @order.may_cancel? %>
           <div class="order_gray_btn">
-            <%= link_to cancel_order_path(@order), class: 'block-class',
+            <%= link_to cancel_order_path(@order),
               data: { turbo_method: 'patch',
               turbo_confirm: t('message.are_you_sure_cancel_order') } do %>
               <div>
@@ -177,7 +176,7 @@
           <div class="p-4">
             <% unless @order.completed? || @order.cancelled? %>
               <div class="order_accent_btn">
-                <%= link_to edit_order_path(@order), class: 'block-class' do %>
+                <%= link_to edit_order_path(@order) do %>
               <div >
                 <%= t('order.appointment_change') %>
               </div>
@@ -186,9 +185,9 @@
             <% end %>
             <% if @order.may_cancel? %>
             <div class="order_gray_btn">
-              <%= link_to cancel_order_path(@order), class: 'block-class',
-                data: { turbo_method: 'patch',
-                turbo_confirm: t('message.are_you_sure_cancel_order') } do %>
+              <%= link_to cancel_order_path(@order),
+                  data: { turbo_method: 'patch',
+                  turbo_confirm: t('message.are_you_sure_cancel_order') } do %>
                 <div>
                   <%= t('order.cancel_order') %>
                 </div>
@@ -201,16 +200,15 @@
                                             turbo_method: "patch",
                                             controller: "loading",
                                             message: t("message.proceeding_to_payment"),
-                                            action: "loading#loading"
-                                          },
-                  class: 'block-class'} do %>
+                                            action: "loading#loading"}
+                                          } do %>
                 <div class="order_warning_btn">
                   <%= t('order.creditcardpay') %>
                   <div id="payment_<%= @order.id %>"></div>
                 </div>
               <% end %>
                 <div class="order_warning_btn">
-                  <%= link_to linepay_order_path(@order), class: "block-class" do %>
+                  <%= link_to linepay_order_path(@order) do %>
                     <div>
                       <%= t('order.linepay') %>
                     </div>
