@@ -192,6 +192,7 @@ tw:
     change_booking_time: 更改預約時間
     appointment_change: 更改預約時間
     reschedule_the_booking_time: 重新選擇預約時段
+    select_appointment_time: 選擇預約時段
     cancel_order: 取消訂單
     pay: 付款
     linepay: LINE Pay付款

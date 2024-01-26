@@ -22,8 +22,10 @@
                         datepicker_target: 'serviceDate',
                         action: "mousedown->datepicker#initializeDatePicker"
                       },
-                      class: 'input input-bordered w-full mt-4', required: true } %>
-      <%= f.submit t("form.Next"), class: 'mt-4 w-full bg-gray-400 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+                      class: 'input input-bordered w-full mt-4 cursor-pointer text-center text-lg',
+                      placeholder: t('order.select_appointment_time'),
+                      required: true } %>
+      <%= f.submit t("form.Next"), class: 'mt-4 w-full bg-gray-400 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer' %>
     <% end %>
   </div>
 </div>

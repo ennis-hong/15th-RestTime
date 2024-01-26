@@ -19,9 +19,8 @@
                             <li>聯絡方式：<%= @order.shop.tel %></li>
                             <li>地址：<%= @shop_address %></li>
                             <li>預約內容：<%= @product_description %></li>
-                            <li>總計金額：<%= @order.price %></li>
-                            <li>付款方式：<%= t("payment_type.#{@order.payment_type}") %>
-</li>
+                            <li>總計金額：<%= @order.price.to_i %>元</li>
+                            <li>付款方式：<%= t("payment_type.#{@order.payment_type}") %></li>
                         </ul>
                         <p class="text-gray-600 mt-2">如果您對訂單有任何疑問，或需要進一步的協助，請隨時聯繫我們。您也可以隨時訪問我們的網站查看訂單的最新狀態。</p>
                         <p class="text-gray-600 mt-2">再次感謝您的購買，我們期待您再次光臨 <%= @shop_title %>。</p>

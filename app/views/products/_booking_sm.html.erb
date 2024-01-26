@@ -19,7 +19,8 @@
                           datepicker_target: 'serviceDate',
                           action: "mousedown->datepicker#initializeDatePicker"
                         },
-                        class: 'input input-bordered flex-1' } %>
+                        class: 'input input-bordered flex-1 text-center text-lg',
+                        placeholder: t('order.select_appointment_time') } %>
 
         <%= f.submit t("order.booking"), class: 'ml-4 bg-orange-400 hover:bg-orange-300 text-gray-700 font-semibold p-3 rounded focus:outline-none focus:shadow-outline' %>
       </div>

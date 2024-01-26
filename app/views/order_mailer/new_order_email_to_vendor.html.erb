@@ -19,9 +19,8 @@
                             <li>顧客姓名：<%= @order.booked_name %></li>
                             <li>聯絡方式：<%= @order.booked_email %></li>
                             <li>預約內容：<%= @product_description %></li>
-                            <li>總計金額：<%= @order.price %></li>
-                            <li>付款方式：<%= t("payment_type.#{@order.payment_type}") %>
-</li>
+                            <li>總計金額：<%= @order.price.to_i %>元</li>
+                            <li>付款方式：<%= t("payment_type.#{@order.payment_type}") %></li>
                         </ul>
                         <p class="text-gray-600 mt-2">請您盡快確認訂單並準備排程，以確保顧客能夠順利消費。若有任何問題或需要進一步協助，請隨時聯絡我們。</p>
                         <p class="text-gray-600 mt-2">謝謝您的合作，祝生意興隆！</p>
