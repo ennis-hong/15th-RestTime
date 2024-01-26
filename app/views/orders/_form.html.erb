@@ -21,9 +21,8 @@
       </div>
       <div>
         <%= form.label :payment_type, t('order.payment_type'), class: 'label' %>
-        <%= form.select :payment_type, [[t('payment_type.Credit_CreditCard'),'CreditCard'], ['LINEPay','LINEPay']], { prompt: t('order.payment_type') }, class: 'select w-full input-bordered' %>
+        <%= form.select :payment_type, [[t('payment_type.Credit_CreditCard'),'CreditCard'], ['LINEPay','LINEPay']], {}, class: 'select w-full input-bordered text-center' %>
       </div>
-
       <%= form.submit t('order.confirm'), class: 'btn btn-primary mt-4' %>
     <% end %>
   </div>
