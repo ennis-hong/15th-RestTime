@@ -67,8 +67,11 @@
               </div>
             <% end %>
               <div class="order_warning_btn">
-                <%= link_to t('order.linepay'), linepay_order_path(@order),data: { turbo: false},
-                class: "block-class" %>
+                <%= link_to linepay_order_path(@order), class: "block-class" do %>
+                  <div>
+                    <%= t('order.linepay') %>
+                  </div>
+                <% end %>
               </div>
           <% end %>
           <% unless @order.completed? || @order.cancelled? %>
@@ -82,9 +85,13 @@
           <% end %>
           <% if @order.may_cancel? %>
           <div class="order_gray_btn">
-            <%= link_to t('order.cancel_order'), cancel_order_path(@order),
+            <%= link_to cancel_order_path(@order), class: 'block-class',
               data: { turbo_method: 'patch',
-              turbo_confirm: t('message.are_you_sure_cancel_order') } %>
+              turbo_confirm: t('message.are_you_sure_cancel_order') } do %>
+              <div>
+                <%= t('order.cancel_order') %>
+              </div>
+            <% end %>
           </div>
           <% end %>
         </div>
@@ -179,9 +186,13 @@
             <% end %>
             <% if @order.may_cancel? %>
             <div class="order_gray_btn">
-              <%= link_to t('order.cancel_order'), cancel_order_path(@order),
+              <%= link_to cancel_order_path(@order), class: 'block-class',
                 data: { turbo_method: 'patch',
-                turbo_confirm: t('message.are_you_sure_cancel_order') } %>
+                turbo_confirm: t('message.are_you_sure_cancel_order') } do %>
+                <div>
+                  <%= t('order.cancel_order') %>
+                </div>
+              <% end %>
             </div>
             <% end %>
           </div>

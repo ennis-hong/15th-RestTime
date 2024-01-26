@@ -63,7 +63,7 @@
                     data: {
                         datepicker_target: 'serviceDate',
                         action: "mousedown->datepicker#initializeDatePicker",
-                      }, class: 'input input-bordered w-full mt-4 text-center' %>
+                      }, class: 'input input-bordered w-full mt-4 text-center cursor-pointer' %>
               <%= f.button t('order.change_booking_time'), 
                     class: 'order_accent_btn',
                     type: 'submit' %>
@@ -78,7 +78,7 @@
   <div class="card order-1 md:order-3 md:hidden col-span-2 bg-white-100 shadow-xl">
       <div class="relative md:mx-12">
         <figure class="mt-2 md:p-8">
-          <% if booking_product.attached? %>
+          <% if booking_product.cover.attached? %>
             <%= image_tag booking_product.cover.variant(:cover), class: "w-full" %>
           <% else %>
             <%= image_tag 'shops/default_cover.png', class: 'w-full h-full object-cover' %>
@@ -123,7 +123,7 @@
                     data: {
                         datepicker_target: 'serviceDate',
                         action: "mousedown->datepicker#initializeDatePicker",
-                      }, class: 'input input-bordered w-full mt-4 text-center' %>
+                      }, class: 'input input-bordered w-full mt-4 text-center cursor-pointer' %>
               <%= f.button t('order.change_booking_time'), 
                     class: 'order_accent_btn',
                     type: 'submit' %>
