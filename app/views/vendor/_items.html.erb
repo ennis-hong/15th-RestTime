@@ -37,13 +37,18 @@
       <div class="collapse collapse-arrow line-container">
         <input type="checkbox" checked />
         <div class="collapse-title flex justify-between">
-          <div class="font-medium">
+          <div class="font-medium text-2xl">
             <%= t('service_times.title')%>
           </div>
         </div>
         <div class="collapse-content">
           <ul>
-            <% if shop.service_times.present? %>
+            <% if shop.service_time_not_set? %>
+              <li>
+                <%= link_to t('message.service_time_not_set'), edit_service_times_path, 
+                            class: 'btn btn-error btn-outline font-bold ml-4 text-white text-lg' %>
+              </li>
+            <% else %>
               <%= render partial: 'shops/service_times', collection: shop.service_times, as: :service_time %>
             <% end %>
           </ul>

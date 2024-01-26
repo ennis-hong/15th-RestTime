@@ -242,6 +242,7 @@ tw:
     no_message: 目前沒有任何新訊息
     no_order: 目前沒有訂單
     nearby_no_shop: 目前附近沒有店家
+    service_time_not_set: 尚未設定營業時間
   payment_type:
     Credit_CreditCard: 信用卡
     LINEPay: LINEPay
