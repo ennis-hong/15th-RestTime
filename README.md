@@ -1,5 +1,7 @@
 # RestTime
 
+![截圖 2024-01-30 下午1 31 14](https://github.com/ennis-hong/15th-RestTime/assets/8993798/c415e254-d18e-479d-9898-faab3929d79a)
+
 ## [點擊進入網站 🌐](https://restime.fly.dev/)
 
 ## 關於 ResTime
